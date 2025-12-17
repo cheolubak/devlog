@@ -1,0 +1,5 @@
+@reference '@devlog/ui-config';
+
+html, body {
+    @apply bg-white dark:bg-gray-900;
+}

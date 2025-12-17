@@ -1,0 +1,10 @@
+@reference '@devlog/ui-config';
+
+.postGrid {
+    @apply grid;
+    @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 4xl:grid-cols-6;
+    @apply gap-x-2;
+    @apply gap-y-8 md:gap-y-16;
+    @apply px-3 md:px-8;
+    @apply py-4 md:py-12;
+}

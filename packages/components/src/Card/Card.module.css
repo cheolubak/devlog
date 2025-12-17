@@ -1,0 +1,11 @@
+@reference '@devlog/ui-config';
+
+.card {
+    @apply flex;
+    @apply flex-col;
+    @apply justify-start;
+    @apply items-stretch;
+    @apply gap-2 md:gap-4;
+    @apply rounded-lg;
+    @apply text-gray-900 dark:text-white;
+}

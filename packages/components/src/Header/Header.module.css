@@ -1,0 +1,21 @@
+@reference '@devlog/ui-config';
+
+.header {
+    @apply w-dvw;
+    @apply max-w-dvw;
+    @apply flex;
+    @apply justify-between;
+    @apply items-center;
+    @apply px-10;
+    @apply py-6;
+    @apply bg-gray-200 dark:bg-gray-900;
+    @apply dark:text-white;
+    @apply box-border;
+}
+
+.menu {
+    @apply flex;
+    @apply justify-end;
+    @apply items-center;
+    @apply gap-8;
+}

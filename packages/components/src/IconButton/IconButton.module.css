@@ -1,0 +1,14 @@
+@reference '@devlog/ui-config';
+
+.iconButton {
+    @apply relative;
+    @apply overflow-hidden;
+    @apply rounded-full;
+    @apply p-0;
+    @apply m-0;
+    @apply cursor-pointer;
+    @apply outline-none;
+    @apply inline-flex;
+    @apply items-center;
+    @apply justify-center;
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@devlog/ui-config",
+  "devDependencies": {
+    "tailwindcss": "catalog:"
+  },
+  "files": [
+    "reset.css"
+  ],
+  "style": "reset.css",
+  "main": "reset.css"
+}

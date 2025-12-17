@@ -1,0 +1,26 @@
+@reference '@devlog/ui-config';
+
+.icon {
+    @apply inline-flex;
+    @apply justify-center;
+    @apply items-center;
+    @apply **:fill-inherit;
+    @apply **:w-full;
+    @apply **:h-full;
+}
+
+.danger {
+    @apply fill-red-500;
+}
+
+.primary {
+    @apply fill-gray-900 dark:fill-white;
+}
+
+.secondary {
+    @apply fill-purple-500;
+}
+
+.success {
+    @apply fill-cyan-500;
+}

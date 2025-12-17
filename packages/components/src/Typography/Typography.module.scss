@@ -1,0 +1,62 @@
+@reference '@devlog/ui-config';
+
+.typography {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+
+@for $i from 1 through 10 {
+  .line-#{$i} {
+    -webkit-line-clamp: $i;
+  }
+}
+
+.display-large {
+  @apply text-display-large;
+}
+
+.display-medium {
+  @apply text-display-medium;
+}
+
+.display-small {
+  @apply text-display-small;
+}
+
+.title-large {
+  @apply text-title-large;
+}
+
+.title-medium {
+  @apply text-title-medium;
+}
+
+.title-small {
+  @apply text-title-small;
+}
+
+.body-large {
+  @apply text-body-large;
+}
+
+.body-medium {
+  @apply text-body-medium;
+}
+
+.body-small {
+  @apply text-body-small;
+}
+
+.label-large {
+  @apply text-label-large;
+}
+
+.label-medium {
+  @apply text-label-medium;
+}
+
+.label-small {
+  @apply text-label-small;
+}
