@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
 
-import localFont from 'next/font/local';
+import { Header } from '@devlog/components';
 
 import './globals.css';
 import '@devlog/ui-config';
-
-import { Header } from '@/packages/components/src';
+import localFont from 'next/font/local';
 
 const pretandard = localFont({
   src: './fonts/PretendardVariable.woff2',

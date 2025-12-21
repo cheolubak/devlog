@@ -9,18 +9,23 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@devlog/components": "workspace:*",
+    "@devlog/database": "workspace:*",
+    "@devlog/request": "workspace:*",
+    "@devlog/ui-config": "workspace:*",
+    "@supabase/ssr": "catalog:",
     "clsx": "catalog:",
+    "dayjs": "catalog:",
     "eslint-plugin-prettier": "catalog:",
     "eslint-plugin-react": "catalog:",
     "eslint-plugin-react-hooks": "catalog:",
+    "marked": "catalog:",
     "next": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "@devlog/components": "workspace:*",
-    "@devlog/ui-config": "workspace:*"
+    "sharp": "catalog:"
   },
   "devDependencies": {
-    "sass": "catalog:",
     "@eslint/eslintrc": "catalog:",
     "@next/eslint-plugin-next": "catalog:",
     "@tailwindcss/postcss": "catalog:",
@@ -33,7 +38,16 @@
     "eslint-config-next": "catalog:",
     "eslint-plugin-perfectionist": "catalog:",
     "prettier": "catalog:",
+    "sass": "catalog:",
     "tailwindcss": "catalog:",
     "typescript": "catalog:"
+  },
+  "packageManager": "pnpm@10.25.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "sharp",
+      "unrs-resolver"
+    ]
   }
 }

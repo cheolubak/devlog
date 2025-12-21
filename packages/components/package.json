@@ -7,7 +7,8 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "next": "catalog:",
-    "@devlog/ui-config": "workspace:*"
+    "@devlog/ui-config": "workspace:*",
+    "@devlog/utils": "workspace:*"
   },
   "devDependencies": {
     "tailwindcss": "catalog:",
@@ -15,6 +16,7 @@
     "typescript": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
-    "@types/react-dom": "catalog:"
+    "@types/react-dom": "catalog:",
+    "react-markdown": "catalog:"
   }
 }

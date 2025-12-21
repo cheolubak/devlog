@@ -6,7 +6,7 @@ catalog:
   eslint-plugin-prettier: ^5.5.4
   eslint-plugin-react: ^7.37.5
   eslint-plugin-react-hooks: ^7.0.1
-  next: 16.0.10
+  next: 16.1.1
   react: 19.2.1
   react-dom: 19.2.1
   sass: ^1.97.0
@@ -24,3 +24,8 @@ catalog:
   prettier: ^3.7.4
   tailwindcss: ^4
   typescript: ^5
+  "@supabase/ssr": ^0.8.0
+  dayjs: ^1.11.19
+  sharp: ^0.34.5
+  marked: ^17.0.1
+  react-markdown: ^10.1.0
