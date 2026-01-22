@@ -29,3 +29,5 @@ catalog:
   sharp: ^0.34.5
   marked: ^17.0.1
   react-markdown: ^10.1.0
+  zod: ^4.3.5
+  immer: ^11.1.3

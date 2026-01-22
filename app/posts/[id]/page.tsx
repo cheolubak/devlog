@@ -5,7 +5,7 @@ import { fetchApi } from '@devlog/request';
 import { marked } from 'marked';
 import { cache } from 'react';
 
-import { PostList } from '@/domains/PostList';
+import { PostList } from '@/packages/domains/PostList';
 import { stripHtmlTags } from '@/packages/utils/src/stripHtmlTags';
 
 export const dynamic = 'force-dynamic';

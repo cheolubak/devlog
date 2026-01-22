@@ -4,7 +4,7 @@ import { generateHeadingId, parseToc } from '@devlog/utils';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import Markdown from 'react-markdown';
 
-import { PostList } from '@/domains/PostList';
+import { PostList } from '@/packages/domains/PostList';
 
 import { Typography } from '../Typography';
 import styles from './PostDetail.module.css';

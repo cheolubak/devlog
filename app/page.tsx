@@ -12,7 +12,7 @@ import { fetchApi } from '@devlog/request';
 import dayjs from 'dayjs';
 import Link from 'next/dist/client/link';
 
-import { PostList } from '@/domains/PostList';
+import { PostList } from '@/packages/domains/PostList';
 
 export const dynamic = 'force-dynamic';
 
