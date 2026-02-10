@@ -7,7 +7,6 @@ export * from './CardThumbnail';
 export * from './Header';
 export * from './Icon';
 export * from './IconButton';
-export * from './PostDetail';
 export * from './PostGrid';
 export * from './Ripple';
 export * from './Typography';
