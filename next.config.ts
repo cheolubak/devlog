@@ -9,7 +9,11 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 2592000, // 30 days
 
     qualities: [75, 95],
-    remotePatterns: [{ hostname: 'images.pexels.com', protocol: 'https' }],
+    remotePatterns: [
+      { hostname: 'images.pexels.com', protocol: 'https' },
+      { hostname: 'cdn-images-1.medium.com', protocol: 'https' },
+      { hostname: 'hyperconnect.github.io', protocol: 'https' },
+    ],
   },
   output: 'standalone',
   transpilePackages: [

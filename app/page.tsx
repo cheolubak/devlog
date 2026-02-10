@@ -13,12 +13,11 @@ import dayjs from 'dayjs';
 import Link from 'next/dist/client/link';
 
 import { PostList } from '@/packages/domains/PostList';
-
-export const dynamic = 'force-dynamic';
+import { ResponseList } from '@/packages/domains/ResponseList';
 
 export default async function Home() {
   try {
-    const posts = await fetchApi.get<PostList[]>('/posts/1', {
+    const posts = await fetchApi.get<ResponseList<PostList>>('/posts/1', {
       next: {
         revalidate: 86400,
         tags: ['posts'],
@@ -27,16 +26,19 @@ export default async function Home() {
 
     return (
       <PostGrid>
-        {posts.map((post) => (
+        {posts.data.map((post) => (
           <Link
-            href={`posts/${post.id}`}
+            href={post.sourceUrl}
             key={post.id}
+            target='_blank'
           >
             <Card>
-              <CardThumbnail
-                alt={post.title}
-                src={post.thumbnail}
-              />
+              {post.imageUrl && (
+                <CardThumbnail
+                  alt={post.title}
+                  src={post.imageUrl}
+                />
+              )}
               <CardHeader>
                 <Typography variants='title-medium'>{post.title}</Typography>
               </CardHeader>
@@ -45,12 +47,12 @@ export default async function Home() {
                   maxLines={5}
                   variants='body-large'
                 >
-                  {post.content}
+                  {post.description}
                 </Typography>
               </CardContent>
               <CardFooter className={'flex justify-between items-center'}>
                 <Typography>
-                  {dayjs(post.created_at).format('YYYY.MM.DD')}
+                  {dayjs(post.originalPublishedAt).format('YYYY.MM.DD')}
                 </Typography>
                 <IconButton
                   iconColor='primary'

@@ -1,5 +1,9 @@
-import { createClient } from '@devlog/database/server';
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
+
+import { PostList } from '@/packages/domains/PostList';
+import { ResponseList } from '@/packages/domains/ResponseList';
+import { externalApi } from '@/packages/request/src/request';
 
 export async function GET(
   req: NextRequest,
@@ -7,22 +11,13 @@ export async function GET(
 ) {
   const { page: pageParam } = await params;
 
-  const page = Number(pageParam);
+  const page = z.coerce.number().int().positive().parse(pageParam);
 
-  if (Number.isNaN(page)) {
-    return NextResponse.json({}, { status: 500 });
-  }
+  const res = await externalApi.get<ResponseList<PostList>>(`/posts`, {
+    params: {
+      offset: page,
+    },
+  });
 
-  const client = await createClient();
-  const { data, error } = await client
-    .from('posts')
-    .select('*')
-    .eq('is_display', true)
-    .range((page - 1) * 20, page * 20);
-
-  if (error) {
-    return NextResponse.json({}, { status: 500 });
-  }
-
-  return NextResponse.json(data);
+  return NextResponse.json(res);
 }

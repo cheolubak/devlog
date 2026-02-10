@@ -1,12 +1,27 @@
 import { z } from 'zod';
 
 export const postListSchema = z.object({
-  content: z.string(),
-  createdAt: z.date(),
+  description: z.string(),
   id: z.uuid(),
-  isDisplay: z.boolean(),
-  tags: z.array(z.string()),
-  thumbnail: z.string(),
+  imageUrl: z.string().nullish(),
+  originalPublishedAt: z.date(),
+  postTags: z.array(
+    z.object({
+      createdAt: z.date(),
+      postId: z.uuid(),
+      tag: z.object({
+        id: z.number().int().positive(),
+        name: z.string(),
+      }),
+      tagId: z.number().int().positive(),
+    }),
+  ),
+  source: z.object({
+    id: z.uuid(),
+    name: z.string(),
+    url: z.string(),
+  }),
+  sourceUrl: z.string(),
   title: z.string(),
 });
 
