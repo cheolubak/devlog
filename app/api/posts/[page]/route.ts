@@ -11,7 +11,7 @@ export async function GET(
 ) {
   const { page: pageParam } = await params;
 
-  const page = z.coerce.number().int().positive().parse(pageParam);
+  const page = z.coerce.number().int().nonnegative().parse(pageParam);
 
   const res = await externalApi.get<ResponseList<PostList>>(`/posts`, {
     params: {
