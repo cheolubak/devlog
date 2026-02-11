@@ -1,9 +1,12 @@
 'use client';
 
-import { clsx } from 'clsx';
-import { ComponentProps } from 'react';
+import type { ComponentProps } from 'react';
 
-import { Icon, IconProps } from '../Icon';
+import { clsx } from 'clsx';
+
+import type { IconProps } from '../Icon';
+
+import { Icon } from '../Icon';
 import { Ripple } from '../Ripple';
 import styles from './IconButton.module.css';
 

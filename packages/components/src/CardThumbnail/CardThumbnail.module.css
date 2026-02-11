@@ -1,6 +1,0 @@
-@reference '@devlog/ui-config';
-
-.cardThumbnail {
-    @apply w-full;
-    @apply aspect-video;
-}

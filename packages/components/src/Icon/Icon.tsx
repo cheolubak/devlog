@@ -1,5 +1,6 @@
+import type { ComponentType } from 'react';
+
 import { clsx } from 'clsx';
-import { ComponentType } from 'react';
 
 import styles from './Icon.module.css';
 import {

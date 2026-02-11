@@ -1,0 +1,13 @@
+.postListItem {
+    display: block;
+    padding: 24px 16px;
+    color: var(--color-white);
+}
+
+.postListItemTitle {
+    margin-bottom: 12px;
+}
+
+.postListItemDescription {
+    height: 48px;
+}

@@ -1,4 +1,6 @@
-import { Pool, QueryResult, QueryResultRow } from 'pg';
+import type { QueryResult, QueryResultRow } from 'pg';
+
+import { Pool } from 'pg';
 
 console.log('=======process.env.DATABASE_URL=======', process.env.DATABASE_URL);
 const pool = new Pool({

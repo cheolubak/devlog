@@ -56,6 +56,26 @@ const eslintConfig = [
 
       // Perfectionist rules (기본 설정)
       ...perfectionist.configs['recommended-natural'].rules,
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: 'react',
+              importNames: ['default'],
+              message:
+                "React의 default import는 사용할 수 없습니다. Named import를 사용하세요 (예: import { useState } from 'react').",
+            },
+          ],
+        },
+      ],
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          prefer: 'type-imports',
+          fixStyle: 'separate-type-imports',
+        },
+      ],
     },
     settings: {
       react: {

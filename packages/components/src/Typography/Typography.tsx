@@ -1,5 +1,6 @@
+import type { ComponentProps, ElementType, JSX, PropsWithChildren } from 'react';
+
 import { clsx } from 'clsx';
-import { ComponentProps, ElementType, JSX, PropsWithChildren } from 'react';
 
 import styles from './Typography.module.scss';
 

@@ -31,3 +31,5 @@ catalog:
   react-markdown: ^10.1.0
   zod: ^4.3.5
   immer: ^11.1.3
+  "@tanstack/react-query": ^5.90.21
+  "@tanstack/react-virtual": ^3.13.18

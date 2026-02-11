@@ -1,7 +1,9 @@
 'use client';
 
+import type { MouseEvent} from 'react';
+
 import { clsx } from 'clsx';
-import { MouseEvent, useState } from 'react';
+import { useState } from 'react';
 
 import { useDebouncedRippleCleanUp } from '@/packages/components/src/Ripple/useDebouncedRippleCleanUp';
 

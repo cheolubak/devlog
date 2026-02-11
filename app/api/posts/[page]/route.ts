@@ -1,8 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
-import { PostList } from '@/packages/domains/PostList';
-import { ResponseList } from '@/packages/domains/ResponseList';
+import type { PostList } from '@/packages/domains/src/PostList';
+import type { ResponseList } from '@/packages/domains/src/ResponseList';
+
 import { externalApi } from '@/packages/request/src/request';
 
 export async function GET(

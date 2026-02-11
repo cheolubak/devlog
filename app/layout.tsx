@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
-
-import { Header } from '@devlog/components';
+import type { ReactNode } from 'react';
 
 import './globals.css';
 import '@devlog/ui-config';
+import { Header } from '@devlog/components';
 import localFont from 'next/font/local';
+
+import { QueryProvider } from '@/providers/QueryProvider';
 
 const pretandard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html
@@ -26,8 +28,10 @@ export default function RootLayout({
       lang='ko'
     >
       <body>
-        <Header />
-        {children}
+        <QueryProvider>
+          <Header />
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );
