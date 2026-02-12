@@ -1,8 +1,11 @@
+@reference '@devlog/ui-config';
+
 .postListItemEditDisplay {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 40px 48px;
+    @apply px-4 md:px-10;
+    @apply py-6 md:py-12;
     color: var(--color-white);
     height: 220px;
 }
