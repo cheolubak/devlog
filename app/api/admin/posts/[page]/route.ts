@@ -1,19 +1,16 @@
-import type { PostList, ResponseList } from '@devlog/domain';
+import type { PostListAll, ResponseList } from '@devlog/domain';
 import type { NextRequest } from 'next/server';
 
 import { externalApi } from '@devlog/request';
 import { NextResponse } from 'next/server';
-import { z } from 'zod';
 
 export async function GET(
-  req: NextRequest,
+  _: NextRequest,
   { params }: { params: Promise<{ page: string }> },
 ) {
-  const { page: pageParam } = await params;
+  const { page } = await params;
 
-  const page = z.coerce.number().int().nonnegative().parse(pageParam);
-
-  const res = await externalApi.get<ResponseList<PostList>>(`/posts`, {
+  const res = await externalApi.get<ResponseList<PostListAll>>('posts/all', {
     params: {
       offset: page,
     },

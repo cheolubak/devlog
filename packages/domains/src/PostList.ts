@@ -17,6 +17,7 @@ export const postListSchema = z.object({
     }),
   ),
   source: z.object({
+    icon: z.string().nullish(),
     id: z.uuid(),
     name: z.string(),
     url: z.string(),

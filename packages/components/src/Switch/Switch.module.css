@@ -1,0 +1,32 @@
+.switch {
+    width: 40px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: var(--color-gray-400);
+    position: relative;
+    cursor: pointer;
+}
+
+.switch.isActive {
+    background-color: var(--color-indigo-500);
+}
+
+.input {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: var(--color-white);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.input:checked + .thumb {
+    transform: translateX(100%);
+}

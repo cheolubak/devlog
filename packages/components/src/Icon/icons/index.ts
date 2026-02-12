@@ -1,4 +1,5 @@
 export * from './IconDarkMode';
+export * from './IconDelete';
 export * from './IconEdit';
 export * from './IconEmail';
 export * from './IconGithub';

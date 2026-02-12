@@ -5,6 +5,7 @@ import { clsx } from 'clsx';
 import styles from './Icon.module.css';
 import {
   IconDarkMode,
+  IconDelete,
   IconEdit,
   IconEmail,
   IconGithub,
@@ -30,6 +31,7 @@ type IconColor = 'danger' | 'primary' | 'secondary' | 'success';
 
 type IconName =
   | 'darkMode'
+  | 'delete'
   | 'edit'
   | 'email'
   | 'github'
@@ -45,6 +47,7 @@ type IconName =
 
 const iconMap: Record<IconName, ComponentType> = {
   darkMode: IconDarkMode,
+  delete: IconDelete,
   edit: IconEdit,
   email: IconEmail,
   github: IconGithub,

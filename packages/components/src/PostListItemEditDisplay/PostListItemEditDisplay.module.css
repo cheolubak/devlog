@@ -1,0 +1,24 @@
+.postListItemEditDisplay {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 48px;
+    color: var(--color-white);
+    height: 220px;
+}
+
+
+.postListItemEditDisplayInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 12px;
+}
+
+.postListItemEditDisplayMenu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
