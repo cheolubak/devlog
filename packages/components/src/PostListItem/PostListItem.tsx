@@ -1,4 +1,5 @@
 import type { PostList } from '@devlog/domain';
+import type { CSSProperties } from 'react';
 
 import { Typography } from '@devlog/components';
 import Link from 'next/link';
@@ -7,13 +8,15 @@ import styles from './PostListItem.module.css';
 
 interface PostItemProps {
   post: PostList;
+  style?: CSSProperties;
 }
 
-export const PostListItem = ({ post }: PostItemProps) => {
+export const PostListItem = ({ post, style }: PostItemProps) => {
   return (
     <Link
       className={styles.postListItem}
       href={post.sourceUrl}
+      style={style}
       target='_blank'
     >
       <Typography

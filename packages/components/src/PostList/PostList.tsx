@@ -3,6 +3,8 @@
 import type { PostList as PostListData, ResponseList } from '@devlog/domain';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { useWindowVirtualizer } from '@tanstack/react-virtual';
+import { useMemo } from 'react';
 
 import { getPostList } from '@/packages/apis';
 
@@ -31,21 +33,44 @@ export const PostList = ({ posts: { data, pagination } }: PostListProps) => {
     queryKey: ['posts'],
   });
 
+  const postList = useMemo(
+    () => posts?.pages.flatMap((page) => page.data) ?? [],
+    [posts],
+  );
+
+  const rowVirtualizer = useWindowVirtualizer({
+    count: postList.length,
+    estimateSize: () => 220,
+    overscan: 3,
+  });
+
   return (
-    <article>
+    <article
+      style={{ height: rowVirtualizer.getTotalSize(), position: 'relative' }}
+    >
       <InfiniteScroll
         fetchNext={fetchNextPage}
         hasNext={hasNextPage}
         isFetching={isFetching}
       >
-        {posts?.pages
-          .flatMap((page) => page.data)
-          .map((post) => (
+        {rowVirtualizer.getVirtualItems().map((virtualItem) => {
+          const post = postList[virtualItem.index];
+
+          return (
             <PostListItem
               key={post.id}
               post={post}
+              style={{
+                height: virtualItem.size,
+                left: 0,
+                position: 'absolute',
+                top: 0,
+                transform: `translateY(${virtualItem.start}px)`,
+                width: '100%',
+              }}
             />
-          ))}
+          );
+        })}
       </InfiniteScroll>
     </article>
   );

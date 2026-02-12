@@ -14,7 +14,7 @@
 }
 
 .primary {
-    @apply fill-gray-900 dark:fill-white;
+    @apply fill-white;
 }
 
 .secondary {

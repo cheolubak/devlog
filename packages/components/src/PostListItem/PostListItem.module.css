@@ -1,7 +1,8 @@
 .postListItem {
     display: block;
-    padding: 24px 16px;
+    padding: 40px 48px;
     color: var(--color-white);
+    height: 220px;
 }
 
 .postListItemTitle {
@@ -9,5 +10,5 @@
 }
 
 .postListItemDescription {
-    height: 48px;
+    margin-bottom: 24px;
 }
