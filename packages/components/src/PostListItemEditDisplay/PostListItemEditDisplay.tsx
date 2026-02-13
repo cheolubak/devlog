@@ -24,6 +24,7 @@ export const PostListItemEditDisplay = ({
   const [isDisplay, setIsDisplay] = useState<boolean>(post.isDisplay);
 
   const handleOpenLink = () => {
+    navigator.clipboard.writeText(post.id);
     window.open(post.sourceUrl, '_blank');
   };
 
