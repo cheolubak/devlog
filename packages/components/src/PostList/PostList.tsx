@@ -45,13 +45,13 @@ export const PostList = ({ posts: { data, pagination } }: PostListProps) => {
   });
 
   return (
-    <article
-      style={{ height: rowVirtualizer.getTotalSize(), position: 'relative' }}
+    <InfiniteScroll
+      fetchNext={fetchNextPage}
+      hasNext={hasNextPage}
+      isFetching={isFetching}
     >
-      <InfiniteScroll
-        fetchNext={fetchNextPage}
-        hasNext={hasNextPage}
-        isFetching={isFetching}
+      <article
+        style={{ height: rowVirtualizer.getTotalSize(), position: 'relative' }}
       >
         {rowVirtualizer.getVirtualItems().map((virtualItem) => {
           const post = postList[virtualItem.index];
@@ -71,7 +71,7 @@ export const PostList = ({ posts: { data, pagination } }: PostListProps) => {
             />
           );
         })}
-      </InfiniteScroll>
-    </article>
+      </article>
+    </InfiniteScroll>
   );
 };
