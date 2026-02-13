@@ -22,10 +22,25 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
     eventSelectContent(post);
   };
 
+  let blogUrl = post.sourceUrl;
+  if (!post.sourceUrl.startsWith('http')) {
+    blogUrl = post.source.blogUrl;
+
+    if (blogUrl.endsWith('/')) {
+      blogUrl = blogUrl.slice(0, -1);
+    }
+
+    if (!post.sourceUrl.startsWith('/')) {
+      blogUrl = `${blogUrl}/`;
+    }
+
+    blogUrl = `${blogUrl}${post.sourceUrl}`;
+  }
+
   return (
     <Link
       className={styles.postListItem}
-      href={post.sourceUrl}
+      href={blogUrl}
       onClick={handleClickPost}
       style={style}
       target='_blank'

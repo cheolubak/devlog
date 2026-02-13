@@ -25,7 +25,22 @@ export const PostListItemEditDisplay = ({
 
   const handleOpenLink = () => {
     navigator.clipboard.writeText(post.id);
-    window.open(post.sourceUrl, '_blank');
+
+    let blogUrl = post.sourceUrl;
+    if (!post.sourceUrl.startsWith('http')) {
+      blogUrl = post.source.blogUrl;
+
+      if (blogUrl.endsWith('/')) {
+        blogUrl = blogUrl.slice(0, -1);
+      }
+
+      if (!post.sourceUrl.startsWith('/')) {
+        blogUrl = `${blogUrl}/`;
+      }
+
+      blogUrl = `${blogUrl}${post.sourceUrl}`;
+    }
+    window.open(blogUrl, '_blank');
   };
 
   const handleChangeDisplay = (isDisplay: boolean) => {

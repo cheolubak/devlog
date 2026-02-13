@@ -17,6 +17,7 @@ export const postListSchema = z.object({
     }),
   ),
   source: z.object({
+    blogUrl: z.string(),
     icon: z.string().nullish(),
     id: z.uuid(),
     name: z.string(),
