@@ -57,12 +57,14 @@ export const PostListEditDisplay = ({
   };
 
   const handleNextPage = () => {
+    window.scrollTo({ top: 0 });
     router.push(`/admin/${page + 1}`, {
       scroll: false,
     });
   };
 
   const handlePrevPage = () => {
+    window.scrollTo({ top: 0 });
     router.push(`/admin/${page - 1}`, {
       scroll: false,
     });
