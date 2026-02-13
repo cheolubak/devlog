@@ -1,0 +1,8 @@
+{
+  "name": "@devlog/config/firebase",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "dependencies": {
+    "firebase": "catalog:"
+  }
+}

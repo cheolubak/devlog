@@ -1,8 +1,12 @@
+'use client';
+
 import type { PostList } from '@devlog/domain';
 import type { CSSProperties } from 'react';
 
 import { Typography } from '@devlog/components';
 import Link from 'next/link';
+
+import { useAnalytics } from '@/hooks/useAnalytics';
 
 import styles from './PostListItem.module.css';
 
@@ -12,10 +16,17 @@ interface PostItemProps {
 }
 
 export const PostListItem = ({ post, style }: PostItemProps) => {
+  const { eventSelectContent } = useAnalytics();
+
+  const handleClickPost = () => {
+    eventSelectContent(post);
+  };
+
   return (
     <Link
       className={styles.postListItem}
       href={post.sourceUrl}
+      onClick={handleClickPost}
       style={style}
       target='_blank'
     >

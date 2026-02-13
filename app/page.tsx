@@ -16,6 +16,7 @@ export default async function Home() {
     } else {
       console.error('Unknown Error:', e);
     }
+
     return (
       <div className='p-10 text-center'>
         <Typography variants='title-large'>오류가 발생했습니다.</Typography>
