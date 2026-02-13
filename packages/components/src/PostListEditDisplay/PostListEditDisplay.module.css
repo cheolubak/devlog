@@ -1,7 +1,11 @@
-.postListEditDisplay {
+@reference '@devlog/ui-config';
+
+.menus {
+    position: sticky;
+    top: 0;
     display: flex;
-    flex-direction: column;
     justify-content: flex-start;
-    align-items: stretch;
-    gap: 24px;
+    align-items: center;
+    gap: 12px;
+    @apply px-4 md:px-10;
 }

@@ -3,7 +3,7 @@
 .button {
     @apply relative;
     @apply outline-none;
-    @apply flex;
+    @apply inline-flex;
     @apply justify-center;
     @apply items-center;
     @apply border-2;
