@@ -45,6 +45,7 @@ export const PostListEditDisplay = ({
     },
     onSuccess: () => {
       alert('삭제 성공');
+      router.refresh();
     },
   });
 
