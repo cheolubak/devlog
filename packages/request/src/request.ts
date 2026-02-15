@@ -6,7 +6,7 @@ export interface RequestConfig {
 
 export interface RequestOptions extends Omit<RequestInit, 'body' | 'method'> {
   next?: NextFetchRequestConfig;
-  params?: Record<string, number | string>;
+  params?: Record<string, number | number[] | string | string[]>;
 }
 
 interface NextFetchRequestConfig {
@@ -68,10 +68,7 @@ export class RequestInstance {
     return this.request<T>('PUT', url, data, options);
   }
 
-  private buildURL(
-    url: string,
-    params?: Record<string, number | string>,
-  ): string {
+  private buildURL(url: string, params?: RequestOptions['params']): string {
     let fullURL = url;
 
     if (this.config.baseURL && !url.startsWith('http')) {
@@ -85,7 +82,13 @@ export class RequestInstance {
     if (params && Object.keys(params).length > 0) {
       const searchParams = new URLSearchParams();
       for (const [key, value] of Object.entries(params)) {
-        searchParams.append(key, String(value));
+        if (Array.isArray(value) && value.length > 0) {
+          for (const v of value) {
+            searchParams.append(key, String(v));
+          }
+        } else {
+          searchParams.append(key, String(value));
+        }
       }
       fullURL += `?${searchParams.toString()}`;
     }

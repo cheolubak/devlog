@@ -34,3 +34,4 @@ catalog:
   "@tanstack/react-query": ^5.90.21
   "@tanstack/react-virtual": ^3.13.18
   firebase: ^12.9.0
+  uuid: ^13

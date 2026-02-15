@@ -1,11 +1,17 @@
 'use client';
 
-import { type Analytics, getAnalytics, logEvent } from 'firebase/analytics';
+import {
+  type Analytics,
+  getAnalytics,
+  logEvent,
+  setUserProperties,
+} from 'firebase/analytics';
 import { useEffect, useRef } from 'react';
 
 import type { PostList } from '@/packages/domains';
 
 import firebaseApp from '@/packages/configs/firebase';
+import { fetchApi } from '@/packages/request';
 
 export const useAnalytics = () => {
   const analytics = useRef<Analytics | null>(null);
@@ -15,14 +21,20 @@ export const useAnalytics = () => {
   }, []);
 
   const handlePageView = (pathname: string) => {
-    if (!analytics.current) return;
+    if (!analytics.current) {
+      return;
+    }
+
     logEvent(analytics.current, 'page_view', {
       firebase_screen: pathname,
     });
   };
 
   const handleSelectContent = (post: PostList) => {
-    if (!analytics.current) return;
+    if (!analytics.current) {
+      return;
+    }
+
     logEvent(analytics.current, 'select_content', {
       content_type: 'post',
       description: post.description,
@@ -31,8 +43,21 @@ export const useAnalytics = () => {
     });
   };
 
+  const handleSetSession = async () => {
+    if (!analytics.current) {
+      return;
+    }
+
+    const { session } = await fetchApi.get<{ session: string }>('/session');
+
+    setUserProperties(analytics.current, {
+      session_id: session,
+    });
+  };
+
   return {
     eventPageView: handlePageView,
     eventSelectContent: handleSelectContent,
+    setSession: handleSetSession,
   };
 };

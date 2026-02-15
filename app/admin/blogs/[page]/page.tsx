@@ -1,5 +1,3 @@
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
 import type { PostListAll, ResponseList } from '@/packages/domains';
@@ -14,14 +12,6 @@ export default async function AdminPage({
 }: {
   params: Promise<{ page: number }>;
 }) {
-  const cookieStore = await cookies();
-
-  const checkAuth = cookieStore.get('auth')?.value;
-
-  if (checkAuth !== 'IKZtsfpbt5vIT60qNrLBsbfymCvBoMQo7NyzLWeaHu7lqwzm') {
-    redirect('/');
-  }
-
   const { page } = await params;
 
   const res = await fetchApi.get<ResponseList<PostListAll>>(

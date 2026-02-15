@@ -31,7 +31,8 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "sharp": "catalog:",
-    "zod": "catalog:"
+    "zod": "catalog:",
+    "uuid": "catalog:"
   },
   "devDependencies": {
     "@eslint/eslintrc": "catalog:",

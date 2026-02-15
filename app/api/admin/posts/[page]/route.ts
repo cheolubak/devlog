@@ -13,6 +13,7 @@ export async function GET(
   const res = await externalApi.get<ResponseList<PostListAll>>('posts/all', {
     params: {
       offset: page,
+      type: ['RSS', 'ATOM', 'SCRAPING'],
     },
   });
 

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: 'DEVLOG - 기술블로그를 한눈에',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: ReactNode;
