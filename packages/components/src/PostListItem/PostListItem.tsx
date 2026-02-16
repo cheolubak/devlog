@@ -47,6 +47,7 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
     >
       <Typography
         className={styles.postListItemTitle}
+        maxLines={2}
         semantic='h2'
         variants='title-large'
       >
