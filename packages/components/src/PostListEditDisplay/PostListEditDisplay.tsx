@@ -14,11 +14,13 @@ import styles from './PostListEditDisplay.module.css';
 interface PostListEditDisplayProps {
   page: number;
   posts: ResponseList<PostListAll>;
+  type: 'blogs' | 'youtubes';
 }
 
 export const PostListEditDisplay = ({
   page,
   posts,
+  type,
 }: PostListEditDisplayProps) => {
   const router = useRouter();
 
@@ -59,14 +61,14 @@ export const PostListEditDisplay = ({
 
   const handleNextPage = () => {
     window.scrollTo({ top: 0 });
-    router.push(`/admin/${page + 1}`, {
+    router.push(`/admin/${type}/${page + 1}`, {
       scroll: false,
     });
   };
 
   const handlePrevPage = () => {
     window.scrollTo({ top: 0 });
-    router.push(`/admin/${page - 1}`, {
+    router.push(`/admin/${type}/${page - 1}`, {
       scroll: false,
     });
   };

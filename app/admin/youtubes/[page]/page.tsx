@@ -27,6 +27,7 @@ export default async function AdminPage({
     <PostListEditDisplay
       page={z.coerce.number().parse(page)}
       posts={res}
+      type='youtubes'
     />
   );
 }
