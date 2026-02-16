@@ -1,6 +1,7 @@
 import type { PostList, ResponseList } from '@devlog/domain';
 import type { NextRequest } from 'next/server';
 
+import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
@@ -13,11 +14,18 @@ export async function GET(
 
   const page = z.coerce.number().int().nonnegative().parse(pageParam);
 
-  const res = await externalApi.get<ResponseList<PostList>>(`/posts/blog`, {
-    params: {
-      offset: page,
-    },
-  });
+  try {
+    log.info('GET Blog Posts', { page });
 
-  return NextResponse.json(res);
+    const res = await externalApi.get<ResponseList<PostList>>(`/posts/blog`, {
+      params: {
+        offset: page,
+      },
+    });
+
+    return NextResponse.json(res);
+  } catch (e) {
+    log.error('GET Blog Posts', { error: JSON.stringify(e), page });
+    return NextResponse.json({ message: 'Error!!' }, { status: 500 });
+  }
 }
