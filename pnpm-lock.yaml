@@ -87,6 +87,12 @@ catalogs:
     immer:
       specifier: ^11.1.3
       version: 11.1.3
+    jotai:
+      specifier: ^2.17.1
+      version: 2.17.1
+    lottie-web:
+      specifier: ^5.13.0
+      version: 5.13.0
     marked:
       specifier: ^17.0.1
       version: 17.0.1
@@ -143,6 +149,9 @@ importers:
       '@devlog/domain':
         specifier: workspace:*
         version: link:packages/domains
+      '@devlog/hooks':
+        specifier: workspace:*
+        version: link:packages/hooks
       '@devlog/logger':
         specifier: workspace:*
         version: link:packages/logger
@@ -291,6 +300,12 @@ importers:
 
   packages/components:
     dependencies:
+      '@devlog/hooks':
+        specifier: workspace:*
+        version: link:../hooks
+      '@devlog/stores':
+        specifier: workspace:*
+        version: link:../stores
       '@devlog/ui-config':
         specifier: workspace:*
         version: link:../configs/ui
@@ -300,6 +315,12 @@ importers:
       clsx:
         specifier: 'catalog:'
         version: 2.1.1
+      jotai:
+        specifier: 'catalog:'
+        version: 2.17.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.1)
+      lottie-web:
+        specifier: 'catalog:'
+        version: 5.13.0
       next:
         specifier: 'catalog:'
         version: 16.1.1(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(sass@1.97.0)
@@ -309,6 +330,9 @@ importers:
       react-dom:
         specifier: 'catalog:'
         version: 19.2.1(react@19.2.1)
+      react-markdown:
+        specifier: 'catalog:'
+        version: 10.1.0(@types/react@19.2.7)(react@19.2.1)
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -319,9 +343,6 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.2.3(@types/react@19.2.7)
-      react-markdown:
-        specifier: 'catalog:'
-        version: 10.1.0(@types/react@19.2.7)(react@19.2.1)
       sass:
         specifier: 'catalog:'
         version: 1.97.0
@@ -366,6 +387,15 @@ importers:
         specifier: 'catalog:'
         version: 4.3.5
 
+  packages/hooks:
+    dependencies:
+      '@devlog/stores':
+        specifier: workspace:*
+        version: link:../stores
+      jotai:
+        specifier: 'catalog:'
+        version: 2.17.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.1)
+
   packages/logger:
     dependencies:
       '@opentelemetry/api-logs':
@@ -373,6 +403,15 @@ importers:
         version: 0.212.0
 
   packages/request: {}
+
+  packages/stores:
+    dependencies:
+      '@devlog/domain':
+        specifier: workspace:*
+        version: link:../domains
+      jotai:
+        specifier: 'catalog:'
+        version: 2.17.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.1)
 
   packages/utils: {}
 
@@ -2322,6 +2361,24 @@ packages:
     resolution: {integrity: sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ==}
     hasBin: true
 
+  jotai@2.17.1:
+    resolution: {integrity: sha512-TFNZZDa/0ewCLQyRC/Sq9crtixNj/Xdf/wmj9631xxMuKToVJZDbqcHIYN0OboH+7kh6P6tpIK7uKWClj86PKw==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@babel/core': '>=7.0.0'
+      '@babel/template': '>=7.0.0'
+      '@types/react': '>=17.0.0'
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@babel/template':
+        optional: true
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -2459,6 +2516,9 @@ packages:
   loose-envify@1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
+
+  lottie-web@5.13.0:
+    resolution: {integrity: sha512-+gfBXl6sxXMPe8tKQm7qzLnUy5DUPJPKIyRHwtpCpyUEYjHYRJC/5gjUvdkuO2c3JllrPtHXH5UJJK8LRYl5yQ==}
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
@@ -5443,6 +5503,13 @@ snapshots:
 
   jiti@2.6.1: {}
 
+  jotai@2.17.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.7)(react@19.2.1):
+    optionalDependencies:
+      '@babel/core': 7.28.5
+      '@babel/template': 7.27.2
+      '@types/react': 19.2.7
+      react: 19.2.1
+
   js-tokens@4.0.0: {}
 
   js-yaml@4.1.1:
@@ -5549,6 +5616,8 @@ snapshots:
   loose-envify@1.4.0:
     dependencies:
       js-tokens: 4.0.0
+
+  lottie-web@5.13.0: {}
 
   lru-cache@5.1.1:
     dependencies:

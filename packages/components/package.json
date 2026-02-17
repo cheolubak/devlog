@@ -8,7 +8,12 @@
     "react-dom": "catalog:",
     "next": "catalog:",
     "@devlog/ui-config": "workspace:*",
-    "@devlog/utils": "workspace:*"
+    "@devlog/utils": "workspace:*",
+    "@devlog/stores": "workspace:*",
+    "@devlog/hooks": "workspace:*",
+    "react-markdown": "catalog:",
+    "lottie-web": "catalog:",
+    "jotai": "catalog:"
   },
   "devDependencies": {
     "tailwindcss": "catalog:",
@@ -16,7 +21,6 @@
     "typescript": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
-    "react-markdown": "catalog:"
+    "@types/react-dom": "catalog:"
   }
 }

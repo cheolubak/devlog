@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 
 import './globals.css';
 import '@devlog/ui-config';
-import { Header } from '@devlog/components';
+import { Header, Loading } from '@devlog/components';
 import localFont from 'next/font/local';
 
 import { FirebaseAnalyticsProvider } from '@/providers/FirebaseAnalyticsProvider';
@@ -33,6 +33,7 @@ export default async function RootLayout({
         <QueryProvider>
           <Header />
           {children}
+          <Loading />
         </QueryProvider>
       </body>
     </html>

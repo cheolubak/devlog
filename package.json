@@ -17,6 +17,7 @@
     "@devlog/logger": "workspace:*",
     "@devlog/request": "workspace:*",
     "@devlog/ui-config": "workspace:*",
+    "@devlog/hooks": "workspace:*",
     "@opentelemetry/api": "catalog:",
     "@opentelemetry/api-logs": "catalog:",
     "@opentelemetry/exporter-logs-otlp-http": "catalog:",
