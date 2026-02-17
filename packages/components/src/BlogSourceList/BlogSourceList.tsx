@@ -48,7 +48,7 @@ export const BlogSourceList = ({ blogSources }: BlogSourceListProps) => {
               semantic='h2'
               variants='display-small'
             >
-              {source.name}
+              {source.name} [{source.totalPostsFetched}]
             </Typography>
             <Typography variants='title-medium'>{source.type}</Typography>
             <Typography>
