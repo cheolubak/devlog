@@ -1,14 +1,16 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
+import type { PostListAll, ResponseList } from '@devlog/domain';
 
-import type { PostListAll, ResponseList } from '@/packages/domains';
+import { useMutation } from '@tanstack/react-query';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { fetchApi } from '@/packages/request';
 
 import { Button } from '../Button';
 import { PostListItemEditDisplay } from '../PostListItemEditDisplay';
+import { Switch } from '../Switch';
+import { Typography } from '../Typography';
 import styles from './PostListEditDisplay.module.css';
 
 interface PostListEditDisplayProps {
@@ -23,6 +25,9 @@ export const PostListEditDisplay = ({
   type,
 }: PostListEditDisplayProps) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const isDisplay = searchParams.get('isDisplay') === 'true';
 
   const { mutate: onChangeDisplay } = useMutation({
     mutationFn: ({ id, isDisplay }: { id: string; isDisplay: boolean }) => {
@@ -73,6 +78,13 @@ export const PostListEditDisplay = ({
     });
   };
 
+  const handleChangeShowListDisplay = (isDiaplay: boolean) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('isDisplay', isDiaplay ? 'true' : 'false');
+
+    router.replace(`?${newSearchParams.toString()}`);
+  };
+
   return (
     <div>
       <div className={styles.menus}>
@@ -92,6 +104,13 @@ export const PostListEditDisplay = ({
         >
           다음
         </Button>
+        <div className={styles.displaySwitch}>
+          <Switch
+            checked={isDisplay}
+            onChange={handleChangeShowListDisplay}
+          />
+          <Typography>노출 콘텐츠 여부</Typography>
+        </div>
       </div>
       {posts.data.map((post) => (
         <PostListItemEditDisplay

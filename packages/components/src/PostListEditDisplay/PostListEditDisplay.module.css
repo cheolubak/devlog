@@ -9,3 +9,10 @@
     gap: 12px;
     @apply px-4 md:px-10;
 }
+
+.displaySwitch {
+    @apply flex;
+    @apply justify-start;
+    @apply items-center;
+    @apply gap-2;
+}
