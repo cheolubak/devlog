@@ -12,7 +12,6 @@
     "@devlog/apis": "workspace:*",
     "@devlog/components": "workspace:*",
     "@devlog/config/firebase": "workspace:*",
-    "@devlog/database": "workspace:*",
     "@devlog/domain": "workspace:*",
     "@devlog/hooks": "workspace:*",
     "@devlog/logger": "workspace:*",

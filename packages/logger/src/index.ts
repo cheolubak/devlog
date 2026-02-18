@@ -29,7 +29,6 @@ export const log = {
     body: string,
     attributes?: Record<string, boolean | number | string>,
   ) => {
-    console.log('=======body, attributes=======', body, attributes);
     logger().emit({
       attributes,
       body,

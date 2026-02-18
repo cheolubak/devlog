@@ -34,7 +34,7 @@ export const InfiniteScroll = ({
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [fetchNext, hasNext, isFetching]);
 
   return (
     <>

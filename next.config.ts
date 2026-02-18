@@ -19,7 +19,6 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   transpilePackages: [
     '@devlog/components',
-    '@devlog/database',
     '@devlog/ui-config',
     '@devlog/request',
   ],

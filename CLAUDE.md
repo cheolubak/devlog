@@ -27,7 +27,6 @@ app/                    # Next.js App Router
 packages/              # 모노레포 패키지
 ├── components/        # @devlog/components - React 컴포넌트
 ├── apis/              # @devlog/apis - API 호출 함수
-├── database/          # @devlog/database - DB 연결
 ├── domains/           # @devlog/domain - 타입/스키마 정의
 ├── request/           # @devlog/request - HTTP 클라이언트
 ├── utils/             # @devlog/utils - 유틸리티 함수

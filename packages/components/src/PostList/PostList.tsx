@@ -16,6 +16,8 @@ interface PostListProps {
 }
 
 export const PostList = ({ posts: { data, pagination } }: PostListProps) => {
+  'use no memo';
+
   const {
     data: posts,
     fetchNextPage,
