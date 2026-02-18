@@ -14,4 +14,5 @@ export * from './PostListItem';
 export * from './PostListItemEditDisplay';
 export * from './Ripple';
 export * from './Switch';
+export * from './Tabs';
 export * from './Typography';

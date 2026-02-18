@@ -14,5 +14,5 @@ export default async function AdminLayout({ children }: AdminLayoutProps) {
     redirect('/');
   }
 
-  return children;
+  return <>{children}</>;
 }

@@ -1,6 +1,8 @@
 @reference '@devlog/ui-config';
 
 .header {
+    @apply sticky;
+    @apply top-0;
     @apply w-dvw;
     @apply max-w-dvw;
     @apply flex;
@@ -11,6 +13,7 @@
     @apply bg-gray-900;
     @apply text-white;
     @apply box-border;
+    @apply z-[1000];
 }
 
 .menu {
