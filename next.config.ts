@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
     ],
   },
   output: 'standalone',
+  reactCompiler: true,
   transpilePackages: [
     '@devlog/components',
     '@devlog/database',
