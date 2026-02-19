@@ -66,14 +66,14 @@ export const PostListEditDisplay = ({
 
   const handleNextPage = () => {
     window.scrollTo({ top: 0 });
-    router.push(`/admin/${type}/${page + 1}`, {
+    router.push(`/admin/${type}/${page + 1}?${searchParams.toString()}`, {
       scroll: false,
     });
   };
 
   const handlePrevPage = () => {
     window.scrollTo({ top: 0 });
-    router.push(`/admin/${type}/${page - 1}`, {
+    router.push(`/admin/${type}/${page - 1}?${searchParams.toString()}`, {
       scroll: false,
     });
   };
