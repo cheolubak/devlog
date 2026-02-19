@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@devlog/apis": "workspace:*",
@@ -55,18 +60,22 @@
     "@typescript-eslint/eslint-plugin": "catalog:",
     "@typescript-eslint/parser": "catalog:",
     "babel-plugin-react-compiler": "^1.0.0",
+    "cypress": "^15.10.0",
     "eslint": "catalog:",
     "eslint-config-next": "catalog:",
     "eslint-plugin-perfectionist": "catalog:",
     "prettier": "catalog:",
     "sass": "catalog:",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:",
+    "@vitest/coverage-v8": "catalog:"
   },
   "packageManager": "pnpm@10.28.1",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@parcel/watcher",
+      "cypress",
       "sharp",
       "unrs-resolver"
     ]
