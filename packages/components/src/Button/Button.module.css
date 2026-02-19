@@ -7,6 +7,7 @@
     @apply justify-center;
     @apply items-center;
     @apply border-2;
+    @apply whitespace-nowrap;
 }
 
 .xl {

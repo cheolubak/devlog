@@ -1,5 +1,13 @@
 @reference '@devlog/ui-config';
 
+.postListItemEdit {
+    @apply flex;
+    @apply flex-col;
+    @apply justify-start;
+    @apply items-stretch;
+    @apply gap-[12px];
+}
+
 .postListItemEditDisplay {
     display: flex;
     justify-content: space-between;
@@ -24,4 +32,21 @@
     justify-content: flex-end;
     align-items: center;
     gap: 12px;
+}
+
+.postKeywordMenu {
+    @apply flex;
+    @apply justify-stretch;
+    @apply items-center;
+    @apply gap-4;
+}
+
+.postKeywords {
+    @apply text-white;
+    @apply w-full;
+    @apply border;
+    @apply border-gray-300;
+    @apply rounded-md;
+    @apply p-4;
+    @apply h-[150px];
 }

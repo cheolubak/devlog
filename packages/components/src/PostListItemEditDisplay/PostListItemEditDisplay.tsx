@@ -1,9 +1,15 @@
 'use client';
 
 import type { PostListAll } from '@devlog/domain';
+import type { ChangeEvent } from 'react';
 
+import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
+import { useRef } from 'react';
 import { useState } from 'react';
+
+import { Button } from '@/packages/components';
+import { fetchApi } from '@/packages/request';
 
 import { IconButton } from '../IconButton';
 import { Switch } from '../Switch';
@@ -22,6 +28,16 @@ export const PostListItemEditDisplay = ({
   post,
 }: PostItemProps) => {
   const [isDisplay, setIsDisplay] = useState<boolean>(post.isDisplay);
+
+  const keywordRef = useRef(post.searchKeywords?.keywords ?? '');
+
+  const { mutate } = useMutation({
+    mutationFn: (variables: { keywords: string }) =>
+      fetchApi.put(`/admin/edit/posts/${post.id}/keywords`, {
+        keywords: variables.keywords,
+      }),
+    mutationKey: ['posts', 'keywords', post.id],
+  });
 
   const handleOpenLink = () => {
     navigator.clipboard.writeText(post.id);
@@ -58,42 +74,71 @@ export const PostListItemEditDisplay = ({
     onDelete?.();
   };
 
+  const handleChangeKeywordText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    keywordRef.current = e.target.value;
+  };
+
+  const handleSaveKeyword = () => {
+    if (!keywordRef.current) {
+      return alert('Input Keywords');
+    }
+
+    mutate({ keywords: keywordRef.current });
+  };
+
   return (
-    <div className={styles.postListItemEditDisplay}>
-      <div className={styles.postListItemEditDisplayInfo}>
-        <Typography variants='label-medium'>{post.id}</Typography>
-        <Typography
-          className={styles.postListItemTitle}
-          semantic='h2'
-          variants='title-large'
-        >
-          {post.title}
-        </Typography>
-        <Typography variants='label-medium'>
-          {dayjs(post.originalPublishedAt).format('YYYY-MM-DD')}
-        </Typography>
-        <Typography
-          semantic='h3'
-          variants='body-medium'
-        >
-          {post.source.name}
-        </Typography>
+    <div className={styles.postListItemEdit}>
+      <div className={styles.postListItemEditDisplay}>
+        <div className={styles.postListItemEditDisplayInfo}>
+          <Typography variants='label-medium'>{post.id}</Typography>
+          <Typography
+            className={styles.postListItemTitle}
+            semantic='h2'
+            variants='title-large'
+          >
+            {post.title}
+          </Typography>
+          <Typography variants='label-medium'>
+            {dayjs(post.originalPublishedAt).format('YYYY-MM-DD')}
+          </Typography>
+          <Typography
+            semantic='h3'
+            variants='body-medium'
+          >
+            {post.source.name}
+          </Typography>
+        </div>
+        <div className={styles.postListItemEditDisplayMenu}>
+          <IconButton
+            iconColor='primary'
+            name='link'
+            onClick={handleOpenLink}
+          />
+          <Switch
+            checked={isDisplay}
+            onChange={handleChangeDisplay}
+          />
+          <IconButton
+            iconColor='primary'
+            name='delete'
+            onClick={handleDelete}
+          />
+        </div>
       </div>
-      <div className={styles.postListItemEditDisplayMenu}>
-        <IconButton
-          iconColor='primary'
-          name='link'
-          onClick={handleOpenLink}
+
+      <div className={styles.postKeywordMenu}>
+        <textarea
+          className={styles.postKeywords}
+          defaultValue={post.searchKeywords?.keywords ?? ''}
+          onChange={handleChangeKeywordText}
+          placeholder='keywords'
         />
-        <Switch
-          checked={isDisplay}
-          onChange={handleChangeDisplay}
-        />
-        <IconButton
-          iconColor='primary'
-          name='delete'
-          onClick={handleDelete}
-        />
+        <Button
+          color='secondary'
+          onClick={handleSaveKeyword}
+        >
+          키워드 수정
+        </Button>
       </div>
     </div>
   );
