@@ -3,14 +3,13 @@
 import type { PostListAll } from '@devlog/domain';
 import type { ChangeEvent } from 'react';
 
+import { useLoading } from '@devlog/hooks';
+import { fetchApi } from '@devlog/request';
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
-import { useRef } from 'react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
-import { Button } from '@/packages/components';
-import { fetchApi } from '@/packages/request';
-
+import { Button } from '../Button';
 import { IconButton } from '../IconButton';
 import { Switch } from '../Switch';
 import { Typography } from '../Typography';
@@ -30,6 +29,7 @@ export const PostListItemEditDisplay = ({
   const [isDisplay, setIsDisplay] = useState<boolean>(post.isDisplay);
 
   const keywordRef = useRef(post.searchKeywords?.keywords ?? '');
+  const { hide, show } = useLoading();
 
   const { mutate } = useMutation({
     mutationFn: (variables: { keywords: string }) =>
@@ -37,6 +37,18 @@ export const PostListItemEditDisplay = ({
         keywords: variables.keywords,
       }),
     mutationKey: ['posts', 'keywords', post.id],
+    onError: () => {
+      alert('키워드 수정 실해');
+    },
+    onMutate: () => {
+      show('changeKeywords');
+    },
+    onSettled: () => {
+      hide('changeKeywords');
+    },
+    onSuccess: () => {
+      alert('키워드 수정 성공');
+    },
   });
 
   const handleOpenLink = () => {
