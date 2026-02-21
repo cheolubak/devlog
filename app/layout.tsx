@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import './globals.css';
 import '@devlog/ui-config';
 import { GlobalModalProvider, Header, Loading } from '@devlog/components';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 
@@ -35,6 +36,7 @@ export default async function RootLayout({
           crossOrigin='anonymous'
           src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4531179937945968'
         />
+        <SpeedInsights />
         <FirebaseAnalyticsProvider />
         <QueryProvider>
           <GlobalModalProvider>
