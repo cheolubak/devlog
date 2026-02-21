@@ -6,7 +6,6 @@ import '@devlog/ui-config';
 import { GlobalModalProvider, Header, Loading } from '@devlog/components';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import localFont from 'next/font/local';
-import Script from 'next/script';
 
 import { FirebaseAnalyticsProvider } from '@/providers/FirebaseAnalyticsProvider';
 import { QueryProvider } from '@/providers/QueryProvider';
@@ -30,12 +29,14 @@ export default async function RootLayout({
       className={pretandard.className}
       lang='ko'
     >
-      <body>
-        <Script
+      <head>
+        <script
           async
           crossOrigin='anonymous'
           src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4531179937945968'
         />
+      </head>
+      <body>
         <SpeedInsights />
         <FirebaseAnalyticsProvider />
         <QueryProvider>
