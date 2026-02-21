@@ -3,8 +3,9 @@ import type { ReactNode } from 'react';
 
 import './globals.css';
 import '@devlog/ui-config';
-import { Header, Loading } from '@devlog/components';
+import { GlobalModalProvider, Header, Loading } from '@devlog/components';
 import localFont from 'next/font/local';
+import Script from 'next/script';
 
 import { FirebaseAnalyticsProvider } from '@/providers/FirebaseAnalyticsProvider';
 import { QueryProvider } from '@/providers/QueryProvider';
@@ -29,11 +30,18 @@ export default async function RootLayout({
       lang='ko'
     >
       <body>
+        <Script
+          async
+          crossOrigin='anonymous'
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4531179937945968'
+        />
         <FirebaseAnalyticsProvider />
         <QueryProvider>
-          <Header />
-          {children}
-          <Loading />
+          <GlobalModalProvider>
+            <Header />
+            {children}
+            <Loading />
+          </GlobalModalProvider>
         </QueryProvider>
       </body>
     </html>
