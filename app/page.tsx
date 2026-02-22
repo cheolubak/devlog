@@ -1,5 +1,6 @@
 import { getPostList } from '@devlog/apis';
 import { PostList, Typography } from '@devlog/components';
+import { Suspense } from 'react';
 
 export const revalidate = 3600;
 
@@ -7,7 +8,11 @@ export default async function Home() {
   try {
     const posts = await getPostList();
 
-    return <PostList posts={posts} />;
+    return (
+      <Suspense>
+        <PostList posts={posts} />
+      </Suspense>
+    );
   } catch (e) {
     console.error('=======Home Page Error=======');
     if (e instanceof Error) {

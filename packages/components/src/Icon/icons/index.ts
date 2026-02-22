@@ -1,3 +1,4 @@
+export * from './IconClear';
 export * from './IconDarkMode';
 export * from './IconDelete';
 export * from './IconEdit';
@@ -10,5 +11,7 @@ export * from './IconMore';
 export * from './IconNotification';
 export * from './IconPerson';
 export * from './IconRss';
+export * from './IconSearch';
 export * from './IconSend';
 export * from './IconShare';
+export * from './IconYoutube';

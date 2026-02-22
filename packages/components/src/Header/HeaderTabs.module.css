@@ -1,0 +1,6 @@
+@reference '@devlog/ui-config';
+
+.headerTabs {
+    @apply flex;
+    @apply gap-2;
+}

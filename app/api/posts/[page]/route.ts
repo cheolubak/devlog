@@ -13,19 +13,37 @@ export async function GET(
   const { page: pageParam } = await params;
 
   const page = z.coerce.number().int().nonnegative().parse(pageParam);
+  const type = req.nextUrl.searchParams.get('type') ?? 'blog';
+  const q = req.nextUrl.searchParams.get('q') ?? '';
 
   try {
-    log.info('GET Blog Posts', { page });
+    log.info('GET Posts', { page, q, type });
 
-    const res = await externalApi.get<ResponseList<PostList>>(`/posts/blog`, {
-      params: {
-        offset: page,
-      },
+    const isYoutube = type === 'youtube';
+    const apiParams: Record<string, number | string | string[]> = {
+      offset: page,
+    };
+
+    let endpoint = isYoutube ? '/posts/youtube' : '/posts/blog';
+    if (q) {
+      apiParams.q = q;
+
+      endpoint = isYoutube ? '/search/youtubes' : '/search/blogs';
+    }
+
+    if (isYoutube) {
+      apiParams.type = ['YOUTUBE'];
+    } else {
+      apiParams.type = ['RSS', 'ATOM', 'SCRAPING'];
+    }
+
+    const res = await externalApi.get<ResponseList<PostList>>(endpoint, {
+      params: apiParams,
     });
 
     return NextResponse.json(res);
   } catch (e) {
-    log.error('GET Blog Posts', { error: JSON.stringify(e), page });
+    log.error('GET Posts', { error: JSON.stringify(e), page, q, type });
     return NextResponse.json({ message: 'Error!!' }, { status: 500 });
   }
 }

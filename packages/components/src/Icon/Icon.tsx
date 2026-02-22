@@ -4,6 +4,7 @@ import { clsx } from 'clsx';
 
 import styles from './Icon.module.css';
 import {
+  IconClear,
   IconDarkMode,
   IconDelete,
   IconEdit,
@@ -16,8 +17,10 @@ import {
   IconNotification,
   IconPerson,
   IconRss,
+  IconSearch,
   IconSend,
   IconShare,
+  IconYoutube,
 } from './icons';
 
 export interface IconProps {
@@ -30,6 +33,7 @@ export interface IconProps {
 type IconColor = 'danger' | 'primary' | 'secondary' | 'success';
 
 type IconName =
+  | 'clear'
   | 'darkMode'
   | 'delete'
   | 'edit'
@@ -42,10 +46,13 @@ type IconName =
   | 'notification'
   | 'person'
   | 'rss'
+  | 'search'
   | 'send'
-  | 'share';
+  | 'share'
+  | 'youtube';
 
 const iconMap: Record<IconName, ComponentType> = {
+  clear: IconClear,
   darkMode: IconDarkMode,
   delete: IconDelete,
   edit: IconEdit,
@@ -58,8 +65,10 @@ const iconMap: Record<IconName, ComponentType> = {
   notification: IconNotification,
   person: IconPerson,
   rss: IconRss,
+  search: IconSearch,
   send: IconSend,
   share: IconShare,
+  youtube: IconYoutube,
 };
 
 export const Icon = ({ className, color, name, size = 24 }: IconProps) => {
