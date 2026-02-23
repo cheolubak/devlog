@@ -59,10 +59,8 @@ export const PostList = ({ posts: { data, pagination } }: PostListProps) => {
 
   if (!isFetching && postList.length === 0) {
     return (
-      <div className='p-10 text-center'>
-        <Typography variants='title-large'>
-          검색 결과가 없습니다.
-        </Typography>
+      <div className='p-10 text-center text-white'>
+        <Typography variants='title-large'>검색 결과가 없습니다.</Typography>
       </div>
     );
   }

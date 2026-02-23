@@ -4,6 +4,7 @@ import type { PostList } from '@devlog/domain';
 import type { CSSProperties } from 'react';
 
 import { Typography } from '@devlog/components';
+import dayjs from 'dayjs';
 import Link from 'next/link';
 
 import { useAnalytics } from '@/hooks/useAnalytics';
@@ -65,7 +66,8 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
         semantic='h3'
         variants='body-medium'
       >
-        {post.source.name}
+        {post.source.name} |{' '}
+        {dayjs(post.originalPublishedAt).format('YYYY.MM.DD')}
       </Typography>
     </Link>
   );
