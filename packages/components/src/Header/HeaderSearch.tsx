@@ -70,7 +70,7 @@ export const HeaderSearch = () => {
         >
           <Icon
             color='var(--color-gray-400)'
-            name='delete'
+            name='clear'
             size={18}
           />
         </button>
