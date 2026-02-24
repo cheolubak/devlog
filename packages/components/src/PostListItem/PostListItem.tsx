@@ -3,7 +3,7 @@
 import type { PostList } from '@devlog/domain';
 import type { CSSProperties } from 'react';
 
-import { Typography } from '@devlog/components';
+import { Icon, Typography } from '@devlog/components';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 
@@ -52,6 +52,15 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
         semantic='h2'
         variants='title-large'
       >
+        <Icon
+          color={
+            post.source.type === 'YOUTUBE'
+              ? 'var(--color-red-500)'
+              : 'var(--color-teal-500)'
+          }
+          name={post.source.type === 'YOUTUBE' ? 'youtube' : 'rss'}
+          size={26}
+        />
         {post.title}
       </Typography>
       <Typography

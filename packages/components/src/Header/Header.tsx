@@ -3,7 +3,6 @@ import { Suspense } from 'react';
 import { Typography } from '../Typography';
 import styles from './Header.module.css';
 import { HeaderSearch } from './HeaderSearch';
-import { HeaderTabs } from './HeaderTabs';
 
 export const Header = () => {
   return (
@@ -17,13 +16,10 @@ export const Header = () => {
         </Typography>
         <div className={styles.search}>
           <Suspense>
-            <HeaderTabs />
+            <HeaderSearch />
           </Suspense>
         </div>
       </div>
-      <Suspense>
-        <HeaderSearch />
-      </Suspense>
     </header>
   );
 };

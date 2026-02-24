@@ -19,22 +19,15 @@ export async function GET(
   try {
     log.info('GET Posts', { page, q, type });
 
-    const isYoutube = type === 'youtube';
     const apiParams: Record<string, number | string | string[]> = {
       offset: page,
     };
 
-    let endpoint = isYoutube ? '/posts/youtube' : '/posts/blog';
+    let endpoint = '/posts';
     if (q) {
       apiParams.q = q;
 
-      endpoint = isYoutube ? '/search/youtubes' : '/search/blogs';
-    }
-
-    if (isYoutube) {
-      apiParams.type = ['YOUTUBE'];
-    } else {
-      apiParams.type = ['RSS', 'ATOM', 'SCRAPING'];
+      endpoint = '/search';
     }
 
     const res = await externalApi.get<ResponseList<PostList>>(endpoint, {

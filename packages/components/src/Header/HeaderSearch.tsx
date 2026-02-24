@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Icon } from '../Icon';
-import styles from './Header.module.css';
+import styles from './HeaderSearch.module.css';
 
 export const HeaderSearch = () => {
   const pathname = usePathname();
