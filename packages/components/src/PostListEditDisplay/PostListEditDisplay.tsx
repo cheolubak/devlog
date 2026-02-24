@@ -2,6 +2,7 @@
 
 import type { PostListAll, ResponseList } from '@devlog/domain';
 
+import { useLoading } from '@devlog/hooks';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -27,6 +28,8 @@ export const PostListEditDisplay = ({
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const { hide, show } = useLoading();
+
   const isDisplay = searchParams.get('isDisplay') === 'true';
 
   const { mutate: onChangeDisplay } = useMutation({
@@ -36,6 +39,12 @@ export const PostListEditDisplay = ({
     mutationKey: ['posts', 'display'],
     onError: () => {
       alert('변경 실패');
+    },
+    onMutate: () => {
+      show('changeDisplay');
+    },
+    onSettled: () => {
+      hide('changeDisplay');
     },
     onSuccess: () => {
       alert('변경 성공');
@@ -49,6 +58,12 @@ export const PostListEditDisplay = ({
     mutationKey: ['posts', 'delete'],
     onError: () => {
       alert('삭제 실패');
+    },
+    onMutate: () => {
+      show('deletePost');
+    },
+    onSettled: () => {
+      hide('deletePost');
     },
     onSuccess: () => {
       alert('삭제 성공');
