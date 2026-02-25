@@ -82,8 +82,7 @@ export const Icon = ({ className, color, name, size = 24 }: IconProps) => {
       className={clsx(styles.icon, isSetColor && styles[color], className)}
       style={{
         fill: isSetColor ? undefined : color,
-        height: size,
-        width: size,
+        fontSize: size,
       }}
     >
       <IconComponent />

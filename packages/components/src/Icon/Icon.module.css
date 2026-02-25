@@ -4,9 +4,18 @@
     @apply inline-flex;
     @apply justify-center;
     @apply items-center;
+    @apply w-[1em];
+    @apply min-w-[1em];
+    @apply max-w-[1em];
+    @apply h-[1em];
+    @apply max-h-[1em];
+    @apply min-h-[1em];
     @apply **:fill-inherit;
-    @apply **:w-full;
+    @apply **:max-w-full;
+    @apply **:min-w-full;
     @apply **:h-full;
+    @apply **:max-h-full;
+    @apply **:min-h-full;
 }
 
 .danger {

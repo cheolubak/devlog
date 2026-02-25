@@ -6,6 +6,7 @@ import '@devlog/ui-config';
 import { GlobalModalProvider, Header, Loading } from '@devlog/components';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import localFont from 'next/font/local';
+import Head from 'next/head';
 
 import { FirebaseAnalyticsProvider } from '@/providers/FirebaseAnalyticsProvider';
 import { QueryProvider } from '@/providers/QueryProvider';
@@ -29,13 +30,34 @@ export default async function RootLayout({
       className={pretandard.className}
       lang='ko'
     >
-      <head>
+      <Head>
         <script
           async
           crossOrigin='anonymous'
           src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4531179937945968'
         />
-      </head>
+        <link
+          href='/apple-touch-icon.png'
+          rel='apple-touch-icon'
+          sizes='180x180'
+        />
+        <link
+          href='/favicon-32x32.png'
+          rel='icon'
+          sizes='32x32'
+          type='image/png'
+        />
+        <link
+          href='/favicon-16x16.png'
+          rel='icon'
+          sizes='16x16'
+          type='image/png'
+        />
+        <link
+          href='/site.webmanifest'
+          rel='manifest'
+        />
+      </Head>
       <body>
         <SpeedInsights />
         <FirebaseAnalyticsProvider />

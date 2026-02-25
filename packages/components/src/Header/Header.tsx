@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Suspense } from 'react';
 
 import { Typography } from '../Typography';
@@ -12,7 +13,12 @@ export const Header = () => {
           semantic='h1'
           variants='display-small'
         >
-          DEVLOG
+          <Image
+            alt='Dev Curate'
+            height={64}
+            src='/logo.svg'
+            width={64}
+          />
         </Typography>
         <div className={styles.search}>
           <Suspense>
