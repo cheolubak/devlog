@@ -1,0 +1,26 @@
+@reference '@devlog/ui-config';
+
+.channelItem {
+    @apply flex;
+    @apply flex-col;
+    @apply items-center;
+    @apply gap-2;
+    @apply w-16;
+}
+
+.channelImage {
+    @apply w-16;
+    @apply min-w-16;
+    @apply max-w-16;
+    @apply h-16;
+    @apply min-h-16;
+    @apply max-h-16;
+    @apply rounded-2xl;
+    @apply bg-white;
+    @apply object-contain;
+}
+
+.channelName {
+    @apply text-white;
+    @apply text-center;
+}

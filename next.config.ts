@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
       { hostname: 'images.pexels.com', protocol: 'https' },
       { hostname: 'cdn-images-1.medium.com', protocol: 'https' },
       { hostname: 'hyperconnect.github.io', protocol: 'https' },
+      { hostname: 'pswufnwmoybbiggmwubt.supabase.co', protocol: 'https' },
     ],
   },
   output: 'standalone',

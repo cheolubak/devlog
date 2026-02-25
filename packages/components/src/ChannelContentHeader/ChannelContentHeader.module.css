@@ -1,0 +1,10 @@
+@reference '@devlog/ui-config';
+
+.channelContentHeader {
+    @apply text-white;
+    @apply flex;
+    @apply justify-stretch;
+    @apply items-center;
+    @apply gap-4;
+    @apply mx-4 md:mx-10;
+}

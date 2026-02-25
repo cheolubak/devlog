@@ -1,0 +1,18 @@
+@reference '@devlog/ui-config';
+
+.bottomNavigation {
+    @apply fixed;
+    @apply bottom-0;
+    @apply left-0;
+    @apply right-0;
+    @apply h-[64px];
+    @apply z-50;
+    @apply bg-teal-900;
+}
+
+.bottomNavigationItemList {
+    @apply h-full;
+    @apply flex;
+    @apply justify-around;
+    @apply items-center;
+}

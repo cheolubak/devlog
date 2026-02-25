@@ -3,7 +3,12 @@ import type { ReactNode } from 'react';
 
 import './globals.css';
 import '@devlog/ui-config';
-import { GlobalModalProvider, Header, Loading } from '@devlog/components';
+import {
+  BottomNavigation,
+  GlobalModalProvider,
+  Header,
+  Loading,
+} from '@devlog/components';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import localFont from 'next/font/local';
 import Head from 'next/head';
@@ -65,6 +70,7 @@ export default async function RootLayout({
           <GlobalModalProvider>
             <Header />
             {children}
+            <BottomNavigation />
             <Loading />
           </GlobalModalProvider>
         </QueryProvider>

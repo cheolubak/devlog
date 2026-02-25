@@ -15,6 +15,7 @@ export const Header = () => {
         >
           <Image
             alt='Dev Curate'
+            className={styles.logo}
             height={64}
             src='/logo.svg'
             width={64}

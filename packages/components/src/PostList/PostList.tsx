@@ -16,9 +16,13 @@ import { Typography } from '../Typography';
 
 interface PostListProps {
   posts: ResponseList<PostListData>;
+  sourceId?: string;
 }
 
-export const PostList = ({ posts: { data, pagination } }: PostListProps) => {
+export const PostList = ({
+  posts: { data, pagination },
+  sourceId,
+}: PostListProps) => {
   'use no memo';
 
   const searchParams = useSearchParams();
@@ -42,8 +46,9 @@ export const PostList = ({ posts: { data, pagination } }: PostListProps) => {
         }
       : undefined,
     initialPageParam: 0,
-    queryFn: ({ pageParam }) => getPostList({ page: pageParam, q, type }),
-    queryKey: ['posts', { q, type }],
+    queryFn: ({ pageParam }) =>
+      getPostList({ page: pageParam, q, sourceId, type }),
+    queryKey: ['posts', { q, sourceId, type }],
   });
 
   const postList = useMemo(

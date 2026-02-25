@@ -1,3 +1,4 @@
+export * from './IconChannel';
 export * from './IconClear';
 export * from './IconDarkMode';
 export * from './IconDelete';
@@ -7,6 +8,7 @@ export * from './IconGithub';
 export * from './IconHash';
 export * from './IconLightMode';
 export * from './IconLink';
+export * from './IconListAlt';
 export * from './IconMore';
 export * from './IconNotification';
 export * from './IconPerson';

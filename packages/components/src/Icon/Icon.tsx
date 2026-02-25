@@ -4,6 +4,7 @@ import { clsx } from 'clsx';
 
 import styles from './Icon.module.css';
 import {
+  IconChannel,
   IconClear,
   IconDarkMode,
   IconDelete,
@@ -13,6 +14,7 @@ import {
   IconHash,
   IconLightMode,
   IconLink,
+  IconListAlt,
   IconMore,
   IconNotification,
   IconPerson,
@@ -33,6 +35,7 @@ export interface IconProps {
 type IconColor = 'danger' | 'primary' | 'secondary' | 'success';
 
 type IconName =
+  | 'channel'
   | 'clear'
   | 'darkMode'
   | 'delete'
@@ -42,6 +45,7 @@ type IconName =
   | 'hash'
   | 'lightMode'
   | 'link'
+  | 'list-alt'
   | 'more'
   | 'notification'
   | 'person'
@@ -52,6 +56,7 @@ type IconName =
   | 'youtube';
 
 const iconMap: Record<IconName, ComponentType> = {
+  channel: IconChannel,
   clear: IconClear,
   darkMode: IconDarkMode,
   delete: IconDelete,
@@ -61,6 +66,7 @@ const iconMap: Record<IconName, ComponentType> = {
   hash: IconHash,
   lightMode: IconLightMode,
   link: IconLink,
+  'list-alt': IconListAlt,
   more: IconMore,
   notification: IconNotification,
   person: IconPerson,

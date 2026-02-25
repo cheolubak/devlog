@@ -1,0 +1,24 @@
+@reference '@devlog/ui-config';
+
+.channelList {
+    @apply px-4 md:px-10;
+    @apply mb-12;
+}
+
+.channelTypeTitle {
+    @apply flex;
+    @apply justify-start;
+    @apply items-center;
+    @apply gap-2;
+    @apply text-white;
+    @apply mb-6;
+}
+
+.channelItemList {
+    @apply grid;
+    @apply justify-between;
+    @apply items-start;
+    @apply gap-y-6 md:gap-y-8;
+    @apply gap-x-4 md:gap-x-8;
+    grid-template-columns: repeat(auto-fill, 4rem);
+}

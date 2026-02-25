@@ -15,9 +15,10 @@ export async function GET(
   const page = z.coerce.number().int().nonnegative().parse(pageParam);
   const type = req.nextUrl.searchParams.get('type') ?? 'blog';
   const q = req.nextUrl.searchParams.get('q') ?? '';
+  const sourceId = req.nextUrl.searchParams.get('sourceId');
 
   try {
-    log.info('GET Posts', { page, q, type });
+    log.info('GET Posts', { page, q, sourceId: sourceId ?? 'null', type });
 
     const apiParams: Record<string, number | string | string[]> = {
       offset: page,
@@ -28,6 +29,10 @@ export async function GET(
       apiParams.q = q;
 
       endpoint = '/search';
+    }
+
+    if (sourceId) {
+      apiParams.sourceId = sourceId;
     }
 
     const res = await externalApi.get<ResponseList<PostList>>(endpoint, {
