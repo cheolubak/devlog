@@ -13,7 +13,8 @@
     "@devlog/hooks": "workspace:*",
     "react-markdown": "catalog:",
     "lottie-web": "catalog:",
-    "jotai": "catalog:"
+    "jotai": "catalog:",
+    "react-simple-pull-to-refresh": "catalog:"
   },
   "devDependencies": {
     "tailwindcss": "catalog:",

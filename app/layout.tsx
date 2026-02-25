@@ -8,6 +8,7 @@ import {
   GlobalModalProvider,
   Header,
   Loading,
+  PullToRefreshWrapper,
 } from '@devlog/components';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import localFont from 'next/font/local';
@@ -66,14 +67,16 @@ export default async function RootLayout({
       <body>
         <SpeedInsights />
         <FirebaseAnalyticsProvider />
-        <QueryProvider>
-          <GlobalModalProvider>
-            <Header />
-            {children}
-            <BottomNavigation />
-            <Loading />
-          </GlobalModalProvider>
-        </QueryProvider>
+        <PullToRefreshWrapper>
+          <QueryProvider>
+            <GlobalModalProvider>
+              <Header />
+              {children}
+              <BottomNavigation />
+              <Loading />
+            </GlobalModalProvider>
+          </QueryProvider>
+        </PullToRefreshWrapper>
       </body>
     </html>
   );

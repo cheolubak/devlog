@@ -15,6 +15,7 @@ export * from './PostList';
 export * from './PostListEditDisplay';
 export * from './PostListItem';
 export * from './PostListItemEditDisplay';
+export * from './PullToRefreshWrapper';
 export * from './Ripple';
 export * from './Switch';
 export * from './Tabs';
