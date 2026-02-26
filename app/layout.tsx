@@ -22,8 +22,8 @@ const pretandard = localFont({
 });
 
 export const metadata: Metadata = {
-  description: '기술 블로그를 모아서 한눈에 볼 수 있어요.',
-  title: 'DEVLOG - 기술블로그를 한눈에',
+  description: '기술 블로그와 유튜브를 모아서 한눈에 볼 수 있어요.',
+  title: 'DEV CURATE - 기술 블로그 유튜브 모아',
 };
 
 export default async function RootLayout({
