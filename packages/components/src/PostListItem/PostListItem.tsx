@@ -46,12 +46,7 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
       style={style}
       target='_blank'
     >
-      <Typography
-        className={styles.postListItemTitle}
-        maxLines={2}
-        semantic='h2'
-        variants='title-large'
-      >
+      <div className={styles.postListItemTitle}>
         <Icon
           color={
             post.source.type === 'YOUTUBE'
@@ -61,8 +56,14 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
           name={post.source.type === 'YOUTUBE' ? 'youtube' : 'rss'}
           size={26}
         />
-        {post.title}
-      </Typography>
+        <Typography
+          maxLines={2}
+          semantic='h2'
+          variants='title-large'
+        >
+          {post.title}
+        </Typography>
+      </div>
       <Typography
         className={styles.postListItemDescription}
         maxLines={2}

@@ -2,5 +2,9 @@
 
 html, body {
     @apply bg-gray-900;
+}
+
+body {
+    @apply pt-[88px] md:pt-[112px];
     @apply pb-[80px];
 }

@@ -25,9 +25,9 @@ export const HeaderSearch = () => {
       return;
     }
 
-    const params = new URLSearchParams(searchParamsRef.current.toString());
+    const params = new URLSearchParams(searchParamsRef.current);
 
-    if (debouncedQuery) {
+    if (debouncedQuery && debouncedQuery.length > 0) {
       params.set('q', debouncedQuery);
     } else {
       params.delete('q');
@@ -35,7 +35,7 @@ export const HeaderSearch = () => {
 
     const queryString = params.toString();
 
-    router.replace(queryString ? `?${queryString}` : '', {
+    router.replace(`?${queryString}`, {
       scroll: false,
     });
   }, [debouncedQuery, router]);

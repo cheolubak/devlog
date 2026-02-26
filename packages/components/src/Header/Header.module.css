@@ -1,7 +1,7 @@
 @reference '@devlog/ui-config';
 
 .header {
-    @apply sticky;
+    @apply fixed;
     @apply top-0;
     @apply w-dvw;
     @apply max-w-dvw;
@@ -25,6 +25,7 @@
 
 .search {
     @apply flex;
+    @apply flex-1;
     @apply justify-end;
     @apply items-center;
     @apply gap-2;
