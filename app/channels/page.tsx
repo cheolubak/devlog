@@ -3,12 +3,19 @@ import type { BlogSource } from '@devlog/domain';
 import { ChannelList, Typography } from '@devlog/components';
 import { fetchApi } from '@devlog/request';
 
+export const revalidate = 3600;
+
 export default async function ChannelsPage() {
   try {
     const { blogs, youtubes } = await fetchApi.get<{
       blogs: BlogSource[];
       youtubes: BlogSource[];
-    }>('channels');
+    }>('channels', {
+      next: {
+        revalidate: 3600,
+        tags: ['channels'],
+      },
+    });
 
     return (
       <article>
