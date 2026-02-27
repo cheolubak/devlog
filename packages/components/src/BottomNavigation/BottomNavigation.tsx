@@ -25,15 +25,6 @@ export const BottomNavigation = () => {
             />
           </Link>
         </li>
-        {/*<li>*/}
-        {/*  <Link href='/mypage'>*/}
-        {/*    <Icon*/}
-        {/*      color='primary'*/}
-        {/*      name='person'*/}
-        {/*      size={36}*/}
-        {/*    />*/}
-        {/*  </Link>*/}
-        {/*</li>*/}
       </ul>
     </footer>
   );

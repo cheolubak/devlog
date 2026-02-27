@@ -1,7 +1,7 @@
 @reference '@devlog/ui-config';
 
 .menus {
-    position: sticky;
+    position: fixed;
     top: 130px;
     display: flex;
     justify-content: flex-start;
