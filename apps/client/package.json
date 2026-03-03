@@ -42,7 +42,8 @@
     "sharp": "catalog:",
     "uuid": "catalog:",
     "zod": "catalog:",
-    "react-simple-pull-to-refresh": "catalog:"
+    "react-simple-pull-to-refresh": "catalog:",
+    "zustand": "catalog:"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "catalog:",
@@ -54,6 +55,7 @@
     "cypress": "^15.10.0",
     "sass": "catalog:",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   }
 }

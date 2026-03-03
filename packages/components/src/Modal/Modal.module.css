@@ -1,16 +1,17 @@
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1001;
-}
+@reference '@devlog/ui-config';
 
-.content {
-  position: relative;
-  z-index: 1;
+.modal {
+    @apply fixed;
+    @apply top-1/2;
+    @apply left-1/2;
+    @apply -translate-x-1/2;
+    @apply -translate-y-1/2;
+    @apply bg-white;
+    @apply rounded-lg;
+    @apply min-w-[90dvw] md:min-w-[500px];
+    @apply max-w-screen lg:max-w-[800px];
+    @apply min-h-[90dvh] md:min-h-[200px];
+    @apply max-h-screen lg:max-h-[80dvh];
+    @apply shadow-lg;
+    @apply z-1000;
 }

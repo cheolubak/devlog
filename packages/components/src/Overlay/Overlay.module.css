@@ -1,9 +1,11 @@
+@reference '@devlog/ui-config';
+
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    @apply fixed;
+    @apply top-0;
+    @apply left-0;
+    @apply bottom-0;
+    @apply right-0;
+    @apply bg-black/50;
+    @apply z-1000;
 }

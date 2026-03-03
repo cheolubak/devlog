@@ -41,7 +41,7 @@ export const PostList = ({
     initialPageParam: 0,
     queryFn: ({ pageParam }) =>
       getPostList({ page: pageParam, q, sourceId, type }),
-    queryKey: ['posts', { q, sourceId, type }],
+    queryKey: ['posts-list', { q, sourceId, type }],
   });
 
   const postList = posts?.pages.flatMap((page) => page.data) ?? [];

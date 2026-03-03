@@ -9,12 +9,16 @@
     @apply cursor-pointer;
 }
 
-.postListItemTitle {
+.postListItemHeader {
     @apply flex;
     @apply justify-stretch;
     @apply items-center;
     @apply gap-2;
     @apply mb-3;
+}
+
+.postListItemTitle {
+    @apply flex-1;
 }
 
 .postListItemDescription {
@@ -23,7 +27,21 @@
 
 .postListItemFooter {
     @apply flex;
+    @apply justify-between;
+    @apply items-center;
+    @apply gap-2;
+}
+
+.postListItemView {
+    @apply flex;
     @apply justify-start;
     @apply items-center;
-    @apply gap-1;
+    @apply gap-2;
+}
+
+.postListItemInfo {
+    @apply flex;
+    @apply justify-end;
+    @apply items-center;
+    @apply gap-3;
 }

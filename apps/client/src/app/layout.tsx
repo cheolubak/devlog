@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 
 import './globals.css';
 import '@devlog/ui-config';
-import { GlobalModalProvider, Loading } from '@devlog/components';
+import { GlobalModal, Loading } from '@devlog/components';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { BottomNavigation, Header, PullToRefreshWrapper } from 'components';
 import localFont from 'next/font/local';
@@ -70,12 +70,11 @@ export default async function RootLayout({
         <FirebaseAnalyticsProvider />
         <PullToRefreshWrapper>
           <QueryProvider>
-            <GlobalModalProvider>
-              <Header />
-              {children}
-              <BottomNavigation />
-              <Loading />
-            </GlobalModalProvider>
+            <Header />
+            {children}
+            <BottomNavigation />
+            <Loading />
+            <GlobalModal />
           </QueryProvider>
         </PullToRefreshWrapper>
       </body>

@@ -1,0 +1,48 @@
+import type { NextRequest } from 'next/server';
+
+import { bffTemplate } from 'helper/bffTemplace';
+import { completeLogin } from 'helper/completeLogin';
+import { NextResponse } from 'next/server';
+
+export async function GET(req: NextRequest) {
+  return bffTemplate(req, async ({ sessionId }) => {
+    const { searchParams } = req.nextUrl;
+
+    const code = searchParams.get('code');
+
+    if (!code) {
+      return NextResponse.json(
+        { error: 'Missing code parameter' },
+        { status: 400 },
+      );
+    }
+
+    const res = await fetch('https://oauth2.googleapis.com/token', {
+      body: new URLSearchParams({
+        client_id: process.env.GOOGLE_LOGIN_CLIENT_ID ?? '',
+        client_secret: process.env.GOOGLE_LOGIN_CLIENT_SECRET ?? '',
+        code,
+        grant_type: 'authorization_code',
+        redirect_uri: `${req.nextUrl.origin}/auth/callback/google`,
+      }),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      method: 'POST',
+    });
+
+    const data: {
+      access_token: string;
+      expires_in: number;
+      id_token: string;
+      scope: string;
+      token_type: 'Bearer';
+    } = await res.json();
+
+    return await completeLogin({
+      accessToken: data.access_token,
+      sessionId,
+      socialType: 'google',
+    });
+  });
+}

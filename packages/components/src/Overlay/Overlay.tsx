@@ -1,5 +1,9 @@
+import type { ComponentProps } from 'react';
+
 import styles from './Overlay.module.css';
 
-export const Overlay = () => {
-  return <div className={styles.overlay} />;
+interface OverlayProps extends ComponentProps<'div'> {}
+
+export const Overlay = ({ ...props }: OverlayProps) => {
+  return <div {...props} className={styles.overlay} />;
 };

@@ -1,23 +1,55 @@
-import type { ReactNode } from 'react';
+'use client';
 
-import { Overlay } from '../Overlay/Overlay';
+import type { ComponentProps } from 'react';
+
+import { clsx } from 'clsx';
+import { useEffect, useRef } from 'react';
+
+import { useModal } from '../GlobalModal';
+import { Overlay } from '../Overlay';
+
 import styles from './Modal.module.css';
 
-interface ModalProps {
-  children: ReactNode;
-  onClose: () => void;
+export interface ModalProps extends ComponentProps<'dialog'> {
+  disabledClose?: boolean;
+  modalKey?: string;
 }
 
-export const Modal = ({ children, onClose }: ModalProps) => {
+export const Modal = ({
+  className,
+  disabledClose = false,
+  modalKey,
+  ...props
+}: ModalProps) => {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  const closeModal = useModal((state) => state.close);
+
+  useEffect(() => {
+    dialogRef.current?.show();
+
+    return () => {
+      dialogRef.current?.close();
+    };
+  }, []);
+
+  const handleClickOverlay = () => {
+    if (disabledClose) {
+      return;
+    }
+
+    closeModal(modalKey);
+  };
+
   return (
-    <div className={styles.modal}>
-      <div
-        onClick={onClose}
-        role='presentation'
-      >
-        <Overlay />
-      </div>
-      <div className={styles.content}>{children}</div>
-    </div>
+    <>
+      <Overlay onClick={handleClickOverlay} />
+      <dialog
+        {...props}
+        className={clsx(styles.modal, className)}
+        open={true}
+        ref={dialogRef}
+      />
+    </>
   );
 };

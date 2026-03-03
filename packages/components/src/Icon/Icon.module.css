@@ -10,12 +10,15 @@
     @apply h-[1em];
     @apply max-h-[1em];
     @apply min-h-[1em];
-    @apply **:fill-inherit;
     @apply **:max-w-full;
     @apply **:min-w-full;
     @apply **:h-full;
     @apply **:max-h-full;
     @apply **:min-h-full;
+}
+
+.icon.colorFill {
+    @apply [&_*]:fill-inherit;
 }
 
 .danger {

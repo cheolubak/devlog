@@ -1,29 +1,9 @@
-import type { ComponentType } from 'react';
-
 import { clsx } from 'clsx';
 
+import type { IconColor, IconName } from './Icon.types';
+
 import styles from './Icon.module.css';
-import {
-  IconChannel,
-  IconClear,
-  IconDarkMode,
-  IconDelete,
-  IconEdit,
-  IconEmail,
-  IconGithub,
-  IconHash,
-  IconLightMode,
-  IconLink,
-  IconListAlt,
-  IconMore,
-  IconNotification,
-  IconPerson,
-  IconRss,
-  IconSearch,
-  IconSend,
-  IconShare,
-  IconYoutube,
-} from './icons';
+import { iconMap } from './Icon.types';
 
 export interface IconProps {
   className?: string;
@@ -31,51 +11,6 @@ export interface IconProps {
   name: IconName;
   size?: number;
 }
-
-type IconColor = 'danger' | 'primary' | 'secondary' | 'success';
-
-type IconName =
-  | 'channel'
-  | 'clear'
-  | 'darkMode'
-  | 'delete'
-  | 'edit'
-  | 'email'
-  | 'github'
-  | 'hash'
-  | 'lightMode'
-  | 'link'
-  | 'list-alt'
-  | 'more'
-  | 'notification'
-  | 'person'
-  | 'rss'
-  | 'search'
-  | 'send'
-  | 'share'
-  | 'youtube';
-
-const iconMap: Record<IconName, ComponentType> = {
-  channel: IconChannel,
-  clear: IconClear,
-  darkMode: IconDarkMode,
-  delete: IconDelete,
-  edit: IconEdit,
-  email: IconEmail,
-  github: IconGithub,
-  hash: IconHash,
-  lightMode: IconLightMode,
-  link: IconLink,
-  'list-alt': IconListAlt,
-  more: IconMore,
-  notification: IconNotification,
-  person: IconPerson,
-  rss: IconRss,
-  search: IconSearch,
-  send: IconSend,
-  share: IconShare,
-  youtube: IconYoutube,
-};
 
 export const Icon = ({ className, color, name, size = 24 }: IconProps) => {
   const IconComponent = iconMap[name];
@@ -85,7 +20,12 @@ export const Icon = ({ className, color, name, size = 24 }: IconProps) => {
 
   return (
     <i
-      className={clsx(styles.icon, isSetColor && styles[color], className)}
+      className={clsx(
+        styles.icon,
+        isSetColor && styles[color],
+        !!color && styles.colorFill,
+        className,
+      )}
       style={{
         fill: isSetColor ? undefined : color,
         fontSize: size,

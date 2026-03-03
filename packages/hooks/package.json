@@ -10,7 +10,8 @@
     "@devlog/stores": "workspace:*",
     "firebase": "catalog:",
     "jotai": "catalog:",
-    "react": "catalog:"
+    "react": "catalog:",
+    "@tanstack/react-query": "catalog:"
   },
   "devDependencies": {
     "@types/react": "catalog:"

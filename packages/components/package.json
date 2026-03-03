@@ -19,7 +19,9 @@
     "react-markdown": "catalog:",
     "@tanstack/react-query": "catalog:",
     "@tanstack/react-virtual": "catalog:",
-    "dayjs": "catalog:"
+    "dayjs": "catalog:",
+    "nanoid": "catalog:",
+    "zustand": "catalog:"
   },
   "devDependencies": {
     "tailwindcss": "catalog:",

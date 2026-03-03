@@ -19,6 +19,7 @@ export class FetchError extends Error {
     message: string,
     public status: number,
     public response: Response,
+    public data?: unknown,
   ) {
     super(message);
     this.name = 'FetchError';
@@ -96,7 +97,7 @@ export class RequestInstance {
     return fullURL;
   }
 
-  private mergeHeaders(options?: RequestOptions): HeadersInit {
+  private async mergeHeaders(options?: RequestOptions): Promise<HeadersInit> {
     const headers = new Headers(this.config.headers);
 
     if (options?.headers) {
@@ -116,7 +117,7 @@ export class RequestInstance {
     options?: RequestOptions,
   ): Promise<T> {
     const fullURL = this.buildURL(url, options?.params);
-    const headers = this.mergeHeaders(options);
+    const headers = await this.mergeHeaders(options);
 
     const fetchOptions: RequestInit = {
       ...options,
@@ -124,7 +125,7 @@ export class RequestInstance {
       method,
     };
 
-    if (data !== undefined) {
+    if (data !== undefined && data !== null) {
       const headersObj = new Headers(headers);
       if (!headersObj.has('Content-Type')) {
         headersObj.set('Content-Type', 'application/json');
@@ -150,6 +151,7 @@ export class RequestInstance {
           `HTTP error! status: ${response.status}`,
           response.status,
           response,
+          await response.json(),
         );
       }
 

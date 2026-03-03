@@ -1,12 +1,14 @@
 'use client';
 
 import type { PostList } from '@devlog/domains';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, MouseEvent } from 'react';
 
-import { Icon, Typography } from '@devlog/components';
+import { Icon, IconButton, Typography } from '@devlog/components';
 import { useAnalytics } from '@devlog/hooks';
 import dayjs from 'dayjs';
 import { useOpenLink } from 'hooks';
+import { usePostBookmark } from 'hooks/usePostBookmark';
+import { usePostView } from 'hooks/usePostView';
 import Link from 'next/link';
 
 import styles from './PostListItem.module.css';
@@ -20,14 +22,26 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
   const { eventSelectContent } = useAnalytics();
   const { parseUrl } = useOpenLink();
 
+  const viewPost = usePostView(post);
+  const bookmarkPosts = usePostBookmark(post);
+
   const handleClickPost = () => {
     eventSelectContent(post);
+
+    viewPost();
   };
 
   let blogUrl = parseUrl({
     blogUrl: post.source.blogUrl,
     sourceUrl: post.sourceUrl,
   });
+
+  const handlePostBookmarks = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    bookmarkPosts();
+  };
 
   return (
     <Link
@@ -37,7 +51,7 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
       style={style}
       target='_blank'
     >
-      <div className={styles.postListItemTitle}>
+      <header className={styles.postListItemHeader}>
         <Icon
           color={
             post.source.type === 'YOUTUBE'
@@ -48,13 +62,21 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
           size={26}
         />
         <Typography
+          className={styles.postListItemTitle}
           maxLines={2}
           semantic='h2'
           variants='title-large'
         >
           {post.title}
         </Typography>
-      </div>
+        <IconButton
+          iconColor={
+            post.isBookmark ? 'var(--color-yellow-500)' : 'var(--color-white)'
+          }
+          name={post.isBookmark ? 'bookmark-fill' : 'bookmark-outline'}
+          onClick={handlePostBookmarks}
+        />
+      </header>
       <Typography
         className={styles.postListItemDescription}
         maxLines={2}
@@ -63,13 +85,28 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
       >
         {post.description}
       </Typography>
-      <Typography
-        semantic='h3'
-        variants='body-medium'
-      >
-        {post.source.name} |{' '}
-        {dayjs(post.originalPublishedAt).format('YYYY.MM.DD')}
-      </Typography>
+      <footer className={styles.postListItemFooter}>
+        <Typography
+          semantic='h3'
+          variants='body-medium'
+        >
+          {post.source.name}
+        </Typography>
+        <div className={styles.postListItemInfo}>
+          <Typography variants='body-medium'>
+            {dayjs(post.originalPublishedAt).format('YYYY.MM.DD')}
+          </Typography>
+          <Typography variants='body-medium'>|</Typography>
+          <div className={styles.postListItemView}>
+            <Icon
+              color='var(--color-white)'
+              name='visibility'
+              size={14}
+            />
+            {post.viewCount}
+          </div>
+        </div>
+      </footer>
     </Link>
   );
 };

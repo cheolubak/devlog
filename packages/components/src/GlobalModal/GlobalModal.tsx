@@ -1,81 +1,33 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import type { ModalProps } from '../Modal';
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { cloneElement, isValidElement, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { Modal } from '../Modal/Modal';
+import { useModal } from './useModal';
 
-interface GlobalModalContextValue {
-  close: () => void;
-  open: (content: ReactNode) => void;
-}
-
-const GlobalModalContext = createContext<GlobalModalContextValue | null>(
-  null,
-);
-
-interface GlobalModalProviderProps {
-  children: ReactNode;
-}
-
-export const GlobalModalProvider = ({
-  children,
-}: GlobalModalProviderProps) => {
-  const [modalContent, setModalContent] = useState<ReactNode>(null);
-  const [isOpen, setIsOpen] = useState(false);
-  const portalRef = useRef<HTMLDivElement | null>(null);
+export const GlobalModal = () => {
+  const modals = useModal((state) => state.modals);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const el = document.createElement('div');
-    el.id = 'global-modal-root';
-    document.body.appendChild(el);
-    portalRef.current = el;
-
-    return () => {
-      document.body.removeChild(el);
-    };
+    setMounted(true);
   }, []);
 
-  const open = useCallback((content: ReactNode) => {
-    setModalContent(content);
-    setIsOpen(true);
-  }, []);
-
-  const close = useCallback(() => {
-    setModalContent(null);
-    setIsOpen(false);
-  }, []);
-
-  return (
-    <GlobalModalContext.Provider value={{ close, open }}>
-      {children}
-      {isOpen &&
-        portalRef.current &&
-        createPortal(
-          <Modal onClose={close}>{modalContent}</Modal>,
-          portalRef.current,
-        )}
-    </GlobalModalContext.Provider>
-  );
-};
-
-export const useGlobalModal = (): GlobalModalContextValue => {
-  const context = useContext(GlobalModalContext);
-
-  if (!context) {
-    throw new Error(
-      'useGlobalModal must be used within a GlobalModalProvider',
-    );
+  if (!mounted) {
+    return null;
   }
 
-  return context;
+  return modals.map(
+    (modal) =>
+      isValidElement<ModalProps>(modal.content) &&
+      createPortal(
+        cloneElement(modal.content, {
+          ...modal.content.props,
+          modalKey: modal.modalKey,
+        }),
+        document.body,
+      ),
+  );
 };

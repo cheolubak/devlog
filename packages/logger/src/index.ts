@@ -7,6 +7,7 @@ export const log = {
     body: string,
     attributes?: Record<string, boolean | number | string>,
   ) => {
+    console.debug(body, attributes);
     logger().emit({
       attributes,
       body,
@@ -18,6 +19,7 @@ export const log = {
     body: string,
     attributes?: Record<string, boolean | number | string>,
   ) => {
+    console.debug(body, attributes);
     logger().emit({
       attributes,
       body,
@@ -29,6 +31,7 @@ export const log = {
     body: string,
     attributes?: Record<string, boolean | number | string>,
   ) => {
+    console.debug(body, attributes);
     logger().emit({
       attributes,
       body,
@@ -40,6 +43,7 @@ export const log = {
     body: string,
     attributes?: Record<string, boolean | number | string>,
   ) => {
+    console.debug(body, attributes);
     logger().emit({
       attributes,
       body,

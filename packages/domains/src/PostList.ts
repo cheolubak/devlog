@@ -4,6 +4,7 @@ export const postListSchema = z.object({
   description: z.string(),
   id: z.uuid(),
   imageUrl: z.string().nullish(),
+  isBookmark: z.boolean().default(false),
   originalPublishedAt: z.date(),
   postTags: z.array(
     z.object({
@@ -26,6 +27,7 @@ export const postListSchema = z.object({
   }),
   sourceUrl: z.string(),
   title: z.string(),
+  viewCount: z.number().int().nonnegative().default(0),
 });
 
 export type PostList = z.infer<typeof postListSchema>;
