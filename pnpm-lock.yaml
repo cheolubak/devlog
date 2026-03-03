@@ -191,12 +191,12 @@ importers:
       '@devlog/components':
         specifier: workspace:*
         version: link:../../packages/components
-      '@devlog/config/firebase':
-        specifier: workspace:*
-        version: link:../../packages/configs/firebase
       '@devlog/domains':
         specifier: workspace:*
         version: link:../../packages/domains
+      '@devlog/firebase-config':
+        specifier: workspace:*
+        version: link:../../packages/configs/firebase
       '@devlog/hooks':
         specifier: workspace:*
         version: link:../../packages/hooks
@@ -419,12 +419,12 @@ importers:
 
   packages/hooks:
     dependencies:
-      '@devlog/config/firebase':
-        specifier: workspace:*
-        version: link:../configs/firebase
       '@devlog/domains':
         specifier: workspace:*
         version: link:../domains
+      '@devlog/firebase-config':
+        specifier: workspace:*
+        version: link:../configs/firebase
       '@devlog/request':
         specifier: workspace:*
         version: link:../request

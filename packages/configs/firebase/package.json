@@ -1,5 +1,5 @@
 {
-  "name": "@devlog/config/firebase",
+  "name": "@devlog/firebase-config",
   "version": "0.0.1",
   "main": "src/index.ts",
   "dependencies": {

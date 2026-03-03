@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
   transpilePackages: [
     '@devlog/apis',
     '@devlog/components',
-    '@devlog/config/firebase',
+    '@devlog/firebase-config',
     '@devlog/ui-config',
     '@devlog/domains',
     '@devlog/hooks',

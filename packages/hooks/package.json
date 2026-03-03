@@ -4,7 +4,7 @@
   "private": true,
   "main": "src/index.ts",
   "dependencies": {
-    "@devlog/config/firebase": "workspace:*",
+    "@devlog/firebase-config": "workspace:*",
     "@devlog/domains": "workspace:*",
     "@devlog/request": "workspace:*",
     "@devlog/stores": "workspace:*",

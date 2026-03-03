@@ -2,7 +2,7 @@
 
 import type { PostList } from '@devlog/domains';
 
-import firebaseApp from '@devlog/config/firebase';
+import firebaseApp from '@devlog/firebase-config';
 import { fetchApi } from '@devlog/request';
 import {
   type Analytics,
