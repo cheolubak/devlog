@@ -5,6 +5,6 @@
   "main": "src/index.ts",
   "dependencies": {
     "@devlog/request": "workspace:*",
-    "@devlog/domain": "workspace:*"
+    "@devlog/domains": "workspace:*"
   }
 }

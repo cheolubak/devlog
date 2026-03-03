@@ -1,0 +1,60 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["tsconfig.json", ".prettierrc.js"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": [
+        "NEXT_PUBLIC_DYNAMIC_API_URL",
+        "NEXT_PUBLIC_EXTERNAL_API_URL",
+        "NEXT_PUBLIC_FIREBASE_PROJECTID",
+        "NEXT_PUBLIC_FIREBASE_STORAGEBUCKET",
+        "NEXT_PUBLIC_FIREBASE_MESSAGINGSENDERID",
+        "NEXT_PUBLIC_FIREBASE_APPID",
+        "NEXT_PUBLIC_FIREBASE_MEASUREMENTID",
+        "NEXT_PUBLIC_FIREBASE_APIKEY",
+        "NEXT_PUBLIC_FIREBASE_APIKEY",
+        "NEXT_PUBLIC_IMAGE_URL_PREFIX",
+        "NEXT_PUBLIC_GRAFANA_OPENTELEMETRY_TOKEN",
+        "NEXT_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT",
+        "NEXT_PUBLIC_OTEL_EXPORTER_OTLP_HEADERS_Authorization"
+      ]
+    },
+    "dev": {
+      "dependsOn": ["^build"],
+      "persistent": true,
+      "cache": false
+    },
+    "start": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "//#lint": {
+      "inputs": [
+        "eslint.config.mjs",
+        "packages/*/src/**/*.{ts,tsx,js,jsx}",
+        "apps/*/src/**/*.{ts,tsx,js,jsx}"
+      ]
+    },
+    "//#test": {
+      "inputs": [
+        "vitest.config.mts",
+        "packages/*/src/**/*.{ts,tsx}",
+        "packages/*/src/**/*.test.ts"
+      ]
+    },
+    "//#test:coverage": {
+      "inputs": [
+        "vitest.config.mts",
+        "packages/*/src/**/*.{ts,tsx}",
+        "packages/*/src/**/*.test.ts"
+      ],
+      "outputs": ["coverage/**"]
+    },
+    "cypress:run": {
+      "dependsOn": ["build"],
+      "cache": false
+    }
+  }
+}

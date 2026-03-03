@@ -12,7 +12,7 @@ const __dirname = dirname(__filename);
 
 const eslintConfig = [
   {
-    ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**'],
+    ignores: ['**/node_modules/**', '**/.next/**', '**/out/**', '**/build/**'],
   },
   {
     files: ['**/*.{js,jsx,ts,tsx}'],

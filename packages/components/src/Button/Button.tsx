@@ -4,8 +4,7 @@ import type { ComponentProps } from 'react';
 
 import { clsx } from 'clsx';
 
-import { Ripple } from '@/packages/components/src/Ripple';
-
+import { Ripple } from '../Ripple';
 import styles from './Button.module.css';
 
 type ButtonColor = 'danger' | 'primary' | 'secondary' | 'success';

@@ -5,9 +5,8 @@ import type { MouseEvent} from 'react';
 import { clsx } from 'clsx';
 import { useState } from 'react';
 
-import { useDebouncedRippleCleanUp } from '@/packages/components/src/Ripple/useDebouncedRippleCleanUp';
-
 import styles from './Ripple.module.css';
+import { useDebouncedRippleCleanUp } from './useDebouncedRippleCleanUp';
 
 interface RippleProps {
   color?: string;

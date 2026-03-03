@@ -1,12 +1,11 @@
 'use client';
 
-import type { PostListAll, ResponseList } from '@devlog/domain';
+import type { PostListAll, ResponseList } from '@devlog/domains';
 
 import { useLoading } from '@devlog/hooks';
+import { fetchApi } from '@devlog/request';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
-
-import { fetchApi } from '@/packages/request';
 
 import { Button } from '../Button';
 import { PostListItemEditDisplay } from '../PostListItemEditDisplay';

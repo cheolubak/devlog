@@ -5,6 +5,6 @@
   "main": "src/index.ts",
   "dependencies": {
     "jotai": "catalog:",
-    "@devlog/domain": "workspace:*"
+    "@devlog/domains": "workspace:*"
   }
 }

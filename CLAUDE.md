@@ -19,26 +19,32 @@ Next.js 16 기반의 개발 블로그 프로젝트입니다. pnpm workspaces를 
 ## 프로젝트 구조
 
 ```
-app/                    # Next.js App Router
-├── api/               # API 라우트
-├── layout.tsx         # 루트 레이아웃
-└── page.tsx           # 홈페이지
+apps/
+└── client/              # @devlog/client - Next.js 앱
+    ├── src/
+    │   ├── app/         # Next.js App Router
+    │   │   ├── api/     # API 라우트
+    │   │   ├── layout.tsx # 루트 레이아웃
+    │   │   └── page.tsx # 홈페이지
+    │   ├── providers/   # 클라이언트 프로바이더 (React Query 등)
+    │   └── instrumentation.ts
+    ├── public/          # 정적 파일
+    └── next.config.ts   # Next.js 설정
 
-packages/              # 모노레포 패키지
-├── components/        # @devlog/components - React 컴포넌트
-├── apis/              # @devlog/apis - API 호출 함수
-├── domains/           # @devlog/domain - 타입/스키마 정의
-├── request/           # @devlog/request - HTTP 클라이언트
-├── utils/             # @devlog/utils - 유틸리티 함수
-└── configs/ui/        # @devlog/ui-config - CSS 리셋
-
-providers/             # 클라이언트 프로바이더 (React Query 등)
+packages/                # 모노레포 패키지
+├── components/          # @devlog/components - React 컴포넌트
+├── apis/                # @devlog/apis - API 호출 함수
+├── domains/             # @devlog/domains - 타입/스키마 정의
+├── hooks/               # @devlog/hooks - React hooks
+├── request/             # @devlog/request - HTTP 클라이언트
+├── utils/               # @devlog/utils - 유틸리티 함수
+└── configs/ui/          # @devlog/ui-config - CSS 리셋
 ```
 
 ## 주요 명령어
 
 ```bash
-pnpm dev      # 개발 서버 (localhost:3000)
+pnpm dev      # 개발 서버 (localhost:3000) - @devlog/client 실행
 pnpm build    # 프로덕션 빌드
 pnpm start    # 빌드된 앱 실행
 pnpm lint     # ESLint 실행
@@ -61,6 +67,8 @@ pnpm lint     # ESLint 실행
 
 ## 환경 변수
 
+`apps/client/.env`에 위치:
+
 ```
 NEXT_PUBLIC_DYNAMIC_API_URL    # Next.js API 엔드포인트
 NEXT_PUBLIC_EXTERNAL_API_URL   # 외부 API 엔드포인트
@@ -79,10 +87,10 @@ DATABASE_URL                   # PostgreSQL 연결 문자열
 
 | 역할 | 경로 |
 |------|------|
-| Next.js 설정 | `next.config.ts` |
+| Next.js 설정 | `apps/client/next.config.ts` |
 | ESLint 설정 | `eslint.config.mjs` |
 | Prettier 설정 | `.prettierrc.js` |
 | 워크스페이스 설정 | `pnpm-workspace.yaml` |
-| API 라우트 | `app/api/posts/[page]/route.ts` |
+| API 라우트 | `apps/client/src/app/api/posts/[page]/route.ts` |
 | 컴포넌트 | `packages/components/src/` |
 | 타입 정의 | `packages/domains/src/` |

@@ -4,7 +4,15 @@
   "private": true,
   "main": "src/index.ts",
   "dependencies": {
+    "@devlog/config/firebase": "workspace:*",
+    "@devlog/domains": "workspace:*",
+    "@devlog/request": "workspace:*",
+    "@devlog/stores": "workspace:*",
+    "firebase": "catalog:",
     "jotai": "catalog:",
-    "@devlog/stores": "workspace:*"
+    "react": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:"
   }
 }

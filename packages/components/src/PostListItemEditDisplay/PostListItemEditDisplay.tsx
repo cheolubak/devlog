@@ -1,6 +1,6 @@
 'use client';
 
-import type { PostListAll } from '@devlog/domain';
+import type { PostListAll } from '@devlog/domains';
 import type { ChangeEvent } from 'react';
 
 import { useLoading } from '@devlog/hooks';

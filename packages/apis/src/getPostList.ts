@@ -1,9 +1,6 @@
-import { fetchApi } from '@devlog/request';
+import type { PostList as PostListData, ResponseList } from '@devlog/domains';
 
-import type {
-  PostList as PostListData,
-  ResponseList,
-} from '@/packages/domains';
+import { fetchApi } from '@devlog/request';
 
 export const getPostList = (info?: {
   page?: number;

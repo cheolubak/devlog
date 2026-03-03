@@ -1,14 +1,14 @@
 'use client';
 
-import type { PostList } from '@devlog/domain';
+import type { PostList } from '@devlog/domains';
 import type { CSSProperties } from 'react';
 
-import { Icon, Typography } from '@devlog/components';
+import { useAnalytics } from '@devlog/hooks';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 
-import { useAnalytics } from '@/hooks/useAnalytics';
-
+import { Icon } from '../Icon';
+import { Typography } from '../Typography';
 import styles from './PostListItem.module.css';
 
 interface PostItemProps {

@@ -1,12 +1,12 @@
 'use client';
 
-import type { BlogSource } from '@devlog/domain';
+import type { BlogSource } from '@devlog/domains';
 
 import Image from 'next/image';
 import { useState } from 'react';
 
-import { Icon, Typography } from '@/packages/components';
-
+import { Icon } from '../Icon';
+import { Typography } from '../Typography';
 import styles from './ChannelContentHeader.module.css';
 
 interface ChannelContentHeaderProps {

@@ -1,9 +1,8 @@
 'use client';
 
-import type { BlogSource, FeedFetchResult } from '@devlog/domain';
+import type { BlogSource, FeedFetchResult } from '@devlog/domains';
 
 import { getBlogSources } from '@devlog/apis';
-import { Button, Icon, Tab, Tabs, Typography } from '@devlog/components';
 import { useLoading } from '@devlog/hooks';
 import { fetchApi } from '@devlog/request';
 import { useQuery } from '@tanstack/react-query';
@@ -12,6 +11,10 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
+import { Button } from '../Button';
+import { Icon } from '../Icon';
+import { Tab, Tabs } from '../Tabs';
+import { Typography } from '../Typography';
 import styles from './BlogSourceList.module.css';
 
 interface BlogSourceListProps {

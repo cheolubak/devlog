@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { postListSchema } from '@/packages/domains/src/PostList';
+import { postListSchema } from './PostList';
 
 export const postListAllSchema = postListSchema.extend({
   isDisplay: z.boolean(),

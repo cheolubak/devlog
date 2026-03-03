@@ -1,4 +1,4 @@
-import type { Modal } from '@devlog/domain';
+import type { Modal } from '@devlog/domains';
 
 import { atom } from 'jotai';
 

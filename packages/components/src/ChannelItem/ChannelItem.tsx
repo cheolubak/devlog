@@ -1,13 +1,12 @@
 'use client';
 
-import type { BlogSource } from '@devlog/domain';
+import type { BlogSource } from '@devlog/domains';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { Icon } from '@/packages/components';
-
+import { Icon } from '../Icon';
 import { Typography } from '../Typography';
 import styles from './ChannelItem.module.css';
 

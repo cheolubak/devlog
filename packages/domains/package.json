@@ -1,9 +1,12 @@
 {
-  "name": "@devlog/domain",
+  "name": "@devlog/domains",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",
   "dependencies": {
     "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:"
   }
 }
