@@ -1,32 +1,34 @@
+@reference '@devlog/ui-config';
+
 .switch {
-    width: 40px;
-    height: 20px;
-    border-radius: 10px;
-    background-color: var(--color-gray-400);
-    position: relative;
-    cursor: pointer;
+    @apply w-10;
+    @apply h-5;
+    @apply rounded-full;
+    @apply bg-gray-400;
+    @apply relative;
+    @apply cursor-pointer;
 }
 
 .switch.isActive {
-    background-color: var(--color-indigo-500);
+    @apply bg-indigo-500;
 }
 
 .input {
-    display: none;
-    width: 0;
-    height: 0;
+    @apply hidden;
+    @apply w-0;
+    @apply h-0;
 }
 
 .thumb {
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-    background-color: var(--color-white);
-    position: absolute;
-    top: 0;
-    left: 0;
+    @apply w-5;
+    @apply h-5;
+    @apply rounded-full;
+    @apply bg-white;
+    @apply absolute;
+    @apply top-0;
+    @apply left-0;
 }
 
 .input:checked + .thumb {
-    transform: translateX(100%);
+    @apply translate-x-full;
 }

@@ -1,22 +1,29 @@
 @reference '@devlog/ui-config';
 
 .postListItem {
-    display: block;
+    @apply block;
     @apply px-4 md:px-10;
     @apply py-6 md:py-12;
-    color: var(--color-white);
-    height: 220px;
-    cursor: pointer;
+    @apply text-white;
+    @apply h-[220px];
+    @apply cursor-pointer;
 }
 
 .postListItemTitle {
-    display: flex;
-    justify-content: stretch;
-    align-items: center;
+    @apply flex;
+    @apply justify-stretch;
+    @apply items-center;
     @apply gap-2;
-    margin-bottom: 12px;
+    @apply mb-3;
 }
 
 .postListItemDescription {
-    margin-bottom: 24px;
+    @apply mb-6;
+}
+
+.postListItemFooter {
+    @apply flex;
+    @apply justify-start;
+    @apply items-center;
+    @apply gap-1;
 }

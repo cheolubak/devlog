@@ -6,6 +6,7 @@ import type { CSSProperties } from 'react';
 import { Icon, Typography } from '@devlog/components';
 import { useAnalytics } from '@devlog/hooks';
 import dayjs from 'dayjs';
+import { useOpenLink } from 'hooks';
 import Link from 'next/link';
 
 import styles from './PostListItem.module.css';
@@ -17,25 +18,16 @@ interface PostItemProps {
 
 export const PostListItem = ({ post, style }: PostItemProps) => {
   const { eventSelectContent } = useAnalytics();
+  const { parseUrl } = useOpenLink();
 
   const handleClickPost = () => {
     eventSelectContent(post);
   };
 
-  let blogUrl = post.sourceUrl;
-  if (!post.sourceUrl.startsWith('http')) {
-    blogUrl = post.source.blogUrl;
-
-    if (blogUrl.endsWith('/')) {
-      blogUrl = blogUrl.slice(0, -1);
-    }
-
-    if (!post.sourceUrl.startsWith('/')) {
-      blogUrl = `${blogUrl}/`;
-    }
-
-    blogUrl = `${blogUrl}${post.sourceUrl}`;
-  }
+  let blogUrl = parseUrl({
+    blogUrl: post.source.blogUrl,
+    sourceUrl: post.sourceUrl,
+  });
 
   return (
     <Link

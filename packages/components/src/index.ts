@@ -8,6 +8,7 @@ export * from './Loading';
 export * from './Modal';
 export * from './Overlay';
 export * from './Ripple';
+export * from './Skeleton';
 export * from './Switch';
 export * from './Tabs';
 export * from './Typography';

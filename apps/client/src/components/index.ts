@@ -9,3 +9,4 @@ export * from './PostListEditDisplay';
 export * from './PostListItem';
 export * from './PostListItemEditDisplay';
 export * from './PullToRefreshWrapper';
+export * from './VirtualPostList';

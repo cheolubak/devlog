@@ -6,10 +6,8 @@ import { getPostList } from '@devlog/apis';
 import { InfiniteScroll, Typography } from '@devlog/components';
 import { POST_TYPE } from '@devlog/domains';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useWindowVirtualizer } from '@tanstack/react-virtual';
-import { PostListItem } from 'components';
+import { PostItemLoading, VirtualPostList } from 'components';
 import { useSearchParams } from 'next/navigation';
-import { useMemo } from 'react';
 
 interface PostListProps {
   posts: ResponseList<PostListData>;
@@ -20,8 +18,6 @@ export const PostList = ({
   posts: { data, pagination },
   sourceId,
 }: PostListProps) => {
-  'use no memo';
-
   const searchParams = useSearchParams();
   const type = searchParams.get('type') ?? POST_TYPE.BLOG;
   const q = searchParams.get('q') ?? '';
@@ -48,16 +44,7 @@ export const PostList = ({
     queryKey: ['posts', { q, sourceId, type }],
   });
 
-  const postList = useMemo(
-    () => posts?.pages.flatMap((page) => page.data) ?? [],
-    [posts],
-  );
-
-  const rowVirtualizer = useWindowVirtualizer({
-    count: postList.length,
-    estimateSize: () => 220,
-    overscan: 3,
-  });
+  const postList = posts?.pages.flatMap((page) => page.data) ?? [];
 
   if (!isFetching && postList.length === 0) {
     return (
@@ -73,28 +60,13 @@ export const PostList = ({
       hasNext={hasNextPage}
       isFetching={isFetching}
     >
-      <article
-        style={{ height: rowVirtualizer.getTotalSize(), position: 'relative' }}
-      >
-        {rowVirtualizer.getVirtualItems().map((virtualItem) => {
-          const post = postList[virtualItem.index];
-
-          return (
-            <PostListItem
-              key={post.id}
-              post={post}
-              style={{
-                height: virtualItem.size,
-                left: 0,
-                position: 'absolute',
-                top: 0,
-                transform: `translateY(${virtualItem.start}px)`,
-                width: '100%',
-              }}
-            />
-          );
-        })}
-      </article>
+      <VirtualPostList postList={postList} />
+      {isFetching &&
+        new Array(10)
+          .fill(() => null)
+          .map((_, idx) => (
+            <PostItemLoading key={`post-item-loading-${idx}`} />
+          ))}
     </InfiniteScroll>
   );
 };

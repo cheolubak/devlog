@@ -8,6 +8,7 @@ import { useLoading } from '@devlog/hooks';
 import { fetchApi } from '@devlog/request';
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
+import { useOpenLink } from 'hooks';
 import { useRef, useState } from 'react';
 
 import styles from './PostListItemEditDisplay.module.css';
@@ -23,6 +24,7 @@ export const PostListItemEditDisplay = ({
   onDelete,
   post,
 }: PostItemProps) => {
+  const { openLink } = useOpenLink();
   const [isDisplay, setIsDisplay] = useState<boolean>(post.isDisplay);
 
   const keywordRef = useRef(post.searchKeywords?.keywords ?? '');
@@ -51,21 +53,7 @@ export const PostListItemEditDisplay = ({
   const handleOpenLink = () => {
     navigator.clipboard.writeText(post.id);
 
-    let blogUrl = post.sourceUrl;
-    if (!post.sourceUrl.startsWith('http')) {
-      blogUrl = post.source.blogUrl;
-
-      if (blogUrl.endsWith('/')) {
-        blogUrl = blogUrl.slice(0, -1);
-      }
-
-      if (!post.sourceUrl.startsWith('/')) {
-        blogUrl = `${blogUrl}/`;
-      }
-
-      blogUrl = `${blogUrl}${post.sourceUrl}`;
-    }
-    window.open(blogUrl, '_blank');
+    openLink({ blogUrl: post.source.blogUrl, sourceUrl: post.sourceUrl });
   };
 
   const handleChangeDisplay = (isDisplay: boolean) => {
