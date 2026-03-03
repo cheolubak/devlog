@@ -1,7 +1,7 @@
 import type { PostListAll, ResponseList } from '@devlog/domains';
 
-import { PostListEditDisplay } from '@devlog/components';
 import { fetchApi } from '@devlog/request';
+import { PostListEditDisplay } from 'components';
 import { z } from 'zod';
 
 export const dynamic = 'force-dynamic';

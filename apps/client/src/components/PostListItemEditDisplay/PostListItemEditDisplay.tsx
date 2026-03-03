@@ -1,18 +1,19 @@
 'use client';
 
-import type { PostListAll } from '@devlog/domains';
 import type { ChangeEvent } from 'react';
 
-import { useLoading } from '@devlog/hooks';
-import { fetchApi } from '@devlog/request';
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { useRef, useState } from 'react';
 
-import { Button } from '../Button';
-import { IconButton } from '../IconButton';
-import { Switch } from '../Switch';
-import { Typography } from '../Typography';
+import type { PostListAll } from '../../../../../packages/domains';
+
+import { Button } from '../../../../../packages/components/src/Button';
+import { IconButton } from '../../../../../packages/components/src/IconButton';
+import { Switch } from '../../../../../packages/components/src/Switch';
+import { Typography } from '../../../../../packages/components/src/Typography';
+import { useLoading } from '../../../../../packages/hooks';
+import { fetchApi } from '../../../../../packages/request';
 import styles from './PostListItemEditDisplay.module.css';
 
 interface PostItemProps {

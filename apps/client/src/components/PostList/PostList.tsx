@@ -1,17 +1,20 @@
 'use client';
 
-import type { PostList as PostListData, ResponseList } from '@devlog/domains';
-
-import { getPostList } from '@devlog/apis';
-import { POST_TYPE } from '@devlog/domains';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useWindowVirtualizer } from '@tanstack/react-virtual';
 import { useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
 
-import { InfiniteScroll } from '../InfiniteScroll';
+import type {
+  PostList as PostListData,
+  ResponseList,
+} from '../../../../../packages/domains';
+
+import { getPostList } from '../../../../../packages/apis';
+import { InfiniteScroll } from '../../../../../packages/components/src/InfiniteScroll';
+import { Typography } from '../../../../../packages/components/src/Typography';
+import { POST_TYPE } from '../../../../../packages/domains';
 import { PostListItem } from '../PostListItem';
-import { Typography } from '../Typography';
 
 interface PostListProps {
   posts: ResponseList<PostListData>;

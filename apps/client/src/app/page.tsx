@@ -1,5 +1,6 @@
 import { getPostList } from '@devlog/apis';
-import { PostList, Typography } from '@devlog/components';
+import { Typography } from '@devlog/components';
+import { PostList } from 'components';
 import { Suspense } from 'react';
 
 export const dynamic = 'force-dynamic';

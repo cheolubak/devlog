@@ -1,7 +1,7 @@
+import { Typography } from '@devlog/components';
 import Image from 'next/image';
 import { Suspense } from 'react';
 
-import { Typography } from '../Typography';
 import styles from './Header.module.css';
 import { HeaderSearch } from './HeaderSearch';
 

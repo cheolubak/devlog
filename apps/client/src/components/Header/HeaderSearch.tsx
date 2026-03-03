@@ -1,10 +1,10 @@
 'use client';
 
+import { Icon } from '@devlog/components';
 import { useDebounce } from '@devlog/hooks';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { Icon } from '../Icon';
 import styles from './HeaderSearch.module.css';
 
 export const HeaderSearch = () => {
@@ -51,7 +51,7 @@ export const HeaderSearch = () => {
   return (
     <div className={styles.searchContainer}>
       <Icon
-        color='var(--color-gray-400)'
+        color='var(--color-white)'
         name='search'
         size={20}
       />

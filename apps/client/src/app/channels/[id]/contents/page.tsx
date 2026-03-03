@@ -1,8 +1,9 @@
 import type { BlogSource } from '@devlog/domains';
 
 import { getPostList } from '@devlog/apis';
-import { ChannelContentHeader, PostList, Typography } from '@devlog/components';
+import { Typography } from '@devlog/components';
 import { fetchApi } from '@devlog/request';
+import { ChannelContentHeader, PostList } from 'components';
 import { Suspense } from 'react';
 
 export const dynamic = 'force-dynamic';

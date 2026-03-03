@@ -1,5 +1,5 @@
 import { getBlogSources } from '@devlog/apis';
-import { BlogSourceList } from '@devlog/components';
+import { BlogSourceList } from 'components';
 
 export default async function BlogSourcesPage({
   searchParams,

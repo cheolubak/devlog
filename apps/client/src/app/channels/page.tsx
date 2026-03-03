@@ -1,7 +1,8 @@
 import type { BlogSource } from '@devlog/domains';
 
-import { ChannelList, Typography } from '@devlog/components';
+import { Typography } from '@devlog/components';
 import { fetchApi } from '@devlog/request';
+import { ChannelList } from 'components';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600;

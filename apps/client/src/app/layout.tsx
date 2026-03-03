@@ -3,19 +3,13 @@ import type { ReactNode } from 'react';
 
 import './globals.css';
 import '@devlog/ui-config';
-import {
-  BottomNavigation,
-  GlobalModalProvider,
-  Header,
-  Loading,
-  PullToRefreshWrapper,
-} from '@devlog/components';
+import { GlobalModalProvider, Loading } from '@devlog/components';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { BottomNavigation, Header, PullToRefreshWrapper } from 'components';
 import localFont from 'next/font/local';
 import Head from 'next/head';
-
-import { FirebaseAnalyticsProvider } from '@/providers/FirebaseAnalyticsProvider';
-import { QueryProvider } from '@/providers/QueryProvider';
+import { FirebaseAnalyticsProvider } from 'providers/FirebaseAnalyticsProvider';
+import { QueryProvider } from 'providers/QueryProvider';
 
 const pretandard = localFont({
   src: './fonts/PretendardVariable.woff2',

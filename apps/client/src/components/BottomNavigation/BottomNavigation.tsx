@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Icon } from '../Icon';
+import { Icon } from '../../../../../packages/components/src/Icon';
 import styles from './BottomNavigation.module.css';
 
 export const BottomNavigation = () => {
