@@ -5,9 +5,10 @@
     @apply bottom-0;
     @apply left-0;
     @apply right-0;
-    @apply h-[64px];
+    @apply h-[calc(64px+env(safe-area-inset-bottom))];
     @apply z-50;
     @apply bg-teal-900;
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 .bottomNavigationItemList {

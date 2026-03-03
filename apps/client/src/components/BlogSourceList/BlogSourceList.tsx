@@ -1,23 +1,16 @@
 'use client';
 
+import type { BlogSource, FeedFetchResult } from '@devlog/domains';
+
+import { getBlogSources } from '@devlog/apis';
+import { Button, Icon, Tab, Tabs, Typography } from '@devlog/components';
+import { useLoading } from '@devlog/hooks';
+import { fetchApi } from '@devlog/request';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
 
-import type {
-  BlogSource,
-  FeedFetchResult,
-} from '../../../../../packages/domains';
-
-import { getBlogSources } from '../../../../../packages/apis/src';
-import { Button } from '../../../../../packages/components/src/Button';
-import { Icon } from '../../../../../packages/components/src/Icon';
-import { Tab, Tabs } from '../../../../../packages/components/src/Tabs';
-import { Typography } from '../../../../../packages/components/src/Typography';
-import { useLoading } from '../../../../../packages/hooks';
-import { fetchApi } from '../../../../../packages/request/src';
 import styles from './BlogSourceList.module.css';
 
 interface BlogSourceListProps {

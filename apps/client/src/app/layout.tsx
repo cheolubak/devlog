@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 
 import './globals.css';
@@ -18,6 +18,13 @@ const pretandard = localFont({
 export const metadata: Metadata = {
   description: '기술 블로그와 유튜브를 모아서 한눈에 볼 수 있어요.',
   title: 'DEV CURATE - 기술 블로그 유튜브 모아',
+};
+
+export const viewport: Viewport = {
+  initialScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
+  width: 'device-width',
 };
 
 export default async function RootLayout({

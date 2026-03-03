@@ -1,4 +1,5 @@
 export * from './Button';
+export * from './FloatingMenu';
 export * from './GlobalModal';
 export * from './Icon';
 export * from './IconButton';

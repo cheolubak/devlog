@@ -1,19 +1,14 @@
 'use client';
 
+import type { PostListAll, ResponseList } from '@devlog/domains';
+
+import { Button, Switch, Typography } from '@devlog/components';
+import { useLoading } from '@devlog/hooks';
+import { fetchApi } from '@devlog/request';
 import { useMutation } from '@tanstack/react-query';
+import { PostListItemEditDisplay } from 'components';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import type {
-  PostListAll,
-  ResponseList,
-} from '../../../../../packages/domains';
-
-import { Button } from '../../../../../packages/components/src/Button';
-import { Switch } from '../../../../../packages/components/src/Switch';
-import { Typography } from '../../../../../packages/components/src/Typography';
-import { useLoading } from '../../../../../packages/hooks';
-import { fetchApi } from '../../../../../packages/request';
-import { PostListItemEditDisplay } from '../PostListItemEditDisplay';
 import styles from './PostListEditDisplay.module.css';
 
 interface PostListEditDisplayProps {
