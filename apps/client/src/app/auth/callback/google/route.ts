@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
         client_secret: process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_SECRET ?? '',
         code,
         grant_type: 'authorization_code',
-        redirect_uri: `${req.nextUrl.origin}/auth/callback/google`,
+        redirect_uri: process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CALLBACK_URL ?? '',
       }),
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
