@@ -1,4 +1,13 @@
-import { Button, Icon, Modal, Typography, useModal } from '@devlog/components';
+'use client';
+
+import {
+  Button,
+  Icon,
+  IconButton,
+  Modal,
+  Typography,
+  useModal,
+} from '@devlog/components';
 import { useLogin } from '@devlog/hooks';
 
 import styles from './LoginModal.module.css';
@@ -13,8 +22,21 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
 
   const { close } = useModal();
 
+  const handleClickPrivacyPolicy = () => {
+    window.open('/policy/privacy', '_blank');
+  };
+
+  const handleClickServicePolicy = () => {
+    window.open('/policy/services', '_blank');
+  };
+
   return (
     <Modal className={styles.loginModal}>
+      <IconButton
+        className={styles.closeButton}
+        name='clear'
+        onClick={() => close(modalKey)}
+      />
       <Typography
         className={styles.loginModalTitle}
         variants='title-large'
@@ -66,6 +88,33 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
           </Button>
         </li>
       </ul>
+      <div className={styles.loginModalMenus}>
+        <Button
+          onClick={handleClickPrivacyPolicy}
+          size='sm'
+          variant='text'
+        >
+          <Typography
+            className={styles.loginModalPolicyButton}
+            variants='body-medium'
+          >
+            개인정보처리방침
+          </Typography>
+        </Button>
+        |
+        <Button
+          onClick={handleClickServicePolicy}
+          size='sm'
+          variant='text'
+        >
+          <Typography
+            className={styles.loginModalPolicyButton}
+            variants='body-medium'
+          >
+            서비스이용약관
+          </Typography>
+        </Button>
+      </div>
     </Modal>
   );
 };

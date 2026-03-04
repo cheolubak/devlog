@@ -28,7 +28,6 @@ export const bffTemplate = async (
     const storedAccessToken = cookieStores.get(ACCESS_TOKEN_KEY)?.value;
     const storedRefreshToken = cookieStores.get(REFRESH_TOKEN_KEY)?.value;
 
-    console.log('=======storedAccessToken=======', storedAccessToken);
     let accessToken = storedAccessToken;
 
     if (!storedAccessToken && storedRefreshToken) {

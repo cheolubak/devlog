@@ -11,6 +11,12 @@
     @apply min-h-0;
 }
 
+.closeButton {
+    @apply absolute;
+    @apply top-3;
+    @apply right-3;
+}
+
 .loginModalTitle {
     @apply mb-6;
     @apply text-center;
@@ -22,6 +28,7 @@
     @apply justify-start;
     @apply items-stretch;
     @apply gap-3;
+    @apply mb-6;
 }
 
 .kakaoLogin,
@@ -53,4 +60,14 @@
     @apply border-none;
     @apply bg-black;
     @apply text-white;
+}
+
+.loginModalMenus {
+    @apply flex;
+    @apply justify-center;
+    @apply items-center;
+}
+
+.loginModalPolicyButton {
+    @apply text-gray-900;
 }

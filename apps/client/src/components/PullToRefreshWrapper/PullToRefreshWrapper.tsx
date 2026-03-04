@@ -22,8 +22,6 @@ export const PullToRefreshWrapper = ({
     pathname.includes('/channels') ||
     pathname === '/mypage/bookmarks';
 
-  console.log('=======isPullable=======', isPullable);
-
   return (
     <PullToRefresh
       isPullable={isPullable}
