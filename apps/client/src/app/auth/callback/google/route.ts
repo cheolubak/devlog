@@ -19,8 +19,8 @@ export async function GET(req: NextRequest) {
 
     const res = await fetch('https://oauth2.googleapis.com/token', {
       body: new URLSearchParams({
-        client_id: process.env.GOOGLE_LOGIN_CLIENT_ID ?? '',
-        client_secret: process.env.GOOGLE_LOGIN_CLIENT_SECRET ?? '',
+        client_id: process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID ?? '',
+        client_secret: process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_SECRET ?? '',
         code,
         grant_type: 'authorization_code',
         redirect_uri: `${req.nextUrl.origin}/auth/callback/google`,
