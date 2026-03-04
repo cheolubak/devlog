@@ -23,5 +23,5 @@ export const completeLogin = async ({
 
   await setAuthCookies({ accessToken, refreshToken });
 
-  return NextResponse.redirect('http://localhost:3000/');
+  return NextResponse.redirect(process.env.NEXT_PUBLIC_HOME!);
 };
