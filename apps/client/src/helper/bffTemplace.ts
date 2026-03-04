@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 
 import { log } from '@devlog/logger';
-import { externalApi } from '@devlog/request';
+import { externalApi, FetchError } from '@devlog/request';
 import {
   ACCESS_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
@@ -56,7 +56,17 @@ export const bffTemplate = async (
 
     return await work({ accessToken, sessionId });
   } catch (e) {
-    log.error('BFF Error', { error: JSON.stringify(e), pathname, search });
+    const attribute: Record<string, string> = {
+      error: JSON.stringify(e),
+      pathname,
+      search,
+    };
+    if (e instanceof FetchError) {
+      if (e.body) attribute.body = JSON.stringify(e.body);
+      if (e.data) attribute.data = JSON.stringify(e.data);
+    }
+
+    log.error('BFF Error', attribute);
 
     return NextResponse.json({ message: '오류' }, { status: 500 });
   }

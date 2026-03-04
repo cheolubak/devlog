@@ -20,6 +20,7 @@ export class FetchError extends Error {
     public status: number,
     public response: Response,
     public data?: unknown,
+    public body?: unknown,
   ) {
     super(message);
     this.name = 'FetchError';
@@ -152,6 +153,7 @@ export class RequestInstance {
           response.status,
           response,
           await response.json(),
+          fetchOptions.body,
         );
       }
 
