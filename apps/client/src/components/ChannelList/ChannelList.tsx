@@ -1,8 +1,8 @@
 import type { BlogSource } from '@devlog/domains';
 
 import { Icon, Typography } from '@devlog/components';
-import { ChannelItem } from 'components';
 
+import { ChannelItem } from '../ChannelItem';
 import styles from './ChannelList.module.css';
 
 interface ChannelListProps {
