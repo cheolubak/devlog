@@ -1,24 +1,23 @@
 'use client';
 
-import type { PostList as PostListData, ResponseList } from '@devlog/domains';
+import type { PostList, ResponseList } from '@devlog/domains';
 
-import { getPostList } from '@devlog/apis';
-import { InfiniteScroll, Typography } from '@devlog/components';
+import { Button, InfiniteScroll, Typography } from '@devlog/components';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { VirtualPostList } from 'components';
-import { useSearchParams } from 'next/navigation';
+import { getBookmarkPosts } from 'apis/getBookmarkPosts';
+import { PostListLoading, VirtualPostList } from 'components';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-import { PostListLoading } from './PostListLoading';
-
-interface PostListProps {
-  posts: ResponseList<PostListData>;
+interface BookmarkPostListProps {
+  posts: ResponseList<PostList>;
   sourceId?: string;
 }
 
-export const PostList = ({
+export const BookmarkPostList = ({
   posts: { data, pagination },
   sourceId,
-}: PostListProps) => {
+}: BookmarkPostListProps) => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const q = searchParams.get('q') ?? '';
 
@@ -39,16 +38,27 @@ export const PostList = ({
         }
       : undefined,
     initialPageParam: 0,
-    queryFn: ({ pageParam }) => getPostList({ page: pageParam, q, sourceId }),
-    queryKey: ['posts-list', { q, sourceId }],
+    queryFn: ({ pageParam }) =>
+      getBookmarkPosts({ page: pageParam, q, sourceId }),
+    queryKey: ['bookmark-posts-list', { q, sourceId }],
   });
 
   const postList = posts?.pages.flatMap((page) => page.data) ?? [];
 
+  const handleGoPosts = () => {
+    router.push('/');
+  };
+
   if (!isFetching && postList.length === 0) {
     return (
-      <div className='p-10 text-center text-white'>
-        <Typography variants='title-large'>검색 결과가 없습니다.</Typography>
+      <div className='flex flex-col items-center gap-5 p-10 text-center text-white'>
+        <Typography variants='title-large'>저장된 포스트가 없어요.</Typography>
+        <Button
+          color='success'
+          onClick={handleGoPosts}
+        >
+          포스트 보러 가기
+        </Button>
       </div>
     );
   }

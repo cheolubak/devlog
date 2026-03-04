@@ -46,6 +46,7 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
   return (
     <Link
       className={styles.postListItem}
+      draggable={false}
       href={blogUrl}
       onClick={handleClickPost}
       style={style}

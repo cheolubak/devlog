@@ -1,0 +1,67 @@
+@reference '@devlog/ui-config';
+
+.mypage {
+    @apply pb-2 md:pb-10;
+    @apply px-4 md:px-10;
+    @apply text-white;
+    @apply h-[calc(100dvh-170px)] md:h-[calc(100dvh-232px)];
+    @apply box-border;
+    @apply flex;
+    @apply flex-col;
+    @apply items-start;
+}
+
+.mypageTitle {
+    @apply mb-10;
+}
+
+.mypageMenus {
+    @apply w-full;
+    @apply h-full;
+    @apply flex;
+    @apply flex-col;
+    @apply justify-between;
+    @apply items-start;
+}
+
+.mypageFooterMenus {
+    @apply w-full;
+    @apply flex;
+    @apply flex-col;
+    @apply items-start;
+    @apply gap-4;
+}
+
+.mypageLoginButton {
+    @apply w-full;
+}
+
+.mypageFooterMenuItem {
+    @apply px-4;
+    @apply h-[44px];
+    @apply inline-flex;
+    @apply justify-center;
+    @apply items-center;
+    @apply gap-2;
+}
+
+.mypageLeaveMenus {
+    @apply w-full;
+    @apply flex;
+    @apply justify-between;
+    @apply items-center;
+}
+
+.userInfo {
+    @apply flex;
+    @apply justify-between;
+    @apply items-center;
+    @apply gap-4;
+    @apply mb-10;
+}
+
+.userProfile {
+    @apply object-cover;
+    @apply rounded-full;
+    @apply bg-white;
+}

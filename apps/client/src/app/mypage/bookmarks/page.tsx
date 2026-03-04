@@ -1,18 +1,19 @@
-import { getPostList } from '@devlog/apis';
 import { Typography } from '@devlog/components';
-import { PostList, PostListLoading } from 'components';
+import { getBookmarkPosts } from 'apis/getBookmarkPosts';
+import { PostListLoading } from 'components';
+import { BookmarkPostList } from 'components/BookmarkPostList';
 import { Suspense } from 'react';
 
 export const dynamic = 'force-dynamic';
-export const revalidate = 3600;
+export const revalidate = false;
 
-export default async function Home() {
+export default async function MypageBookmarks() {
   try {
-    const posts = await getPostList();
+    const posts = await getBookmarkPosts();
 
     return (
       <Suspense fallback={<PostListLoading />}>
-        <PostList posts={posts} />
+        <BookmarkPostList posts={posts} />
       </Suspense>
     );
   } catch (e) {

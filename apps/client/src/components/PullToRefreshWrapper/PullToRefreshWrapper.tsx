@@ -2,7 +2,7 @@
 
 import type { PropsWithChildren } from 'react';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 
 interface PullToRefreshWrapperProps extends PropsWithChildren {}
@@ -11,10 +11,26 @@ export const PullToRefreshWrapper = ({
   children,
 }: PullToRefreshWrapperProps) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleRefresh = async () => {
     router.refresh();
   };
 
-  return <PullToRefresh onRefresh={handleRefresh}>{children}</PullToRefresh>;
+  const isPullable =
+    pathname === '/' ||
+    pathname.includes('/channels') ||
+    pathname === '/mypage/bookmarks';
+
+  console.log('=======isPullable=======', isPullable);
+
+  return (
+    <PullToRefresh
+      isPullable={isPullable}
+      onRefresh={handleRefresh}
+      pullingContent=''
+    >
+      {children}
+    </PullToRefresh>
+  );
 };

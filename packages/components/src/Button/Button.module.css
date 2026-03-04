@@ -8,6 +8,7 @@
     @apply items-center;
     @apply border-2;
     @apply whitespace-nowrap;
+    @apply text-white;
 }
 
 .xl {
@@ -70,6 +71,30 @@
     @apply border-transparent;
 }
 
+
 .outline {
     @apply bg-transparent;
+}
+
+.text.primary {
+    @apply text-white;
+}
+
+.outline.primary {
+    @apply text-gray-900;
+}
+
+.outline.secondary,
+.text.secondary {
+    @apply text-purple-500;
+}
+
+.outline.success,
+.text.success {
+    @apply text-cyan-500;
+}
+
+.outline.danger,
+.text.danger {
+    @apply text-red-500;
 }

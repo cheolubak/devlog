@@ -35,6 +35,7 @@
 .kakaoLogin {
     @apply bg-[#fee500];
     @apply border-none;
+    @apply text-black;
 }
 
 .naverLogin {

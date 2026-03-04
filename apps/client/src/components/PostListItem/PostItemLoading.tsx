@@ -5,7 +5,7 @@ import styles from './PostListItem.module.css';
 export const PostItemLoading = () => {
   return (
     <div className={styles.postListItem}>
-      <div className={styles.postListItemTitle}>
+      <div className={styles.postListItemHeader}>
         <Skeleton
           height={26}
           variant='rectangular'
@@ -26,11 +26,24 @@ export const PostItemLoading = () => {
           height={20}
           width={80}
         />
-        |
-        <Skeleton
-          height={20}
-          width={80}
-        />
+        <div className={styles.postListItemInfo}>
+          <Skeleton
+            height={20}
+            width={80}
+          />
+          |
+          <div className={styles.postListItemView}>
+            <Skeleton
+              height={14}
+              variant='circular'
+              width={14}
+            />
+            <Skeleton
+              height={20}
+              width={30}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

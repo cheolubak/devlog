@@ -1,0 +1,10 @@
+@reference '@devlog/ui-config';
+
+.policyLayout {
+    @apply py-6 md:py-10;
+    @apply px-4 md:px-10;
+    @apply text-white;
+    @apply flex;
+    @apply flex-col;
+    @apply gap-6;
+}

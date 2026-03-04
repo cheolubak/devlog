@@ -5,9 +5,9 @@
     @apply bottom-0;
     @apply left-0;
     @apply right-0;
-    @apply h-[calc(64px+env(safe-area-inset-bottom))];
+    @apply h-[calc(64px+env(safe-area-inset-bottom))] md:h-[100px];
     @apply z-50;
-    @apply bg-teal-900;
+    @apply bg-gray-900;
     padding-bottom: env(safe-area-inset-bottom);
 }
 
@@ -16,4 +16,16 @@
     @apply flex;
     @apply justify-around;
     @apply items-center;
+    @apply bg-indigo-900/10;
+}
+
+.bottomNavigationItem {
+    @apply relative;
+    @apply inline-flex;
+    @apply justify-center;
+    @apply items-center;
+    @apply w-12 md:w-[64px];
+    @apply h-12 md:h-[64px];
+    @apply rounded-full;
+    @apply overflow-hidden;
 }

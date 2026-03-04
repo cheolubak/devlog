@@ -25,11 +25,11 @@ export async function GET(
         offset: page,
       };
 
-      let endpoint = '/posts';
+      let endpoint = '/posts/bookmarks';
       if (q) {
         apiParams.q = q;
 
-        endpoint = '/search';
+        endpoint = '/search/bookmarks';
       }
 
       if (sourceId) {
@@ -49,7 +49,10 @@ export async function GET(
         params: apiParams,
       });
 
-      return NextResponse.json(res);
+      return NextResponse.json({
+        ...res,
+        data: res.data.map((item) => ({ ...item, isBookmark: true })),
+      });
     } catch (e) {
       log.error('GET Posts', { error: JSON.stringify(e), page, q });
       return NextResponse.json({ message: 'Error!!' }, { status: 500 });

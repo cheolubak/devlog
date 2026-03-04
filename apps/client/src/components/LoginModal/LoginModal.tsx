@@ -47,6 +47,7 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
           <Button
             className={styles.googleLogin}
             onClick={loginWithGoogle}
+            variant='outline'
           >
             <Icon name='google' />
             구글 로그인

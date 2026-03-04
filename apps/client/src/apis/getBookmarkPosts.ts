@@ -1,9 +1,9 @@
-import type { PostList as PostListData, ResponseList } from '@devlog/domains';
+import type { PostList, ResponseList } from '@devlog/domains';
 
 import { fetchApi } from '@devlog/request';
 import { ACCESS_TOKEN_KEY, SESSION_ID_KEY } from 'constants/auth';
 
-export const getPostList = async (info?: {
+export const getBookmarkPosts = async (info?: {
   page?: number;
   q?: string;
   sourceId?: string;
@@ -31,7 +31,7 @@ export const getPostList = async (info?: {
     headers['Cookie'] = cookie;
   }
 
-  return fetchApi.get<ResponseList<PostListData>>(`/posts/${page}`, {
+  return fetchApi.get<ResponseList<PostList>>(`/posts/${page}/bookmarks`, {
     headers,
     next: { revalidate: 3600, tags: ['posts'] },
     params,

@@ -68,15 +68,13 @@ export default async function RootLayout({
       <body>
         <SpeedInsights />
         <FirebaseAnalyticsProvider />
-        <PullToRefreshWrapper>
-          <QueryProvider>
-            <Header />
-            {children}
-            <BottomNavigation />
-            <Loading />
-            <GlobalModal />
-          </QueryProvider>
-        </PullToRefreshWrapper>
+        <QueryProvider>
+          <Header />
+          <PullToRefreshWrapper>{children}</PullToRefreshWrapper>
+          <BottomNavigation />
+          <Loading />
+          <GlobalModal />
+        </QueryProvider>
       </body>
     </html>
   );

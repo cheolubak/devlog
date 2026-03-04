@@ -1,0 +1,37 @@
+@reference '@devlog/ui-config';
+
+.defaultModal {
+    @apply flex;
+    @apply flex-col;
+    @apply justify-start;
+    @apply items-stretch;
+    @apply px-4 md:px-6;
+    @apply py-8 md:py-10;
+    @apply h-fit;
+    @apply min-h-0;
+}
+
+.defaultModalTitle {
+    @apply mb-6;
+    @apply text-center;
+}
+
+.defaultModalDescription {
+    @apply mb-9;
+    @apply text-center;
+}
+
+.defaultModalMenu {
+    @apply flex;
+    @apply justify-center;
+    @apply items-center;
+    @apply gap-3;
+}
+
+.defaultModalMenuButton {
+    @apply flex-1;
+}
+
+.defaultModalCancelButton {
+    @apply !text-gray-900;
+}

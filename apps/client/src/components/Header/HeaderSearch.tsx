@@ -44,7 +44,7 @@ export const HeaderSearch = () => {
     setQuery('');
   }, []);
 
-  if (pathname !== '/') {
+  if (pathname !== '/' && pathname !== '/mypage/bookmarks') {
     return null;
   }
 

@@ -27,6 +27,7 @@ export async function POST(
     revalidateTag('posts', { expire: 0 });
     revalidatePath('/');
     revalidatePath('/channel/[id]/contents');
+    revalidatePath('/mypage/bookmarks');
 
     return NextResponse.json({});
   });

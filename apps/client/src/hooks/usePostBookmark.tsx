@@ -46,6 +46,24 @@ export const usePostBookmark = (post: PostList) => {
           });
         },
       );
+      queryClient.setQueriesData<InfiniteData<ResponseList<PostList>>>(
+        {
+          queryKey: ['bookmark-posts-list'],
+        },
+        (oldData) => {
+          if (!oldData) return oldData;
+
+          return {
+            ...oldData,
+            pages: oldData.pages.map((page) => ({
+              ...page,
+              data: prevBookmark.current
+                ? page.data.filter((item) => item.id !== post.id)
+                : [...page.data, post],
+            })),
+          };
+        },
+      );
     },
     onSuccess: () => {
       prevBookmark.current = !prevBookmark.current;

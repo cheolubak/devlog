@@ -1,7 +1,7 @@
-import { Typography } from '@devlog/components';
+import { MyPage as MyPageComponent } from 'components/MyPage';
 
 export const dynamic = 'force-dynamic';
 
 export default async function MyPage() {
-  return <Typography variants='display-medium'>준비중...</Typography>;
+  return <MyPageComponent />;
 }
