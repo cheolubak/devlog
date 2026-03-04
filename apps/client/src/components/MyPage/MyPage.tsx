@@ -68,7 +68,6 @@ export const MyPage = () => {
         title='회원탈퇴'
       />,
     );
-    leave();
   };
 
   const handleClickPrivacyPolicy = () => {
