@@ -20,7 +20,7 @@ export const useAuth = () => {
   });
 
   const { mutate: leave } = useMutation({
-    mutationFn: () => fetchApi.post('/leave'),
+    mutationFn: () => fetchApi.delete('/leave'),
     mutationKey: ['logout'],
     onMutate: () => {
       queryClient.setQueryData(['user'], null);
