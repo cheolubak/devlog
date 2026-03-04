@@ -30,22 +30,27 @@ export const bffTemplate = async (
 
     let accessToken = storedAccessToken;
 
-    if (!storedAccessToken && storedRefreshToken) {
-      const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
-        await externalApi.post<{
-          accessToken: string;
-          refreshToken: string;
-        }>('/auth/refresh', {
-          refreshToken: storedRefreshToken,
-          sessionId,
+    try {
+      if (!storedAccessToken && storedRefreshToken) {
+        const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
+          await externalApi.post<{
+            accessToken: string;
+            refreshToken: string;
+          }>('/auth/refresh', {
+            refreshToken: storedRefreshToken,
+            sessionId,
+          });
+
+        await setAuthCookies({
+          accessToken: newAccessToken,
+          refreshToken: newRefreshToken,
         });
 
-      await setAuthCookies({
-        accessToken: newAccessToken,
-        refreshToken: newRefreshToken,
-      });
-
-      accessToken = newAccessToken;
+        accessToken = newAccessToken;
+      }
+    } catch {
+      cookieStores.delete(ACCESS_TOKEN_KEY);
+      cookieStores.delete(REFRESH_TOKEN_KEY);
     }
 
     const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
@@ -56,6 +61,7 @@ export const bffTemplate = async (
 
     return await work({ accessToken, sessionId });
   } catch (e) {
+    console.log('=======e=======', e);
     const attribute: Record<string, string> = {
       error: JSON.stringify(e),
       pathname,

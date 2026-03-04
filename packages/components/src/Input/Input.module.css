@@ -1,0 +1,30 @@
+@reference '@devlog/ui-config';
+
+.inputContainer {
+    @apply h-12;
+    @apply inline-flex;
+    @apply justify-stretch;
+    @apply items-center;
+    @apply gap-2;
+    @apply px-4;
+    @apply border;
+    @apply border-gray-400;
+    @apply rounded-lg;
+    @apply bg-white;
+    @apply shadow-md;
+}
+
+.input {
+    @apply outline-none;
+    @apply border-none;
+    @apply bg-transparent;
+    @apply flex-1;
+}
+
+.prefix {
+    @apply -ml-1;
+}
+
+.suffix {
+    @apply -mr-1;
+}

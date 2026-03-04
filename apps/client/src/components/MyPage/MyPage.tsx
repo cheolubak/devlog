@@ -4,8 +4,9 @@ import type { User } from '@devlog/domains';
 import type { ReactNode } from 'react';
 
 import { Button, Icon, Typography, useModal } from '@devlog/components';
-import { DefaultModal } from 'components';
+import { BlogRequestModal, DefaultModal } from 'components';
 import { LoginModal } from 'components/LoginModal';
+import { YoutubeRequestModal } from 'components/YoutubeRequestModal';
 import { useAuth } from 'hooks';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -78,6 +79,14 @@ export const MyPage = () => {
     window.open('/policy/services', '_blank');
   };
 
+  const handleRequestBlog = () => {
+    open(<BlogRequestModal />);
+  };
+
+  const handleRequestYoutube = () => {
+    open(<YoutubeRequestModal />);
+  };
+
   return (
     <main className={styles.mypage}>
       <Typography
@@ -113,19 +122,40 @@ export const MyPage = () => {
         </header>
       )}
 
-      <article className={styles.mypageMenus}>
-        {isLogin && (
-          <Link
-            className={styles.mypageFooterMenuItem}
-            href='/mypage/bookmarks'
-          >
+      <article className={styles.mypageContainer}>
+        <div className={styles.mypageMenuList}>
+          {isLogin && (
+            <Link
+              className={styles.mypageFooterMenuItem}
+              href='/mypage/bookmarks'
+            >
+              <Icon
+                color='var(--color-white)'
+                name='bookmark-fill'
+              />
+              <Typography variants='title-medium'>북마크</Typography>
+            </Link>
+          )}
+          <Button onClick={handleRequestBlog}>
             <Icon
               color='var(--color-white)'
-              name='bookmark-fill'
+              name='rss'
             />
-            <Typography variants='title-medium'>북마크</Typography>
-          </Link>
-        )}
+            <Typography variants='title-medium'>
+              RSS 블로그 추가 요청
+            </Typography>
+          </Button>
+          <Button onClick={handleRequestYoutube}>
+            <Icon
+              color='var(--color-white)'
+              name='youtube'
+            />
+            <Typography variants='title-medium'>
+              유튜브 채널 추가 요청
+            </Typography>
+          </Button>
+        </div>
+
         {!isLogin && (
           <Button
             className={styles.mypageLoginButton}

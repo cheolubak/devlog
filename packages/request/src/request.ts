@@ -16,13 +16,14 @@ interface NextFetchRequestConfig {
 
 export class FetchError extends Error {
   constructor(
-    message: string,
+    public method: string,
+    public apiUrl: string,
     public status: number,
     public response: Response,
     public data?: unknown,
     public body?: unknown,
   ) {
-    super(message);
+    super(`FetchError : [${method}](${status}) ${apiUrl}`);
     this.name = 'FetchError';
   }
 }
@@ -149,7 +150,8 @@ export class RequestInstance {
 
       if (!response.ok) {
         throw new FetchError(
-          `HTTP error! status: ${response.status}`,
+          method,
+          fullURL,
           response.status,
           response,
           await response.json(),

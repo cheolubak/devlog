@@ -1,3 +1,5 @@
+'use client';
+
 import type { User } from '@devlog/domains';
 
 import { useLoading } from '@devlog/hooks';

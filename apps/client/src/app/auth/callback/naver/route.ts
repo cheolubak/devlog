@@ -44,8 +44,14 @@ export async function GET(req: NextRequest) {
       },
     );
 
+    if (!res.ok) {
+      return NextResponse.json({}, { status: 500 });
+    }
+
     const data: { access_token: string; refresh_token: string } =
       await res.json();
+
+    console.log('=======data=======', data);
 
     return await completeLogin({
       accessToken: data.access_token,

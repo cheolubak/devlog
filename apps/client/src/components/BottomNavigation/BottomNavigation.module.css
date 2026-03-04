@@ -8,7 +8,6 @@
     @apply h-[calc(64px+env(safe-area-inset-bottom))] md:h-[100px];
     @apply z-50;
     @apply bg-gray-900;
-    padding-bottom: env(safe-area-inset-bottom);
 }
 
 .bottomNavigationItemList {
@@ -16,7 +15,8 @@
     @apply flex;
     @apply justify-around;
     @apply items-center;
-    @apply bg-indigo-900/10;
+    @apply bg-indigo-900/30;
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 .bottomNavigationItem {

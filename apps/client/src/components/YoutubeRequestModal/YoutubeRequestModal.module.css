@@ -1,0 +1,39 @@
+@reference '@devlog/ui-config';
+
+.youtubeRequestModal {
+    @apply px-4 md:px-8;
+    @apply py-6 md:py-10;
+    @apply overflow-y-auto;
+}
+
+.youtubeRequestModalTitle {
+    @apply mb-4;
+    @apply text-center;
+}
+
+.youtubeRequestModalDescription {
+    @apply mb-8;
+    @apply text-center;
+}
+
+.youtubeRequestModalForm {
+    @apply flex;
+    @apply flex-col;
+    @apply gap-4;
+    @apply mb-8;
+}
+
+.youtubeRequestModalFooter {
+    @apply flex;
+    @apply justify-center;
+    @apply items-center;
+    @apply gap-2;
+
+    & > * {
+        @apply flex-1;
+    }
+
+    & > *:first-child {
+        @apply text-gray-900;
+    }
+}

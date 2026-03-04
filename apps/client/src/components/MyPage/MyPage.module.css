@@ -15,13 +15,22 @@
     @apply mb-10;
 }
 
-.mypageMenus {
+.mypageContainer {
     @apply w-full;
     @apply h-full;
     @apply flex;
     @apply flex-col;
     @apply justify-between;
     @apply items-start;
+}
+
+.mypageMenuList {
+    @apply w-full;
+    @apply flex;
+    @apply flex-col;
+    @apply justify-start;
+    @apply items-start;
+    @apply gap-3;
 }
 
 .mypageFooterMenus {

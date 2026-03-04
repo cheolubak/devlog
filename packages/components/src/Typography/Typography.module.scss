@@ -5,6 +5,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   word-break: break-all;
+  @apply whitespace-pre-wrap;
 }
 
 @for $i from 1 through 10 {

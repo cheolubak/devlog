@@ -1,0 +1,9 @@
+@reference '@devlog/ui-config';
+
+.inputGroup {
+    @apply flex;
+    @apply flex-col;
+    @apply gap-1;
+    @apply justify-start;
+    @apply items-stretch;
+}

@@ -4,6 +4,8 @@ export * from './GlobalModal';
 export * from './Icon';
 export * from './IconButton';
 export * from './InfiniteScroll';
+export * from './Input';
+export * from './InputGroup';
 export * from './Loading';
 export * from './Modal';
 export * from './Overlay';
