@@ -13,7 +13,13 @@ export const useAuth = () => {
   const { hide, show } = useLoading();
 
   const { data: user } = useQuery({
-    queryFn: () => fetchApi.get<User>('/me'),
+    queryFn: async () => {
+      try {
+        return await fetchApi.get<User>('/me');
+      } catch {
+        return null;
+      }
+    },
     queryKey: ['user'],
   });
 
