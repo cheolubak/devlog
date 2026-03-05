@@ -1,5 +1,7 @@
+@reference '@devlog/ui-config';
+
 .skeleton {
-    background-color: #e0e0e0;
+    @apply bg-[#e0e0e0]/30;
     animation: shimmer 1.5s infinite ease-in-out;
 }
 

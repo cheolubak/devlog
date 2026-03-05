@@ -20,8 +20,10 @@ export const HeaderSearch = () => {
   const searchParamsRef = useRef(searchParams);
   searchParamsRef.current = searchParams;
 
+  const disabledSearch = pathname === 'mypage' || pathname === '/channels';
+
   useEffect(() => {
-    if (pathnameRef.current !== '/') {
+    if (disabledSearch) {
       return;
     }
 
@@ -44,7 +46,7 @@ export const HeaderSearch = () => {
     setQuery('');
   }, []);
 
-  if (pathname !== '/' && pathname !== '/mypage/bookmarks') {
+  if (disabledSearch) {
     return null;
   }
 
