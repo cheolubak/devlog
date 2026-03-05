@@ -61,7 +61,7 @@
     @apply items-center;
 }
 
-.userInfo {
+.userInfoContainer {
     @apply flex;
     @apply justify-between;
     @apply items-center;
@@ -69,8 +69,23 @@
     @apply mb-10;
 }
 
+.userInfo {
+    @apply flex;
+    @apply flex-col;
+    @apply justify-start;
+    @apply items-start;
+    @apply gap-2;
+}
+
 .userProfile {
     @apply object-cover;
     @apply rounded-full;
     @apply bg-white;
+}
+
+.userInfoContent {
+    @apply flex;
+    @apply justify-start;
+    @apply items-center;
+    @apply gap-2;
 }

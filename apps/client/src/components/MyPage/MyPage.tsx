@@ -18,27 +18,25 @@ const SOCIAL_ICON: Record<User['socialType'], ReactNode> = {
     <Icon
       color='var(--color-white)'
       name='github'
-      size={32}
+      size={24}
     />
   ),
   GOOGLE: (
     <Icon
       name='google'
-      size={32}
+      size={24}
     />
   ),
   KAKAO: (
     <Icon
       color='#fee500'
       name='kakao'
-      size={32}
     />
   ),
   NAVER: (
     <Icon
       color='#03C75A'
       name='naver'
-      size={32}
     />
   ),
 };
@@ -97,7 +95,7 @@ export const MyPage = () => {
       </Typography>
 
       {user && (
-        <header className={styles.userInfo}>
+        <header className={styles.userInfoContainer}>
           {user.profile ? (
             <Image
               alt={user.nickname}
@@ -115,10 +113,15 @@ export const MyPage = () => {
               width={48}
             />
           )}
-          <Typography variants='title-large'>
-            안녕하세요, {user.nickname}님!
-          </Typography>
-          {SOCIAL_ICON[user.socialType]}
+          <div className={styles.userInfo}>
+            <Typography variants='title-large'>
+              안녕하세요, {user.nickname}님!
+            </Typography>
+            <div className={styles.userInfoContent}>
+              {SOCIAL_ICON[user.socialType]}
+              {user.email && <Typography>{user.email}</Typography>}
+            </div>
+          </div>
         </header>
       )}
 
