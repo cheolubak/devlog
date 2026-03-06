@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 
 import { externalApi } from '@devlog/request';
-import { bffTemplate } from 'helper/bffTemplace';
+import { bffTemplate } from 'helper/bffTemplate';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {

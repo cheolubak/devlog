@@ -2,8 +2,8 @@
 
 import type { PostList as PostListData, ResponseList } from '@devlog/domains';
 
-import { getPostList } from '@devlog/apis';
 import { InfiniteScroll, Typography } from '@devlog/components';
+import { getPostList } from 'apis/getPostList';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { VirtualPostList } from 'components';
 import { useSearchParams } from 'next/navigation';

@@ -1,7 +1,7 @@
 import type { BlogSource } from '@devlog/domains';
 
-import { getPostList } from '@devlog/apis';
 import { Typography } from '@devlog/components';
+import { getPostList } from 'apis/getPostList';
 import { fetchApi } from '@devlog/request';
 import { ChannelContentHeader, PostList } from 'components';
 import { Suspense } from 'react';

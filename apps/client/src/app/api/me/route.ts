@@ -2,7 +2,7 @@ import type { User } from '@devlog/domains';
 import type { NextRequest } from 'next/server';
 
 import { externalApi } from '@devlog/request';
-import { bffTemplate } from 'helper/bffTemplace';
+import { bffTemplate } from 'helper/bffTemplate';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {

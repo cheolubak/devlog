@@ -61,7 +61,6 @@ export const bffTemplate = async (
 
     return await work({ accessToken, sessionId });
   } catch (e) {
-    console.log('=======e=======', e);
     const attribute: Record<string, string> = {
       error: JSON.stringify(e),
       pathname,

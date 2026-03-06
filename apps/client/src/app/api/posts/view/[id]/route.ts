@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 
 import { externalApi } from '@devlog/request';
-import { bffTemplate } from 'helper/bffTemplace';
+import { bffTemplate } from 'helper/bffTemplate';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { NextResponse } from 'next/server';
 

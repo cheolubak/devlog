@@ -1,6 +1,6 @@
 import type { NextRequest } from 'next/server';
 
-import { bffTemplate } from 'helper/bffTemplace';
+import { bffTemplate } from 'helper/bffTemplate';
 import { completeLogin } from 'helper/completeLogin';
 import { NextResponse } from 'next/server';
 

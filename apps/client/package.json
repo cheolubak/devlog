@@ -35,15 +35,13 @@
     "clsx": "catalog:",
     "dayjs": "catalog:",
     "firebase": "catalog:",
-    "immer": "catalog:",
     "next": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "sharp": "catalog:",
     "uuid": "catalog:",
     "zod": "catalog:",
-    "react-simple-pull-to-refresh": "catalog:",
-    "zustand": "catalog:"
+    "react-simple-pull-to-refresh": "catalog:"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "catalog:",

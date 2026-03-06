@@ -1,5 +1,5 @@
-import { getPostList } from '@devlog/apis';
 import { Typography } from '@devlog/components';
+import { getPostList } from 'apis/getPostList';
 import { PostList, PostListLoading } from 'components';
 import { Suspense } from 'react';
 

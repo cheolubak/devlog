@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 
 import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
-import { bffTemplate } from 'helper/bffTemplace';
+import { bffTemplate } from 'helper/bffTemplate';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
