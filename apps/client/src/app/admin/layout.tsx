@@ -10,7 +10,7 @@ export default async function AdminLayout({ children }: AdminLayoutProps) {
 
   const checkAuth = cookieStore.get('auth')?.value;
 
-  if (checkAuth !== 'IKZtsfpbt5vIT60qNrLBsbfymCvBoMQo7NyzLWeaHu7lqwzm') {
+  if (checkAuth !== process.env.NEXT_PUBLIC_AUTH_KEY) {
     redirect('/');
   }
 
