@@ -1,6 +1,8 @@
 import { getBlogSources } from '@devlog/apis';
 import { BlogSourceList } from 'components';
 
+export const dynamic = 'force-dynamic';
+
 export default async function BlogSourcesPage({
   searchParams,
 }: {

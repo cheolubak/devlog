@@ -2,7 +2,7 @@ import type { BlogSource } from '@devlog/domains';
 
 import { Typography } from '@devlog/components';
 import { fetchApi } from '@devlog/request';
-import { ChannelList, ChannelListContainer } from 'components';
+import { ChannelListContainer } from 'components';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600;

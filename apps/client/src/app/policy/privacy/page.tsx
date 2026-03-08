@@ -2,6 +2,7 @@ import { Typography } from '@devlog/components';
 import { PolicyLayout } from 'components';
 import { PolicyTable } from 'components/PolicyTable';
 
+export const revalidate = 3600;
 export default function PrivacyPolicyPage() {
   return (
     <PolicyLayout>

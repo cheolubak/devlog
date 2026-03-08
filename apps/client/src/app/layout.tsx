@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 
+import { GlobalModal, Loading } from '@devlog/components';
+
 import './globals.css';
 import '@devlog/ui-config';
-import { GlobalModal, Loading } from '@devlog/components';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import {
   BottomNavigation,
@@ -16,6 +17,7 @@ import Head from 'next/head';
 import { FirebaseAnalyticsProvider } from 'providers/FirebaseAnalyticsProvider';
 import { QueryProvider } from 'providers/QueryProvider';
 import { ScrollProvider } from 'providers/ScrollProvider';
+import { Suspense } from 'react';
 
 const pretandard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -79,7 +81,9 @@ export default async function RootLayout({
           <Header />
           <PullToRefreshWrapper>{children}</PullToRefreshWrapper>
           <BottomNavigation />
-          <PostListFilter />
+          <Suspense>
+            <PostListFilter />
+          </Suspense>
           <Loading />
           <GlobalModal />
         </QueryProvider>

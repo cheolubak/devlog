@@ -1,6 +1,7 @@
 import { Typography } from '@devlog/components';
 import { PolicyLayout } from 'components';
 
+export const revalidate = 3600;
 export default function ServicePolicyPage() {
   return (
     <PolicyLayout>
