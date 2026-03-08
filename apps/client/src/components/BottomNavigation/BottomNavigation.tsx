@@ -11,6 +11,7 @@ export const BottomNavigation = () => {
           <Link
             className={styles.bottomNavigationItem}
             href='/'
+            scroll={false}
           >
             <Ripple />
             <Icon
@@ -24,6 +25,7 @@ export const BottomNavigation = () => {
           <Link
             className={styles.bottomNavigationItem}
             href='/channels'
+            scroll={false}
           >
             <Ripple />
             <Icon
@@ -37,6 +39,7 @@ export const BottomNavigation = () => {
           <Link
             className={styles.bottomNavigationItem}
             href='/mypage/bookmarks'
+            scroll={false}
           >
             <Ripple />
             <Icon
@@ -50,6 +53,7 @@ export const BottomNavigation = () => {
           <Link
             className={styles.bottomNavigationItem}
             href='/mypage'
+            scroll={false}
           >
             <Ripple />
             <Icon

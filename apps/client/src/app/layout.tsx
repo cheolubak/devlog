@@ -10,6 +10,7 @@ import localFont from 'next/font/local';
 import Head from 'next/head';
 import { FirebaseAnalyticsProvider } from 'providers/FirebaseAnalyticsProvider';
 import { QueryProvider } from 'providers/QueryProvider';
+import { ScrollProvider } from 'providers/ScrollProvider';
 
 const pretandard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -68,6 +69,7 @@ export default async function RootLayout({
       <body>
         <SpeedInsights />
         <FirebaseAnalyticsProvider />
+        <ScrollProvider />
         <QueryProvider>
           <Header />
           <PullToRefreshWrapper>{children}</PullToRefreshWrapper>

@@ -11,7 +11,8 @@
     "firebase": "catalog:",
     "jotai": "catalog:",
     "react": "catalog:",
-    "@tanstack/react-query": "catalog:"
+    "@tanstack/react-query": "catalog:",
+    "next": "catalog:"
   },
   "devDependencies": {
     "@types/react": "catalog:"

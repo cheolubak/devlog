@@ -3,6 +3,7 @@
 import type { PostList as PostListData, ResponseList } from '@devlog/domains';
 
 import { InfiniteScroll, Typography } from '@devlog/components';
+import { useScrollRestoration } from '@devlog/hooks';
 import {
   type InfiniteData,
   useInfiniteQuery,
@@ -87,6 +88,8 @@ export const PostList = ({
   }, [bookmarks]);
 
   const postList = posts?.pages.flatMap((page) => page.data) ?? [];
+
+  useScrollRestoration({ isReady: postList.length > 0 });
 
   if (!isFetching && postList.length === 0) {
     return (

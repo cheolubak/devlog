@@ -2,7 +2,7 @@ import type { BlogSource } from '@devlog/domains';
 
 import { Typography } from '@devlog/components';
 import { fetchApi } from '@devlog/request';
-import { ChannelList } from 'components';
+import { ChannelList, ChannelListContainer } from 'components';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
@@ -20,16 +20,10 @@ export default async function ChannelsPage() {
     });
 
     return (
-      <article>
-        <ChannelList
-          channels={blogs}
-          type='blog'
-        />
-        <ChannelList
-          channels={youtubes}
-          type='youtube'
-        />
-      </article>
+      <ChannelListContainer
+        blogs={blogs}
+        youtubes={youtubes}
+      />
     );
   } catch (e) {
     console.error('=======Channels Page Error=======');

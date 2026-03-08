@@ -3,6 +3,7 @@
 import type { PostList, ResponseList } from '@devlog/domains';
 
 import { Button, InfiniteScroll, Typography } from '@devlog/components';
+import { useScrollRestoration } from '@devlog/hooks';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getBookmarkPosts } from 'apis/getBookmarkPosts';
 import { PostListLoading, VirtualPostList } from 'components';
@@ -32,6 +33,8 @@ export const BookmarkPostList = ({ sourceId }: BookmarkPostListProps) => {
   });
 
   const postList = posts?.pages.flatMap((page) => page.data) ?? [];
+
+  useScrollRestoration({ isReady: postList.length > 0 });
 
   const handleGoPosts = () => {
     router.push('/');

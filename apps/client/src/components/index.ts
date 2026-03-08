@@ -4,6 +4,7 @@ export * from './BottomNavigation';
 export * from './ChannelContentHeader';
 export * from './ChannelItem';
 export * from './ChannelList';
+export * from './ChannelListContainer';
 export * from './DefaultModal';
 export * from './Header';
 export * from './PolicyLayout';
