@@ -38,6 +38,7 @@ export const Button = ({
         styles[size],
         className,
       )}
+      draggable={false}
     >
       {children}
       {useRipple && <Ripple />}

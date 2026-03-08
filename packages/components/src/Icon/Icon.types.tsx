@@ -4,11 +4,13 @@ import {
   IconBookmarkFill,
   IconBookmarkOutline,
   IconChannel,
+  IconCheck,
   IconClear,
   IconDarkMode,
   IconDelete,
   IconEdit,
   IconEmail,
+  IconFilter,
   IconGithub,
   IconGoogle,
   IconHash,
@@ -34,11 +36,13 @@ export type IconName =
   | 'bookmark-fill'
   | 'bookmark-outline'
   | 'channel'
+  | 'check'
   | 'clear'
   | 'darkMode'
   | 'delete'
   | 'edit'
   | 'email'
+  | 'filter'
   | 'github'
   | 'google'
   | 'hash'
@@ -61,11 +65,13 @@ export const iconMap: Record<IconName, ComponentType> = {
   'bookmark-fill': IconBookmarkFill,
   'bookmark-outline': IconBookmarkOutline,
   channel: IconChannel,
+  check: IconCheck,
   clear: IconClear,
   darkMode: IconDarkMode,
   delete: IconDelete,
   edit: IconEdit,
   email: IconEmail,
+  filter: IconFilter,
   github: IconGithub,
   google: IconGoogle,
   hash: IconHash,

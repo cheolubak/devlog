@@ -1,3 +1,8 @@
+import type {
+  PostRegionFilter,
+  PostTypeFilter,
+} from 'components/PostFilterModal/PostFilterModal.type';
+
 import { Typography } from '@devlog/components';
 import { getPostList } from 'apis/getPostList';
 import { PostList, PostListLoading } from 'components';
@@ -6,9 +11,14 @@ import { Suspense } from 'react';
 export const dynamic = 'force-dynamic';
 export const revalidate = 3600;
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ region?: PostRegionFilter; type?: PostTypeFilter }>;
+}) {
   try {
-    const posts = await getPostList();
+    const { region, type } = await searchParams;
+    const posts = await getPostList({ region, type });
 
     return (
       <Suspense fallback={<PostListLoading />}>

@@ -51,8 +51,6 @@ export async function GET(req: NextRequest) {
     const data: { access_token: string; refresh_token: string } =
       await res.json();
 
-    console.log('=======data=======', data);
-
     return await completeLogin({
       accessToken: data.access_token,
       sessionId,

@@ -1,0 +1,46 @@
+@reference '@devlog/ui-config';
+
+.radioContainer {
+    @apply flex;
+    @apply justify-start;
+    @apply items-center;
+    @apply gap-2;
+    @apply cursor-pointer;
+}
+
+.disabled {
+    @apply cursor-not-allowed;
+}
+
+.radioInput {
+    @apply hidden;
+    @apply w-0;
+    @apply h-0;
+}
+
+.radioInput:checked + .radio {
+    @apply border-gray-900;
+
+    &::after {
+        @apply bg-gray-900;
+    }
+}
+
+.radio {
+    @apply inline-flex;
+    @apply justify-center;
+    @apply items-center;
+    @apply w-6;
+    @apply h-6;
+    @apply rounded-full;
+    @apply border-2;
+    @apply border-gray-200;
+
+    &::after {
+        content: '';
+        @apply w-3;
+        @apply h-3;
+        @apply rounded-full;
+        @apply bg-gray-200;
+    }
+}

@@ -1,13 +1,19 @@
 import type { PostList as PostListData, ResponseList } from '@devlog/domains';
+import type {
+  PostRegionFilter,
+  PostTypeFilter,
+} from 'components/PostFilterModal/PostFilterModal.type';
 
 import { fetchApi } from '@devlog/request';
 
 export const getPostList = async (info?: {
   page?: number;
   q?: string;
+  region?: PostRegionFilter;
   sourceId?: string;
+  type?: PostTypeFilter;
 }) => {
-  const { page, q, sourceId } = info ?? {};
+  const { page, q, region, sourceId, type } = info ?? {};
 
   const params: Record<string, string> = {};
 
@@ -21,6 +27,14 @@ export const getPostList = async (info?: {
 
   if (sourceId) {
     params.sourceId = sourceId;
+  }
+
+  if (region) {
+    params.region = region;
+  }
+
+  if (type) {
+    params.type = type;
   }
 
   return fetchApi.get<ResponseList<PostListData>>(`/posts`, {

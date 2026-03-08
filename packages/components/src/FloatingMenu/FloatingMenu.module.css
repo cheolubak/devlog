@@ -2,7 +2,7 @@
 
 .floatingMenu {
     @apply fixed;
-    @apply bottom-[calc(80px+env(safe-area-inset-bottom))];
+    @apply bottom-[calc(80px+env(safe-area-inset-bottom))] md:bottom-[calc(120px+env(safe-area-inset-bottom))];
 }
 
 .floatingMenu[data-position="center"] {

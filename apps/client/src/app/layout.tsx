@@ -5,7 +5,12 @@ import './globals.css';
 import '@devlog/ui-config';
 import { GlobalModal, Loading } from '@devlog/components';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { BottomNavigation, Header, PullToRefreshWrapper } from 'components';
+import {
+  BottomNavigation,
+  Header,
+  PostListFilter,
+  PullToRefreshWrapper,
+} from 'components';
 import localFont from 'next/font/local';
 import Head from 'next/head';
 import { FirebaseAnalyticsProvider } from 'providers/FirebaseAnalyticsProvider';
@@ -74,6 +79,7 @@ export default async function RootLayout({
           <Header />
           <PullToRefreshWrapper>{children}</PullToRefreshWrapper>
           <BottomNavigation />
+          <PostListFilter />
           <Loading />
           <GlobalModal />
         </QueryProvider>

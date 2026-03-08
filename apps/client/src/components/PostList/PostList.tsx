@@ -1,6 +1,10 @@
 'use client';
 
 import type { PostList as PostListData, ResponseList } from '@devlog/domains';
+import type {
+  PostRegionFilter,
+  PostTypeFilter,
+} from 'components/PostFilterModal/PostFilterModal.type';
 
 import { InfiniteScroll, Typography } from '@devlog/components';
 import { useScrollRestoration } from '@devlog/hooks';
@@ -12,7 +16,7 @@ import {
 } from '@tanstack/react-query';
 import { getBookmarkPosts } from 'apis/getBookmarkPosts';
 import { getPostList } from 'apis/getPostList';
-import { VirtualPostList } from 'components';
+import { PostListFilter, VirtualPostList } from 'components';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -29,8 +33,10 @@ export const PostList = ({
 }: PostListProps) => {
   const searchParams = useSearchParams();
   const q = searchParams.get('q') ?? '';
+  const region = searchParams.get('region');
+  const type = searchParams.get('type');
 
-  const isDefaultView = !q;
+  const isDefaultView = !q && !region && !sourceId && !type;
 
   const queryClient = useQueryClient();
 
@@ -57,8 +63,15 @@ export const PostList = ({
         }
       : undefined,
     initialPageParam: 0,
-    queryFn: ({ pageParam }) => getPostList({ page: pageParam, q, sourceId }),
-    queryKey: ['posts-list', { q, sourceId }],
+    queryFn: ({ pageParam }) =>
+      getPostList({
+        page: pageParam,
+        q,
+        region: region as PostRegionFilter,
+        sourceId,
+        type: type as PostTypeFilter,
+      }),
+    queryKey: ['posts-list', q ?? '', region ?? '', sourceId ?? '', type ?? ''],
   });
 
   useEffect(() => {
@@ -100,13 +113,15 @@ export const PostList = ({
   }
 
   return (
-    <InfiniteScroll
-      fetchNext={fetchNextPage}
-      hasNext={hasNextPage}
-      isFetching={isFetching}
-    >
-      <VirtualPostList postList={postList} />
-      {isFetching && <PostListLoading />}
-    </InfiniteScroll>
+    <>
+      <InfiniteScroll
+        fetchNext={fetchNextPage}
+        hasNext={hasNextPage}
+        isFetching={isFetching}
+      >
+        <VirtualPostList postList={postList} />
+        {isFetching && <PostListLoading />}
+      </InfiniteScroll>
+    </>
   );
 };

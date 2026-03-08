@@ -1,0 +1,29 @@
+@reference '@devlog/ui-config';
+
+.postFilterModal {
+    all: unset;
+    @apply rounded-t-2xl;
+    @apply fixed;
+    @apply z-1000;
+    @apply pb-[calc(24px+env(safe-area-inset-bottom))] md:pb-[calc(100px+env(safe-area-inset-bottom))];
+    @apply bg-white;
+    @apply pt-6;
+    @apply px-4 md:px-10;
+    @apply h-fit;
+    @apply bottom-0;
+    @apply left-0;
+    @apply right-0;
+    @apply flex;
+    @apply flex-col;
+    @apply justify-start;
+    @apply items-stretch;
+    @apply gap-6;
+}
+
+.postFilterList {
+    @apply flex;
+    @apply flex-col;
+    @apply justify-start;
+    @apply items-stretch;
+    @apply gap-3;
+}

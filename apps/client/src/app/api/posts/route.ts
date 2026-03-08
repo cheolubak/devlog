@@ -17,8 +17,10 @@ export async function GET(req: NextRequest) {
       .nonnegative()
       .default(0)
       .parse(searchParams.get('page'));
-    const q = req.nextUrl.searchParams.get('q') ?? '';
-    const sourceId = req.nextUrl.searchParams.get('sourceId');
+    const q = searchParams.get('q') ?? '';
+    const sourceId = searchParams.get('sourceId');
+    const region = searchParams.get('region');
+    const type = searchParams.get('type');
 
     try {
       log.info('GET Posts', { page, q, sourceId: sourceId ?? 'null' });
@@ -36,6 +38,16 @@ export async function GET(req: NextRequest) {
 
       if (sourceId) {
         apiParams.sourceId = sourceId;
+      }
+
+      if (region) {
+        apiParams.region = region;
+      }
+
+      if (type === 'BLOG') {
+        apiParams.type = ['RSS', 'ATOM', 'SCRAPING'];
+      } else if (type === 'YOUTUBE') {
+        apiParams.type = ['YOUTUBE'];
       }
 
       const headers: Record<string, string> = {

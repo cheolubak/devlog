@@ -1,0 +1,33 @@
+@reference '@devlog/ui-config';
+
+.checkboxContainer {
+    @apply flex;
+    @apply justify-start;
+    @apply items-center;
+    @apply gap-2;
+    @apply cursor-pointer;
+}
+
+.disabled {
+    @apply cursor-not-allowed;
+}
+
+.checkboxInput {
+    @apply hidden;
+    @apply w-0;
+    @apply h-0;
+}
+
+.checkboxInput:checked + .checkbox {
+    @apply bg-gray-900;
+}
+
+.checkbox {
+    @apply w-6;
+    @apply h-6;
+    @apply rounded-lg;
+    @apply bg-gray-200;
+    @apply inline-flex;
+    @apply justify-center;
+    @apply items-center;
+}

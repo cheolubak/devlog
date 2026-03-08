@@ -1,0 +1,23 @@
+@reference '@devlog/ui-config';
+
+.filterButton {
+    @apply rounded-full;
+    @apply px-6;
+}
+
+.filterIcon {
+    @apply relative;
+    @apply w-5;
+    @apply h-5;
+}
+
+.isActive {
+    @apply inline-block;
+    @apply absolute;
+    @apply -top-0.5;
+    @apply -right-0.5;
+    @apply w-2;
+    @apply h-2;
+    @apply rounded-full;
+    @apply bg-red-500;
+}
