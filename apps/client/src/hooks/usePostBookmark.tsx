@@ -42,7 +42,6 @@ export const usePostBookmark = (post: PostList) => {
 
           return handleBookmarkUpdate({
             data: oldData,
-            isBookmark: !prevBookmark.current,
           });
         },
       );
@@ -83,14 +82,22 @@ export const usePostBookmark = (post: PostList) => {
     isBookmark,
   }: {
     data: InfiniteData<ResponseList<PostList>>;
-    isBookmark: boolean;
+    isBookmark?: boolean;
   }) => {
     return {
       ...data,
       pages: data.pages.map((page) => ({
         ...page,
         data: page.data.map((item) =>
-          item.id === post.id ? { ...item, isBookmark } : item,
+          item.id === post.id
+            ? {
+                ...item,
+                isBookmark:
+                  typeof isBookmark !== 'undefined'
+                    ? isBookmark
+                    : !item.isBookmark,
+              }
+            : item,
         ),
       })),
     };

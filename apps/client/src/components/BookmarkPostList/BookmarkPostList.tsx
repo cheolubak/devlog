@@ -9,19 +9,13 @@ import { PostListLoading, VirtualPostList } from 'components';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 interface BookmarkPostListProps {
-  posts: ResponseList<PostList>;
   sourceId?: string;
 }
 
-export const BookmarkPostList = ({
-  posts: { data, pagination },
-  sourceId,
-}: BookmarkPostListProps) => {
+export const BookmarkPostList = ({ sourceId }: BookmarkPostListProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const q = searchParams.get('q') ?? '';
-
-  const isDefaultView = !q;
 
   const {
     data: posts,
@@ -29,14 +23,8 @@ export const BookmarkPostList = ({
     hasNextPage,
     isFetching,
   } = useInfiniteQuery({
-    getNextPageParam: (lastPage) =>
+    getNextPageParam: (lastPage: ResponseList<PostList>) =>
       lastPage.pagination.hasMore ? lastPage.pagination.offset + 1 : undefined,
-    initialData: isDefaultView
-      ? {
-          pageParams: [0],
-          pages: [{ data, pagination }],
-        }
-      : undefined,
     initialPageParam: 0,
     queryFn: ({ pageParam }) =>
       getBookmarkPosts({ page: pageParam, q, sourceId }),

@@ -1,5 +1,4 @@
 import { Typography } from '@devlog/components';
-import { getBookmarkPosts } from 'apis/getBookmarkPosts';
 import { PostListLoading } from 'components';
 import { BookmarkPostList } from 'components/BookmarkPostList';
 import { Suspense } from 'react';
@@ -9,11 +8,9 @@ export const revalidate = false;
 
 export default async function MypageBookmarks() {
   try {
-    const posts = await getBookmarkPosts();
-
     return (
       <Suspense fallback={<PostListLoading />}>
-        <BookmarkPostList posts={posts} />
+        <BookmarkPostList />
       </Suspense>
     );
   } catch (e) {

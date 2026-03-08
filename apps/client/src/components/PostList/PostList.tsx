@@ -3,10 +3,17 @@
 import type { PostList as PostListData, ResponseList } from '@devlog/domains';
 
 import { InfiniteScroll, Typography } from '@devlog/components';
+import {
+  type InfiniteData,
+  useInfiniteQuery,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
+import { getBookmarkPosts } from 'apis/getBookmarkPosts';
 import { getPostList } from 'apis/getPostList';
-import { useInfiniteQuery } from '@tanstack/react-query';
 import { VirtualPostList } from 'components';
 import { useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 import { PostListLoading } from './PostListLoading';
 
@@ -23,6 +30,16 @@ export const PostList = ({
   const q = searchParams.get('q') ?? '';
 
   const isDefaultView = !q;
+
+  const queryClient = useQueryClient();
+
+  const { data: bookmarks } = useQuery({
+    queryFn: () =>
+      getBookmarkPosts({
+        postIdList: data.map((post) => post.id),
+      }),
+    queryKey: ['first-post-bookmark'],
+  });
 
   const {
     data: posts,
@@ -42,6 +59,32 @@ export const PostList = ({
     queryFn: ({ pageParam }) => getPostList({ page: pageParam, q, sourceId }),
     queryKey: ['posts-list', { q, sourceId }],
   });
+
+  useEffect(() => {
+    if (!bookmarks || !bookmarks.data || bookmarks.data.length === 0) {
+      return;
+    }
+
+    const bookmarkPostIdList = bookmarks.data.map((post) => post.id);
+
+    queryClient.setQueriesData<InfiniteData<ResponseList<PostListData>>>(
+      { queryKey: ['posts-list'] },
+      (oldData) => {
+        if (!oldData) return oldData;
+
+        return {
+          ...oldData,
+          pages: oldData.pages.map((page) => ({
+            ...page,
+            data: page.data.map((item) => ({
+              ...item,
+              isBookmark: bookmarkPostIdList.includes(item.id),
+            })),
+          })),
+        };
+      },
+    );
+  }, [bookmarks]);
 
   const postList = posts?.pages.flatMap((page) => page.data) ?? [];
 

@@ -7,14 +7,16 @@ import { bffTemplate } from 'helper/bffTemplate';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: Promise<{ page: string }> },
-) {
+export async function GET(req: NextRequest) {
   return bffTemplate(req, async ({ accessToken, sessionId }) => {
-    const { page: pageParam } = await params;
+    const { searchParams } = req.nextUrl;
 
-    const page = z.coerce.number().int().nonnegative().parse(pageParam);
+    const page = z.coerce
+      .number()
+      .int()
+      .nonnegative()
+      .default(0)
+      .parse(searchParams.get('page'));
     const q = req.nextUrl.searchParams.get('q') ?? '';
     const sourceId = req.nextUrl.searchParams.get('sourceId');
 
@@ -25,11 +27,11 @@ export async function GET(
         offset: page,
       };
 
-      let endpoint = '/posts/bookmarks';
+      let endpoint = '/posts';
       if (q) {
         apiParams.q = q;
 
-        endpoint = '/search/bookmarks';
+        endpoint = '/search';
       }
 
       if (sourceId) {
@@ -49,10 +51,7 @@ export async function GET(
         params: apiParams,
       });
 
-      return NextResponse.json({
-        ...res,
-        data: res.data.map((item) => ({ ...item, isBookmark: true })),
-      });
+      return NextResponse.json(res);
     } catch (e) {
       log.error('GET Posts', { error: JSON.stringify(e), page, q });
       return NextResponse.json({ message: 'Error!!' }, { status: 500 });
