@@ -1,25 +1,29 @@
 # Dev Blog
 
+### 서비스 URL
+
+https://devcurate.xyz
+
 Next.js 16 기반의 개발 블로그 프로젝트입니다. pnpm workspaces와 Turborepo를 사용한 모노레포 구조로 구성되어 있습니다.
 
 ## 기술 스택
 
-| 분류 | 기술 |
-|------|------|
-| 프레임워크 | Next.js 16, React 19 |
-| 언어 | TypeScript (strict mode) |
-| 패키지 매니저 | pnpm 10 (workspaces) |
-| 빌드 시스템 | Turborepo |
-| 스타일링 | CSS Modules, Sass, Tailwind CSS 4 |
-| 서버 상태 관리 | TanStack React Query |
-| 클라이언트 상태 관리 | Zustand, Jotai |
-| 데이터베이스 | PostgreSQL (Supabase) |
-| 인증 | Firebase |
-| 스키마 검증 | Zod 4 |
-| 모니터링 | OpenTelemetry (Grafana) |
-| E2E 테스트 | Cypress |
-| 단위 테스트 | Vitest |
-| 배포 | Vercel |
+| 분류          | 기술                                |
+|-------------|-----------------------------------|
+| 프레임워크       | Next.js 16, React 19              |
+| 언어          | TypeScript (strict mode)          |
+| 패키지 매니저     | pnpm 10 (workspaces)              |
+| 빌드 시스템      | Turborepo                         |
+| 스타일링        | CSS Modules, Sass, Tailwind CSS 4 |
+| 서버 상태 관리    | TanStack React Query              |
+| 클라이언트 상태 관리 | Zustand, Jotai                    |
+| 데이터베이스      | PostgreSQL (Supabase)             |
+| 인증          | Firebase                          |
+| 스키마 검증      | Zod 4                             |
+| 모니터링        | OpenTelemetry (Grafana)           |
+| E2E 테스트     | Cypress                           |
+| 단위 테스트      | Vitest                            |
+| 배포          | Vercel                            |
 
 ## 프로젝트 구조
 
@@ -53,19 +57,20 @@ packages/                  # 공유 패키지
 
 ### 앱 라우트 (`apps/client/src/app`)
 
-| 경로 | 설명 |
-|------|------|
-| `/` | 홈페이지 |
-| `/admin/*` | 관리자 대시보드 |
-| `/auth/*` | OAuth 콜백 (Google, GitHub, Kakao, Naver) |
-| `/channels/*` | 채널 관련 페이지 |
-| `/mypage/*` | 마이페이지, 북마크 |
-| `/policy/*` | 정책 페이지 |
-| `/api/*` | API 라우트 (posts, auth, bookmarks, revalidate 등) |
+| 경로            | 설명                                             |
+|---------------|------------------------------------------------|
+| `/`           | 홈페이지                                           |
+| `/admin/*`    | 관리자 대시보드                                       |
+| `/auth/*`     | OAuth 콜백 (Google, GitHub, Kakao, Naver)        |
+| `/channels/*` | 채널 관련 페이지                                      |
+| `/mypage/*`   | 마이페이지, 북마크                                     |
+| `/policy/*`   | 정책 페이지                                         |
+| `/api/*`      | API 라우트 (posts, auth, bookmarks, revalidate 등) |
 
 ### 주요 UI 컴포넌트 (`packages/components`)
 
-Button, FloatingMenu, GlobalModal, Icon, IconButton, InfiniteScroll, Input, InputGroup, Loading, Modal, Overlay, Ripple, Skeleton, Switch, Tabs, Typography
+Button, FloatingMenu, GlobalModal, Icon, IconButton, InfiniteScroll, Input, InputGroup, Loading, Modal, Overlay, Ripple,
+Skeleton, Switch, Tabs, Typography
 
 ## 시작하기
 
@@ -110,15 +115,15 @@ pnpm start      # 빌드된 앱 실행
 
 ## 스크립트
 
-| 명령어 | 설명 |
-|--------|------|
-| `pnpm dev` | 개발 서버 실행 |
-| `pnpm build` | 프로덕션 빌드 |
-| `pnpm start` | 프로덕션 서버 실행 |
-| `pnpm lint` | ESLint 실행 |
-| `pnpm test` | Vitest 단위 테스트 실행 |
-| `pnpm test:watch` | Vitest watch 모드 |
-| `pnpm test:coverage` | 테스트 커버리지 리포트 |
+| 명령어                  | 설명               |
+|----------------------|------------------|
+| `pnpm dev`           | 개발 서버 실행         |
+| `pnpm build`         | 프로덕션 빌드          |
+| `pnpm start`         | 프로덕션 서버 실행       |
+| `pnpm lint`          | ESLint 실행        |
+| `pnpm test`          | Vitest 단위 테스트 실행 |
+| `pnpm test:watch`    | Vitest watch 모드  |
+| `pnpm test:coverage` | 테스트 커버리지 리포트     |
 
 ## 아키텍처 특징
 
