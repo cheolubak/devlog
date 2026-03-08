@@ -24,7 +24,16 @@ const pretandard = localFont({
 });
 
 export const metadata: Metadata = {
-  description: '기술 블로그와 유튜브를 모아서 한눈에 볼 수 있어요.',
+  description:
+    '기술 블로그와 유튜브를 모아서 한눈에 볼 수 있어요. 웹 개발, AI 등 여러정보를 확인하실 수 있어요.',
+  keywords: [
+    'devlog',
+    '기술블로그',
+    '기술유튜브',
+    '개발블로그',
+    '개발유튜브',
+    '개발',
+  ],
   title: 'DEV CURATE - 기술 블로그 유튜브 모아',
 };
 
