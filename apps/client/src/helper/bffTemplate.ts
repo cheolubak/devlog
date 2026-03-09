@@ -2,6 +2,7 @@ import type { NextRequest } from 'next/server';
 
 import { log } from '@devlog/logger';
 import { externalApi, FetchError } from '@devlog/request';
+import { getAgentInfo } from '@devlog/utils';
 import * as Sentry from '@sentry/nextjs';
 import {
   ACCESS_TOKEN_KEY,
@@ -22,14 +23,19 @@ export const bffTemplate = async (
 ) => {
   const { pathname, search } = req.nextUrl;
 
+  const { browser, device, ip, os } = getAgentInfo(req);
+
+  let sessionId: string | undefined;
+  let accessToken: string | undefined;
+
   try {
     const cookieStores = await cookies();
 
-    const sessionId = cookieStores.get(SESSION_ID_KEY)?.value || uuidv4();
+    sessionId = cookieStores.get(SESSION_ID_KEY)?.value || uuidv4();
     const storedAccessToken = cookieStores.get(ACCESS_TOKEN_KEY)?.value;
     const storedRefreshToken = cookieStores.get(REFRESH_TOKEN_KEY)?.value;
 
-    let accessToken = storedAccessToken;
+    accessToken = storedAccessToken;
 
     try {
       if (!storedAccessToken && storedRefreshToken) {
@@ -54,6 +60,17 @@ export const bffTemplate = async (
       cookieStores.delete(REFRESH_TOKEN_KEY);
     }
 
+    log.info('BFF Request', {
+      accessToken: accessToken ?? 'unknown',
+      browser: browser ?? 'unknown',
+      device,
+      ip,
+      os: os ?? 'unknown',
+      pathname: req.nextUrl.pathname,
+      search: req.nextUrl.search,
+      sessionId,
+    });
+
     const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
 
     cookieStores.set(SESSION_ID_KEY, sessionId, {
@@ -65,16 +82,33 @@ export const bffTemplate = async (
     Sentry.captureException(e);
 
     const attribute: Record<string, string> = {
-      error: JSON.stringify(e),
+      accessToken: accessToken ?? 'unknown',
+      browser: browser ?? 'unknown',
+      device,
+      ip,
+      os: os ?? 'unknown',
       pathname,
       search,
+      sessionId: sessionId ?? 'unknown',
     };
+
     if (e instanceof FetchError) {
-      if (e.body) attribute.body = JSON.stringify(e.body);
-      if (e.data) attribute.data = JSON.stringify(e.data);
+      if (e.body) {
+        attribute.body = JSON.stringify(e.body);
+      }
+
+      if (e.status) {
+        attribute.status = e.status.toString();
+      }
+
+      if (e.data) {
+        attribute.data = JSON.stringify(e.data);
+      }
+    } else if (e instanceof Error) {
+      attribute.message = e.message;
     }
 
-    log.error('BFF Error', attribute);
+    log.error('BFF Request Error', attribute);
 
     return NextResponse.json({ message: '오류' }, { status: 500 });
   }

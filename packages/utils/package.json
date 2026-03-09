@@ -1,5 +1,8 @@
 {
   "name": "@devlog/utils",
   "private": true,
-  "main": "src/index.ts"
+  "main": "src/index.ts",
+  "dependencies": {
+    "next": "catalog:"
+  }
 }

@@ -18,6 +18,7 @@
     "@devlog/hooks": "workspace:*",
     "@devlog/logger": "workspace:*",
     "@devlog/request": "workspace:*",
+    "@devlog/utils": "workspace:*",
     "@devlog/ui-config": "workspace:*",
     "@opentelemetry/api": "catalog:",
     "@opentelemetry/api-logs": "catalog:",

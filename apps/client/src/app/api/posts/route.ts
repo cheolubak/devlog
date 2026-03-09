@@ -23,8 +23,6 @@ export async function GET(req: NextRequest) {
     const type = searchParams.get('type');
 
     try {
-      log.info('GET Posts', { page, q, sourceId: sourceId ?? 'null' });
-
       const apiParams: Record<string, number | string | string[]> = {
         offset: page,
       };
