@@ -2,6 +2,7 @@ import type { NextRequest } from 'next/server';
 
 import { log } from '@devlog/logger';
 import { externalApi, FetchError } from '@devlog/request';
+import * as Sentry from '@sentry/nextjs';
 import {
   ACCESS_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
@@ -61,6 +62,8 @@ export const bffTemplate = async (
 
     return await work({ accessToken, sessionId });
   } catch (e) {
+    Sentry.captureException(e);
+
     const attribute: Record<string, string> = {
       error: JSON.stringify(e),
       pathname,
