@@ -16,7 +16,6 @@
     @apply min-h-16;
     @apply max-h-16;
     @apply rounded-2xl;
-    @apply bg-white;
     @apply object-contain;
 }
 
