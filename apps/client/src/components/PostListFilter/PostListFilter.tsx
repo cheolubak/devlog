@@ -3,12 +3,15 @@
 import { Button, FloatingMenu, Icon, useModal } from '@devlog/components';
 import { PostFilterModal } from 'components';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { useScrollDirection } from 'stores';
 
 import styles from './PostListFilter.module.css';
 
 export const PostListFilter = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
+
+  const scrollDirection = useScrollDirection((state) => state.direction);
 
   const { open } = useModal();
 
@@ -23,7 +26,10 @@ export const PostListFilter = () => {
   }
 
   return (
-    <FloatingMenu position='center'>
+    <FloatingMenu
+      data-scroll-direction={scrollDirection}
+      position='center'
+    >
       <Button
         className={styles.filterButton}
         color='success'

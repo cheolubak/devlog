@@ -5,9 +5,14 @@
     @apply bottom-0;
     @apply left-0;
     @apply right-0;
-    @apply h-[calc(64px+env(safe-area-inset-bottom))] md:h-[100px];
+    @apply h-[calc(64px+env(safe-area-inset-bottom))] md:h-[80px];
     @apply z-50;
     @apply bg-gray-900;
+    @apply transition-transform;
+}
+
+.bottomNavigation[data-scroll-direction="DOWN"] {
+    @apply translate-y-full;
 }
 
 .bottomNavigationItemList {

@@ -42,7 +42,8 @@
     "uuid": "catalog:",
     "zod": "catalog:",
     "react-simple-pull-to-refresh": "catalog:",
-    "@sentry/nextjs": "catalog:"
+    "@sentry/nextjs": "catalog:",
+    "zustand": "catalog:"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "catalog:",

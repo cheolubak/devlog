@@ -3,6 +3,11 @@
 .floatingMenu {
     @apply fixed;
     @apply bottom-[calc(80px+env(safe-area-inset-bottom))] md:bottom-[calc(120px+env(safe-area-inset-bottom))];
+    @apply transition-transform;
+}
+
+.floatingMenu[data-scroll-direction="DOWN"] {
+    @apply translate-y-full;
 }
 
 .floatingMenu[data-position="center"] {

@@ -1,11 +1,19 @@
+'use client';
+
 import { Icon, Ripple } from '@devlog/components';
 import Link from 'next/link';
+import { useScrollDirection } from 'stores';
 
 import styles from './BottomNavigation.module.css';
 
 export const BottomNavigation = () => {
+  const scrollDirection = useScrollDirection((state) => state.direction);
+
   return (
-    <footer className={styles.bottomNavigation}>
+    <footer
+      className={styles.bottomNavigation}
+      data-scroll-direction={scrollDirection}
+    >
       <ul className={styles.bottomNavigationItemList}>
         <li>
           <Link
@@ -17,7 +25,7 @@ export const BottomNavigation = () => {
             <Icon
               color='primary'
               name='list-alt'
-              size={36}
+              size={28}
             />
           </Link>
         </li>
@@ -31,7 +39,7 @@ export const BottomNavigation = () => {
             <Icon
               color='primary'
               name='channel'
-              size={36}
+              size={28}
             />
           </Link>
         </li>
@@ -45,7 +53,7 @@ export const BottomNavigation = () => {
             <Icon
               color='primary'
               name='bookmark-fill'
-              size={36}
+              size={28}
             />
           </Link>
         </li>
@@ -59,7 +67,7 @@ export const BottomNavigation = () => {
             <Icon
               color='primary'
               name='person'
-              size={36}
+              size={28}
             />
           </Link>
         </li>
