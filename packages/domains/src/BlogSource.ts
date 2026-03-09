@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 export const blogSourceSchema = z.object({
   blogUrl: z.string(),
+  corpUrl: z.string().nullish(),
   createdAt: z.string(),
   icon: z.string().nullish(),
   id: z.string(),
