@@ -41,7 +41,8 @@
     "sharp": "catalog:",
     "uuid": "catalog:",
     "zod": "catalog:",
-    "react-simple-pull-to-refresh": "catalog:"
+    "react-simple-pull-to-refresh": "catalog:",
+    "@sentry/nextjs": "catalog:"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "catalog:",

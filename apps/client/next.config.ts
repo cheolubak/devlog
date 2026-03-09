@@ -1,5 +1,7 @@
 import type { NextConfig } from 'next';
 
+const { withSentryConfig } = require('@sentry/nextjs');
+
 const nextConfig: NextConfig = {
   images: {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -27,4 +29,16 @@ const nextConfig: NextConfig = {
   ],
 };
 
-export default nextConfig;
+export default withSentryConfig(nextConfig, {
+  org: process.env.NEXT_PUBLIC_SENTRY_ORG,
+  project: process.env.NEXT_PUBLIC_SENTRY_PROJECT,
+  silent: !process.env.CI,
+  tunnelRoute: '/monitoring',
+  webpack: {
+    automaticVercelMonitors: true,
+    treeshake: {
+      removeDebugLogging: true,
+    },
+  },
+  widenClientFileUpload: true,
+});
