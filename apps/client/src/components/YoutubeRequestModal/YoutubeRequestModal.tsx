@@ -54,7 +54,7 @@ export const YoutubeRequestModal = ({ modalKey }: BlogRequestModalProps) => {
       ) {
         throw new Error('입력하신 요청하신 내용을 다시 확인 해주세요');
       } else {
-        return fetchApi.post('/request/blogs', {
+        return fetchApi.post('/request/youtubes', {
           email: email.replace(/\s/g, ''),
           url: url.replace(/\s/g, ''),
         });
