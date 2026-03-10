@@ -1,6 +1,7 @@
-export const POST_TYPE = {
-  BLOG: 'blog',
-  YOUTUBE: 'youtube',
-} as const;
+import { z } from 'zod';
 
-export type PostType = (typeof POST_TYPE)[keyof typeof POST_TYPE];
+export const postTypeSchema = z.enum(['blog', 'youtube']);
+
+export const POST_TYPE = postTypeSchema.enum;
+
+export type PostType = z.infer<typeof postTypeSchema>;
