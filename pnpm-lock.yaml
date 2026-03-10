@@ -200,9 +200,6 @@ importers:
 
   apps/client:
     dependencies:
-      '@devlog/apis':
-        specifier: workspace:*
-        version: link:../../packages/apis
       '@devlog/components':
         specifier: workspace:*
         version: link:../../packages/components
@@ -337,20 +334,8 @@ importers:
         specifier: 'catalog:'
         version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.27)(jiti@2.6.1)(jsdom@28.1.0)(lightningcss@1.30.2)(sass@1.97.0)(terser@5.46.0)
 
-  packages/apis:
-    dependencies:
-      '@devlog/domains':
-        specifier: workspace:*
-        version: link:../domains
-      '@devlog/request':
-        specifier: workspace:*
-        version: link:../request
-
   packages/components:
     dependencies:
-      '@devlog/apis':
-        specifier: workspace:*
-        version: link:../apis
       '@devlog/domains':
         specifier: workspace:*
         version: link:../domains
