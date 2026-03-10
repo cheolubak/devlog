@@ -3,7 +3,6 @@
   "main": "src/index.ts",
   "private": true,
   "dependencies": {
-    "@devlog/apis": "workspace:*",
     "@devlog/domains": "workspace:*",
     "@devlog/hooks": "workspace:*",
     "@devlog/request": "workspace:*",

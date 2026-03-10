@@ -42,7 +42,6 @@ apps/
     └── public/            # 정적 파일
 
 packages/                  # 공유 패키지
-├── apis/                  # @devlog/apis - API 호출 함수
 ├── components/            # @devlog/components - 공통 UI 컴포넌트
 ├── configs/
 │   ├── firebase/          # @devlog/firebase-config - Firebase 설정

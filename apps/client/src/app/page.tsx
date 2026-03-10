@@ -4,7 +4,7 @@ import type {
 } from 'components/PostFilterModal/PostFilterModal.type';
 
 import { Typography } from '@devlog/components';
-import { getPostList } from 'apis/getPostList';
+import { getPostList } from 'apis';
 import { PostList, PostListLoading } from 'components';
 import { Suspense } from 'react';
 

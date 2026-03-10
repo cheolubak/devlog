@@ -33,7 +33,6 @@ apps/
 
 packages/                # 모노레포 패키지
 ├── components/          # @devlog/components - React 컴포넌트
-├── apis/                # @devlog/apis - API 호출 함수
 ├── domains/             # @devlog/domains - 타입/스키마 정의
 ├── hooks/               # @devlog/hooks - React hooks
 ├── request/             # @devlog/request - HTTP 클라이언트

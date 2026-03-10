@@ -1,4 +1,4 @@
-import { getBlogSources } from '@devlog/apis';
+import { getBlogSources } from 'apis';
 import { BlogSourceList } from 'components';
 
 export const dynamic = 'force-dynamic';

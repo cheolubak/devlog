@@ -2,11 +2,11 @@
 
 import type { BlogSource, FeedFetchResult } from '@devlog/domains';
 
-import { getBlogSources } from '@devlog/apis';
 import { Button, Icon, Tab, Tabs, Typography } from '@devlog/components';
 import { useLoading } from '@devlog/hooks';
 import { fetchApi } from '@devlog/request';
 import { useQuery } from '@tanstack/react-query';
+import { getBlogSources } from 'apis';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';

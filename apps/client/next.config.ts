@@ -16,7 +16,6 @@ const nextConfig: NextConfig = {
   },
   reactCompiler: true,
   transpilePackages: [
-    '@devlog/apis',
     '@devlog/components',
     '@devlog/firebase-config',
     '@devlog/ui-config',

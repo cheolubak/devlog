@@ -14,9 +14,9 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
+import { getPostList } from 'apis';
 import { getBookmarkPosts } from 'apis/getBookmarkPosts';
-import { getPostList } from 'apis/getPostList';
-import { PostListFilter, VirtualPostList } from 'components';
+import { VirtualPostList } from 'components';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
