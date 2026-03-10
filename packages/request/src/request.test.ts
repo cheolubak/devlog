@@ -186,7 +186,7 @@ describe('RequestInstance', () => {
   describe('에러 처리', () => {
     it('응답이 ok가 아니면 FetchError를 던진다', async () => {
       mockFetch.mockResolvedValueOnce(
-        new Response('Not Found', { status: 404 }),
+        jsonResponse({ message: 'Not Found' }, 404),
       );
 
       const client = RequestInstance.create();
@@ -198,7 +198,7 @@ describe('RequestInstance', () => {
 
     it('FetchError에 status가 포함된다', async () => {
       mockFetch.mockResolvedValueOnce(
-        new Response('Server Error', { status: 500 }),
+        jsonResponse({ message: 'Server Error' }, 500),
       );
 
       const client = RequestInstance.create();
