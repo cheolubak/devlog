@@ -7,7 +7,6 @@ import { useEffect, useRef } from 'react';
 
 import { useModal } from '../GlobalModal';
 import { Overlay } from '../Overlay';
-
 import styles from './Modal.module.css';
 
 export interface ModalProps extends ComponentProps<'dialog'> {

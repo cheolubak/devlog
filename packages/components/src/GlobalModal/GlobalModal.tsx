@@ -1,9 +1,9 @@
 'use client';
 
-import type { ModalProps } from '../Modal';
-
 import { cloneElement, isValidElement, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+
+import type { ModalProps } from '../Modal';
 
 import { useModal } from './useModal';
 
