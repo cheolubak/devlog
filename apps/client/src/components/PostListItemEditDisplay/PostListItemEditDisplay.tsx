@@ -95,6 +95,15 @@ export const PostListItemEditDisplay = ({
           >
             {post.title}
           </Typography>
+          {post.titleEn && (
+            <Typography
+              className={styles.postListItemTitle}
+              semantic='h2'
+              variants='title-large'
+            >
+              {post.titleEn}
+            </Typography>
+          )}
           <Typography variants='label-medium'>
             {dayjs(post.originalPublishedAt).format('YYYY-MM-DD')}
           </Typography>
