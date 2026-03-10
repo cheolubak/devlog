@@ -15,6 +15,7 @@ import {
   IconGoogle,
   IconHash,
   IconKakao,
+  IconLanguage,
   IconLightMode,
   IconLink,
   IconListAlt,
@@ -47,6 +48,7 @@ export type IconName =
   | 'google'
   | 'hash'
   | 'kakao'
+  | 'language'
   | 'lightMode'
   | 'link'
   | 'list-alt'
@@ -76,6 +78,7 @@ export const iconMap: Record<IconName, ComponentType> = {
   google: IconGoogle,
   hash: IconHash,
   kakao: IconKakao,
+  language: IconLanguage,
   lightMode: IconLightMode,
   link: IconLink,
   'list-alt': IconListAlt,

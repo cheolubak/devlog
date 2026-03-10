@@ -22,9 +22,13 @@
 }
 
 .prefix {
+    @apply w-6;
+    @apply h-6;
     @apply -ml-1;
 }
 
 .suffix {
+    @apply w-fit;
+    @apply h-fit;
     @apply -mr-1;
 }

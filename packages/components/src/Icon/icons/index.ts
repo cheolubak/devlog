@@ -12,6 +12,7 @@ export * from './IconGithub';
 export * from './IconGoogle';
 export * from './IconHash';
 export * from './IconKakao';
+export * from './IconLanguage';
 export * from './IconLightMode';
 export * from './IconLink';
 export * from './IconListAlt';

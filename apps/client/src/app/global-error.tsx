@@ -12,7 +12,6 @@ export default function ErrorPage({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  console.log('=======error=======', error);
   const pathname = usePathname();
   const router = useRouter();
 

@@ -15,6 +15,7 @@ import {
 import localFont from 'next/font/local';
 import Head from 'next/head';
 import { FirebaseAnalyticsProvider } from 'providers/FirebaseAnalyticsProvider';
+import { I18nProvider } from 'providers/I18nProvider';
 import { QueryProvider } from 'providers/QueryProvider';
 import { ScrollProvider } from 'providers/ScrollProvider';
 import { Suspense } from 'react';
@@ -86,16 +87,18 @@ export default async function RootLayout({
         <SpeedInsights />
         <FirebaseAnalyticsProvider />
         <ScrollProvider />
-        <QueryProvider>
-          <Header />
-          <PullToRefreshWrapper>{children}</PullToRefreshWrapper>
-          <BottomNavigation />
-          <Suspense>
-            <PostListFilter />
-          </Suspense>
-          <Loading />
-          <GlobalModal />
-        </QueryProvider>
+        <I18nProvider>
+          <QueryProvider>
+            <Header />
+            <PullToRefreshWrapper>{children}</PullToRefreshWrapper>
+            <BottomNavigation />
+            <Suspense>
+              <PostListFilter />
+            </Suspense>
+            <Loading />
+            <GlobalModal />
+          </QueryProvider>
+        </I18nProvider>
       </body>
     </html>
   );

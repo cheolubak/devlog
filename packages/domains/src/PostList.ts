@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 export const postListSchema = z.object({
   description: z.string(),
+  descriptionEn: z.string().nullish(),
   id: z.uuid(),
   imageUrl: z.string().nullish(),
   isBookmark: z.boolean().default(false),
@@ -27,6 +28,7 @@ export const postListSchema = z.object({
   }),
   sourceUrl: z.string(),
   title: z.string(),
+  titleEn: z.string().nullish(),
   viewCount: z.number().int().nonnegative().default(0),
 });
 

@@ -1,14 +1,21 @@
+'use client';
+
 import { Typography } from '@devlog/components';
+import { HeaderMenu } from 'components/HeaderMenu';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense } from 'react';
+import { useScrollDirection } from 'stores';
 
 import styles from './Header.module.css';
-import { HeaderSearch } from './HeaderSearch';
 
 export const Header = () => {
+  const scrollDirection = useScrollDirection((state) => state.direction);
+
   return (
-    <header className={styles.header}>
+    <header
+      className={styles.header}
+      data-scroll-direction={scrollDirection}
+    >
       <div className={styles.topRow}>
         <Link href='/'>
           <Typography
@@ -24,11 +31,7 @@ export const Header = () => {
             />
           </Typography>
         </Link>
-        <div className={styles.search}>
-          <Suspense>
-            <HeaderSearch />
-          </Suspense>
-        </div>
+        <HeaderMenu />
       </div>
     </header>
   );

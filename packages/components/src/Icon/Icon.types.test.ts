@@ -32,6 +32,7 @@ const allIconNames: IconName[] = [
   'share',
   'visibility',
   'youtube',
+  'language',
 ];
 
 describe('iconMap', () => {

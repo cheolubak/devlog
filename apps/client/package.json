@@ -43,7 +43,10 @@
     "zod": "catalog:",
     "react-simple-pull-to-refresh": "catalog:",
     "@sentry/nextjs": "catalog:",
-    "zustand": "catalog:"
+    "zustand": "catalog:",
+    "i18next": "catalog:",
+    "i18next-browser-languagedetector": "catalog:",
+    "react-i18next": "catalog:"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "catalog:",

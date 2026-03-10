@@ -1,6 +1,6 @@
 'use client';
 
-import { Icon } from '@devlog/components';
+import { Icon, Input } from '@devlog/components';
 import { useDebounce } from '@devlog/hooks';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -51,32 +51,32 @@ export const HeaderSearch = () => {
   }
 
   return (
-    <div className={styles.searchContainer}>
-      <Icon
-        color='var(--color-white)'
-        name='search'
-        size={20}
-      />
-      <input
-        className={styles.searchInput}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder='Search...'
-        type='text'
-        value={query}
-      />
-      {query && (
-        <button
-          className={styles.clearButton}
-          onClick={handleClear}
-          type='button'
-        >
-          <Icon
-            color='var(--color-gray-400)'
-            name='clear'
-            size={18}
-          />
-        </button>
-      )}
-    </div>
+    <Input
+      className={styles.searchInput}
+      onChange={(e) => setQuery(e.target.value)}
+      placeholder='Search...'
+      prefix={
+        <Icon
+          color='var(--color-white)'
+          name='search'
+        />
+      }
+      suffix={
+        query && (
+          <button
+            className={styles.clearButton}
+            onClick={handleClear}
+            type='button'
+          >
+            <Icon
+              color='var(--color-gray-400)'
+              name='clear'
+            />
+          </button>
+        )
+      }
+      type='text'
+      value={query}
+    />
   );
 };

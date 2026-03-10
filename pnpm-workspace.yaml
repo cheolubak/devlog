@@ -46,5 +46,8 @@ catalog:
   zustand: ^5
   nanoid: ^5
   '@sentry/nextjs': ^10
+  i18next: ^25
+  react-i18next: ^15
+  i18next-browser-languagedetector: ^8
 
 onlyBuiltDependencies: '["@parcel/watcher","sharp","unrs-resolver","cypress"]'

@@ -10,6 +10,7 @@ import { useOpenLink } from 'hooks';
 import { usePostBookmark } from 'hooks/usePostBookmark';
 import { usePostView } from 'hooks/usePostView';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 import styles from './PostListItem.module.css';
 
@@ -19,8 +20,14 @@ interface PostItemProps {
 }
 
 export const PostListItem = ({ post, style }: PostItemProps) => {
+  const { i18n } = useTranslation();
   const { eventSelectContent } = useAnalytics();
   const { parseUrl } = useOpenLink();
+
+  const isEnglish = i18n.language !== 'ko';
+  const title = (isEnglish ? post.titleEn : null) ?? post.title;
+  const description =
+    (isEnglish ? post.descriptionEn : null) ?? post.description;
 
   const viewPost = usePostView(post);
   const bookmarkPosts = usePostBookmark(post);
@@ -68,7 +75,7 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
           semantic='h2'
           variants='title-large'
         >
-          {post.title}
+          {title}
         </Typography>
         <IconButton
           iconColor={
@@ -84,7 +91,7 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
         semantic='p'
         variants='body-large'
       >
-        {post.description}
+        {description}
       </Typography>
       <footer className={styles.postListItemFooter}>
         <Typography

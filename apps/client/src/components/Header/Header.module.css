@@ -1,7 +1,7 @@
 @reference '@devlog/ui-config';
 
 .header {
-    @apply fixed;
+    @apply sticky;
     @apply top-0;
     @apply w-dvw;
     @apply max-w-dvw;
@@ -14,21 +14,19 @@
     @apply text-white;
     @apply box-border;
     @apply z-[1000];
+    @apply transition-transform;
+}
+
+.header[data-scroll-direction="DOWN"] {
+    @apply -translate-y-full md:translate-y-0;
 }
 
 .topRow {
     @apply flex;
+    @apply flex-col md:flex-row;
     @apply justify-between;
-    @apply items-center;
+    @apply items-stretch md:items-center;
     @apply gap-4;
-}
-
-.search {
-    @apply flex;
-    @apply flex-1;
-    @apply justify-end;
-    @apply items-center;
-    @apply gap-2;
 }
 
 .logo {

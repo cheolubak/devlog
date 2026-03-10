@@ -21,14 +21,14 @@
 }
 
 .searchInput {
-    @apply flex-1;
+    @apply border-2;
+    @apply border-white;
+    @apply w-full;
     @apply bg-transparent;
-    @apply border-none;
-    @apply outline-none;
     @apply text-white;
-    @apply text-sm;
-    @apply placeholder-gray-400;
+    @apply placeholder-gray-100;
     @apply min-w-0;
+    @apply md:max-w-[400px];
 }
 
 .clearButton {
