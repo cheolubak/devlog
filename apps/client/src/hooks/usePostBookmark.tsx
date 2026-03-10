@@ -1,6 +1,7 @@
 import type { PostList, ResponseList } from '@devlog/domains';
 
 import { useModal } from '@devlog/components';
+import { useAnalytics } from '@devlog/hooks';
 import { fetchApi } from '@devlog/request';
 import {
   type InfiniteData,
@@ -14,6 +15,8 @@ import { useRef } from 'react';
 export const usePostBookmark = (post: PostList) => {
   const { open } = useModal();
   const { isLogin } = useAuth();
+  const { eventBookmark } = useAnalytics();
+
   const queryClient = useQueryClient();
 
   const prevBookmark = useRef(post.isBookmark);
@@ -35,6 +38,8 @@ export const usePostBookmark = (post: PostList) => {
       );
     },
     onMutate: () => {
+      eventBookmark(post);
+
       queryClient.setQueriesData<InfiniteData<ResponseList<PostList>>>(
         { queryKey: ['posts-list'] },
         (oldData) => {

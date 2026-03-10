@@ -1,5 +1,11 @@
+import { useAnalytics } from './useAnalytics';
+
 export const useLogin = () => {
+  const { eventLogin } = useAnalytics();
+
   const handleLoginWithGithub = () => {
+    eventLogin('github');
+
     if (!process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID) {
       return;
     }
@@ -13,6 +19,8 @@ export const useLogin = () => {
   };
 
   const handleLoginWithNaver = () => {
+    eventLogin('naver');
+
     if (
       !process.env.NEXT_PUBLIC_NAVER_LOGIN_CLIENT_ID ||
       !process.env.NEXT_PUBLIC_NAVER_LOGIN_CALLBACK_URL
@@ -32,6 +40,8 @@ export const useLogin = () => {
   };
 
   const handleLoginWithKakao = () => {
+    eventLogin('kakao');
+
     if (
       !process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID ||
       !process.env.NEXT_PUBLIC_KAKAO_CALLBACK_URL
@@ -51,6 +61,8 @@ export const useLogin = () => {
   };
 
   const handleLoginWithGoogle = () => {
+    eventLogin('google');
+
     if (
       !process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID ||
       !process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CALLBACK_URL

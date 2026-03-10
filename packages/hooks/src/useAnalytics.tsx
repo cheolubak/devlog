@@ -19,6 +19,16 @@ export const useAnalytics = () => {
     analytics.current = getAnalytics(firebaseApp);
   }, []);
 
+  const handleLogin = (type: 'github' | 'google' | 'kakao' | 'naver') => {
+    if (!analytics.current) {
+      return;
+    }
+
+    logEvent(analytics.current, 'login', {
+      content_type: type,
+    });
+  };
+
   const handlePageView = (pathname: string) => {
     if (!analytics.current) {
       return;
@@ -42,6 +52,19 @@ export const useAnalytics = () => {
     });
   };
 
+  const handleBookmark = (post: PostList) => {
+    if (!analytics.current) {
+      return;
+    }
+
+    logEvent(analytics.current, 'select_content', {
+      content_type: 'bookmark',
+      description: post.description,
+      item_id: post.id,
+      name: post.title,
+    });
+  };
+
   const handleSetSession = async () => {
     if (!analytics.current) {
       return;
@@ -55,6 +78,8 @@ export const useAnalytics = () => {
   };
 
   return {
+    eventBookmark: handleBookmark,
+    eventLogin: handleLogin,
     eventPageView: handlePageView,
     eventSelectContent: handleSelectContent,
     setSession: handleSetSession,
