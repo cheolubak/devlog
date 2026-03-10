@@ -39,6 +39,14 @@ export const useAnalytics = () => {
     });
   };
 
+  const handleEvent = (eventName: string, args?: Record<string, any>) => {
+    if (!analytics.current) {
+      return;
+    }
+
+    logEvent(analytics.current, eventName, args);
+  };
+
   const handleSelectContent = (post: PostList) => {
     if (!analytics.current) {
       return;
@@ -57,8 +65,7 @@ export const useAnalytics = () => {
       return;
     }
 
-    logEvent(analytics.current, 'select_content', {
-      content_type: 'bookmark',
+    logEvent(analytics.current, 'bookmark', {
       description: post.description,
       item_id: post.id,
       name: post.title,
@@ -78,6 +85,7 @@ export const useAnalytics = () => {
   };
 
   return {
+    event: handleEvent,
     eventBookmark: handleBookmark,
     eventLogin: handleLogin,
     eventPageView: handlePageView,
