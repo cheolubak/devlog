@@ -1,4 +1,4 @@
-import { act, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { ScrollProvider } from './ScrollProvider';
@@ -7,8 +7,9 @@ vi.mock('stores', () => {
   const setDirection = vi.fn();
 
   return {
-    useScrollDirection: (selector: (state: { setDirection: typeof setDirection }) => unknown) =>
-      selector({ setDirection }),
+    useScrollDirection: (
+      selector: (state: { setDirection: typeof setDirection }) => unknown,
+    ) => selector({ setDirection }),
   };
 });
 

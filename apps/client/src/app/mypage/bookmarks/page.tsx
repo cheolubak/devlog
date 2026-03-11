@@ -1,4 +1,5 @@
 import { Typography } from '@devlog/components';
+import { log } from '@devlog/logger';
 import { PostListLoading } from 'components';
 import { BookmarkPostList } from 'components/BookmarkPostList';
 import { Suspense } from 'react';
@@ -14,13 +15,7 @@ export default async function MypageBookmarks() {
       </Suspense>
     );
   } catch (e) {
-    console.error('=======Home Page Error=======');
-    if (e instanceof Error) {
-      console.error('Message:', e.message);
-      console.error('Stack:', e.stack);
-    } else {
-      console.error('Unknown Error:', e);
-    }
+    log.error('Bookmark Page Error', { error: JSON.stringify(e) });
 
     return (
       <div className='p-10 text-center'>

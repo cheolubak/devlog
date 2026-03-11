@@ -9,6 +9,7 @@ import {
   useModal,
 } from '@devlog/components';
 import { useLogin } from '@devlog/hooks';
+import { LogClick } from 'components/LogClick';
 
 import styles from './LoginModal.module.css';
 
@@ -32,11 +33,13 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
 
   return (
     <Modal className={styles.loginModal}>
-      <IconButton
-        className={styles.closeButton}
-        name='clear'
-        onClick={() => close(modalKey)}
-      />
+      <LogClick eventName='login_modal_close_click'>
+        <IconButton
+          className={styles.closeButton}
+          name='clear'
+          onClick={() => close(modalKey)}
+        />
+      </LogClick>
       <Typography
         className={styles.loginModalTitle}
         variants='title-large'
@@ -45,75 +48,99 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
       </Typography>
       <ul className={styles.loginModalButtonList}>
         <li>
-          <Button
-            className={styles.kakaoLogin}
-            onClick={loginWithKakao}
+          <LogClick
+            eventName='login'
+            params={{ socialType: 'KAKAO' }}
           >
-            <Icon name='kakao' />
-            카카오 로그인
-          </Button>
+            <Button
+              className={styles.kakaoLogin}
+              onClick={loginWithKakao}
+            >
+              <Icon name='kakao' />
+              카카오 로그인
+            </Button>
+          </LogClick>
         </li>
         <li>
-          <Button
-            className={styles.naverLogin}
-            onClick={loginWithNaver}
+          <LogClick
+            eventName='login'
+            params={{ socialType: 'NAVER' }}
           >
-            <Icon
-              color='var(--color-white)'
-              name='naver'
-            />
-            네이버 로그인
-          </Button>
+            <Button
+              className={styles.naverLogin}
+              onClick={loginWithNaver}
+            >
+              <Icon
+                color='var(--color-white)'
+                name='naver'
+              />
+              네이버 로그인
+            </Button>
+          </LogClick>
         </li>
         <li>
-          <Button
-            className={styles.googleLogin}
-            onClick={loginWithGoogle}
-            variant='outline'
+          <LogClick
+            eventName='login'
+            params={{ socialType: 'GOOGLE' }}
           >
-            <Icon name='google' />
-            구글 로그인
-          </Button>
+            <Button
+              className={styles.googleLogin}
+              onClick={loginWithGoogle}
+              variant='outline'
+            >
+              <Icon name='google' />
+              구글 로그인
+            </Button>
+          </LogClick>
         </li>
         <li>
-          <Button
-            className={styles.githubLogin}
-            onClick={loginWithGithub}
+          <LogClick
+            eventName='login'
+            params={{ socialType: 'GITHUB' }}
           >
-            <Icon
-              color='var(--color-white)'
-              name='github'
-            />
-            GitHub 로그인
-          </Button>
+            <Button
+              className={styles.githubLogin}
+              onClick={loginWithGithub}
+            >
+              <Icon
+                color='var(--color-white)'
+                name='github'
+              />
+              GitHub 로그인
+            </Button>
+          </LogClick>
         </li>
       </ul>
       <div className={styles.loginModalMenus}>
-        <Button
-          onClick={handleClickPrivacyPolicy}
-          size='sm'
-          variant='text'
-        >
-          <Typography
-            className={styles.loginModalPolicyButton}
-            variants='body-medium'
+        <LogClick eventName='login_modal_privacy_policy_click'>
+          <Button
+            onClick={handleClickPrivacyPolicy}
+            size='sm'
+            variant='text'
           >
-            개인정보처리방침
-          </Typography>
-        </Button>
+            <Typography
+              className={styles.loginModalPolicyButton}
+              variants='body-medium'
+            >
+              개인정보처리방침
+            </Typography>
+          </Button>
+        </LogClick>
         |
-        <Button
-          onClick={handleClickServicePolicy}
-          size='sm'
-          variant='text'
-        >
-          <Typography
-            className={styles.loginModalPolicyButton}
-            variants='body-medium'
+        <LogClick eventName='login_modal_service_policy_click'>
+          <Button
+            onClick={handleClickServicePolicy}
+            size='sm'
+            variant='text'
           >
-            서비스이용약관
-          </Typography>
-        </Button>
+            <Typography
+              className={styles.loginModalPolicyButton}
+              variants='body-medium'
+            >
+              서비스이용약관
+            </Typography>
+          </Button>
+        </LogClick>
       </div>
     </Modal>
   );

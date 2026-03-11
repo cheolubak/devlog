@@ -4,6 +4,7 @@ import type {
 } from 'components/PostFilterModal/PostFilterModal.type';
 
 import { Typography } from '@devlog/components';
+import { log } from '@devlog/logger';
 import { getPostList } from 'apis';
 import { PostList, PostListLoading } from 'components';
 import { Suspense } from 'react';
@@ -26,13 +27,7 @@ export default async function Home({
       </Suspense>
     );
   } catch (e) {
-    console.error('=======Home Page Error=======');
-    if (e instanceof Error) {
-      console.error('Message:', e.message);
-      console.error('Stack:', e.stack);
-    } else {
-      console.error('Unknown Error:', e);
-    }
+    log.error('Home Page Error', { error: JSON.stringify(e) });
 
     return (
       <div className='p-10 text-center'>

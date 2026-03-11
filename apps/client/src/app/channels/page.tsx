@@ -1,6 +1,7 @@
 import type { BlogSource } from '@devlog/domains';
 
 import { Typography } from '@devlog/components';
+import { log } from '@devlog/logger';
 import { fetchApi } from '@devlog/request';
 import { ChannelListContainer } from 'components';
 
@@ -26,13 +27,7 @@ export default async function ChannelsPage() {
       />
     );
   } catch (e) {
-    console.error('=======Channels Page Error=======');
-    if (e instanceof Error) {
-      console.error('Message:', e.message);
-      console.error('Stack:', e.stack);
-    } else {
-      console.error('Unknown Error:', e);
-    }
+    log.error('Channel Page Error', { error: JSON.stringify(e) });
 
     return (
       <div className='p-10 text-center'>

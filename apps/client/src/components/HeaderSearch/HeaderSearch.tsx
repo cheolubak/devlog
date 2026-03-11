@@ -2,6 +2,7 @@
 
 import { Icon, Input } from '@devlog/components';
 import { useDebounce } from '@devlog/hooks';
+import { eventTracking } from 'apis/eventTracking';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -23,6 +24,10 @@ export const HeaderSearch = () => {
   const disabledSearch = pathname === 'mypage' || pathname === '/channels';
 
   useEffect(() => {
+    setQuery('');
+  }, [pathname]);
+
+  useEffect(() => {
     if (disabledSearch) {
       return;
     }
@@ -36,6 +41,13 @@ export const HeaderSearch = () => {
     }
 
     const queryString = params.toString();
+
+    if (debouncedQuery.length > 0) {
+      eventTracking('search', {
+        pathname: pathnameRef.current,
+        query: debouncedQuery,
+      });
+    }
 
     router.replace(`?${queryString}`, {
       scroll: false,

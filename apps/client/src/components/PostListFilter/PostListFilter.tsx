@@ -2,6 +2,7 @@
 
 import { Button, FloatingMenu, Icon, useModal } from '@devlog/components';
 import { PostFilterModal } from 'components';
+import { LogClick } from 'components/LogClick';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useScrollDirection } from 'stores';
 
@@ -30,22 +31,24 @@ export const PostListFilter = () => {
       data-scroll-direction={scrollDirection}
       position='center'
     >
-      <Button
-        className={styles.filterButton}
-        color='success'
-        onClick={handleOpenFilter}
-        size='sm'
-      >
-        <div className={styles.filterIcon}>
-          <Icon
-            color='var(--color-white)'
-            name='filter'
-            size={20}
-          />
-          {isActive && <span className={styles.isActive} />}
-        </div>
-        필터
-      </Button>
+      <LogClick eventName='filter_click'>
+        <Button
+          className={styles.filterButton}
+          color='success'
+          onClick={handleOpenFilter}
+          size='sm'
+        >
+          <div className={styles.filterIcon}>
+            <Icon
+              color='var(--color-white)'
+              name='filter'
+              size={20}
+            />
+            {isActive && <span className={styles.isActive} />}
+          </div>
+          필터
+        </Button>
+      </LogClick>
     </FloatingMenu>
   );
 };

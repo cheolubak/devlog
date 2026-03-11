@@ -2,6 +2,7 @@
 
 import { Icon, Ripple } from '@devlog/components';
 import { useAnalytics } from '@devlog/hooks';
+import { LogClick } from 'components/LogClick';
 import Link from 'next/link';
 import { useScrollDirection } from 'stores';
 
@@ -25,64 +26,84 @@ export const BottomNavigation = () => {
     >
       <ul className={styles.bottomNavigationItemList}>
         <li>
-          <Link
-            className={styles.bottomNavigationItem}
-            href='/'
-            onClick={() => handleClickNavigation('posts')}
-            scroll={false}
+          <LogClick
+            eventName='navigation_click'
+            params={{ name: 'posts' }}
           >
-            <Ripple />
-            <Icon
-              color='primary'
-              name='list-alt'
-              size={28}
-            />
-          </Link>
+            <Link
+              className={styles.bottomNavigationItem}
+              href='/'
+              onClick={() => handleClickNavigation('posts')}
+              scroll={false}
+            >
+              <Ripple />
+              <Icon
+                color='primary'
+                name='list-alt'
+                size={28}
+              />
+            </Link>
+          </LogClick>
         </li>
         <li>
-          <Link
-            className={styles.bottomNavigationItem}
-            href='/channels'
-            onClick={() => handleClickNavigation('channels')}
-            scroll={false}
+          <LogClick
+            eventName='navigation_click'
+            params={{ name: 'channels' }}
           >
-            <Ripple />
-            <Icon
-              color='primary'
-              name='channel'
-              size={28}
-            />
-          </Link>
+            <Link
+              className={styles.bottomNavigationItem}
+              href='/channels'
+              onClick={() => handleClickNavigation('channels')}
+              scroll={false}
+            >
+              <Ripple />
+              <Icon
+                color='primary'
+                name='channel'
+                size={28}
+              />
+            </Link>
+          </LogClick>
         </li>
         <li>
-          <Link
-            className={styles.bottomNavigationItem}
-            href='/mypage/bookmarks'
-            onClick={() => handleClickNavigation('bookmarks')}
-            scroll={false}
+          <LogClick
+            eventName='navigation_click'
+            params={{ name: 'bookmarks' }}
           >
-            <Ripple />
-            <Icon
-              color='primary'
-              name='bookmark-fill'
-              size={28}
-            />
-          </Link>
+            <Link
+              className={styles.bottomNavigationItem}
+              href='/mypage/bookmarks'
+              onClick={() => handleClickNavigation('bookmarks')}
+              scroll={false}
+            >
+              <Ripple />
+              <Icon
+                color='primary'
+                name='bookmark-fill'
+                size={28}
+              />
+            </Link>
+          </LogClick>
         </li>
         <li>
-          <Link
-            className={styles.bottomNavigationItem}
-            href='/mypage'
-            onClick={() => handleClickNavigation('mypage')}
-            scroll={false}
+          <LogClick
+            eventName='navigation_click'
+            params={{ name: 'mypage' }}
           >
-            <Ripple />
-            <Icon
-              color='primary'
-              name='person'
-              size={28}
-            />
-          </Link>
+            <Link
+              className={styles.bottomNavigationItem}
+              href='/mypage'
+              onClick={() => handleClickNavigation('mypage')}
+              scroll={false}
+            >
+              <Ripple />
+              <Icon
+                color='primary'
+                name='person'
+                size={28}
+              />
+            </Link>
+          </LogClick>
         </li>
       </ul>
     </footer>

@@ -2,6 +2,7 @@
 
 import { Button, Icon } from '@devlog/components';
 import { useAnalytics } from '@devlog/hooks';
+import { LogClick } from 'components/LogClick';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 
@@ -30,16 +31,21 @@ export const LanguageMenu = () => {
   };
 
   return (
-    <Button
-      className={styles.languageMenu}
-      onClick={handleToggleLanguage}
-      variant='outline'
+    <LogClick
+      eventName='language_toggle'
+      params={{ language: i18n.language }}
     >
-      <Icon
-        color='var(--color-white)'
-        name='language'
-      />
-      {i18n.language === 'en' ? 'English' : '한국어'}
-    </Button>
+      <Button
+        className={styles.languageMenu}
+        onClick={handleToggleLanguage}
+        variant='outline'
+      >
+        <Icon
+          color='var(--color-white)'
+          name='language'
+        />
+        {i18n.language === 'en' ? 'English' : '한국어'}
+      </Button>
+    </LogClick>
   );
 };

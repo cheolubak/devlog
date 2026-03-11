@@ -7,6 +7,7 @@ import type {
 import type { ChangeEvent } from 'react';
 
 import { Button, Modal, Radio, Typography, useModal } from '@devlog/components';
+import { LogClick } from 'components/LogClick';
 import {
   POST_REGION_FILTERS,
   POST_TYPE_FILTERS,
@@ -101,7 +102,12 @@ export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
           </li>
         ))}
       </ul>
-      <Button onClick={handleSearch}>찾기</Button>
+      <LogClick
+        eventName='filter_search'
+        params={{ postType, region }}
+      >
+        <Button onClick={handleSearch}>찾기</Button>
+      </LogClick>
     </Modal>
   );
 };
