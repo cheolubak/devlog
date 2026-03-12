@@ -40,10 +40,8 @@ interface TypographyProps<
   variants?: TypographyVariants;
 }
 
-type TypographyPropsWithIntrinsic<
-  T extends ElementType = TypographySemantic,
-> = Omit<ComponentProps<T>, keyof TypographyProps<T>> &
-  TypographyProps<T>;
+type TypographyPropsWithIntrinsic<T extends ElementType = TypographySemantic> =
+  Omit<ComponentProps<T>, keyof TypographyProps<T>> & TypographyProps<T>;
 
 type TypographySemantic = Extract<
   keyof JSX.IntrinsicElements,
@@ -67,9 +65,12 @@ type TypographyVariants =
   | 'title-medium'
   | 'title-small';
 
-export const Typography = <
-  T extends ElementType = TypographySemantic,
->({
+const MAX_LINE_CLAMP = Array.from(
+  { length: 10 },
+  (_, i) => `line-clamp-${i + 1}`,
+);
+
+export const Typography = <T extends ElementType = TypographySemantic>({
   children,
   className,
   maxLines,
@@ -84,7 +85,7 @@ export const Typography = <
       {...(props as any)}
       className={cn(
         typographyVariants({ variants }),
-        maxLines && `line-clamp-${maxLines}`,
+        maxLines && MAX_LINE_CLAMP[maxLines - 1],
         className,
       )}
     >
