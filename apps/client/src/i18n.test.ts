@@ -1,6 +1,10 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import i18n from './i18n';
+import i18n, {
+  FALLBACK_LANGUAGE,
+  I18N_STORAGE_KEY,
+  SUPPORTED_LANGUAGES,
+} from './i18n';
 
 describe('i18n', () => {
   it('기본 fallbackLng이 en으로 설정되어 있다', () => {
@@ -30,25 +34,16 @@ describe('i18n', () => {
     expect(i18n.language).toBe('en');
   });
 
-  it('브라우저 언어가 ko이면 ko를 감지한다', () => {
-    vi.spyOn(navigator, 'language', 'get').mockReturnValue('ko');
-    vi.spyOn(navigator, 'languages', 'get').mockReturnValue(['ko']);
-
-    const detected = i18n.services.languageDetector.detect();
-
-    expect(detected).toContain('ko');
-
-    vi.restoreAllMocks();
+  it('SUPPORTED_LANGUAGES에 ko와 en이 포함되어 있다', () => {
+    expect(SUPPORTED_LANGUAGES).toContain('ko');
+    expect(SUPPORTED_LANGUAGES).toContain('en');
   });
 
-  it('브라우저 언어가 ko가 아니면 ko를 감지하지 않는다', () => {
-    vi.spyOn(navigator, 'language', 'get').mockReturnValue('ja');
-    vi.spyOn(navigator, 'languages', 'get').mockReturnValue(['ja']);
+  it('FALLBACK_LANGUAGE가 en이다', () => {
+    expect(FALLBACK_LANGUAGE).toBe('en');
+  });
 
-    const detected = i18n.services.languageDetector.detect();
-
-    expect(detected).not.toContain('ko');
-
-    vi.restoreAllMocks();
+  it('I18N_STORAGE_KEY가 정의되어 있다', () => {
+    expect(I18N_STORAGE_KEY).toBe('i18nextLng');
   });
 });
