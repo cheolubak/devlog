@@ -9,9 +9,8 @@ import {
   useModal,
 } from '@devlog/components';
 import { useLogin } from '@devlog/hooks';
+import { cn } from '@devlog/utils';
 import { LogClick } from 'components/LogClick';
-
-import styles from './LoginModal.module.css';
 
 interface LoginModalProps {
   modalKey?: string;
@@ -32,28 +31,39 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
   };
 
   return (
-    <Modal className={styles.loginModal}>
+    <Modal
+      className={cn(
+        'flex flex-col justify-start items-stretch',
+        'px-4 md:px-6 py-8 md:py-10',
+        'h-fit min-h-0',
+      )}
+    >
       <LogClick eventName='login_modal_close_click'>
         <IconButton
-          className={styles.closeButton}
+          className='absolute top-3 right-3'
           name='clear'
           onClick={() => close(modalKey)}
         />
       </LogClick>
       <Typography
-        className={styles.loginModalTitle}
+        className='mb-6 text-center'
         variants='title-large'
       >
         로그인
       </Typography>
-      <ul className={styles.loginModalButtonList}>
+      <ul
+        className={cn(
+          'flex flex-col justify-start items-stretch',
+          'gap-3 mb-6',
+        )}
+      >
         <li>
           <LogClick
             eventName='login'
             params={{ socialType: 'KAKAO' }}
           >
             <Button
-              className={styles.kakaoLogin}
+              className='w-full relative bg-[#fee500] border-none text-black'
               onClick={loginWithKakao}
             >
               <Icon name='kakao' />
@@ -67,7 +77,7 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
             params={{ socialType: 'NAVER' }}
           >
             <Button
-              className={styles.naverLogin}
+              className='w-full relative bg-[#03C75A] border-none text-white'
               onClick={loginWithNaver}
             >
               <Icon
@@ -84,7 +94,7 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
             params={{ socialType: 'GOOGLE' }}
           >
             <Button
-              className={styles.googleLogin}
+              className='w-full relative bg-white border'
               onClick={loginWithGoogle}
               variant='outline'
             >
@@ -99,7 +109,7 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
             params={{ socialType: 'GITHUB' }}
           >
             <Button
-              className={styles.githubLogin}
+              className='w-full relative border-none bg-black text-white'
               onClick={loginWithGithub}
             >
               <Icon
@@ -111,7 +121,7 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
           </LogClick>
         </li>
       </ul>
-      <div className={styles.loginModalMenus}>
+      <div className='flex justify-center items-center'>
         <LogClick eventName='login_modal_privacy_policy_click'>
           <Button
             onClick={handleClickPrivacyPolicy}
@@ -119,7 +129,7 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
             variant='text'
           >
             <Typography
-              className={styles.loginModalPolicyButton}
+              className='text-gray-900'
               variants='body-medium'
             >
               개인정보처리방침
@@ -134,7 +144,7 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
             variant='text'
           >
             <Typography
-              className={styles.loginModalPolicyButton}
+              className='text-gray-900'
               variants='body-medium'
             >
               서비스이용약관

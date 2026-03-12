@@ -2,7 +2,8 @@
 
 import type { ComponentProps, ReactNode } from 'react';
 
-import clsx from 'clsx';
+import { cn } from '@devlog/utils';
+import { cva } from 'class-variance-authority';
 import {
   Children,
   cloneElement,
@@ -14,7 +15,116 @@ import {
   useState,
 } from 'react';
 
-import styles from './Tabs.module.css';
+/* ------------------------------------------------------------------ */
+/*  CVA Definitions                                                    */
+/* ------------------------------------------------------------------ */
+
+const tabsContainerVariants = cva('relative', {
+  defaultVariants: { orientation: 'horizontal' },
+  variants: {
+    orientation: {
+      horizontal: 'w-full',
+      vertical: 'flex flex-row h-full',
+    },
+  },
+});
+
+const tabListVariants = cva('relative flex', {
+  defaultVariants: {
+    centered: false,
+    orientation: 'horizontal',
+    scrollable: false,
+  },
+  variants: {
+    centered: {
+      false: '',
+      true: 'justify-center',
+    },
+    orientation: {
+      horizontal: 'flex-row',
+      vertical: 'flex-col',
+    },
+    scrollable: {
+      false: '',
+      true: 'overflow-hidden',
+    },
+  },
+});
+
+const tabListInnerVariants = cva('flex', {
+  defaultVariants: {
+    orientation: 'horizontal',
+    scrollable: false,
+  },
+  variants: {
+    orientation: {
+      horizontal: 'flex-row',
+      vertical: 'flex-col',
+    },
+    scrollable: {
+      false: '',
+      true: 'overflow-x-auto scrollbar-none',
+    },
+  },
+});
+
+const tabVariants = cva(
+  [
+    'relative inline-flex items-center justify-center',
+    'cursor-pointer select-none whitespace-nowrap',
+    'px-4 py-3 text-sm font-medium',
+    'border-0 bg-transparent',
+    'transition-colors duration-200',
+    'text-white',
+    'min-w-[90px] min-h-[48px]',
+    'hover:not-disabled:bg-white/5',
+  ],
+  {
+    defaultVariants: {
+      disabled: false,
+      fullWidth: false,
+      selected: false,
+    },
+    variants: {
+      disabled: {
+        false: '',
+        true: 'cursor-not-allowed text-gray-300',
+      },
+      fullWidth: {
+        false: '',
+        true: 'flex-1',
+      },
+      iconPosition: {
+        bottom: 'flex-col-reverse gap-1',
+        end: 'flex-row-reverse gap-2',
+        start: 'flex-row gap-2',
+        top: 'flex-col gap-1',
+      },
+      selected: {
+        false: '',
+        true: 'text-indigo-500',
+      },
+    },
+  },
+);
+
+const indicatorVariants = cva('absolute bg-indigo-500', {
+  defaultVariants: { orientation: 'horizontal' },
+  variants: {
+    orientation: {
+      horizontal: 'bottom-0 left-0 h-[2px]',
+      vertical: 'top-0 right-0 w-[2px]',
+    },
+  },
+});
+
+const scrollButtonClass = cn(
+  'flex items-center justify-center',
+  'cursor-pointer border-0 bg-transparent shrink-0',
+  'text-gray-500 w-[40px] min-h-[48px]',
+  'hover:bg-white/5',
+  'disabled:cursor-not-allowed disabled:text-gray-300',
+);
 
 /* ------------------------------------------------------------------ */
 /*  Tab                                                                */
@@ -32,13 +142,6 @@ interface TabProps extends Omit<ComponentProps<'button'>, 'value'> {
   textColor?: string;
   value: string;
 }
-
-const iconPositionClass = {
-  bottom: styles.iconBottom,
-  end: styles.iconEnd,
-  start: styles.iconStart,
-  top: styles.iconTop,
-} as const;
 
 interface TabsProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   centered?: boolean;
@@ -71,12 +174,13 @@ export function Tab({
   return (
     <button
       aria-selected={selected}
-      className={clsx(
-        styles.tab,
-        selected && styles.selected,
-        disabled && styles.disabled,
-        fullWidth && styles.fullWidth,
-        icon && iconPositionClass[iconPosition],
+      className={cn(
+        tabVariants({
+          disabled,
+          fullWidth: fullWidth ?? false,
+          iconPosition: icon ? iconPosition : undefined,
+          selected,
+        }),
         className,
       )}
       data-value={value}
@@ -246,23 +350,27 @@ export function Tabs({
   });
 
   /* ---- indicator style ---- */
+  const indicatorTransition =
+    'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+
   const indicatorStyle: React.CSSProperties = isHorizontal
     ? {
         transform: `translateX(${indicator.offset}px)`,
+        transition: indicatorTransition,
         width: indicator.size,
         ...(indicatorColor ? { backgroundColor: indicatorColor } : {}),
       }
     : {
         height: indicator.size,
         transform: `translateY(${indicator.offset}px)`,
+        transition: indicatorTransition,
         ...(indicatorColor ? { backgroundColor: indicatorColor } : {}),
       };
 
   return (
     <div
-      className={clsx(
-        styles.tabs,
-        isHorizontal ? styles.horizontal : styles.vertical,
+      className={cn(
+        tabsContainerVariants({ orientation }),
         className,
       )}
       {...props}
@@ -270,7 +378,7 @@ export function Tabs({
       {isScrollable && isHorizontal && (
         <button
           aria-label='Scroll left'
-          className={styles.scrollButton}
+          className={scrollButtonClass}
           onClick={() => scroll(-1)}
           tabIndex={-1}
           type='button'
@@ -288,29 +396,24 @@ export function Tabs({
 
       <div
         aria-orientation={orientation}
-        className={clsx(
-          styles.tabList,
-          isHorizontal ? styles.horizontal : styles.vertical,
-          centered && variant === 'standard' && styles.centered,
-          isScrollable && styles.scrollable,
-        )}
+        className={tabListVariants({
+          centered: centered && variant === 'standard',
+          orientation,
+          scrollable: isScrollable,
+        })}
         role='tablist'
       >
         <div
-          className={clsx(
-            styles.tabListInner,
-            isHorizontal ? styles.horizontal : styles.vertical,
-            isScrollable && styles.scrollable,
-          )}
+          className={tabListInnerVariants({
+            orientation,
+            scrollable: isScrollable,
+          })}
           onKeyDown={handleKeyDown}
           ref={tabListRef}
         >
           {tabElements}
           <span
-            className={clsx(
-              styles.indicator,
-              isHorizontal ? styles.horizontal : styles.vertical,
-            )}
+            className={indicatorVariants({ orientation })}
             style={indicatorStyle}
           />
         </div>
@@ -319,7 +422,7 @@ export function Tabs({
       {isScrollable && isHorizontal && (
         <button
           aria-label='Scroll right'
-          className={styles.scrollButton}
+          className={scrollButtonClass}
           onClick={() => scroll(1)}
           tabIndex={-1}
           type='button'

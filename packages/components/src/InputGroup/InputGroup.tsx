@@ -1,9 +1,8 @@
 import type { ComponentProps } from 'react';
 
-import { clsx } from 'clsx';
+import { cn } from '@devlog/utils';
 
 import { Typography } from '../Typography';
-import styles from './InputGroup.module.css';
 
 interface InputGroupProps extends ComponentProps<'div'> {
   label?: string;
@@ -18,7 +17,10 @@ export const InputGroup = ({
   return (
     <div
       {...props}
-      className={clsx(styles.inputGroup, className)}
+      className={cn(
+        'flex flex-col gap-1 justify-start items-stretch',
+        className,
+      )}
     >
       {label && <Typography variants='body-small'>{label}</Typography>}
       {children}

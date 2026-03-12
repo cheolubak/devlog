@@ -1,9 +1,9 @@
 import type { BlogSource } from '@devlog/domains';
 
 import { Icon, Typography } from '@devlog/components';
+import { cn } from '@devlog/utils';
 
 import { ChannelItem } from '../ChannelItem';
-import styles from './ChannelList.module.css';
 
 interface ChannelListProps {
   channels: BlogSource[];
@@ -12,9 +12,12 @@ interface ChannelListProps {
 
 export const ChannelList = ({ channels, type }: ChannelListProps) => {
   return (
-    <section className={styles.channelList}>
+    <section className={cn('px-4 md:px-10 mb-12')}>
       <Typography
-        className={styles.channelTypeTitle}
+        className={cn(
+          'flex justify-start items-center gap-2',
+          'text-white mb-6',
+        )}
         semantic='h2'
         variants='title-large'
       >
@@ -27,7 +30,13 @@ export const ChannelList = ({ channels, type }: ChannelListProps) => {
         />
         {type === 'blog' ? '기술블로그' : '유튜브'}
       </Typography>
-      <ul className={styles.channelItemList}>
+      <ul
+        className={cn(
+          'grid justify-between items-start',
+          'gap-y-6 md:gap-y-8 gap-x-4 md:gap-x-8',
+          '[grid-template-columns:repeat(auto-fill,4rem)]',
+        )}
+      >
         {channels.map((channel) => (
           <ChannelItem
             channel={channel}

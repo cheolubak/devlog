@@ -1,11 +1,10 @@
 'use client';
 
-import type { MouseEvent} from 'react';
+import type { MouseEvent } from 'react';
 
-import { clsx } from 'clsx';
+import { cn } from '@devlog/utils';
 import { useState } from 'react';
 
-import styles from './Ripple.module.css';
 import { useDebouncedRippleCleanUp } from './useDebouncedRippleCleanUp';
 
 interface RippleProps {
@@ -41,11 +40,14 @@ export const Ripple = ({ color = '#bdbdbd', duration = 1000 }: RippleProps) => {
 
   return (
     <div
-      className={clsx(styles.ripple)}
+      className={cn('absolute top-0 left-0 bottom-0 right-0 overflow-hidden')}
       onMouseDown={handleAddRipple}
     >
       {rippleArray.map(({ size, x, y }, idx) => (
         <span
+          className={cn(
+            'inline-block scale-0 rounded-full absolute animate-ripple',
+          )}
           key={`ripple-${idx}`}
           style={{
             animationDuration: `${duration}ms`,

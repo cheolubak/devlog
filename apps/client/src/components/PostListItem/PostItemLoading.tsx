@@ -1,11 +1,27 @@
 import { Skeleton } from '@devlog/components';
-
-import styles from './PostListItem.module.css';
+import { cn } from '@devlog/utils';
 
 export const PostItemLoading = () => {
   return (
-    <div className={styles.postListItem}>
-      <div className={styles.postListItemHeader}>
+    <div
+      className={cn(
+        'block',
+        'px-4 md:px-10',
+        'py-6 md:py-12',
+        'text-white',
+        'h-[220px]',
+        'cursor-pointer',
+      )}
+    >
+      <div
+        className={cn(
+          'flex',
+          'justify-stretch',
+          'items-center',
+          'gap-2',
+          'mb-3',
+        )}
+      >
         <Skeleton
           height={26}
           variant='rectangular'
@@ -17,22 +33,43 @@ export const PostItemLoading = () => {
         />
       </div>
       <Skeleton
-        className={styles.postListItemDescription}
+        className={cn('mb-6')}
         height={24}
         width='100%'
       />
-      <div className={styles.postListItemFooter}>
+      <div
+        className={cn(
+          'flex',
+          'justify-between',
+          'items-center',
+          'gap-2',
+        )}
+      >
         <Skeleton
           height={20}
           width={80}
         />
-        <div className={styles.postListItemInfo}>
+        <div
+          className={cn(
+            'flex',
+            'justify-end',
+            'items-center',
+            'gap-3',
+          )}
+        >
           <Skeleton
             height={20}
             width={80}
           />
           |
-          <div className={styles.postListItemView}>
+          <div
+            className={cn(
+              'flex',
+              'justify-start',
+              'items-center',
+              'gap-2',
+            )}
+          >
             <Skeleton
               height={14}
               variant='circular'

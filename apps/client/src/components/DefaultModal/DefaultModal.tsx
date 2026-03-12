@@ -1,7 +1,5 @@
 import { Button, Modal, Typography, useModal } from '@devlog/components';
-import { clsx } from 'clsx';
-
-import styles from './DefaultModal.module.css';
+import { cn } from '@devlog/utils';
 
 interface DefaultModalProps {
   cancelText?: string;
@@ -35,22 +33,26 @@ export const DefaultModal = ({
   };
 
   return (
-    <Modal className={styles.defaultModal}>
+    <Modal
+      className={cn(
+        'flex flex-col justify-start items-stretch',
+        'px-4 md:px-6 py-8 md:py-10 h-fit min-h-0',
+      )}
+    >
       {title && (
-        <Typography className={styles.defaultModalTitle}>{title}</Typography>
+        <Typography className={cn('mb-6 text-center')}>
+          {title}
+        </Typography>
       )}
       {description && (
-        <Typography className={styles.defaultModalDescription}>
+        <Typography className={cn('mb-9 text-center')}>
           {description}
         </Typography>
       )}
-      <footer className={styles.defaultModalMenu}>
+      <footer className={cn('flex justify-center items-center gap-3')}>
         {cancelText && (
           <Button
-            className={clsx(
-              styles.defaultModalMenuButton,
-              styles.defaultModalCancelButton,
-            )}
+            className={cn('flex-1 !text-gray-900')}
             onClick={handleClickCancel}
             variant='text'
           >
@@ -59,7 +61,7 @@ export const DefaultModal = ({
         )}
         {confirmText && (
           <Button
-            className={styles.defaultModalMenuButton}
+            className={cn('flex-1')}
             onClick={handleClickConfirm}
             variant='filled'
           >

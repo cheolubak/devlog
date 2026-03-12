@@ -5,13 +5,12 @@ import type { BlogSource, FeedFetchResult } from '@devlog/domains';
 import { Button, Icon, Tab, Tabs, Typography } from '@devlog/components';
 import { useLoading } from '@devlog/hooks';
 import { fetchApi } from '@devlog/request';
+import { cn } from '@devlog/utils';
 import { useQuery } from '@tanstack/react-query';
 import { getBlogSources } from 'apis';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-
-import styles from './BlogSourceList.module.css';
 
 interface BlogSourceListProps {
   blogSources: BlogSource[];
@@ -58,13 +57,24 @@ export const BlogSourceList = ({ blogSources }: BlogSourceListProps) => {
         <Tab value='YOUTUBE'>YOUTUBE</Tab>
         <Tab value='BLOG'>BLOG</Tab>
       </Tabs>
-      <ul className={styles.blogSourceList}>
+      <ul
+        className={cn(
+          'flex flex-col justify-start items-stretch gap-6',
+        )}
+      >
         {data.map((source) => (
           <li
-            className={styles.blogSourceItem}
+            className={cn(
+              'px-4 md:px-10 py-6 md:py-12 text-white',
+              'flex justify-between items-center',
+            )}
             key={source.id}
           >
-            <div className={styles.blogSourceContent}>
+            <div
+              className={cn(
+                'flex flex-col justify-center items-stretch gap-3',
+              )}
+            >
               <Typography
                 semantic='h2'
                 variants='display-small'
@@ -78,7 +88,7 @@ export const BlogSourceList = ({ blogSources }: BlogSourceListProps) => {
                 {source.lastFetchStatus})
               </Typography>
               <Link
-                className={styles.blogLink}
+                className={cn('flex justify-start items-center gap-2')}
                 href={source.blogUrl}
                 target='_blank'
               >

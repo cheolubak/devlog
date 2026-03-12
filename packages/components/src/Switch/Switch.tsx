@@ -2,10 +2,8 @@
 
 import type { ChangeEvent, ComponentProps } from 'react';
 
-import { clsx } from 'clsx';
+import { cn } from '@devlog/utils';
 import { useEffect, useState } from 'react';
-
-import styles from './Switch.module.css';
 
 interface SwitchProps extends Omit<
   ComponentProps<'input'>,
@@ -34,17 +32,36 @@ export const Switch = ({
 
   return (
     <label
-      className={clsx(styles.switch, (checked || isActive) && styles.isActive)}
+      className={cn(
+        'w-10',
+        'h-5',
+        'rounded-full',
+        'bg-gray-400',
+        'relative',
+        'cursor-pointer',
+        (checked || isActive) && 'bg-indigo-500',
+      )}
     >
       <input
         {...props}
         checked={checked || isActive}
-        className={styles.input}
+        className='peer hidden w-0 h-0'
         defaultChecked={defaultChecked}
         onChange={handleChange}
         type='checkbox'
       />
-      <span className={styles.thumb} />
+      <span
+        className={cn(
+          'w-5',
+          'h-5',
+          'rounded-full',
+          'bg-white',
+          'absolute',
+          'top-0',
+          'left-0',
+          'peer-checked:translate-x-full',
+        )}
+      />
     </label>
   );
 };

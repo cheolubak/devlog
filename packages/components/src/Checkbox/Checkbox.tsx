@@ -2,12 +2,11 @@
 
 import type { ChangeEvent, ComponentProps, ReactNode } from 'react';
 
-import { clsx } from 'clsx';
+import { cn } from '@devlog/utils';
 import { useEffect, useState } from 'react';
 
 import { Icon } from '../Icon';
 import { Typography } from '../Typography';
-import styles from './Checkbox.module.css';
 
 interface CheckboxProps extends Omit<
   ComponentProps<'input'>,
@@ -44,16 +43,34 @@ export const Checkbox = ({
 
   return (
     <label
-      className={clsx(styles.checkboxContainer, disabled && styles.disabled)}
+      className={cn(
+        'flex',
+        'justify-start',
+        'items-center',
+        'gap-2',
+        'cursor-pointer',
+        disabled && 'cursor-not-allowed',
+      )}
     >
       <input
         {...props}
         checked={isChecked}
-        className={styles.checkboxInput}
+        className='peer hidden w-0 h-0'
         onChange={handleChange}
         type='checkbox'
       />
-      <span className={styles.checkbox}>
+      <span
+        className={cn(
+          'w-6',
+          'h-6',
+          'rounded-lg',
+          'bg-gray-200',
+          'inline-flex',
+          'justify-center',
+          'items-center',
+          'peer-checked:bg-gray-900',
+        )}
+      >
         {isChecked && (
           <Icon
             color='var(--color-white)'

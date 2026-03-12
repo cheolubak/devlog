@@ -6,7 +6,6 @@ import lottie from 'lottie-web/build/player/lottie_light';
 import { useEffect, useRef } from 'react';
 
 import { Overlay } from '../Overlay';
-import styles from './Loading.module.css';
 
 export const Loading = () => {
   const loadings = useAtomValue(loadingStore);
@@ -49,7 +48,7 @@ export const LoadingIndicator = () => {
 
   return (
     <div
-      className={styles.loadingIndicator}
+      className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-1000 w-[200px] h-[200px]"
       ref={indicatorRef}
     />
   );

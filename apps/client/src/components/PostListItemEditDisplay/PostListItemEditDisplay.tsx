@@ -6,12 +6,11 @@ import type { ChangeEvent } from 'react';
 import { Button, IconButton, Switch, Typography } from '@devlog/components';
 import { useLoading } from '@devlog/hooks';
 import { fetchApi } from '@devlog/request';
+import { cn } from '@devlog/utils';
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { useOpenLink } from 'hooks';
 import { useRef, useState } from 'react';
-
-import styles from './PostListItemEditDisplay.module.css';
 
 interface PostItemProps {
   onChangeDisplay: (isDisplay: boolean) => void;
@@ -84,12 +83,17 @@ export const PostListItemEditDisplay = ({
   };
 
   return (
-    <div className={styles.postListItemEdit}>
-      <div className={styles.postListItemEditDisplay}>
-        <div className={styles.postListItemEditDisplayInfo}>
+    <div className='flex flex-col justify-start items-stretch gap-3'>
+      <div
+        className={cn(
+          'flex justify-between items-center',
+          'px-4 md:px-10 py-6 md:py-12',
+          'text-[var(--color-white)] h-[220px]',
+        )}
+      >
+        <div className='flex flex-col justify-center items-stretch gap-3'>
           <Typography variants='label-medium'>{post.id}</Typography>
           <Typography
-            className={styles.postListItemTitle}
             semantic='h2'
             variants='title-large'
           >
@@ -97,7 +101,6 @@ export const PostListItemEditDisplay = ({
           </Typography>
           {post.titleEn && (
             <Typography
-              className={styles.postListItemTitle}
               semantic='h2'
               variants='title-large'
             >
@@ -114,7 +117,7 @@ export const PostListItemEditDisplay = ({
             {post.source.name}
           </Typography>
         </div>
-        <div className={styles.postListItemEditDisplayMenu}>
+        <div className='flex justify-end items-center gap-3'>
           <IconButton
             iconColor='primary'
             name='link'
@@ -132,9 +135,12 @@ export const PostListItemEditDisplay = ({
         </div>
       </div>
 
-      <div className={styles.postKeywordMenu}>
+      <div className='flex justify-stretch items-center gap-4'>
         <textarea
-          className={styles.postKeywords}
+          className={cn(
+            'text-white w-full border border-gray-300',
+            'rounded-md p-4 h-[150px]',
+          )}
           defaultValue={post.searchKeywords?.keywords ?? ''}
           onChange={handleChangeKeywordText}
           placeholder='keywords'

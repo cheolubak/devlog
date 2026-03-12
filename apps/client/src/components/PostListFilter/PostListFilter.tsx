@@ -1,12 +1,11 @@
 'use client';
 
 import { Button, FloatingMenu, Icon, useModal } from '@devlog/components';
+import { cn } from '@devlog/utils';
 import { PostFilterModal } from 'components';
 import { LogClick } from 'components/LogClick';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useScrollDirection } from 'stores';
-
-import styles from './PostListFilter.module.css';
 
 export const PostListFilter = () => {
   const searchParams = useSearchParams();
@@ -33,18 +32,31 @@ export const PostListFilter = () => {
     >
       <LogClick eventName='filter_click'>
         <Button
-          className={styles.filterButton}
+          className={cn('rounded-full', 'px-6')}
           color='success'
           onClick={handleOpenFilter}
           size='sm'
         >
-          <div className={styles.filterIcon}>
+          <div className={cn('relative', 'w-5', 'h-5')}>
             <Icon
               color='var(--color-white)'
               name='filter'
               size={20}
             />
-            {isActive && <span className={styles.isActive} />}
+            {isActive && (
+              <span
+                className={cn(
+                  'inline-block',
+                  'absolute',
+                  '-top-0.5',
+                  '-right-0.5',
+                  'w-2',
+                  'h-2',
+                  'rounded-full',
+                  'bg-red-500',
+                )}
+              />
+            )}
           </div>
           필터
         </Button>

@@ -3,11 +3,10 @@
 import type { BlogSource } from '@devlog/domains';
 
 import { Icon, Typography } from '@devlog/components';
+import { cn } from '@devlog/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-
-import styles from './ChannelContentHeader.module.css';
 
 interface ChannelContentHeaderProps {
   channel: BlogSource;
@@ -19,15 +18,31 @@ export const ChannelContentHeader = ({
   const [imageError, setImageError] = useState(false);
 
   return (
-    <header className={styles.channelContentHeader}>
+    <header
+      className={cn(
+        'flex',
+        'flex-col md:flex-row',
+        'justify-start md:justify-between',
+        'items-start md:items-center',
+        'gap-8 md:gap-4',
+        'px-4 md:px-10',
+        'mb-6 md:mb-0',
+      )}
+    >
       <Typography
-        className={styles.channelContentHeaderTitle}
+        className={cn(
+          'text-white',
+          'flex',
+          'justify-stretch',
+          'items-center',
+          'gap-4',
+        )}
         variants='title-large'
       >
         {channel.icon && !imageError ? (
           <Image
             alt={channel.name}
-            className={styles.channelImage}
+            className={cn('object-cover', 'rounded-full', 'bg-white')}
             height={48}
             onError={() => setImageError(true)}
             src={channel.icon}
@@ -36,14 +51,14 @@ export const ChannelContentHeader = ({
         ) : channel.type !== 'YOUTUBE' ? (
           <Image
             alt={channel.name}
-            className={styles.channelImage}
+            className={cn('object-cover', 'rounded-full', 'bg-white')}
             height={48}
             src={'/logo.svg'}
             width={48}
           />
         ) : (
           <Icon
-            className={styles.channelImage}
+            className={cn('object-cover', 'rounded-full', 'bg-white')}
             color='var(--color-red-500)'
             name='youtube'
             size={48}
@@ -51,10 +66,27 @@ export const ChannelContentHeader = ({
         )}
         {channel.name}
       </Typography>
-      <div className={styles.channelContentHeaderMenu}>
+      <div
+        className={cn(
+          'flex',
+          'justify-end',
+          'items-center',
+          'gap-4',
+          'text-white',
+        )}
+      >
         {channel.corpUrl && (
           <Link
-            className={styles.channelContentHeaderMenuItem}
+            className={cn(
+              'cursor-pointer',
+              'inline-flex',
+              'justify-center',
+              'items-center',
+              'h-12',
+              'px-4 md:px-6',
+              'rounded-lg',
+              'bg-indigo-500/60',
+            )}
             href={channel.corpUrl}
             target='_blank'
           >
@@ -64,7 +96,16 @@ export const ChannelContentHeader = ({
         {channel.corpUrl && channel.blogUrl && '|'}
         {channel.blogUrl && (
           <Link
-            className={styles.channelContentHeaderMenuItem}
+            className={cn(
+              'cursor-pointer',
+              'inline-flex',
+              'justify-center',
+              'items-center',
+              'h-12',
+              'px-4 md:px-6',
+              'rounded-lg',
+              'bg-indigo-500/60',
+            )}
             href={channel.blogUrl}
             target='_blank'
           >

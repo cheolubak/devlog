@@ -1,17 +1,25 @@
 import type { CSSProperties } from 'react';
 
-import { clsx } from 'clsx';
+import { cn } from '@devlog/utils';
+import { cva } from 'class-variance-authority';
 
-import styles from './Skeleton.module.css';
+const skeletonVariants = cva('bg-[#e0e0e0]/30 animate-shimmer', {
+  defaultVariants: { variant: 'text' },
+  variants: {
+    variant: {
+      circular: 'rounded-full',
+      rectangular: 'rounded-lg',
+      text: 'rounded-[4px] h-[1em] w-full',
+    },
+  },
+});
 
 interface SkeletonProps {
   className?: string;
   height?: CSSProperties['height'];
-  variant?: SkeletonVariant;
+  variant?: 'circular' | 'rectangular' | 'text';
   width?: CSSProperties['width'];
 }
-
-type SkeletonVariant = 'circular' | 'rectangular' | 'text';
 
 export const Skeleton = ({
   className,
@@ -26,7 +34,7 @@ export const Skeleton = ({
 
   return (
     <div
-      className={clsx(styles.skeleton, styles[variant], className)}
+      className={cn(skeletonVariants({ variant }), className)}
       style={style}
     />
   );

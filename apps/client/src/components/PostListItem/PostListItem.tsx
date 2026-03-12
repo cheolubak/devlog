@@ -5,6 +5,7 @@ import type { CSSProperties, MouseEvent } from 'react';
 
 import { Icon, IconButton, Typography } from '@devlog/components';
 import { useAnalytics } from '@devlog/hooks';
+import { cn } from '@devlog/utils';
 import { LogClick } from 'components/LogClick';
 import dayjs from 'dayjs';
 import { useOpenLink } from 'hooks';
@@ -12,8 +13,6 @@ import { usePostBookmark } from 'hooks/usePostBookmark';
 import { usePostView } from 'hooks/usePostView';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-
-import styles from './PostListItem.module.css';
 
 interface PostItemProps {
   post: PostList;
@@ -65,14 +64,29 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
       params={eventPostParams}
     >
       <Link
-        className={styles.postListItem}
+        className={cn(
+          'block',
+          'px-4 md:px-10',
+          'py-6 md:py-12',
+          'text-white',
+          'h-[220px]',
+          'cursor-pointer',
+        )}
         draggable={false}
         href={blogUrl}
         onClick={handleClickPost}
         style={style}
         target='_blank'
       >
-        <header className={styles.postListItemHeader}>
+        <header
+          className={cn(
+            'flex',
+            'justify-stretch',
+            'items-center',
+            'gap-2',
+            'mb-3',
+          )}
+        >
           <Icon
             color={
               post.source.type === 'YOUTUBE'
@@ -83,7 +97,7 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
             size={26}
           />
           <Typography
-            className={styles.postListItemTitle}
+            className={cn('flex-1')}
             maxLines={2}
             semantic='h2'
             variants='title-large'
@@ -106,26 +120,47 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
           </LogClick>
         </header>
         <Typography
-          className={styles.postListItemDescription}
+          className={cn('mb-6')}
           maxLines={2}
           semantic='p'
           variants='body-large'
         >
           {description}
         </Typography>
-        <footer className={styles.postListItemFooter}>
+        <footer
+          className={cn(
+            'flex',
+            'justify-between',
+            'items-center',
+            'gap-2',
+          )}
+        >
           <Typography
             semantic='h3'
             variants='body-medium'
           >
             {post.source.name}
           </Typography>
-          <div className={styles.postListItemInfo}>
+          <div
+            className={cn(
+              'flex',
+              'justify-end',
+              'items-center',
+              'gap-3',
+            )}
+          >
             <Typography variants='body-medium'>
               {dayjs(post.originalPublishedAt).format('YYYY.MM.DD')}
             </Typography>
             <Typography variants='body-medium'>|</Typography>
-            <div className={styles.postListItemView}>
+            <div
+              className={cn(
+                'flex',
+                'justify-start',
+                'items-center',
+                'gap-2',
+              )}
+            >
               <Icon
                 color='var(--color-white)'
                 name='visibility'

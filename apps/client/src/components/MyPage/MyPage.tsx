@@ -4,6 +4,7 @@ import type { User } from '@devlog/domains';
 import type { ReactNode } from 'react';
 
 import { Button, Icon, Typography, useModal } from '@devlog/components';
+import { cn } from '@devlog/utils';
 import { BlogRequestModal, DefaultModal } from 'components';
 import { LogClick } from 'components/LogClick';
 import { LoginModal } from 'components/LoginModal';
@@ -11,8 +12,6 @@ import { YoutubeRequestModal } from 'components/YoutubeRequestModal';
 import { useAuth } from 'hooks';
 import Image from 'next/image';
 import Link from 'next/link';
-
-import styles from './MyPage.module.css';
 
 const SOCIAL_ICON: Record<User['socialType'], ReactNode> = {
   GITHUB: (
@@ -87,20 +86,43 @@ export const MyPage = () => {
   };
 
   return (
-    <main className={styles.mypage}>
+    <main
+      className={cn(
+        'pb-2 md:pb-10',
+        'px-4 md:px-10',
+        'text-white',
+        'h-[calc(100dvh-170px)] md:h-[calc(100dvh-232px)]',
+        'box-border',
+        'flex',
+        'flex-col',
+        'items-start',
+      )}
+    >
       <Typography
-        className={styles.mypageTitle}
+        className={cn('mb-10')}
         variants='title-medium'
       >
         마이페이지
       </Typography>
 
       {user && (
-        <header className={styles.userInfoContainer}>
+        <header
+          className={cn(
+            'flex',
+            'justify-between',
+            'items-center',
+            'gap-4',
+            'mb-10',
+          )}
+        >
           {user.profile ? (
             <Image
               alt={user.nickname}
-              className={styles.userProfile}
+              className={cn(
+                'object-cover',
+                'rounded-full',
+                'bg-white',
+              )}
               height={48}
               src={user.profile}
               width={48}
@@ -108,17 +130,36 @@ export const MyPage = () => {
           ) : (
             <Image
               alt={user.nickname}
-              className={styles.userProfile}
+              className={cn(
+                'object-cover',
+                'rounded-full',
+                'bg-white',
+              )}
               height={48}
               src='/logo.svg'
               width={48}
             />
           )}
-          <div className={styles.userInfo}>
+          <div
+            className={cn(
+              'flex',
+              'flex-col',
+              'justify-start',
+              'items-start',
+              'gap-2',
+            )}
+          >
             <Typography variants='title-large'>
               안녕하세요, {user.nickname}님!
             </Typography>
-            <div className={styles.userInfoContent}>
+            <div
+              className={cn(
+                'flex',
+                'justify-start',
+                'items-center',
+                'gap-2',
+              )}
+            >
               {SOCIAL_ICON[user.socialType]}
               {user.email && <Typography>{user.email}</Typography>}
             </div>
@@ -126,12 +167,37 @@ export const MyPage = () => {
         </header>
       )}
 
-      <article className={styles.mypageContainer}>
-        <div className={styles.mypageMenuList}>
+      <article
+        className={cn(
+          'w-full',
+          'h-full',
+          'flex',
+          'flex-col',
+          'justify-between',
+          'items-start',
+        )}
+      >
+        <div
+          className={cn(
+            'w-full',
+            'flex',
+            'flex-col',
+            'justify-start',
+            'items-start',
+            'gap-3',
+          )}
+        >
           {isLogin && (
             <LogClick eventName='mypage_bookmark_click'>
               <Link
-                className={styles.mypageFooterMenuItem}
+                className={cn(
+                  'px-4',
+                  'h-[44px]',
+                  'inline-flex',
+                  'justify-center',
+                  'items-center',
+                  'gap-2',
+                )}
                 href='/mypage/bookmarks'
               >
                 <Icon
@@ -169,7 +235,7 @@ export const MyPage = () => {
         {!isLogin && (
           <LogClick eventName='mypage_login_click'>
             <Button
-              className={styles.mypageLoginButton}
+              className={cn('w-full')}
               color='success'
               onClick={handleLogin}
             >
@@ -178,7 +244,15 @@ export const MyPage = () => {
           </LogClick>
         )}
 
-        <footer className={styles.mypageFooterMenus}>
+        <footer
+          className={cn(
+            'w-full',
+            'flex',
+            'flex-col',
+            'items-start',
+            'gap-4',
+          )}
+        >
           <LogClick eventName='mypage_privacy_policy_click'>
             <Button
               onClick={handleClickPrivacyPolicy}
@@ -198,7 +272,14 @@ export const MyPage = () => {
             </Button>
           </LogClick>
           {isLogin && (
-            <div className={styles.mypageLeaveMenus}>
+            <div
+              className={cn(
+                'w-full',
+                'flex',
+                'justify-between',
+                'items-center',
+              )}
+            >
               <LogClick eventName='mypage_logout_click'>
                 <Button
                   onClick={handleLogout}

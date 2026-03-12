@@ -1,7 +1,0 @@
-@reference '@devlog/ui-config';
-
-.languageMenu {
-    @apply border-white;
-    @apply !text-white;
-    @apply w-[120px];
-}

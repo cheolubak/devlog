@@ -12,12 +12,11 @@ import {
 } from '@devlog/components';
 import { useLoading } from '@devlog/hooks';
 import { fetchApi } from '@devlog/request';
+import { cn } from '@devlog/utils';
 import { useMutation } from '@tanstack/react-query';
 import { DefaultModal } from 'components';
 import { useAuth } from 'hooks';
 import { useRef } from 'react';
-
-import styles from './BlogRequestModal.module.css';
 
 interface BlogRequestModalProps {
   modalKey?: string;
@@ -95,16 +94,16 @@ export const BlogRequestModal = ({ modalKey }: BlogRequestModalProps) => {
   });
 
   return (
-    <Modal className={styles.blogRequestModal}>
+    <Modal className={cn('px-4 md:px-8 py-6 md:py-10 overflow-y-auto')}>
       <Typography
-        className={styles.blogRequestModalTitle}
+        className={cn('mb-4 text-center')}
         semantic='h3'
         variants='title-large'
       >
         블로그 요청
       </Typography>
       <Typography
-        className={styles.blogRequestModalDescription}
+        className={cn('mb-8 text-center')}
         semantic='p'
       >
         {
@@ -112,7 +111,7 @@ export const BlogRequestModal = ({ modalKey }: BlogRequestModalProps) => {
         }
       </Typography>
 
-      <form className={styles.blogRequestModalForm}>
+      <form className={cn('flex flex-col gap-4 mb-8')}>
         <InputGroup label='블로그 URL'>
           <Input
             name='url'
@@ -130,7 +129,12 @@ export const BlogRequestModal = ({ modalKey }: BlogRequestModalProps) => {
         </InputGroup>
       </form>
 
-      <footer className={styles.blogRequestModalFooter}>
+      <footer
+        className={cn(
+          'flex justify-center items-center gap-2',
+          '[&>*]:flex-1 [&>*:first-child]:text-gray-900',
+        )}
+      >
         <Button
           onClick={handleClickClose}
           variant='text'

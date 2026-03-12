@@ -1,9 +1,26 @@
-import { clsx } from 'clsx';
+import { cn } from '@devlog/utils';
+import { cva } from 'class-variance-authority';
 
 import type { IconColor, IconName } from './Icon.types';
 
-import styles from './Icon.module.css';
 import { iconMap } from './Icon.types';
+
+const iconVariants = cva(
+  'inline-flex justify-center items-center w-[1em] min-w-[1em] max-w-[1em] h-[1em] max-h-[1em] min-h-[1em] **:max-w-full **:min-w-full **:h-full **:max-h-full **:min-h-full',
+  {
+    variants: {
+      color: {
+        danger: 'fill-red-500',
+        primary: 'fill-white',
+        secondary: 'fill-purple-500',
+        success: 'fill-cyan-500',
+      },
+      colorFill: {
+        true: '[&_*]:fill-inherit',
+      },
+    },
+  },
+);
 
 export interface IconProps {
   className?: string;
@@ -20,10 +37,11 @@ export const Icon = ({ className, color, name, size = 24 }: IconProps) => {
 
   return (
     <i
-      className={clsx(
-        styles.icon,
-        isSetColor && styles[color],
-        !!color && styles.colorFill,
+      className={cn(
+        iconVariants({
+          color: isSetColor ? (color as IconColor) : undefined,
+          colorFill: !!color || undefined,
+        }),
         className,
       )}
       style={{

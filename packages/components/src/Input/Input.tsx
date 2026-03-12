@@ -2,9 +2,7 @@
 
 import type { ComponentProps, ReactNode } from 'react';
 
-import { clsx } from 'clsx';
-
-import styles from './Input.module.css';
+import { cn } from '@devlog/utils';
 
 interface InputProps extends Omit<
   ComponentProps<'input'>,
@@ -23,13 +21,19 @@ export const Input = ({
   ...props
 }: InputProps) => {
   return (
-    <label className={clsx(styles.inputContainer, className)}>
-      {prefix && <span className={styles.prefix}>{prefix}</span>}
+    <label className={cn(
+      'h-12 inline-flex justify-stretch items-center gap-2 px-4 border border-gray-400 rounded-lg bg-white shadow-md',
+      className,
+    )}>
+      {prefix && <span className="w-6 h-6 -ml-1">{prefix}</span>}
       <input
         {...props}
-        className={clsx(styles.input, inputClassName)}
+        className={cn(
+          'outline-none border-none bg-transparent flex-1',
+          inputClassName,
+        )}
       />
-      {suffix && <span className={styles.suffix}>{suffix}</span>}
+      {suffix && <span className="w-fit h-fit -mr-1">{suffix}</span>}
     </label>
   );
 };

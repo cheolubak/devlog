@@ -2,11 +2,10 @@
 
 import { Icon, Input } from '@devlog/components';
 import { useDebounce } from '@devlog/hooks';
+import { cn } from '@devlog/utils';
 import { eventTracking } from 'apis/eventTracking';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
-
-import styles from './HeaderSearch.module.css';
 
 export const HeaderSearch = () => {
   const pathname = usePathname();
@@ -64,7 +63,16 @@ export const HeaderSearch = () => {
 
   return (
     <Input
-      className={styles.searchInput}
+      className={cn(
+        'border-2',
+        'border-white',
+        'w-full',
+        'bg-transparent',
+        'text-white',
+        'placeholder-gray-100',
+        'min-w-0',
+        'md:max-w-[400px]',
+      )}
       onChange={(e) => setQuery(e.target.value)}
       placeholder='Search...'
       prefix={
@@ -76,7 +84,18 @@ export const HeaderSearch = () => {
       suffix={
         query && (
           <button
-            className={styles.clearButton}
+            className={cn(
+              'flex',
+              'items-center',
+              'justify-center',
+              'bg-transparent',
+              'border-none',
+              'cursor-pointer',
+              'p-0',
+              'rounded',
+              'transition-colors',
+              'hover:opacity-80',
+            )}
             onClick={handleClear}
             type='button'
           >

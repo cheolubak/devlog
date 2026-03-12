@@ -2,11 +2,10 @@
 
 import { Button, Icon } from '@devlog/components';
 import { useAnalytics } from '@devlog/hooks';
+import { cn } from '@devlog/utils';
 import { LogClick } from 'components/LogClick';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
-
-import styles from './LanguageMenu.module.css';
 
 export const LanguageMenu = () => {
   const pathname = usePathname();
@@ -36,7 +35,7 @@ export const LanguageMenu = () => {
       params={{ language: i18n.language }}
     >
       <Button
-        className={styles.languageMenu}
+        className={cn('border-white !text-white w-[120px]')}
         onClick={handleToggleLanguage}
         variant='outline'
       >

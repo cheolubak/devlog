@@ -5,11 +5,10 @@ import type { PostListAll, ResponseList } from '@devlog/domains';
 import { Button, Switch, Typography } from '@devlog/components';
 import { useLoading } from '@devlog/hooks';
 import { fetchApi } from '@devlog/request';
+import { cn } from '@devlog/utils';
 import { useMutation } from '@tanstack/react-query';
 import { PostListItemEditDisplay } from 'components';
 import { useRouter, useSearchParams } from 'next/navigation';
-
-import styles from './PostListEditDisplay.module.css';
 
 interface PostListEditDisplayProps {
   page: number;
@@ -99,7 +98,12 @@ export const PostListEditDisplay = ({
 
   return (
     <div>
-      <div className={styles.menus}>
+      <div
+        className={cn(
+          'fixed top-[130px] flex justify-start items-center gap-3',
+          'px-4 md:px-10',
+        )}
+      >
         <Button
           color='secondary'
           disabled={page <= 0}
@@ -116,7 +120,7 @@ export const PostListEditDisplay = ({
         >
           다음
         </Button>
-        <div className={styles.displaySwitch}>
+        <div className='flex justify-start items-center gap-2'>
           <Switch
             checked={isDisplay}
             onChange={handleChangeShowListDisplay}
