@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+@source "../../components/src";
+@source "../../../apps/client/src";
+
 @layer base {
     .no-tailwind * {
         all: revert;

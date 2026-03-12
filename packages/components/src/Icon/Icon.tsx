@@ -6,7 +6,23 @@ import type { IconColor, IconName } from './Icon.types';
 import { iconMap } from './Icon.types';
 
 const iconVariants = cva(
-  'inline-flex justify-center items-center w-[1em] min-w-[1em] max-w-[1em] h-[1em] max-h-[1em] min-h-[1em] **:max-w-full **:min-w-full **:h-full **:max-h-full **:min-h-full',
+  cn(
+    'inline-flex',
+    'justify-center',
+    'items-center',
+    'w-[1em]',
+    'min-w-[1em]',
+    'max-w-[1em]',
+    'h-[1em]',
+    'max-h-[1em]',
+    'min-h-[1em]',
+    '[&_*]:max-w-full',
+    '[&_*]:min-w-full',
+    '[&_*]:h-full',
+    '[&_*]:max-h-full',
+    '[&_*]:min-h-full',
+    '**:!fill-inherit',
+  ),
   {
     variants: {
       color: {

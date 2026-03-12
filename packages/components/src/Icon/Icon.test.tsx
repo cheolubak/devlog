@@ -29,10 +29,10 @@ describe('Icon', () => {
     expect(el.style.fill).toBe('rgb(255, 0, 0)');
   });
 
-  it('IconColor("primary")인 경우 fill 스타일이 설정되지 않는다', () => {
+  it('IconColor("primary")인 경우 fill-white 클래스가 적용된다', () => {
     const { container } = render(<Icon color='primary' name='check' />);
     const el = container.querySelector('i') as HTMLElement;
-    expect(el.style.fill).toBe('');
+    expect(el.className).toContain('fill-white');
   });
 
   it('추가 className을 병합한다', () => {
