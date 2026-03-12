@@ -3,6 +3,8 @@
   "private": true,
   "main": "src/index.ts",
   "dependencies": {
+    "clsx": "catalog:",
+    "tailwind-merge": "catalog:",
     "next": "catalog:"
   }
 }

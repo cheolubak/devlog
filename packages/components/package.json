@@ -9,6 +9,7 @@
     "@devlog/stores": "workspace:*",
     "@devlog/ui-config": "workspace:*",
     "@devlog/utils": "workspace:*",
+    "class-variance-authority": "catalog:",
     "clsx": "catalog:",
     "jotai": "catalog:",
     "lottie-web": "catalog:",
