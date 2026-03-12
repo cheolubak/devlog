@@ -21,7 +21,6 @@ const iconVariants = cva(
     '[&_*]:h-full',
     '[&_*]:max-h-full',
     '[&_*]:min-h-full',
-    '**:!fill-inherit',
   ),
   {
     variants: {
@@ -32,7 +31,7 @@ const iconVariants = cva(
         success: 'fill-cyan-500',
       },
       colorFill: {
-        true: '[&_*]:fill-inherit',
+        true: '**:fill-inherit',
       },
     },
   },
@@ -56,7 +55,7 @@ export const Icon = ({ className, color, name, size = 24 }: IconProps) => {
       className={cn(
         iconVariants({
           color: isSetColor ? (color as IconColor) : undefined,
-          colorFill: !!color || undefined,
+          colorFill: !!color,
         }),
         className,
       )}
