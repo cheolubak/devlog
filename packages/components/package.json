@@ -10,7 +10,6 @@
     "@devlog/ui-config": "workspace:*",
     "@devlog/utils": "workspace:*",
     "class-variance-authority": "catalog:",
-    "clsx": "catalog:",
     "jotai": "catalog:",
     "lottie-web": "catalog:",
     "next": "catalog:",
@@ -24,7 +23,6 @@
   },
   "devDependencies": {
     "tailwindcss": "catalog:",
-    "sass": "catalog:",
     "typescript": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
