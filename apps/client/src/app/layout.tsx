@@ -9,12 +9,18 @@ import {
   PostListFilter,
   PullToRefreshWrapper,
 } from 'components';
+import {
+  FALLBACK_LANGUAGE,
+  I18N_STORAGE_KEY,
+  SUPPORTED_LANGUAGES,
+} from 'i18n.constants';
 import localFont from 'next/font/local';
+import { cookies } from 'next/headers';
 import { FirebaseAnalyticsProvider } from 'providers/FirebaseAnalyticsProvider';
+import { I18nProvider } from 'providers/I18nProvider';
 
 import './globals.css';
 import '@devlog/ui-config';
-import { I18nProvider } from 'providers/I18nProvider';
 import { QueryProvider } from 'providers/QueryProvider';
 import { ScrollProvider } from 'providers/ScrollProvider';
 import { Suspense } from 'react';
@@ -71,16 +77,24 @@ export default async function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const langCookie = cookieStore.get(I18N_STORAGE_KEY)?.value;
+  const lang =
+    langCookie &&
+    (SUPPORTED_LANGUAGES as readonly string[]).includes(langCookie)
+      ? langCookie
+      : FALLBACK_LANGUAGE;
+
   return (
     <html
       className={pretendard.className}
-      lang='ko'
+      lang={lang}
     >
       <body>
         <SpeedInsights />
         <FirebaseAnalyticsProvider />
         <ScrollProvider />
-        <I18nProvider>
+        <I18nProvider initialLang={lang}>
           <QueryProvider>
             <Header />
             <main>

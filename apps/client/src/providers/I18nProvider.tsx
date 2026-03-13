@@ -14,6 +14,7 @@ import { I18nextProvider } from 'react-i18next';
 
 interface I18nProviderProps {
   children: ReactNode;
+  initialLang: string;
 }
 
 function detectLanguage(): string {
@@ -35,7 +36,15 @@ function detectLanguage(): string {
   return FALLBACK_LANGUAGE;
 }
 
-export const I18nProvider = ({ children }: I18nProviderProps) => {
+function setLangCookie(lng: string) {
+  document.cookie = `${I18N_STORAGE_KEY}=${lng};path=/;max-age=${365 * 24 * 60 * 60};samesite=lax`;
+}
+
+export const I18nProvider = ({ children, initialLang }: I18nProviderProps) => {
+  if (i18n.language !== initialLang) {
+    i18n.changeLanguage(initialLang);
+  }
+
   useEffect(() => {
     const detected = detectLanguage();
 
@@ -43,8 +52,11 @@ export const I18nProvider = ({ children }: I18nProviderProps) => {
       i18n.changeLanguage(detected);
     }
 
+    setLangCookie(i18n.language);
+
     const handleLanguageChanged = (lng: string) => {
       localStorage.setItem(I18N_STORAGE_KEY, lng);
+      setLangCookie(lng);
     };
 
     i18n.on('languageChanged', handleLanguageChanged);

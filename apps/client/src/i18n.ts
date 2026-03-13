@@ -1,9 +1,12 @@
+import { FALLBACK_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n.constants';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-export const SUPPORTED_LANGUAGES = ['ko', 'en'] as const;
-export const FALLBACK_LANGUAGE = 'en';
-export const I18N_STORAGE_KEY = 'i18nextLng';
+export {
+  FALLBACK_LANGUAGE,
+  I18N_STORAGE_KEY,
+  SUPPORTED_LANGUAGES,
+} from 'i18n.constants';
 
 i18n.use(initReactI18next).init({
   fallbackLng: FALLBACK_LANGUAGE,
