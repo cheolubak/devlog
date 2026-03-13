@@ -48,10 +48,6 @@ export const MyPage = () => {
 
   const translateText = useTranslateText();
 
-  const handleLogout = () => {
-    logout();
-  };
-
   const handleLogin = () => {
     if (isLogin) {
       return;
@@ -272,7 +268,7 @@ export const MyPage = () => {
             >
               <LogClick eventName='mypage_logout_click'>
                 <Button
-                  onClick={handleLogout}
+                  onClick={() => logout()}
                   size='sm'
                   variant='text'
                 >
