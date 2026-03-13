@@ -11,6 +11,7 @@ import {
 import { useLogin } from '@devlog/hooks';
 import { cn } from '@devlog/utils';
 import { LogClick } from 'components/LogClick';
+import { useTranslation } from 'react-i18next';
 
 interface LoginModalProps {
   modalKey?: string;
@@ -19,6 +20,8 @@ interface LoginModalProps {
 export const LoginModal = ({ modalKey }: LoginModalProps) => {
   const { loginWithGithub, loginWithGoogle, loginWithKakao, loginWithNaver } =
     useLogin();
+
+  const { i18n } = useTranslation();
 
   const { close } = useModal();
 
@@ -29,6 +32,8 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
   const handleClickServicePolicy = () => {
     window.open('/policy/services', '_blank');
   };
+
+  const isKorean = i18n.language === 'ko';
 
   return (
     <Modal
@@ -49,7 +54,7 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
         className='mb-6 text-center'
         variants='title-large'
       >
-        로그인
+        {isKorean ? '로그인' : 'LOGIN'}
       </Typography>
       <ul
         className={cn(
@@ -67,7 +72,7 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
               onClick={loginWithKakao}
             >
               <Icon name='kakao' />
-              카카오 로그인
+              {isKorean ? '카카오 로그인' : 'Kakao Login'}
             </Button>
           </LogClick>
         </li>
@@ -84,7 +89,7 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
                 color='var(--color-white)'
                 name='naver'
               />
-              네이버 로그인
+              {isKorean ? '네이버 로그인' : 'Naver Login'}
             </Button>
           </LogClick>
         </li>
@@ -99,7 +104,7 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
               variant='outline'
             >
               <Icon name='google' />
-              구글 로그인
+              {isKorean ? '구글 로그인' : 'Google Login'}
             </Button>
           </LogClick>
         </li>
@@ -116,7 +121,7 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
                 color='var(--color-white)'
                 name='github'
               />
-              GitHub 로그인
+              {isKorean ? 'GitHub 로그인' : 'GitHub Login'}
             </Button>
           </LogClick>
         </li>
@@ -132,7 +137,7 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
               className='text-gray-900'
               variants='body-medium'
             >
-              개인정보처리방침
+              {isKorean ? '개인정보처리방침' : 'Privacy Policy'}
             </Typography>
           </Button>
         </LogClick>
@@ -147,7 +152,7 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
               className='text-gray-900'
               variants='body-medium'
             >
-              서비스이용약관
+              {isKorean ? '서비스이용약관' : 'Service Policy'}
             </Typography>
           </Button>
         </LogClick>

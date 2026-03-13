@@ -1,13 +1,13 @@
 export const POST_REGION_FILTERS = [
-  { name: '전체', value: 'ALL' },
-  { name: '국내', value: 'KOREA' },
-  { name: '국외', value: 'FOREIGN' },
+  { enName: 'All', name: '전체', value: 'ALL' },
+  { enName: 'Korean', name: '국내', value: 'KOREA' },
+  { enName: 'English', name: '국외', value: 'FOREIGN' },
 ] as const;
 
 export const POST_TYPE_FILTERS = [
-  { name: '전체', value: 'ALL' },
-  { name: 'RSS 블로그', value: 'BLOG' },
-  { name: '유튜브', value: 'YOUTUBE' },
+  { enName: 'All', name: '전체', value: 'ALL' },
+  { enName: 'RSS Blog', name: 'RSS 블로그', value: 'BLOG' },
+  { enName: 'Youtube', name: '유튜브', value: 'YOUTUBE' },
 ] as const;
 
 export type PostRegionFilter = (typeof POST_REGION_FILTERS)[number]['value'];

@@ -1,7 +1,10 @@
+'use client';
+
 import type { BlogSource } from '@devlog/domains';
 
 import { Icon, Typography } from '@devlog/components';
 import { cn } from '@devlog/utils';
+import { useTranslation } from 'react-i18next';
 
 import { ChannelItem } from '../ChannelItem';
 
@@ -10,7 +13,19 @@ interface ChannelListProps {
   type: 'blog' | 'youtube';
 }
 
+const CHANNEL_LIST_TYPE: Record<
+  ChannelListProps['type'],
+  { enName: string; name: string }
+> = {
+  blog: { enName: 'Blog', name: '기술블로그' },
+  youtube: { enName: 'Youtube', name: '유튜브' },
+};
+
 export const ChannelList = ({ channels, type }: ChannelListProps) => {
+  const { i18n } = useTranslation();
+
+  const isKorean = i18n.language === 'ko';
+
   return (
     <section className={cn('px-4 md:px-10 mb-12')}>
       <Typography
@@ -28,7 +43,9 @@ export const ChannelList = ({ channels, type }: ChannelListProps) => {
           name={type === 'blog' ? 'rss' : 'youtube'}
           size={32}
         />
-        {type === 'blog' ? '기술블로그' : '유튜브'}
+        {isKorean
+          ? CHANNEL_LIST_TYPE[type].name
+          : CHANNEL_LIST_TYPE[type].enName}
       </Typography>
       <ul
         className={cn(

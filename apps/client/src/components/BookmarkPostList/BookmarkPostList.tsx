@@ -8,6 +8,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { getBookmarkPosts } from 'apis/getBookmarkPosts';
 import { PostListLoading, VirtualPostList } from 'components';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 interface BookmarkPostListProps {
   sourceId?: string;
@@ -16,6 +17,10 @@ interface BookmarkPostListProps {
 export const BookmarkPostList = ({ sourceId }: BookmarkPostListProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { i18n } = useTranslation();
+
+  const isKorean = i18n.language === 'ko';
+
   const q = searchParams.get('q') ?? '';
 
   const {
@@ -43,12 +48,14 @@ export const BookmarkPostList = ({ sourceId }: BookmarkPostListProps) => {
   if (!isFetching && postList.length === 0) {
     return (
       <div className='flex flex-col items-center gap-5 p-10 text-center text-white'>
-        <Typography variants='title-large'>저장된 포스트가 없어요.</Typography>
+        <Typography variants='title-large'>
+          {isKorean ? '저장된 포스트가 없어요.' : 'No bookmarked posts.'}
+        </Typography>
         <Button
           color='success'
           onClick={handleGoPosts}
         >
-          포스트 보러 가기
+          {isKorean ? '포스트 보러 가기' : 'Go to posts'}
         </Button>
       </div>
     );

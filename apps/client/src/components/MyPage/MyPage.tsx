@@ -12,6 +12,7 @@ import { YoutubeRequestModal } from 'components/YoutubeRequestModal';
 import { useAuth } from 'hooks';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 const SOCIAL_ICON: Record<User['socialType'], ReactNode> = {
   GITHUB: (
@@ -45,6 +46,10 @@ export const MyPage = () => {
   const { isLogin, leave, logout, user } = useAuth();
   const { open } = useModal();
 
+  const { i18n } = useTranslation();
+
+  const isKorean = i18n.language === 'ko';
+
   const handleLogout = () => {
     logout();
   };
@@ -60,11 +65,15 @@ export const MyPage = () => {
   const handleLeave = () => {
     open(
       <DefaultModal
-        cancelText='아니요'
-        confirmText='예'
-        description='정말로 탈퇴하시겠어요?'
+        cancelText={isKorean ? '아니요' : 'No'}
+        confirmText={isKorean ? '예' : 'Yes'}
+        description={
+          isKorean
+            ? '정말로 탈퇴하시겠어요?'
+            : 'Are you sure you want to leave?'
+        }
         onConfirm={leave}
-        title='회원탈퇴'
+        title={isKorean ? '회원탈퇴' : 'Leave'}
       />,
     );
   };
@@ -102,7 +111,7 @@ export const MyPage = () => {
         className={cn('mb-10')}
         variants='title-medium'
       >
-        마이페이지
+        {isKorean ? '마이페이지' : 'My Page'}
       </Typography>
 
       {user && (
@@ -118,11 +127,7 @@ export const MyPage = () => {
           {user.profile ? (
             <Image
               alt={user.nickname}
-              className={cn(
-                'object-cover',
-                'rounded-full',
-                'bg-white',
-              )}
+              className={cn('object-cover', 'rounded-full', 'bg-white')}
               height={48}
               src={user.profile}
               width={48}
@@ -130,11 +135,7 @@ export const MyPage = () => {
           ) : (
             <Image
               alt={user.nickname}
-              className={cn(
-                'object-cover',
-                'rounded-full',
-                'bg-white',
-              )}
+              className={cn('object-cover', 'rounded-full', 'bg-white')}
               height={48}
               src='/logo.svg'
               width={48}
@@ -150,15 +151,12 @@ export const MyPage = () => {
             )}
           >
             <Typography variants='title-large'>
-              안녕하세요, {user.nickname}님!
+              {isKorean
+                ? `안녕하세요, ${user.nickname}님!`
+                : `Hello, ${user.nickname}!`}
             </Typography>
             <div
-              className={cn(
-                'flex',
-                'justify-start',
-                'items-center',
-                'gap-2',
-              )}
+              className={cn('flex', 'justify-start', 'items-center', 'gap-2')}
             >
               {SOCIAL_ICON[user.socialType]}
               {user.email && <Typography>{user.email}</Typography>}
@@ -204,7 +202,9 @@ export const MyPage = () => {
                   color='var(--color-white)'
                   name='bookmark-fill'
                 />
-                <Typography variants='title-medium'>북마크</Typography>
+                <Typography variants='title-medium'>
+                  {isKorean ? '북마크' : 'Bookmarks'}
+                </Typography>
               </Link>
             </LogClick>
           )}
@@ -215,7 +215,7 @@ export const MyPage = () => {
                 name='rss'
               />
               <Typography variants='title-medium'>
-                RSS 블로그 추가 요청
+                {isKorean ? 'RSS 블로그 추가 요청' : 'RSS Blog Request'}
               </Typography>
             </Button>
           </LogClick>
@@ -226,7 +226,7 @@ export const MyPage = () => {
                 name='youtube'
               />
               <Typography variants='title-medium'>
-                유튜브 채널 추가 요청
+                {isKorean ? '유튜브 채널 추가 요청' : 'YouTube Channel Request'}
               </Typography>
             </Button>
           </LogClick>
@@ -239,19 +239,13 @@ export const MyPage = () => {
               color='success'
               onClick={handleLogin}
             >
-              로그인
+              {isKorean ? '로그인' : 'LOGIN'}
             </Button>
           </LogClick>
         )}
 
         <footer
-          className={cn(
-            'w-full',
-            'flex',
-            'flex-col',
-            'items-start',
-            'gap-4',
-          )}
+          className={cn('w-full', 'flex', 'flex-col', 'items-start', 'gap-4')}
         >
           <LogClick eventName='mypage_privacy_policy_click'>
             <Button
@@ -259,7 +253,9 @@ export const MyPage = () => {
               size='sm'
               variant='text'
             >
-              <Typography variants='body-medium'>개인정보처리방침</Typography>
+              <Typography variants='body-medium'>
+                {isKorean ? '개인정보처리방침' : 'Privacy Policy'}
+              </Typography>
             </Button>
           </LogClick>
           <LogClick eventName='mypage_service_policy_click'>
@@ -268,7 +264,9 @@ export const MyPage = () => {
               size='sm'
               variant='text'
             >
-              <Typography variants='body-medium'>서비스이용약관</Typography>
+              <Typography variants='body-medium'>
+                {isKorean ? '서비스이용약관' : 'Service Policy'}
+              </Typography>
             </Button>
           </LogClick>
           {isLogin && (
@@ -286,7 +284,9 @@ export const MyPage = () => {
                   size='sm'
                   variant='text'
                 >
-                  <Typography variants='body-medium'>로그아웃</Typography>
+                  <Typography variants='body-medium'>
+                    {isKorean ? '로그아웃' : 'LOGOUT'}
+                  </Typography>
                 </Button>
               </LogClick>
 
@@ -296,7 +296,9 @@ export const MyPage = () => {
                   size='sm'
                   variant='text'
                 >
-                  <Typography variants='body-medium'>회원탈퇴</Typography>
+                  <Typography variants='body-medium'>
+                    {isKorean ? '회원탈퇴' : 'LEAVE'}
+                  </Typography>
                 </Button>
               </LogClick>
             </div>

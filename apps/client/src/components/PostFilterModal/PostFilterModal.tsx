@@ -15,6 +15,7 @@ import {
 } from 'components/PostFilterModal/PostFilterModal.type';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface PostFilterModalProps {
   modalKey?: string;
@@ -22,6 +23,8 @@ interface PostFilterModalProps {
 
 export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
   const searchParams = useSearchParams();
+
+  const { i18n } = useTranslation();
 
   const { close } = useModal();
 
@@ -63,6 +66,8 @@ export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
     close(modalKey);
   };
 
+  const isKorean = i18n.language === 'ko';
+
   return (
     <Modal
       className={cn(
@@ -90,9 +95,9 @@ export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
     >
       <Typography
         semantic='h3'
-        variants='title-medium'
+        variants='title-large'
       >
-        포스트 필터
+        {isKorean ? '포스트 필터' : 'Posts Filter'}
       </Typography>
       <hr />
       <ul
@@ -112,7 +117,7 @@ export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
               onChange={handleChangeFilter}
               value={item.value}
             >
-              {item.name}
+              {isKorean ? item.name : item.enName}
             </Radio>
           </li>
         ))}
@@ -135,7 +140,7 @@ export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
               onChange={handleChangeFilter}
               value={item.value}
             >
-              {item.name}
+              {isKorean ? item.name : item.enName}
             </Radio>
           </li>
         ))}
@@ -144,7 +149,7 @@ export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
         eventName='filter_search'
         params={{ postType, region }}
       >
-        <Button onClick={handleSearch}>찾기</Button>
+        <Button onClick={handleSearch}>{isKorean ? '찾기' : 'Search'}</Button>
       </LogClick>
     </Modal>
   );

@@ -5,11 +5,14 @@ import { cn } from '@devlog/utils';
 import { PostFilterModal } from 'components';
 import { LogClick } from 'components/LogClick';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 import { useScrollDirection } from 'stores';
 
 export const PostListFilter = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
+
+  const { i18n } = useTranslation();
 
   const scrollDirection = useScrollDirection((state) => state.direction);
 
@@ -24,6 +27,8 @@ export const PostListFilter = () => {
   if (pathname !== '/') {
     return null;
   }
+
+  const isKorean = i18n.language === 'ko';
 
   return (
     <FloatingMenu
@@ -58,7 +63,7 @@ export const PostListFilter = () => {
               />
             )}
           </div>
-          필터
+          {isKorean ? '필터' : 'Filter'}
         </Button>
       </LogClick>
     </FloatingMenu>
