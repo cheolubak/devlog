@@ -13,16 +13,18 @@ export const setAuthCookies = async ({
 }) => {
   const cookieStores = await cookies();
 
-  cookieStores.set(ACCESS_TOKEN_KEY, accessToken, {
-    expires: jwtDecode(accessToken).exp * 1000,
+  const cookieOptions = {
     httpOnly: true,
-    sameSite: 'lax',
+    sameSite: 'lax' as const,
     secure: process.env.NODE_ENV === 'production',
+  };
+
+  cookieStores.set(ACCESS_TOKEN_KEY, accessToken, {
+    ...cookieOptions,
+    expires: jwtDecode(accessToken).exp * 1000,
   });
   cookieStores.set(REFRESH_TOKEN_KEY, refreshToken, {
+    ...cookieOptions,
     expires: jwtDecode(refreshToken).exp * 1000,
-    httpOnly: true,
-    sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
   });
 };

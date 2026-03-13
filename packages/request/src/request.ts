@@ -142,17 +142,12 @@ export class RequestInstance {
           fullURL,
           response.status,
           response,
-          await response.json(),
+          await this.parseResponse(response),
           fetchOptions.body,
         );
       }
 
-      const contentType = response.headers.get('content-type');
-      if (contentType?.includes('application/json')) {
-        return await response.json();
-      }
-
-      return (await response.text()) as T;
+      return (await this.parseResponse(response)) as T;
     } finally {
       if (timeoutId) {
         clearTimeout(timeoutId);
@@ -173,13 +168,24 @@ export class RequestInstance {
     return headers;
   }
 
+  private parseResponse(res: Response) {
+    return res
+      .json()
+      .catch(() => res.formData())
+      .catch(() => res.text())
+      .catch(() => res.blob())
+      .catch(() => res.arrayBuffer())
+      .catch(() => undefined);
+  }
+
   private async request<T>(
     method: string,
     url: string,
     data?: unknown,
     options?: RequestOptions,
   ): Promise<T> {
-    const maxRetries = this.config.retry ?? 0;
+    const maxRetries = Math.max(0, Math.floor(this.config.retry ?? 0));
+
     let lastError: unknown;
 
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
@@ -191,7 +197,8 @@ export class RequestInstance {
         const isRetryable =
           e instanceof FetchError
             ? e.status >= 500
-            : e instanceof Error && e.name === 'AbortError';
+            : (e instanceof Error && e.name === 'AbortError') ||
+              e instanceof TypeError;
 
         if (attempt < maxRetries && isRetryable) {
           await new Promise((r) =>
