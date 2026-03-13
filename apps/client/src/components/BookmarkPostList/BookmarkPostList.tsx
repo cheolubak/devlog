@@ -9,7 +9,6 @@ import { getBookmarkPosts } from 'apis/getBookmarkPosts';
 import { PostListLoading, VirtualPostList } from 'components';
 import { useTranslateText } from 'hooks/useTranslateText';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
 
 interface BookmarkPostListProps {
   sourceId?: string;
