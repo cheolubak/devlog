@@ -4,7 +4,7 @@ import { ACCESS_TOKEN_KEY } from 'constants/auth';
 import { NextResponse } from 'next/server';
 
 const REQUIRE_LOGIN_PATH: Readonly<Record<string, string>> = {
-  '/mypage/bookmarks': '/mypage',
+  '/bookmarks': '/mypage',
 };
 
 export default function proxy(req: NextRequest) {
