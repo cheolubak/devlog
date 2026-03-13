@@ -3,9 +3,6 @@ import type { ReactNode } from 'react';
 
 import { GlobalModal, Loading } from '@devlog/components';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-
-import './globals.css';
-import '@devlog/ui-config';
 import {
   BottomNavigation,
   Header,
@@ -14,6 +11,9 @@ import {
 } from 'components';
 import localFont from 'next/font/local';
 import { FirebaseAnalyticsProvider } from 'providers/FirebaseAnalyticsProvider';
+
+import './globals.css';
+import '@devlog/ui-config';
 import { I18nProvider } from 'providers/I18nProvider';
 import { QueryProvider } from 'providers/QueryProvider';
 import { ScrollProvider } from 'providers/ScrollProvider';

@@ -3,7 +3,6 @@
 import type { IconProps } from '@devlog/components';
 
 import { Icon, Ripple } from '@devlog/components';
-import { useAnalytics } from '@devlog/hooks';
 import { cn } from '@devlog/utils';
 import { LogClick } from 'components/LogClick';
 import Link from 'next/link';
@@ -31,18 +30,9 @@ export const BottomNavigation = () => {
   const scrollDirection = useScrollDirection((state) => state.direction);
   const pathname = usePathname();
 
-  const { event } = useAnalytics();
-
-  const handleClickNavigation = (name: string) => {
-    event('navigation_click', {
-      name,
-    });
-  };
-
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
-    if (href === '/mypage') return pathname === '/mypage';
-    return pathname.startsWith(href);
+    return pathname === href || pathname.startsWith(`${href}/`);
   };
 
   return (
@@ -92,7 +82,6 @@ export const BottomNavigation = () => {
                   isActive(item.href) && 'bg-indigo-500/30',
                 )}
                 href={item.href}
-                onClick={() => handleClickNavigation(item.name)}
                 scroll={false}
               >
                 <Ripple />

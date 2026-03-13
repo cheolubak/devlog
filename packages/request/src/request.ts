@@ -160,7 +160,7 @@ export class RequestInstance {
     }
   }
 
-  private async mergeHeaders(options?: RequestOptions): Promise<HeadersInit> {
+  private mergeHeaders(options?: RequestOptions): HeadersInit {
     const headers = new Headers(this.config.headers);
 
     if (options?.headers) {
@@ -180,11 +180,14 @@ export class RequestInstance {
     options?: RequestOptions,
   ): Promise<T> {
     const maxRetries = this.config.retry ?? 0;
+    let lastError: unknown;
 
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
       try {
         return await this.executeRequest<T>(method, url, data, options);
       } catch (e) {
+        lastError = e;
+
         const isRetryable =
           e instanceof FetchError
             ? e.status >= 500
@@ -196,11 +199,11 @@ export class RequestInstance {
           );
           continue;
         }
-        throw e;
+        break;
       }
     }
 
-    throw new Error('Unexpected retry exhaustion');
+    throw lastError;
   }
 }
 
