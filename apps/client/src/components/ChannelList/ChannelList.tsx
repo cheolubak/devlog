@@ -1,10 +1,8 @@
-'use client';
-
 import type { BlogSource } from '@devlog/domains';
 
 import { Icon, Typography } from '@devlog/components';
 import { cn } from '@devlog/utils';
-import { useTranslation } from 'react-i18next';
+import { useIsKorean } from 'hooks/useIsKorean';
 
 import { ChannelItem } from '../ChannelItem';
 
@@ -18,13 +16,11 @@ const CHANNEL_LIST_TYPE: Record<
   { enName: string; name: string }
 > = {
   blog: { enName: 'Blog', name: '기술블로그' },
-  youtube: { enName: 'Youtube', name: '유튜브' },
+  youtube: { enName: 'YouTube', name: '유튜브' },
 };
 
 export const ChannelList = ({ channels, type }: ChannelListProps) => {
-  const { i18n } = useTranslation();
-
-  const isKorean = i18n.language === 'ko';
+  const isKorean = useIsKorean();
 
   return (
     <section className={cn('px-4 md:px-10 mb-12')}>

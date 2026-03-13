@@ -7,8 +7,8 @@ import { useScrollRestoration } from '@devlog/hooks';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getBookmarkPosts } from 'apis/getBookmarkPosts';
 import { PostListLoading, VirtualPostList } from 'components';
+import { useIsKorean } from 'hooks/useIsKorean';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
 
 interface BookmarkPostListProps {
   sourceId?: string;
@@ -17,9 +17,8 @@ interface BookmarkPostListProps {
 export const BookmarkPostList = ({ sourceId }: BookmarkPostListProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { i18n } = useTranslation();
 
-  const isKorean = i18n.language === 'ko';
+  const isKorean = useIsKorean();
 
   const q = searchParams.get('q') ?? '';
 

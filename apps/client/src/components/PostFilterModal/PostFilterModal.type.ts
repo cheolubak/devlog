@@ -7,7 +7,7 @@ export const POST_REGION_FILTERS = [
 export const POST_TYPE_FILTERS = [
   { enName: 'All', name: '전체', value: 'ALL' },
   { enName: 'RSS Blog', name: 'RSS 블로그', value: 'BLOG' },
-  { enName: 'Youtube', name: '유튜브', value: 'YOUTUBE' },
+  { enName: 'YouTube', name: '유튜브', value: 'YOUTUBE' },
 ] as const;
 
 export type PostRegionFilter = (typeof POST_REGION_FILTERS)[number]['value'];

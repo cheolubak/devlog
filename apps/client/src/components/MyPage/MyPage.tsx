@@ -10,9 +10,9 @@ import { LogClick } from 'components/LogClick';
 import { LoginModal } from 'components/LoginModal';
 import { YoutubeRequestModal } from 'components/YoutubeRequestModal';
 import { useAuth } from 'hooks';
+import { useIsKorean } from 'hooks/useIsKorean';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
 
 const SOCIAL_ICON: Record<User['socialType'], ReactNode> = {
   GITHUB: (
@@ -46,9 +46,7 @@ export const MyPage = () => {
   const { isLogin, leave, logout, user } = useAuth();
   const { open } = useModal();
 
-  const { i18n } = useTranslation();
-
-  const isKorean = i18n.language === 'ko';
+  const isKorean = useIsKorean();
 
   const handleLogout = () => {
     logout();

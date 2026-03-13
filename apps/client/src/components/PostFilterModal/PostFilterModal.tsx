@@ -13,9 +13,9 @@ import {
   POST_REGION_FILTERS,
   POST_TYPE_FILTERS,
 } from 'components/PostFilterModal/PostFilterModal.type';
+import { useIsKorean } from 'hooks/useIsKorean';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 interface PostFilterModalProps {
   modalKey?: string;
@@ -24,9 +24,9 @@ interface PostFilterModalProps {
 export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
   const searchParams = useSearchParams();
 
-  const { i18n } = useTranslation();
-
   const { close } = useModal();
+
+  const isKorean = useIsKorean();
 
   const [region, setRegion] = useState<PostRegionFilter>(
     (searchParams.get('region') as PostRegionFilter) ?? 'ALL',
@@ -66,8 +66,6 @@ export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
     close(modalKey);
   };
 
-  const isKorean = i18n.language === 'ko';
-
   return (
     <Modal
       className={cn(
@@ -97,7 +95,7 @@ export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
         semantic='h3'
         variants='title-large'
       >
-        {isKorean ? '포스트 필터' : 'Posts Filter'}
+        {isKorean ? '포스트 필터' : 'Post Filter'}
       </Typography>
       <hr />
       <ul

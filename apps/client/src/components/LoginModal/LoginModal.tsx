@@ -11,7 +11,7 @@ import {
 import { useLogin } from '@devlog/hooks';
 import { cn } from '@devlog/utils';
 import { LogClick } from 'components/LogClick';
-import { useTranslation } from 'react-i18next';
+import { useIsKorean } from 'hooks/useIsKorean';
 
 interface LoginModalProps {
   modalKey?: string;
@@ -21,9 +21,9 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
   const { loginWithGithub, loginWithGoogle, loginWithKakao, loginWithNaver } =
     useLogin();
 
-  const { i18n } = useTranslation();
-
   const { close } = useModal();
+
+  const isKorean = useIsKorean();
 
   const handleClickPrivacyPolicy = () => {
     window.open('/policy/privacy', '_blank');
@@ -32,8 +32,6 @@ export const LoginModal = ({ modalKey }: LoginModalProps) => {
   const handleClickServicePolicy = () => {
     window.open('/policy/services', '_blank');
   };
-
-  const isKorean = i18n.language === 'ko';
 
   return (
     <Modal
