@@ -16,8 +16,7 @@ export const Header = () => {
       className={cn(
         'sticky',
         'top-0',
-        'w-dvw',
-        'max-w-dvw',
+        'w-full',
         'flex',
         'flex-col',
         'gap-6',

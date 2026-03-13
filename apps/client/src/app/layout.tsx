@@ -19,7 +19,7 @@ import { QueryProvider } from 'providers/QueryProvider';
 import { ScrollProvider } from 'providers/ScrollProvider';
 import { Suspense } from 'react';
 
-const pretandard = localFont({
+const pretendard = localFont({
   display: 'swap',
   fallback: [
     '-apple-system',
@@ -73,7 +73,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html
-      className={pretandard.className}
+      className={pretendard.className}
       lang='ko'
     >
       <body>

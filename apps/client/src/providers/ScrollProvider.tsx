@@ -19,6 +19,8 @@ export const ScrollProvider = () => {
   }, []);
 
   useEffect(() => {
+    prevScrollPosY.current = window.scrollY;
+
     const handleScroll = () => {
       if (ticking.current) {
         return;

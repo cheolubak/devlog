@@ -18,7 +18,8 @@
         "NEXT_PUBLIC_GRAFANA_OPENTELEMETRY_TOKEN",
         "NEXT_PUBLIC_OTEL_EXPORTER_OTLP_ENDPOINT",
         "NEXT_PUBLIC_OTEL_EXPORTER_OTLP_HEADERS_Authorization"
-      ]
+      ],
+      "cache": true
     },
     "dev": {
       "persistent": true,
