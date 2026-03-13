@@ -61,40 +61,42 @@ export const BottomNavigation = () => {
         )}
         style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
-        {NAV_ITEMS.map((item) => (
-          <li key={item.name}>
-            <LogClick
-              eventName='navigation_click'
-              params={{ name: item.name }}
-            >
-              <Link
-                aria-current={isActive(item.href) ? 'page' : undefined}
-                aria-label={item.ariaLabel}
-                className={cn(
-                  'relative',
-                  'inline-flex',
-                  'justify-center',
-                  'items-center',
-                  'w-12 md:w-[64px]',
-                  'h-12 md:h-[64px]',
-                  'rounded-full',
-                  'overflow-hidden',
-                )}
-                href={item.href}
-                scroll={false}
+        {NAV_ITEMS.map((item) => {
+          const active = isActive(item.href);
+
+          return (
+            <li key={item.name}>
+              <LogClick
+                eventName='navigation_click'
+                params={{ name: item.name }}
               >
-                <Ripple />
-                <Icon
-                  color={
-                    isActive(item.href) ? 'var(--color-orange-500)' : 'primary'
-                  }
-                  name={item.icon}
-                  size={28}
-                />
-              </Link>
-            </LogClick>
-          </li>
-        ))}
+                <Link
+                  aria-current={active ? 'page' : undefined}
+                  aria-label={item.ariaLabel}
+                  className={cn(
+                    'relative',
+                    'inline-flex',
+                    'justify-center',
+                    'items-center',
+                    'w-12 md:w-[64px]',
+                    'h-12 md:h-[64px]',
+                    'rounded-full',
+                    'overflow-hidden',
+                  )}
+                  href={item.href}
+                  scroll={false}
+                >
+                  <Ripple />
+                  <Icon
+                    color={active ? 'var(--color-orange-500)' : 'primary'}
+                    name={item.icon}
+                    size={28}
+                  />
+                </Link>
+              </LogClick>
+            </li>
+          );
+        })}
       </ul>
     </footer>
   );
