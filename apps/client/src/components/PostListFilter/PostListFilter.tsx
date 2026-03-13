@@ -4,7 +4,7 @@ import { Button, FloatingMenu, Icon, useModal } from '@devlog/components';
 import { cn } from '@devlog/utils';
 import { PostFilterModal } from 'components';
 import { LogClick } from 'components/LogClick';
-import { useIsKorean } from 'hooks/useIsKorean';
+import { useTranslateText } from 'hooks/useTranslateText';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useScrollDirection } from 'stores';
 
@@ -12,7 +12,7 @@ export const PostListFilter = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const isKorean = useIsKorean();
+  const translateText = useTranslateText();
 
   const scrollDirection = useScrollDirection((state) => state.direction);
 
@@ -61,7 +61,7 @@ export const PostListFilter = () => {
               />
             )}
           </div>
-          {isKorean ? '필터' : 'Filter'}
+          {translateText('postListFilter.filter')}
         </Button>
       </LogClick>
     </FloatingMenu>

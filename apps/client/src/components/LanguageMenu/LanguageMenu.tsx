@@ -4,6 +4,7 @@ import { Button, Icon } from '@devlog/components';
 import { useAnalytics } from '@devlog/hooks';
 import { cn } from '@devlog/utils';
 import { LogClick } from 'components/LogClick';
+import { useTranslateText } from 'hooks/useTranslateText';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 
@@ -12,8 +13,9 @@ export const LanguageMenu = () => {
   const { event } = useAnalytics();
 
   const { i18n } = useTranslation();
+  const translateText = useTranslateText();
 
-  const disabledSearch = pathname === 'mypage' || pathname === '/channels';
+  const disabledSearch = pathname === '/mypage' || pathname === '/channels';
 
   if (disabledSearch) {
     return null;
@@ -43,7 +45,7 @@ export const LanguageMenu = () => {
           color='var(--color-white)'
           name='language'
         />
-        {i18n.language === 'en' ? 'English' : '한국어'}
+        {translateText('common.language')}
       </Button>
     </LogClick>
   );

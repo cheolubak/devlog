@@ -46,4 +46,28 @@ describe('i18n', () => {
   it('I18N_STORAGE_KEY가 정의되어 있다', () => {
     expect(I18N_STORAGE_KEY).toBe('i18nextLng');
   });
+
+  it('en과 ko의 번역 키가 동일하다', () => {
+    const enKeys = Object.keys(
+      i18n.store.data.en?.translation ?? {},
+    ).sort();
+    const koKeys = Object.keys(
+      i18n.store.data.ko?.translation ?? {},
+    ).sort();
+
+    expect(enKeys).toEqual(koKeys);
+    expect(enKeys.length).toBeGreaterThan(0);
+  });
+
+  it('번역 리소스에 빈 값이 없다', () => {
+    for (const lng of SUPPORTED_LANGUAGES) {
+      const translations = i18n.store.data[lng]?.translation;
+
+      if (translations) {
+        for (const [key, value] of Object.entries(translations)) {
+          expect(value, `${lng}.${key}`).not.toBe('');
+        }
+      }
+    }
+  });
 });

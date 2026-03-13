@@ -13,7 +13,7 @@ import {
   POST_REGION_FILTERS,
   POST_TYPE_FILTERS,
 } from 'components/PostFilterModal/PostFilterModal.type';
-import { useIsKorean } from 'hooks/useIsKorean';
+import { useTranslateText } from 'hooks/useTranslateText';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
@@ -26,7 +26,7 @@ export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
 
   const { close } = useModal();
 
-  const isKorean = useIsKorean();
+  const translateText = useTranslateText();
 
   const [region, setRegion] = useState<PostRegionFilter>(
     (searchParams.get('region') as PostRegionFilter) ?? 'ALL',
@@ -95,7 +95,7 @@ export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
         semantic='h3'
         variants='title-large'
       >
-        {isKorean ? '포스트 필터' : 'Post Filter'}
+        {translateText('postFilter.title')}
       </Typography>
       <hr />
       <ul
@@ -115,7 +115,7 @@ export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
               onChange={handleChangeFilter}
               value={item.value}
             >
-              {isKorean ? item.name : item.enName}
+              {translateText(`postFilter.region.${item.value}`)}
             </Radio>
           </li>
         ))}
@@ -138,7 +138,7 @@ export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
               onChange={handleChangeFilter}
               value={item.value}
             >
-              {isKorean ? item.name : item.enName}
+              {translateText(`postFilter.type.${item.value}`)}
             </Radio>
           </li>
         ))}
@@ -147,7 +147,9 @@ export const PostFilterModal = ({ modalKey }: PostFilterModalProps) => {
         eventName='filter_search'
         params={{ postType, region }}
       >
-        <Button onClick={handleSearch}>{isKorean ? '찾기' : 'Search'}</Button>
+        <Button onClick={handleSearch}>
+          {translateText('postFilter.search')}
+        </Button>
       </LogClick>
     </Modal>
   );

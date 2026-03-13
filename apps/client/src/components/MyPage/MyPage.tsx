@@ -10,7 +10,7 @@ import { LogClick } from 'components/LogClick';
 import { LoginModal } from 'components/LoginModal';
 import { YoutubeRequestModal } from 'components/YoutubeRequestModal';
 import { useAuth } from 'hooks';
-import { useIsKorean } from 'hooks/useIsKorean';
+import { useTranslateText } from 'hooks/useTranslateText';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -46,7 +46,7 @@ export const MyPage = () => {
   const { isLogin, leave, logout, user } = useAuth();
   const { open } = useModal();
 
-  const isKorean = useIsKorean();
+  const translateText = useTranslateText();
 
   const handleLogout = () => {
     logout();
@@ -63,15 +63,11 @@ export const MyPage = () => {
   const handleLeave = () => {
     open(
       <DefaultModal
-        cancelText={isKorean ? '아니요' : 'No'}
-        confirmText={isKorean ? '예' : 'Yes'}
-        description={
-          isKorean
-            ? '정말로 탈퇴하시겠어요?'
-            : 'Are you sure you want to leave?'
-        }
+        cancelText={translateText('myPage.leaveConfirmNo')}
+        confirmText={translateText('myPage.leaveConfirmYes')}
+        description={translateText('myPage.leaveConfirmDescription')}
         onConfirm={leave}
-        title={isKorean ? '회원탈퇴' : 'Leave'}
+        title={translateText('myPage.leaveConfirmTitle')}
       />,
     );
   };
@@ -109,7 +105,7 @@ export const MyPage = () => {
         className={cn('mb-10')}
         variants='title-medium'
       >
-        {isKorean ? '마이페이지' : 'My Page'}
+        {translateText('myPage.title')}
       </Typography>
 
       {user && (
@@ -149,9 +145,7 @@ export const MyPage = () => {
             )}
           >
             <Typography variants='title-large'>
-              {isKorean
-                ? `안녕하세요, ${user.nickname}님!`
-                : `Hello, ${user.nickname}!`}
+              {translateText('myPage.greeting', { nickname: user.nickname })}
             </Typography>
             <div
               className={cn('flex', 'justify-start', 'items-center', 'gap-2')}
@@ -201,7 +195,7 @@ export const MyPage = () => {
                   name='bookmark-fill'
                 />
                 <Typography variants='title-medium'>
-                  {isKorean ? '북마크' : 'Bookmarks'}
+                  {translateText('myPage.bookmarks')}
                 </Typography>
               </Link>
             </LogClick>
@@ -213,7 +207,7 @@ export const MyPage = () => {
                 name='rss'
               />
               <Typography variants='title-medium'>
-                {isKorean ? 'RSS 블로그 추가 요청' : 'RSS Blog Request'}
+                {translateText('myPage.rssBlogRequest')}
               </Typography>
             </Button>
           </LogClick>
@@ -224,7 +218,7 @@ export const MyPage = () => {
                 name='youtube'
               />
               <Typography variants='title-medium'>
-                {isKorean ? '유튜브 채널 추가 요청' : 'YouTube Channel Request'}
+                {translateText('myPage.youtubeChannelRequest')}
               </Typography>
             </Button>
           </LogClick>
@@ -237,7 +231,7 @@ export const MyPage = () => {
               color='success'
               onClick={handleLogin}
             >
-              {isKorean ? '로그인' : 'LOGIN'}
+              {translateText('common.login')}
             </Button>
           </LogClick>
         )}
@@ -252,7 +246,7 @@ export const MyPage = () => {
               variant='text'
             >
               <Typography variants='body-medium'>
-                {isKorean ? '개인정보처리방침' : 'Privacy Policy'}
+                {translateText('common.privacyPolicy')}
               </Typography>
             </Button>
           </LogClick>
@@ -263,7 +257,7 @@ export const MyPage = () => {
               variant='text'
             >
               <Typography variants='body-medium'>
-                {isKorean ? '서비스이용약관' : 'Service Policy'}
+                {translateText('common.servicePolicy')}
               </Typography>
             </Button>
           </LogClick>
@@ -283,7 +277,7 @@ export const MyPage = () => {
                   variant='text'
                 >
                   <Typography variants='body-medium'>
-                    {isKorean ? '로그아웃' : 'LOGOUT'}
+                    {translateText('myPage.logout')}
                   </Typography>
                 </Button>
               </LogClick>
@@ -295,7 +289,7 @@ export const MyPage = () => {
                   variant='text'
                 >
                   <Typography variants='body-medium'>
-                    {isKorean ? '회원탈퇴' : 'LEAVE'}
+                    {translateText('myPage.leave')}
                   </Typography>
                 </Button>
               </LogClick>

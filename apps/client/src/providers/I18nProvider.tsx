@@ -3,14 +3,18 @@
 import 'i18n';
 
 import type { ReactNode } from 'react';
-import { useEffect } from 'react';
 
 import i18n, {
   FALLBACK_LANGUAGE,
   I18N_STORAGE_KEY,
   SUPPORTED_LANGUAGES,
 } from 'i18n';
+import { useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
+
+interface I18nProviderProps {
+  children: ReactNode;
+}
 
 function detectLanguage(): string {
   const stored = localStorage.getItem(I18N_STORAGE_KEY);
@@ -29,10 +33,6 @@ function detectLanguage(): string {
   }
 
   return FALLBACK_LANGUAGE;
-}
-
-interface I18nProviderProps {
-  children: ReactNode;
 }
 
 export const I18nProvider = ({ children }: I18nProviderProps) => {

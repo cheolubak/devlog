@@ -2,7 +2,7 @@ import type { BlogSource } from '@devlog/domains';
 
 import { Icon, Typography } from '@devlog/components';
 import { cn } from '@devlog/utils';
-import { useIsKorean } from 'hooks/useIsKorean';
+import { useTranslateText } from 'hooks/useTranslateText';
 
 import { ChannelItem } from '../ChannelItem';
 
@@ -11,16 +11,8 @@ interface ChannelListProps {
   type: 'blog' | 'youtube';
 }
 
-const CHANNEL_LIST_TYPE: Record<
-  ChannelListProps['type'],
-  { enName: string; name: string }
-> = {
-  blog: { enName: 'Blog', name: '기술블로그' },
-  youtube: { enName: 'YouTube', name: '유튜브' },
-};
-
 export const ChannelList = ({ channels, type }: ChannelListProps) => {
-  const isKorean = useIsKorean();
+  const translateText = useTranslateText();
 
   return (
     <section className={cn('px-4 md:px-10 mb-12')}>
@@ -39,9 +31,7 @@ export const ChannelList = ({ channels, type }: ChannelListProps) => {
           name={type === 'blog' ? 'rss' : 'youtube'}
           size={32}
         />
-        {isKorean
-          ? CHANNEL_LIST_TYPE[type].name
-          : CHANNEL_LIST_TYPE[type].enName}
+        {translateText(`channelList.${type}`)}
       </Typography>
       <ul
         className={cn(

@@ -7,8 +7,9 @@ import { useScrollRestoration } from '@devlog/hooks';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getBookmarkPosts } from 'apis/getBookmarkPosts';
 import { PostListLoading, VirtualPostList } from 'components';
-import { useIsKorean } from 'hooks/useIsKorean';
+import { useTranslateText } from 'hooks/useTranslateText';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 interface BookmarkPostListProps {
   sourceId?: string;
@@ -18,7 +19,7 @@ export const BookmarkPostList = ({ sourceId }: BookmarkPostListProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const isKorean = useIsKorean();
+  const translateText = useTranslateText();
 
   const q = searchParams.get('q') ?? '';
 
@@ -48,13 +49,13 @@ export const BookmarkPostList = ({ sourceId }: BookmarkPostListProps) => {
     return (
       <div className='flex flex-col items-center gap-5 p-10 text-center text-white'>
         <Typography variants='title-large'>
-          {isKorean ? '저장된 포스트가 없어요.' : 'No bookmarked posts.'}
+          {translateText('bookmarkPostList.empty')}
         </Typography>
         <Button
           color='success'
           onClick={handleGoPosts}
         >
-          {isKorean ? '포스트 보러 가기' : 'Go to posts'}
+          {translateText('bookmarkPostList.goToPosts')}
         </Button>
       </div>
     );
