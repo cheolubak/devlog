@@ -8,10 +8,11 @@ export async function GET() {
   const session = cookieStore.get('sessionId')?.value ?? uuidv4();
 
   cookieStore.set('sessionId', session, {
-    expires: 60 * 60 * 24 * 365,
     httpOnly: true,
+    maxAge: 60 * 60 * 24 * 365,
     path: '/',
     sameSite: 'strict',
+    secure: process.env.NODE_ENV === 'production',
   });
 
   return NextResponse.json({ session });

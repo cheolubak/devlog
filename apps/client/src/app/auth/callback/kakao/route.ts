@@ -2,6 +2,7 @@ import type { NextRequest } from 'next/server';
 
 import { bffTemplate } from 'helper/bffTemplate';
 import { completeLogin } from 'helper/completeLogin';
+import { verifyOAuthState } from 'helper/verifyOAuthState';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
@@ -9,8 +10,9 @@ export async function GET(req: NextRequest) {
     const { searchParams } = req.nextUrl;
 
     const code = searchParams.get('code');
+    const state = searchParams.get('state');
 
-    if (!code) {
+    if (!code || !(await verifyOAuthState(state))) {
       return NextResponse.json({}, { status: 400 });
     }
 

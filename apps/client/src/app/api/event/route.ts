@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     );
 
     const info: Record<string, string> = {
-      accessToken: accessToken ?? 'unknown',
+      accessToken: accessToken ? `${accessToken.slice(0, 6)}***` : 'none',
       eventName,
       sessionId,
     };
