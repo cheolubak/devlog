@@ -19,7 +19,7 @@ const NAV_ITEMS: {
   { ariaLabel: '채널', href: '/channels', icon: 'channel', name: 'channels' },
   {
     ariaLabel: '북마크',
-    href: '/mypage/bookmarks',
+    href: '/bookmarks',
     icon: 'bookmark-fill',
     name: 'bookmarks',
   },
@@ -79,14 +79,15 @@ export const BottomNavigation = () => {
                   'h-12 md:h-[64px]',
                   'rounded-full',
                   'overflow-hidden',
-                  isActive(item.href) && 'bg-indigo-500/30',
                 )}
                 href={item.href}
                 scroll={false}
               >
                 <Ripple />
                 <Icon
-                  color='primary'
+                  color={
+                    isActive(item.href) ? 'var(--color-orange-500)' : 'primary'
+                  }
                   name={item.icon}
                   size={28}
                 />
