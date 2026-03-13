@@ -15,8 +15,14 @@ export const setAuthCookies = async ({
 
   cookieStores.set(ACCESS_TOKEN_KEY, accessToken, {
     expires: jwtDecode(accessToken).exp * 1000,
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
   });
   cookieStores.set(REFRESH_TOKEN_KEY, refreshToken, {
     expires: jwtDecode(refreshToken).exp * 1000,
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
   });
 };

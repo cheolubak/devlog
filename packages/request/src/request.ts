@@ -1,6 +1,7 @@
 export interface RequestConfig {
   baseURL?: string;
   headers?: HeadersInit;
+  retry?: number;
   timeout?: number;
 }
 
@@ -99,20 +100,7 @@ export class RequestInstance {
     return fullURL;
   }
 
-  private async mergeHeaders(options?: RequestOptions): Promise<HeadersInit> {
-    const headers = new Headers(this.config.headers);
-
-    if (options?.headers) {
-      const optionHeaders = new Headers(options.headers);
-      optionHeaders.forEach((value, key) => {
-        headers.set(key, value);
-      });
-    }
-
-    return headers;
-  }
-
-  private async request<T>(
+  private async executeRequest<T>(
     method: string,
     url: string,
     data?: unknown,
@@ -171,6 +159,49 @@ export class RequestInstance {
       }
     }
   }
+
+  private async mergeHeaders(options?: RequestOptions): Promise<HeadersInit> {
+    const headers = new Headers(this.config.headers);
+
+    if (options?.headers) {
+      const optionHeaders = new Headers(options.headers);
+      optionHeaders.forEach((value, key) => {
+        headers.set(key, value);
+      });
+    }
+
+    return headers;
+  }
+
+  private async request<T>(
+    method: string,
+    url: string,
+    data?: unknown,
+    options?: RequestOptions,
+  ): Promise<T> {
+    const maxRetries = this.config.retry ?? 0;
+
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        return await this.executeRequest<T>(method, url, data, options);
+      } catch (e) {
+        const isRetryable =
+          e instanceof FetchError
+            ? e.status >= 500
+            : e instanceof Error && e.name === 'AbortError';
+
+        if (attempt < maxRetries && isRetryable) {
+          await new Promise((r) =>
+            setTimeout(r, Math.min(1000 * 2 ** attempt, 5000)),
+          );
+          continue;
+        }
+        throw e;
+      }
+    }
+
+    throw new Error('Unexpected retry exhaustion');
+  }
 }
 
 export const request = {
@@ -183,4 +214,6 @@ export const fetchApi = RequestInstance.create({
 
 export const externalApi = RequestInstance.create({
   baseURL: process.env.NEXT_PUBLIC_EXTERNAL_API_URL,
+  retry: 2,
+  timeout: 10000,
 });

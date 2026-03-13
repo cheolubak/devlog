@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
     if (
       !process.env.NEXT_PUBLIC_NAVER_LOGIN_CLIENT_ID ||
-      !process.env.NEXT_PUBLIC_NAVER_LOGIN_CLIENT_SECRET ||
+      !process.env.NAVER_LOGIN_CLIENT_SECRET ||
       !process.env.NEXT_PUBLIC_NAVER_LOGIN_CALLBACK_URL
     ) {
       return NextResponse.json({}, { status: 500 });
@@ -25,7 +25,7 @@ export async function GET(req: NextRequest) {
 
     const params = new URLSearchParams({
       client_id: process.env.NEXT_PUBLIC_NAVER_LOGIN_CLIENT_ID,
-      client_secret: process.env.NEXT_PUBLIC_NAVER_LOGIN_CLIENT_SECRET,
+      client_secret: process.env.NAVER_LOGIN_CLIENT_SECRET,
       code,
       grant_type: 'authorization_code',
       response_type: 'code',
@@ -39,7 +39,7 @@ export async function GET(req: NextRequest) {
           'Content-Type': 'application/json',
           'X-Naver-Client-Id': process.env.NEXT_PUBLIC_NAVER_LOGIN_CLIENT_ID,
           'X-Naver-Client-Secret':
-            process.env.NEXT_PUBLIC_NAVER_LOGIN_CLIENT_SECRET,
+            process.env.NAVER_LOGIN_CLIENT_SECRET,
         },
       },
     );

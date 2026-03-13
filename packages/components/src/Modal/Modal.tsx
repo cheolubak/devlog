@@ -24,12 +24,26 @@ export const Modal = ({
   const closeModal = useModal((state) => state.close);
 
   useEffect(() => {
-    dialogRef.current?.show();
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    dialog.showModal();
+
+    const handleCancel = (e: Event) => {
+      if (disabledClose) {
+        e.preventDefault();
+        return;
+      }
+      closeModal(modalKey);
+    };
+
+    dialog.addEventListener('cancel', handleCancel);
 
     return () => {
-      dialogRef.current?.close();
+      dialog.removeEventListener('cancel', handleCancel);
+      dialog.close();
     };
-  }, []);
+  }, [closeModal, disabledClose, modalKey]);
 
   const handleClickOverlay = () => {
     if (disabledClose) {
@@ -45,10 +59,9 @@ export const Modal = ({
       <dialog
         {...props}
         className={cn(
-          'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg min-w-[90dvw] md:min-w-[500px] max-w-screen lg:max-w-[800px] min-h-[90dvh] md:min-h-[200px] max-h-screen lg:max-h-[80dvh] shadow-lg z-1000',
+          'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg min-w-[90dvw] md:min-w-[500px] max-w-screen lg:max-w-[800px] min-h-[90dvh] md:min-h-[200px] max-h-screen lg:max-h-[80dvh] shadow-lg z-1000 backdrop:bg-transparent',
           className,
         )}
-        open={true}
         ref={dialogRef}
       />
     </>

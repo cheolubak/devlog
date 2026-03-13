@@ -61,7 +61,7 @@ export const bffTemplate = async (
     }
 
     log.info('BFF Request', {
-      accessToken: accessToken ?? 'unknown',
+      accessToken: accessToken ? `${accessToken.slice(0, 6)}***` : 'none',
       browser: browser ?? 'unknown',
       device,
       ip,
@@ -82,7 +82,7 @@ export const bffTemplate = async (
     Sentry.captureException(e);
 
     const attribute: Record<string, string> = {
-      accessToken: accessToken ?? 'unknown',
+      accessToken: accessToken ? `${accessToken.slice(0, 6)}***` : 'none',
       browser: browser ?? 'unknown',
       device,
       ip,

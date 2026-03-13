@@ -1,14 +1,35 @@
 'use client';
 
+import type { IconProps } from '@devlog/components';
+
 import { Icon, Ripple } from '@devlog/components';
 import { useAnalytics } from '@devlog/hooks';
 import { cn } from '@devlog/utils';
 import { LogClick } from 'components/LogClick';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useScrollDirection } from 'stores';
+
+const NAV_ITEMS: {
+  ariaLabel: string;
+  href: string;
+  icon: IconProps['name'];
+  name: string;
+}[] = [
+  { ariaLabel: '글 목록', href: '/', icon: 'list-alt', name: 'posts' },
+  { ariaLabel: '채널', href: '/channels', icon: 'channel', name: 'channels' },
+  {
+    ariaLabel: '북마크',
+    href: '/mypage/bookmarks',
+    icon: 'bookmark-fill',
+    name: 'bookmarks',
+  },
+  { ariaLabel: '마이페이지', href: '/mypage', icon: 'person', name: 'mypage' },
+];
 
 export const BottomNavigation = () => {
   const scrollDirection = useScrollDirection((state) => state.direction);
+  const pathname = usePathname();
 
   const { event } = useAnalytics();
 
@@ -16,6 +37,12 @@ export const BottomNavigation = () => {
     event('navigation_click', {
       name,
     });
+  };
+
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/';
+    if (href === '/mypage') return pathname === '/mypage';
+    return pathname.startsWith(href);
   };
 
   return (
@@ -44,126 +71,40 @@ export const BottomNavigation = () => {
         )}
         style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
-        <li>
-          <LogClick
-            eventName='navigation_click'
-            params={{ name: 'posts' }}
-          >
-            <Link
-              aria-label='글 목록'
-              className={cn(
-                'relative',
-                'inline-flex',
-                'justify-center',
-                'items-center',
-                'w-12 md:w-[64px]',
-                'h-12 md:h-[64px]',
-                'rounded-full',
-                'overflow-hidden',
-              )}
-              href='/'
-              onClick={() => handleClickNavigation('posts')}
-              scroll={false}
+        {NAV_ITEMS.map((item) => (
+          <li key={item.name}>
+            <LogClick
+              eventName='navigation_click'
+              params={{ name: item.name }}
             >
-              <Ripple />
-              <Icon
-                color='primary'
-                name='list-alt'
-                size={28}
-              />
-            </Link>
-          </LogClick>
-        </li>
-        <li>
-          <LogClick
-            eventName='navigation_click'
-            params={{ name: 'channels' }}
-          >
-            <Link
-              aria-label='채널'
-              className={cn(
-                'relative',
-                'inline-flex',
-                'justify-center',
-                'items-center',
-                'w-12 md:w-[64px]',
-                'h-12 md:h-[64px]',
-                'rounded-full',
-                'overflow-hidden',
-              )}
-              href='/channels'
-              onClick={() => handleClickNavigation('channels')}
-              scroll={false}
-            >
-              <Ripple />
-              <Icon
-                color='primary'
-                name='channel'
-                size={28}
-              />
-            </Link>
-          </LogClick>
-        </li>
-        <li>
-          <LogClick
-            eventName='navigation_click'
-            params={{ name: 'bookmarks' }}
-          >
-            <Link
-              aria-label='북마크'
-              className={cn(
-                'relative',
-                'inline-flex',
-                'justify-center',
-                'items-center',
-                'w-12 md:w-[64px]',
-                'h-12 md:h-[64px]',
-                'rounded-full',
-                'overflow-hidden',
-              )}
-              href='/mypage/bookmarks'
-              onClick={() => handleClickNavigation('bookmarks')}
-              scroll={false}
-            >
-              <Ripple />
-              <Icon
-                color='primary'
-                name='bookmark-fill'
-                size={28}
-              />
-            </Link>
-          </LogClick>
-        </li>
-        <li>
-          <LogClick
-            eventName='navigation_click'
-            params={{ name: 'mypage' }}
-          >
-            <Link
-              aria-label='마이페이지'
-              className={cn(
-                'relative',
-                'inline-flex',
-                'justify-center',
-                'items-center',
-                'w-12 md:w-[64px]',
-                'h-12 md:h-[64px]',
-                'rounded-full',
-                'overflow-hidden',
-              )}
-              href='/mypage'
-              onClick={() => handleClickNavigation('mypage')}
-              scroll={false}
-            >
-              <Ripple />
-              <Icon
-                color='primary'
-                name='person'
-                size={28}
-              />
-            </Link>
-          </LogClick>
-        </li>
+              <Link
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                aria-label={item.ariaLabel}
+                className={cn(
+                  'relative',
+                  'inline-flex',
+                  'justify-center',
+                  'items-center',
+                  'w-12 md:w-[64px]',
+                  'h-12 md:h-[64px]',
+                  'rounded-full',
+                  'overflow-hidden',
+                  isActive(item.href) && 'bg-indigo-500/30',
+                )}
+                href={item.href}
+                onClick={() => handleClickNavigation(item.name)}
+                scroll={false}
+              >
+                <Ripple />
+                <Icon
+                  color='primary'
+                  name={item.icon}
+                  size={28}
+                />
+              </Link>
+            </LogClick>
+          </li>
+        ))}
       </ul>
     </footer>
   );
