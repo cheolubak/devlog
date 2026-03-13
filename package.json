@@ -9,7 +9,8 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "analyze": "turbo analyze"
   },
   "devDependencies": {
     "@eslint/eslintrc": "catalog:",
@@ -32,6 +33,12 @@
     "typescript": "catalog:",
     "vitest": "catalog:"
   },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions"
+  ],
   "packageManager": "pnpm@10.28.1",
   "pnpm": {
     "onlyBuiltDependencies": [

@@ -52,6 +52,7 @@ export const Header = () => {
                 alt='Dev Curate'
                 className='w-16 min-w-16 max-w-16 h-16 min-h-16 max-h-16'
                 height={64}
+                priority
                 src='/logo.svg'
                 width={64}
               />

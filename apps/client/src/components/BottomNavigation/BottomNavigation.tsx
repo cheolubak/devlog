@@ -50,6 +50,7 @@ export const BottomNavigation = () => {
             params={{ name: 'posts' }}
           >
             <Link
+              aria-label='글 목록'
               className={cn(
                 'relative',
                 'inline-flex',
@@ -79,6 +80,7 @@ export const BottomNavigation = () => {
             params={{ name: 'channels' }}
           >
             <Link
+              aria-label='채널'
               className={cn(
                 'relative',
                 'inline-flex',
@@ -108,6 +110,7 @@ export const BottomNavigation = () => {
             params={{ name: 'bookmarks' }}
           >
             <Link
+              aria-label='북마크'
               className={cn(
                 'relative',
                 'inline-flex',
@@ -137,6 +140,7 @@ export const BottomNavigation = () => {
             params={{ name: 'mypage' }}
           >
             <Link
+              aria-label='마이페이지'
               className={cn(
                 'relative',
                 'inline-flex',

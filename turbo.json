@@ -25,6 +25,10 @@
       "persistent": true,
       "cache": false
     },
+    "analyze": {
+      "dependsOn": ["build"],
+      "cache": true
+    },
     "start": {
       "dependsOn": ["build"],
       "cache": false

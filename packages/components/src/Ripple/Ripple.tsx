@@ -18,7 +18,7 @@ export const Ripple = ({ color = '#bdbdbd', duration = 1000 }: RippleProps) => {
   >([]);
 
   useDebouncedRippleCleanUp(rippleArray.length, duration, () => {
-    // setRippleArray([]);
+    setRippleArray([]);
   });
 
   const handleAddRipple = (e: MouseEvent<HTMLElement>) => {

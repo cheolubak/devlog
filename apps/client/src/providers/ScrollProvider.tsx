@@ -8,7 +8,9 @@ import { useScrollDirection } from 'stores';
 export const ScrollProvider = () => {
   const setScrollDirection = useScrollDirection((state) => state.setDirection);
 
+  const requestAnimationFrameIdRef = useRef<null | number>(null);
   const prevScrollPosY = useRef(0);
+  const ticking = useRef(false);
 
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
@@ -18,19 +20,36 @@ export const ScrollProvider = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollPosY = window.scrollY;
+      if (ticking.current) {
+        return;
+      }
 
-      const scrollDirection: ScrollDirection =
-        currentScrollPosY > prevScrollPosY.current ? 'DOWN' : 'UP';
+      ticking.current = true;
 
-      prevScrollPosY.current = currentScrollPosY;
-      setScrollDirection(scrollDirection);
+      requestAnimationFrameIdRef.current = requestAnimationFrame(() => {
+        const currentScrollPosY = window.scrollY;
+        if (currentScrollPosY === prevScrollPosY.current) {
+          ticking.current = false;
+          return;
+        }
+
+        const scrollDirection: ScrollDirection =
+          currentScrollPosY > prevScrollPosY.current ? 'DOWN' : 'UP';
+
+        prevScrollPosY.current = currentScrollPosY;
+        setScrollDirection(scrollDirection);
+        ticking.current = false;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      ticking.current = false;
+      if (requestAnimationFrameIdRef.current) {
+        cancelAnimationFrame(requestAnimationFrameIdRef.current);
+      }
     };
   }, []);
 

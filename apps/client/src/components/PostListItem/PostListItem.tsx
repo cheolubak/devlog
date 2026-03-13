@@ -109,6 +109,7 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
             params={eventPostParams}
           >
             <IconButton
+              aria-label={post.isBookmark ? '북마크 해제' : '북마크 추가'}
               iconColor={
                 post.isBookmark
                   ? 'var(--color-yellow-500)'
