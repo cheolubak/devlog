@@ -11,9 +11,9 @@ export const getBlogSources = async (type: string) => {
   const checkAuth = cookieStore.get(ADMIN_AUTH_KEY)?.value;
 
   return fetchApi.get<BlogSource[]>('/admin/blog-sources', {
-    headers: {
-      Cookie: checkAuth ? `${ADMIN_AUTH_KEY}=${checkAuth}` : '',
-    },
+    headers: checkAuth
+      ? { Cookie: `${ADMIN_AUTH_KEY}=${checkAuth}` }
+      : undefined,
     params: { type },
   });
 };

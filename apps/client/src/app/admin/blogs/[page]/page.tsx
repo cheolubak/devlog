@@ -24,9 +24,9 @@ export default async function AdminPage({
   const res = await fetchApi.get<ResponseList<PostListAll>>(
     `admin/posts/${page}`,
     {
-      headers: {
-        Cookie: checkAuth ? `${ADMIN_AUTH_KEY}=${checkAuth}` : '',
-      },
+      headers: checkAuth
+        ? { Cookie: `${ADMIN_AUTH_KEY}=${checkAuth}` }
+        : undefined,
       next: {
         revalidate: 0,
       },

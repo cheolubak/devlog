@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     const state = searchParams.get('state');
 
     if (!code || !(await verifyOAuthState(state))) {
-      return NextResponse.json({}, { status: 400 });
+      return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
     }
 
     const params = new URLSearchParams({

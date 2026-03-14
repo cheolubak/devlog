@@ -1,3 +1,4 @@
+import { SESSION_ID_KEY } from 'constants/auth';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
@@ -5,9 +6,9 @@ import { v4 as uuidv4 } from 'uuid';
 export async function GET() {
   const cookieStore = await cookies();
 
-  const session = cookieStore.get('sessionId')?.value ?? uuidv4();
+  const session = cookieStore.get(SESSION_ID_KEY)?.value ?? uuidv4();
 
-  cookieStore.set('sessionId', session, {
+  cookieStore.set(SESSION_ID_KEY, session, {
     httpOnly: true,
     maxAge: 60 * 60 * 24 * 365,
     path: '/',

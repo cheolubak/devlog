@@ -4,7 +4,7 @@ const OAUTH_STATE_COOKIE = 'oauth_state';
 
 function generateOAuthState(): string {
   const state = crypto.randomUUID();
-  document.cookie = `${OAUTH_STATE_COOKIE}=${state};path=/;max-age=600;samesite=lax`;
+  document.cookie = `${OAUTH_STATE_COOKIE}=${state};path=/;max-age=600;samesite=lax${location.protocol === 'https:' ? ';secure' : ''}`;
   return state;
 }
 

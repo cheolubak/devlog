@@ -14,7 +14,11 @@ export async function DELETE(
 
   const { id } = await params;
 
-  await externalApi.delete(`/posts/${id}`);
+  await externalApi.delete(`/posts/${id}`, {
+    headers: {
+      'x-admin-api-key': process.env.AUTH_KEY!,
+    },
+  });
 
   revalidateTag('posts', {
     expire: 0,
