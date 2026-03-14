@@ -16,6 +16,12 @@ export async function POST(
 
   const res = await externalApi.post<FeedFetchResult>(
     `/feed-fetcher/fetch/${id}`,
+    null,
+    {
+      headers: {
+        'x-admin-api-key': process.env.AUTH_KEY!,
+      },
+    },
   );
 
   return NextResponse.json(res);

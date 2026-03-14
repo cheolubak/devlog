@@ -18,6 +18,9 @@ export async function GET(
   const isDisplay = searchParams.get('isDisplay') ?? 'false';
 
   const res = await externalApi.get<ResponseList<PostListAll>>('posts/all', {
+    headers: {
+      'x-admin-api-key': process.env.AUTH_KEY!,
+    },
     params: {
       isDisplay,
       offset: page,

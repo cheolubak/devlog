@@ -20,6 +20,11 @@ export async function GET(req: NextRequest) {
 
   const res = await externalApi.get<BlogSource[]>(
     `/blog-sources/${BLOG_SOURCE_TYPE_MAP[type] ?? 'blogs'}`,
+    {
+      headers: {
+        'x-admin-api-key': process.env.AUTH_KEY!,
+      },
+    },
   );
 
   return NextResponse.json(res);

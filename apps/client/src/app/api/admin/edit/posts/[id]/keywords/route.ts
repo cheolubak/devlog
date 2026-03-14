@@ -15,9 +15,17 @@ export async function PUT(
 
   const body = await req.json();
 
-  const res = await externalApi.put(`/posts/${id}/keywords`, {
-    keywords: body.keywords,
-  });
+  const res = await externalApi.put(
+    `/posts/${id}/keywords`,
+    {
+      keywords: body.keywords,
+    },
+    {
+      headers: {
+        'x-admin-api-key': process.env.AUTH_KEY!,
+      },
+    },
+  );
 
   return NextResponse.json(res);
 }

@@ -35,7 +35,11 @@ export async function PATCH(
 
   const body: { isDisplay: boolean } = await req.json();
 
-  await externalApi.patch(`/posts/${id}/display`, body);
+  await externalApi.patch(`/posts/${id}/display`, body, {
+    headers: {
+      'x-admin-api-key': process.env.AUTH_KEY!,
+    },
+  });
 
   revalidateTag('posts', {
     expire: 0,
