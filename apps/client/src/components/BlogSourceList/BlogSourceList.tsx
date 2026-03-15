@@ -57,12 +57,8 @@ export const BlogSourceList = ({ blogSources }: BlogSourceListProps) => {
         <Tab value='YOUTUBE'>YOUTUBE</Tab>
         <Tab value='BLOG'>BLOG</Tab>
       </Tabs>
-      <ul
-        className={cn(
-          'flex flex-col justify-start items-stretch gap-6',
-        )}
-      >
-        {data.map((source) => (
+      <ul className={cn('flex flex-col justify-start items-stretch gap-6')}>
+        {data?.map((source) => (
           <li
             className={cn(
               'px-4 md:px-10 py-6 md:py-12 text-white',
@@ -71,9 +67,7 @@ export const BlogSourceList = ({ blogSources }: BlogSourceListProps) => {
             key={source.id}
           >
             <div
-              className={cn(
-                'flex flex-col justify-center items-stretch gap-3',
-              )}
+              className={cn('flex flex-col justify-center items-stretch gap-3')}
             >
               <Typography
                 semantic='h2'
