@@ -36,13 +36,24 @@ export async function PATCH(
 
   const { id } = await params;
 
-  const body = await req.json();
+  let rawBody: unknown;
+  try {
+    rawBody = await req.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
 
-  if (!body || typeof body.isDisplay !== 'boolean') {
+  if (
+    !rawBody ||
+    typeof rawBody !== 'object' ||
+    typeof (rawBody as { isDisplay?: unknown }).isDisplay !== 'boolean'
+  ) {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
   }
 
-  await externalApi.patch(`/posts/${id}/display`, body, {
+  const payload = { isDisplay: (rawBody as { isDisplay: boolean }).isDisplay };
+
+  await externalApi.patch(`/posts/${id}/display`, payload, {
     headers: getAdminApiHeaders(),
   });
 

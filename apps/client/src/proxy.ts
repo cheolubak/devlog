@@ -40,6 +40,8 @@ function validateOrigin(req: NextRequest): boolean {
   const origin = req.headers.get('origin');
 
   if (!origin) {
+    // 브라우저는 same-origin 요청에서 Origin 헤더를 생략할 수 있음
+    // cross-origin 요청은 항상 Origin을 포함하므로 이 분기는 안전
     return true;
   }
 

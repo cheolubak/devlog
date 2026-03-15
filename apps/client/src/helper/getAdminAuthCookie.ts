@@ -1,3 +1,5 @@
+'use server';
+
 import { ADMIN_AUTH_KEY } from 'constants/auth';
 import { cookies } from 'next/headers';
 
