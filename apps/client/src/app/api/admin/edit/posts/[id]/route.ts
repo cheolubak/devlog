@@ -36,7 +36,11 @@ export async function PATCH(
 
   const { id } = await params;
 
-  const body: { isDisplay: boolean } = await req.json();
+  const body = await req.json();
+
+  if (!body || typeof body.isDisplay !== 'boolean') {
+    return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
+  }
 
   await externalApi.patch(`/posts/${id}/display`, body, {
     headers: getAdminApiHeaders(),

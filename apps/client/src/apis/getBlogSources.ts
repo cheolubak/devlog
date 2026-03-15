@@ -2,11 +2,10 @@ import type { BlogSource } from '@devlog/domains';
 
 import { fetchApi } from '@devlog/request';
 import { ADMIN_AUTH_KEY } from 'constants/auth';
-import { cookies } from 'next/headers';
+import { getAdminAuthCookie } from 'helper/getAdminAuthCookie';
 
-export const getBlogSources = async (type: string) => {
-  const cookieStore = await cookies();
-  const checkAuth = cookieStore.get(ADMIN_AUTH_KEY)?.value;
+export const getBlogSources = async (type: string): Promise<BlogSource[]> => {
+  const checkAuth = await getAdminAuthCookie();
 
   return fetchApi.get<BlogSource[]>('/admin/blog-sources', {
     headers: checkAuth

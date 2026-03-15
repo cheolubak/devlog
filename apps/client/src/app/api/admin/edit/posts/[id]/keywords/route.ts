@@ -16,6 +16,14 @@ export async function PUT(
 
   const body = await req.json();
 
+  if (
+    !body ||
+    !Array.isArray(body.keywords) ||
+    body.keywords.some((keyword: unknown) => typeof keyword !== 'string')
+  ) {
+    return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
+  }
+
   const res = await externalApi.put(
     `/posts/${id}/keywords`,
     {

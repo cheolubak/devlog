@@ -22,7 +22,7 @@ export const BlogSourceList = ({ blogSources }: BlogSourceListProps) => {
   const type = searchParams.get('type') ?? 'YOUTUBE';
 
   const { data, refetch } = useQuery({
-    initialData: blogSources,
+    placeholderData: blogSources,
     queryFn: () =>
       fetchApi.get<BlogSource[]>('/admin/blog-sources', { params: { type } }),
     queryKey: ['blogSources', type],
