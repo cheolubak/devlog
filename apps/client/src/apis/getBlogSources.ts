@@ -1,5 +1,3 @@
-'use server';
-
 import type { BlogSource } from '@devlog/domains';
 
 import { fetchApi } from '@devlog/request';

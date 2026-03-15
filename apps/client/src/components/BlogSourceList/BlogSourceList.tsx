@@ -7,7 +7,6 @@ import { useLoading } from '@devlog/hooks';
 import { fetchApi } from '@devlog/request';
 import { cn } from '@devlog/utils';
 import { useQuery } from '@tanstack/react-query';
-import { getBlogSources } from 'apis';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -24,7 +23,8 @@ export const BlogSourceList = ({ blogSources }: BlogSourceListProps) => {
 
   const { data, refetch } = useQuery({
     initialData: blogSources,
-    queryFn: () => getBlogSources(type),
+    queryFn: () =>
+      fetchApi.get<BlogSource[]>('/admin/blog-sources', { params: { type } }),
     queryKey: ['blogSources', type],
     staleTime: 1000 * 60 * 60,
   });

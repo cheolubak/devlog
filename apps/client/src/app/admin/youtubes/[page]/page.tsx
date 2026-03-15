@@ -12,7 +12,7 @@ export default async function AdminPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ page: number }>;
+  params: Promise<{ page: string }>;
   searchParams: Promise<{ isDisplay?: 'false' | 'true' }>;
 }) {
   const { page } = await params;

@@ -2,6 +2,7 @@ import type { FeedFetchResult } from '@devlog/domains';
 import type { NextRequest } from 'next/server';
 
 import { externalApi } from '@devlog/request';
+import { getAdminApiHeaders } from 'helper/adminApiHeaders';
 import { verifyAdmin } from 'helper/verifyAdmin';
 import { NextResponse } from 'next/server';
 
@@ -18,9 +19,7 @@ export async function POST(
     `/feed-fetcher/fetch/${id}`,
     null,
     {
-      headers: {
-        'x-admin-api-key': process.env.AUTH_KEY!,
-      },
+      headers: getAdminApiHeaders(),
     },
   );
 

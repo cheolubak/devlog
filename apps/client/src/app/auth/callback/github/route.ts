@@ -12,7 +12,8 @@ export async function GET(req: NextRequest) {
     const code = searchParams.get('code');
     const state = searchParams.get('state');
 
-    if (!code || !(await verifyOAuthState(state))) {
+    const isValidState = await verifyOAuthState(state);
+    if (!code || !isValidState) {
       return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
     }
 
