@@ -2,6 +2,7 @@ import type { PostListAll, ResponseList } from '@devlog/domains';
 import type { NextRequest } from 'next/server';
 
 import { externalApi } from '@devlog/request';
+import { getAdminApiHeaders } from 'helper/adminApiHeaders';
 import { verifyAdmin } from 'helper/verifyAdmin';
 import { NextResponse } from 'next/server';
 
@@ -18,6 +19,7 @@ export async function GET(
   const isDisplay = searchParams.get('isDisplay') ?? 'false';
 
   const res = await externalApi.get<ResponseList<PostListAll>>('posts/all', {
+    headers: getAdminApiHeaders(),
     params: {
       isDisplay,
       offset: page,

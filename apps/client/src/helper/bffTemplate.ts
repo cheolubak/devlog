@@ -71,10 +71,12 @@ export const bffTemplate = async (
       sessionId,
     });
 
-    const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
-
     cookieStores.set(SESSION_ID_KEY, sessionId, {
-      expires,
+      httpOnly: true,
+      maxAge: 365 * 24 * 60 * 60,
+      path: '/',
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
     });
 
     return await work({ accessToken, sessionId });

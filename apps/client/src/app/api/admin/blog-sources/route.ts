@@ -2,6 +2,7 @@ import type { BlogSource } from '@devlog/domains';
 import type { NextRequest } from 'next/server';
 
 import { externalApi } from '@devlog/request';
+import { getAdminApiHeaders } from 'helper/adminApiHeaders';
 import { verifyAdmin } from 'helper/verifyAdmin';
 import { NextResponse } from 'next/server';
 
@@ -20,6 +21,9 @@ export async function GET(req: NextRequest) {
 
   const res = await externalApi.get<BlogSource[]>(
     `/blog-sources/${BLOG_SOURCE_TYPE_MAP[type] ?? 'blogs'}`,
+    {
+      headers: getAdminApiHeaders(),
+    },
   );
 
   return NextResponse.json(res);

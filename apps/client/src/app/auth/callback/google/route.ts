@@ -2,6 +2,7 @@ import type { NextRequest } from 'next/server';
 
 import { bffTemplate } from 'helper/bffTemplate';
 import { completeLogin } from 'helper/completeLogin';
+import { verifyOAuthState } from 'helper/verifyOAuthState';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
@@ -9,10 +10,12 @@ export async function GET(req: NextRequest) {
     const { searchParams } = req.nextUrl;
 
     const code = searchParams.get('code');
+    const state = searchParams.get('state');
 
-    if (!code) {
+    const isValidState = await verifyOAuthState(state);
+    if (!code || !isValidState) {
       return NextResponse.json(
-        { error: 'Missing code parameter' },
+        { error: 'Invalid request' },
         { status: 400 },
       );
     }
