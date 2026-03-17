@@ -55,7 +55,7 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
     source: post.source.name,
     sourceId: post.source.id,
     title: post.title,
-    type: post.source.type,
+    type: post.source.type ?? '',
   };
 
   return (

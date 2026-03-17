@@ -25,7 +25,7 @@ export const ChannelItem = ({ channel }: ChannelItemProps) => {
     <li>
       <LogClick
         eventName='channel_click'
-        params={{ id: channel.id, name: channel.name, type: channel.type }}
+        params={{ id: channel.id, name: channel.name, type: channel.type ?? '' }}
       >
         <Link
           className={cn('flex flex-col items-center gap-2 w-16')}
