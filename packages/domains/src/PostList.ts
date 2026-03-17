@@ -6,10 +6,10 @@ export const postListSchema = z.object({
   id: z.uuid(),
   imageUrl: z.string().nullish(),
   isBookmark: z.boolean().default(false),
-  originalPublishedAt: z.date(),
+  originalPublishedAt: z.coerce.date(),
   postTags: z.array(
     z.object({
-      createdAt: z.date(),
+      createdAt: z.coerce.date(),
       postId: z.uuid(),
       tag: z.object({
         id: z.number().int().positive(),

@@ -1,6 +1,10 @@
 import type { ReactNode } from 'react';
 
-export interface Modal {
-  content: ReactNode;
-  modalKey: string;
-}
+import { z } from 'zod';
+
+export const modalSchema = z.object({
+  content: z.custom<ReactNode>(),
+  modalKey: z.string(),
+});
+
+export type Modal = z.infer<typeof modalSchema>;
