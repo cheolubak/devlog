@@ -10,7 +10,10 @@ import { z } from 'zod';
 export async function GET(req: NextRequest) {
   return bffTemplate(req, async ({ accessToken, sessionId }) => {
     if (!accessToken) {
-      return NextResponse.json([]);
+      return NextResponse.json({
+        data: [],
+        pagination: { hasMore: false, limit: 20, offset: 0, total: 0 },
+      });
     }
 
     const { searchParams } = req.nextUrl;
