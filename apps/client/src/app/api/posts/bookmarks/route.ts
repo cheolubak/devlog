@@ -1,9 +1,6 @@
 import type { NextRequest } from 'next/server';
 
-import {
-  postListSchema,
-  responseListSchema,
-} from '@devlog/domains';
+import { postListSchema, responseListSchema } from '@devlog/domains';
 import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
 import { bffTemplate } from 'helper/bffTemplate';
@@ -12,8 +9,11 @@ import { z } from 'zod';
 
 export async function GET(req: NextRequest) {
   return bffTemplate(req, async ({ accessToken, sessionId }) => {
-    const { searchParams } = req.nextUrl;
+    if (!accessToken) {
+      return NextResponse.json([]);
+    }
 
+    const { searchParams } = req.nextUrl;
     const page = z.coerce
       .number()
       .int()
