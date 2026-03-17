@@ -1,6 +1,6 @@
-import type { User } from '@devlog/domains';
 import type { NextRequest } from 'next/server';
 
+import { userSchema } from '@devlog/domains';
 import { externalApi } from '@devlog/request';
 import { bffTemplate } from 'helper/bffTemplate';
 import { NextResponse } from 'next/server';
@@ -14,17 +14,19 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const res = await externalApi.get<User>('/auth/me', {
+    const res = await externalApi.get('/auth/me', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         sessionId,
       },
     });
 
+    const parsed = userSchema.parse(res);
+
     return NextResponse.json({
-      ...res,
-      profile: res.profile
-        ? `${process.env.NEXT_PUBLIC_IMAGE_URL_PREFIX}${res.profile.startsWith('/') ? res.profile : `/${res.profile}`}`
+      ...parsed,
+      profile: parsed.profile
+        ? `${process.env.NEXT_PUBLIC_IMAGE_URL_PREFIX}${parsed.profile.startsWith('/') ? parsed.profile : `/${parsed.profile}`}`
         : undefined,
     });
   });

@@ -1,6 +1,6 @@
-import type { FeedFetchResult } from '@devlog/domains';
 import type { NextRequest } from 'next/server';
 
+import { feedFetchResultSchema } from '@devlog/domains';
 import { externalApi } from '@devlog/request';
 import { getAdminApiHeaders } from 'helper/adminApiHeaders';
 import { verifyAdmin } from 'helper/verifyAdmin';
@@ -15,7 +15,7 @@ export async function POST(
 
   const { id } = await params;
 
-  const res = await externalApi.post<FeedFetchResult>(
+  const res = await externalApi.post(
     `/feed-fetcher/fetch/${id}`,
     null,
     {
@@ -23,5 +23,7 @@ export async function POST(
     },
   );
 
-  return NextResponse.json(res);
+  const parsed = feedFetchResultSchema.parse(res);
+
+  return NextResponse.json(parsed);
 }

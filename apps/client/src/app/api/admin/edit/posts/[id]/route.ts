@@ -5,6 +5,11 @@ import { getAdminApiHeaders } from 'helper/adminApiHeaders';
 import { verifyAdmin } from 'helper/verifyAdmin';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
+
+const postEditBodySchema = z.object({
+  isDisplay: z.boolean(),
+});
 
 export async function DELETE(
   _: NextRequest,
@@ -36,22 +41,13 @@ export async function PATCH(
 
   const { id } = await params;
 
-  let rawBody: unknown;
-  try {
-    rawBody = await req.json();
-  } catch {
-    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
-  }
+  const result = postEditBodySchema.safeParse(await req.json().catch(() => null));
 
-  if (
-    !rawBody ||
-    typeof rawBody !== 'object' ||
-    typeof (rawBody as { isDisplay?: unknown }).isDisplay !== 'boolean'
-  ) {
+  if (!result.success) {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
   }
 
-  const payload = { isDisplay: (rawBody as { isDisplay: boolean }).isDisplay };
+  const payload = result.data;
 
   await externalApi.patch(`/posts/${id}/display`, payload, {
     headers: getAdminApiHeaders(),

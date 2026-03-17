@@ -1,6 +1,6 @@
-import type { BlogSource } from '@devlog/domains';
 import type { NextRequest } from 'next/server';
 
+import { blogSourceSchema } from '@devlog/domains';
 import { externalApi } from '@devlog/request';
 import { NextResponse } from 'next/server';
 
@@ -10,10 +10,12 @@ export async function GET(
 ) {
   const { id } = await params;
 
-  const res = await externalApi.get<BlogSource>(`/blog-sources/${id}`);
+  const parsed = blogSourceSchema.parse(
+    await externalApi.get(`/blog-sources/${id}`),
+  );
 
   return NextResponse.json({
-    ...res,
-    icon: `${process.env.NEXT_PUBLIC_IMAGE_URL_PREFIX}${res.icon?.startsWith('/') ? res.icon : `/${res.icon}`}`,
+    ...parsed,
+    icon: `${process.env.NEXT_PUBLIC_IMAGE_URL_PREFIX}${parsed.icon?.startsWith('/') ? parsed.icon : `/${parsed.icon}`}`,
   });
 }

@@ -1,10 +1,11 @@
-import type { BlogSource } from '@devlog/domains';
 import type { NextRequest } from 'next/server';
 
+import { blogSourceSchema } from '@devlog/domains';
 import { externalApi } from '@devlog/request';
 import { getAdminApiHeaders } from 'helper/adminApiHeaders';
 import { verifyAdmin } from 'helper/verifyAdmin';
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
 
 const BLOG_SOURCE_TYPE_MAP: Record<string, string> = {
   BLOG: 'blogs',
@@ -19,12 +20,14 @@ export async function GET(req: NextRequest) {
 
   const type = searchParams.get('type') ?? 'BLOG';
 
-  const res = await externalApi.get<BlogSource[]>(
+  const res = await externalApi.get(
     `/blog-sources/${BLOG_SOURCE_TYPE_MAP[type] ?? 'blogs'}`,
     {
       headers: getAdminApiHeaders(),
     },
   );
 
-  return NextResponse.json(res);
+  const parsed = z.array(blogSourceSchema).parse(res);
+
+  return NextResponse.json(parsed);
 }

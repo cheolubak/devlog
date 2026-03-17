@@ -1,10 +1,12 @@
-import type { BlogSource } from '@devlog/domains';
-
+import { blogSourceSchema } from '@devlog/domains';
 import { externalApi } from '@devlog/request';
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
 
 export async function GET() {
-  const channels = await externalApi.get<BlogSource[]>('blog-sources');
+  const channels = z.array(blogSourceSchema).parse(
+    await externalApi.get('blog-sources'),
+  );
 
   const youtubes = channels.filter((channel) => channel.type === 'YOUTUBE');
 

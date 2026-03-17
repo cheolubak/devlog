@@ -1,6 +1,9 @@
-import type { PostList, ResponseList } from '@devlog/domains';
 import type { NextRequest } from 'next/server';
 
+import {
+  postListSchema,
+  responseListSchema,
+} from '@devlog/domains';
 import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
 import { bffTemplate } from 'helper/bffTemplate';
@@ -44,14 +47,16 @@ export async function GET(req: NextRequest) {
         headers.Authorization = `Bearer ${accessToken}`;
       }
 
-      const res = await externalApi.get<ResponseList<PostList>>(endpoint, {
+      const res = await externalApi.get(endpoint, {
         headers,
         params: apiParams,
       });
 
+      const parsed = responseListSchema(postListSchema).parse(res);
+
       return NextResponse.json({
-        ...res,
-        data: res.data.map((item) => ({ ...item, isBookmark: true })),
+        ...parsed,
+        data: parsed.data.map((item) => ({ ...item, isBookmark: true })),
       });
     } catch (e) {
       log.error('GET Posts', { error: JSON.stringify(e), page, q });
