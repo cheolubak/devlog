@@ -16,7 +16,7 @@ const validPostListAll = {
     icon: null,
     id: '660e8400-e29b-41d4-a716-446655440000',
     name: 'Example Blog',
-    type: 'RSS' as const,
+    type: 'RSS',
     url: 'https://example.com',
   },
   sourceUrl: 'https://example.com/post/1',

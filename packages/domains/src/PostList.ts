@@ -25,7 +25,7 @@ export const postListSchema = z.object({
     icon: z.string().nullish(),
     id: z.uuid(),
     name: z.string(),
-    type: z.enum(['RSS', 'ATOM', 'SCRAPING', 'YOUTUBE']),
+    type: z.string().optional(),
     url: z.string(),
   }),
   sourceUrl: z.string(),

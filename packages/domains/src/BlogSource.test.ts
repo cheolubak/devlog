@@ -11,9 +11,9 @@ const validBlogSource = {
   isActive: true,
   lastFetchedAt: '2025-06-01T00:00:00Z',
   lastFetchError: '',
-  lastFetchStatus: 'SUCCESS' as const,
+  lastFetchStatus: 'SUCCESS',
   name: 'Example Blog',
-  type: 'RSS' as const,
+  type: 'RSS',
   updatedAt: '2025-06-01T00:00:00Z',
   url: 'https://blog.example.com/rss',
 };
@@ -60,6 +60,14 @@ describe('blogSourceSchema', () => {
     expect(result.scrapingConfig).toBeNull();
   });
 
+  it('lastFetchError가 null이어도 파싱한다', () => {
+    const result = blogSourceSchema.parse({
+      ...validBlogSource,
+      lastFetchError: null,
+    });
+    expect(result.lastFetchError).toBeNull();
+  });
+
   it('lastFetchStatus가 FAILED여도 파싱한다', () => {
     const result = blogSourceSchema.parse({
       ...validBlogSource,
@@ -75,10 +83,12 @@ describe('blogSourceSchema', () => {
     }
   });
 
-  it('유효하지 않은 type은 에러를 던진다', () => {
-    expect(() =>
-      blogSourceSchema.parse({ ...validBlogSource, type: 'INVALID' }),
-    ).toThrow();
+  it('새로운 type 값도 파싱한다', () => {
+    const result = blogSourceSchema.parse({
+      ...validBlogSource,
+      type: 'NEW_TYPE',
+    });
+    expect(result.type).toBe('NEW_TYPE');
   });
 
   it('필수 필드가 누락되면 에러를 던진다', () => {
