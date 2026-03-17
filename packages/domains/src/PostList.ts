@@ -7,17 +7,19 @@ export const postListSchema = z.object({
   imageUrl: z.string().nullish(),
   isBookmark: z.boolean().default(false),
   originalPublishedAt: z.coerce.date(),
-  postTags: z.array(
-    z.object({
-      createdAt: z.coerce.date(),
-      postId: z.uuid(),
-      tag: z.object({
-        id: z.number().int().positive(),
-        name: z.string(),
+  postTags: z
+    .array(
+      z.object({
+        createdAt: z.coerce.date(),
+        postId: z.uuid(),
+        tag: z.object({
+          id: z.number().int().positive(),
+          name: z.string(),
+        }),
+        tagId: z.number().int().positive(),
       }),
-      tagId: z.number().int().positive(),
-    }),
-  ),
+    )
+    .default([]),
   source: z.object({
     blogUrl: z.string(),
     icon: z.string().nullish(),
