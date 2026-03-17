@@ -43,9 +43,7 @@ export async function GET(req: NextRequest) {
         sessionId,
       };
 
-      if (accessToken) {
-        headers.Authorization = `Bearer ${accessToken}`;
-      }
+      headers.Authorization = `Bearer ${accessToken}`;
 
       const res = await externalApi.get(endpoint, {
         headers,

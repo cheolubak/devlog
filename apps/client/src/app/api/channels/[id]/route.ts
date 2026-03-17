@@ -16,6 +16,8 @@ export async function GET(
 
   return NextResponse.json({
     ...parsed,
-    icon: `${process.env.NEXT_PUBLIC_IMAGE_URL_PREFIX}${parsed.icon?.startsWith('/') ? parsed.icon : `/${parsed.icon}`}`,
+    icon: parsed.icon
+      ? `${process.env.NEXT_PUBLIC_IMAGE_URL_PREFIX}${parsed.icon.startsWith('/') ? parsed.icon : `/${parsed.icon}`}`
+      : null,
   });
 }
