@@ -26,6 +26,9 @@ export const useAuth = () => {
   const { mutate: logout } = useMutation({
     mutationFn: () => fetchApi.delete('/logout'),
     mutationKey: ['logout'],
+    onError: () => {
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+    },
     onMutate: () => {
       queryClient.setQueryData(['user'], null);
     },
@@ -33,7 +36,7 @@ export const useAuth = () => {
 
   const { mutate: leave } = useMutation({
     mutationFn: () => fetchApi.delete('/leave'),
-    mutationKey: ['logout'],
+    mutationKey: ['leave'],
     onMutate: () => {
       show('leave');
       queryClient.setQueryData(['user'], null);
