@@ -47,4 +47,14 @@ describe('jwtDecode', () => {
 
     expect(result.exp).toBe(1800000000);
   });
+
+  it('잘못된 형식의 토큰이면 에러를 던진다', () => {
+    expect(() => jwtDecode('invalid-token')).toThrow(
+      'Invalid JWT token format',
+    );
+  });
+
+  it('빈 문자열이면 에러를 던진다', () => {
+    expect(() => jwtDecode('')).toThrow('Invalid JWT token format');
+  });
 });

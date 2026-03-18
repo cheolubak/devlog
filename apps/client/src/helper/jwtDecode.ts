@@ -1,6 +1,11 @@
 export const jwtDecode = (token: string) => {
-  const splited = token.split('.');
-  const payload = atob(splited[1]);
+  const parts = token.split('.');
+
+  if (parts.length !== 3) {
+    throw new Error('Invalid JWT token format');
+  }
+
+  const payload = atob(parts[1]);
 
   const data: {
     exp: number;
