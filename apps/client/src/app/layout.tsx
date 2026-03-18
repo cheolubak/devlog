@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 
-import { GlobalModal, Loading } from '@devlog/components';
+import { GlobalModal, Loading, Toast } from '@devlog/components';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import {
   BottomNavigation,
@@ -106,6 +106,7 @@ export default async function RootLayout({
             </Suspense>
             <Loading />
             <GlobalModal />
+            <Toast />
           </QueryProvider>
         </I18nProvider>
       </body>

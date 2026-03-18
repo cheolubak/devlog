@@ -15,4 +15,5 @@ export * from './Ripple';
 export * from './Skeleton';
 export * from './Switch';
 export * from './Tabs';
+export * from './Toast';
 export * from './Typography';
