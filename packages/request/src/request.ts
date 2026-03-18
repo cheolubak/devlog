@@ -168,14 +168,13 @@ export class RequestInstance {
     return headers;
   }
 
-  private parseResponse(res: Response) {
-    return res
-      .json()
-      .catch(() => res.formData())
-      .catch(() => res.text())
-      .catch(() => res.blob())
-      .catch(() => res.arrayBuffer())
-      .catch(() => undefined);
+  private async parseResponse(res: Response) {
+    const text = await res.text();
+    try {
+      return JSON.parse(text);
+    } catch {
+      return text;
+    }
   }
 
   private async request<T>(

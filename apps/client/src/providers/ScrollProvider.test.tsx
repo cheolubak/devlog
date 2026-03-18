@@ -40,6 +40,7 @@ describe('ScrollProvider', () => {
     expect(addEventListenerSpy).toHaveBeenCalledWith(
       'scroll',
       expect.any(Function),
+      { passive: true },
     );
 
     addEventListenerSpy.mockRestore();

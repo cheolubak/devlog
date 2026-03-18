@@ -10,6 +10,10 @@ export default defineConfig({
       helper: path.resolve(__dirname, 'apps/client/src/helper'),
       hooks: path.resolve(__dirname, 'apps/client/src/hooks'),
       i18n: path.resolve(__dirname, 'apps/client/src/i18n'),
+      'i18n.constants': path.resolve(
+        __dirname,
+        'apps/client/src/i18n.constants',
+      ),
       providers: path.resolve(__dirname, 'apps/client/src/providers'),
       stores: path.resolve(__dirname, 'apps/client/src/stores'),
       types: path.resolve(__dirname, 'apps/client/src/types'),
