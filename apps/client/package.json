@@ -9,6 +9,8 @@
     "lint": "eslint",
     "cypress:open": "cypress open",
     "cypress:run": "start-server-and-test 'next start' http://localhost:3000 'cypress run'",
+    "cypress:component": "cypress run --component",
+    "cypress:component:open": "cypress open --component",
     "analyze": "next experimental-analyze"
   },
   "dependencies": {

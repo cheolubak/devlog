@@ -5,6 +5,13 @@ export default defineConfig({
     baseUrl: 'http://localhost:3000',
     specPattern: 'cypress/e2e/**/*.cy.ts',
   },
+  component: {
+    devServer: {
+      framework: 'next',
+      bundler: 'webpack',
+    },
+    specPattern: 'cypress/component/**/*.cy.tsx',
+  },
   viewportHeight: 720,
   viewportWidth: 1280,
 });
