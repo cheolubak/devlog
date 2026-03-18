@@ -68,7 +68,10 @@ export async function GET(req: NextRequest) {
 
       return NextResponse.json(parsed);
     } catch (e) {
-      return handleRouteError(e, 'fetch posts', { page, q });
+      return handleRouteError(e, 'fetch posts', {
+        hasQuery: q.length > 0,
+        page,
+      });
     }
   });
 }

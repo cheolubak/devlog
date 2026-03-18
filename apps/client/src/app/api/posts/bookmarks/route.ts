@@ -60,7 +60,10 @@ export async function GET(req: NextRequest) {
         data: parsed.data.map((item) => ({ ...item, isBookmark: true })),
       });
     } catch (e) {
-      return handleRouteError(e, 'fetch bookmark posts', { page, q });
+      return handleRouteError(e, 'fetch bookmark posts', {
+        hasQuery: q.length > 0,
+        page,
+      });
     }
   });
 }

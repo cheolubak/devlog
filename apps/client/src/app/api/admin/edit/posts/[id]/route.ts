@@ -25,16 +25,16 @@ export async function DELETE(
     await externalApi.delete(`/posts/${id}`, {
       headers: getAdminApiHeaders(),
     });
-
-    revalidateTag('posts', {
-      expire: 0,
-    });
-    revalidatePath('/');
-
-    return NextResponse.json({ message: 'success' });
   } catch (e) {
     return handleRouteError(e, 'delete post', { id });
   }
+
+  revalidateTag('posts', {
+    expire: 0,
+  });
+  revalidatePath('/');
+
+  return NextResponse.json({ message: 'success' });
 }
 
 export async function PATCH(
@@ -58,14 +58,14 @@ export async function PATCH(
     await externalApi.patch(`/posts/${id}/display`, payload, {
       headers: getAdminApiHeaders(),
     });
-
-    revalidateTag('posts', {
-      expire: 0,
-    });
-    revalidatePath('/');
-
-    return NextResponse.json({ message: 'success' });
   } catch (e) {
     return handleRouteError(e, 'update post', { id });
   }
+
+  revalidateTag('posts', {
+    expire: 0,
+  });
+  revalidatePath('/');
+
+  return NextResponse.json({ message: 'success' });
 }
