@@ -4,6 +4,7 @@ import {
   postListAllSchema,
   responseListSchema,
 } from '@devlog/domains';
+import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
 import { getAdminApiHeaders } from 'helper/adminApiHeaders';
 import { verifyAdmin } from 'helper/verifyAdmin';
@@ -21,16 +22,27 @@ export async function GET(
 
   const isDisplay = searchParams.get('isDisplay') ?? 'false';
 
-  const res = await externalApi.get('posts/all', {
-    headers: getAdminApiHeaders(),
-    params: {
-      isDisplay,
-      offset: page,
-      type: ['RSS', 'ATOM', 'SCRAPING'],
-    },
-  });
+  try {
+    const res = await externalApi.get('posts/all', {
+      headers: getAdminApiHeaders(),
+      params: {
+        isDisplay,
+        offset: page,
+        type: ['RSS', 'ATOM', 'SCRAPING'],
+      },
+    });
 
-  const parsed = responseListSchema(postListAllSchema).parse(res);
+    const parsed = responseListSchema(postListAllSchema).parse(res);
 
-  return NextResponse.json(parsed);
+    return NextResponse.json(parsed);
+  } catch (e) {
+    log.error('GET Admin Posts', {
+      error: e instanceof Error ? e.message : String(e),
+      page,
+    });
+    return NextResponse.json(
+      { message: 'Failed to fetch posts' },
+      { status: 500 },
+    );
+  }
 }

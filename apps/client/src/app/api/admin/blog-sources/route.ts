@@ -1,6 +1,7 @@
 import type { NextRequest } from 'next/server';
 
 import { blogSourceSchema } from '@devlog/domains';
+import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
 import { getAdminApiHeaders } from 'helper/adminApiHeaders';
 import { verifyAdmin } from 'helper/verifyAdmin';
@@ -20,14 +21,25 @@ export async function GET(req: NextRequest) {
 
   const type = searchParams.get('type') ?? 'BLOG';
 
-  const res = await externalApi.get(
-    `/blog-sources/${BLOG_SOURCE_TYPE_MAP[type] ?? 'blogs'}`,
-    {
-      headers: getAdminApiHeaders(),
-    },
-  );
+  try {
+    const res = await externalApi.get(
+      `/blog-sources/${BLOG_SOURCE_TYPE_MAP[type] ?? 'blogs'}`,
+      {
+        headers: getAdminApiHeaders(),
+      },
+    );
 
-  const parsed = z.array(blogSourceSchema).parse(res);
+    const parsed = z.array(blogSourceSchema).parse(res);
 
-  return NextResponse.json(parsed);
+    return NextResponse.json(parsed);
+  } catch (e) {
+    log.error('GET Admin Blog Sources', {
+      error: e instanceof Error ? e.message : String(e),
+      type,
+    });
+    return NextResponse.json(
+      { message: 'Failed to fetch blog sources' },
+      { status: 500 },
+    );
+  }
 }

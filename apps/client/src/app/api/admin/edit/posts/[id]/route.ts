@@ -1,5 +1,6 @@
 import type { NextRequest } from 'next/server';
 
+import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
 import { getAdminApiHeaders } from 'helper/adminApiHeaders';
 import { verifyAdmin } from 'helper/verifyAdmin';
@@ -20,16 +21,27 @@ export async function DELETE(
 
   const { id } = await params;
 
-  await externalApi.delete(`/posts/${id}`, {
-    headers: getAdminApiHeaders(),
-  });
+  try {
+    await externalApi.delete(`/posts/${id}`, {
+      headers: getAdminApiHeaders(),
+    });
 
-  revalidateTag('posts', {
-    expire: 0,
-  });
-  revalidatePath('/');
+    revalidateTag('posts', {
+      expire: 0,
+    });
+    revalidatePath('/');
 
-  return NextResponse.json({ message: 'success' });
+    return NextResponse.json({ message: 'success' });
+  } catch (e) {
+    log.error('DELETE Admin Post', {
+      error: e instanceof Error ? e.message : String(e),
+      id,
+    });
+    return NextResponse.json(
+      { message: 'Failed to delete post' },
+      { status: 500 },
+    );
+  }
 }
 
 export async function PATCH(
@@ -49,14 +61,25 @@ export async function PATCH(
 
   const payload = result.data;
 
-  await externalApi.patch(`/posts/${id}/display`, payload, {
-    headers: getAdminApiHeaders(),
-  });
+  try {
+    await externalApi.patch(`/posts/${id}/display`, payload, {
+      headers: getAdminApiHeaders(),
+    });
 
-  revalidateTag('posts', {
-    expire: 0,
-  });
-  revalidatePath('/');
+    revalidateTag('posts', {
+      expire: 0,
+    });
+    revalidatePath('/');
 
-  return NextResponse.json({ message: 'success' });
+    return NextResponse.json({ message: 'success' });
+  } catch (e) {
+    log.error('PATCH Admin Post', {
+      error: e instanceof Error ? e.message : String(e),
+      id,
+    });
+    return NextResponse.json(
+      { message: 'Failed to update post' },
+      { status: 500 },
+    );
+  }
 }
