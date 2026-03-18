@@ -52,8 +52,7 @@ export const useAuth = () => {
       hide('leave');
     },
     onSuccess: () => {
-      logout();
-
+      queryClient.setQueryData(['user'], null);
       router.replace('/');
     },
   });
