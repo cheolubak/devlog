@@ -1,0 +1,86 @@
+{
+  "blogs": [
+    {
+      "id": "blog-001",
+      "name": "Tech Blog",
+      "blogUrl": "https://tech-blog.example.com",
+      "url": "https://tech-blog.example.com",
+      "corpUrl": "https://tech-corp.example.com",
+      "icon": "/icons/tech-blog.png",
+      "type": "RSS",
+      "isActive": true,
+      "lastFetchedAt": "2025-01-15T00:00:00.000Z",
+      "lastFetchStatus": "SUCCESS",
+      "lastFetchError": null,
+      "totalPostsFetched": 100,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-15T00:00:00.000Z"
+    },
+    {
+      "id": "blog-002",
+      "name": "Dev Notes",
+      "blogUrl": "https://devnotes.example.com",
+      "url": "https://devnotes.example.com",
+      "corpUrl": null,
+      "icon": null,
+      "type": "ATOM",
+      "isActive": true,
+      "lastFetchedAt": "2025-01-14T00:00:00.000Z",
+      "lastFetchStatus": "SUCCESS",
+      "lastFetchError": null,
+      "totalPostsFetched": 50,
+      "createdAt": "2024-02-01T00:00:00.000Z",
+      "updatedAt": "2025-01-14T00:00:00.000Z"
+    },
+    {
+      "id": "blog-003",
+      "name": "CSS Weekly",
+      "blogUrl": "https://cssweekly.example.com",
+      "url": "https://cssweekly.example.com",
+      "corpUrl": null,
+      "icon": "/icons/css-weekly.png",
+      "type": "RSS",
+      "isActive": true,
+      "lastFetchedAt": "2025-01-13T00:00:00.000Z",
+      "lastFetchStatus": "SUCCESS",
+      "lastFetchError": null,
+      "totalPostsFetched": 30,
+      "createdAt": "2024-03-01T00:00:00.000Z",
+      "updatedAt": "2025-01-13T00:00:00.000Z"
+    }
+  ],
+  "youtubes": [
+    {
+      "id": "yt-001",
+      "name": "코딩 유튜브",
+      "blogUrl": "https://youtube.com/@coding",
+      "url": "https://youtube.com/@coding",
+      "corpUrl": null,
+      "icon": "/icons/coding-yt.png",
+      "type": "YOUTUBE",
+      "isActive": true,
+      "lastFetchedAt": "2025-01-15T00:00:00.000Z",
+      "lastFetchStatus": "SUCCESS",
+      "lastFetchError": null,
+      "totalPostsFetched": 200,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-15T00:00:00.000Z"
+    },
+    {
+      "id": "yt-002",
+      "name": "개발 TV",
+      "blogUrl": "https://youtube.com/@devtv",
+      "url": "https://youtube.com/@devtv",
+      "corpUrl": null,
+      "icon": null,
+      "type": "YOUTUBE",
+      "isActive": true,
+      "lastFetchedAt": "2025-01-14T00:00:00.000Z",
+      "lastFetchStatus": "SUCCESS",
+      "lastFetchError": null,
+      "totalPostsFetched": 150,
+      "createdAt": "2024-02-01T00:00:00.000Z",
+      "updatedAt": "2025-01-14T00:00:00.000Z"
+    }
+  ]
+}
