@@ -1,9 +1,9 @@
 import type { NextRequest } from 'next/server';
 
 import { postListSchema, responseListSchema } from '@devlog/domains';
-import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
 import { bffTemplate } from 'helper/bffTemplate';
+import { handleRouteError } from 'helper/handleRouteError';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
@@ -60,12 +60,7 @@ export async function GET(req: NextRequest) {
         data: parsed.data.map((item) => ({ ...item, isBookmark: true })),
       });
     } catch (e) {
-      log.error('GET Bookmark Posts', {
-        error: e instanceof Error ? e.message : String(e),
-        page,
-        q,
-      });
-      return NextResponse.json({ message: 'Error!!' }, { status: 500 });
+      return handleRouteError(e, 'fetch bookmark posts', { page, q });
     }
   });
 }

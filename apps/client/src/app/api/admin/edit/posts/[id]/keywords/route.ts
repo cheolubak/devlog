@@ -1,8 +1,8 @@
 import type { NextRequest } from 'next/server';
 
-import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
 import { getAdminApiHeaders } from 'helper/adminApiHeaders';
+import { handleRouteError } from 'helper/handleRouteError';
 import { verifyAdmin } from 'helper/verifyAdmin';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
@@ -39,13 +39,6 @@ export async function PUT(
 
     return NextResponse.json(res);
   } catch (e) {
-    log.error('PUT Admin Post Keywords', {
-      error: e instanceof Error ? e.message : String(e),
-      id,
-    });
-    return NextResponse.json(
-      { message: 'Failed to update keywords' },
-      { status: 500 },
-    );
+    return handleRouteError(e, 'update keywords', { id });
   }
 }

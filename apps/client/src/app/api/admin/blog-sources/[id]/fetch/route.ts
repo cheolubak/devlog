@@ -1,9 +1,9 @@
 import type { NextRequest } from 'next/server';
 
 import { feedFetchResultSchema } from '@devlog/domains';
-import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
 import { getAdminApiHeaders } from 'helper/adminApiHeaders';
+import { handleRouteError } from 'helper/handleRouteError';
 import { verifyAdmin } from 'helper/verifyAdmin';
 import { NextResponse } from 'next/server';
 
@@ -29,13 +29,6 @@ export async function POST(
 
     return NextResponse.json(parsed);
   } catch (e) {
-    log.error('POST Admin Feed Fetch', {
-      error: e instanceof Error ? e.message : String(e),
-      id,
-    });
-    return NextResponse.json(
-      { message: 'Failed to fetch feed' },
-      { status: 500 },
-    );
+    return handleRouteError(e, 'fetch feed', { id });
   }
 }

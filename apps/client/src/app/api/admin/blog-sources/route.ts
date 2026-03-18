@@ -1,9 +1,9 @@
 import type { NextRequest } from 'next/server';
 
 import { blogSourceSchema } from '@devlog/domains';
-import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
 import { getAdminApiHeaders } from 'helper/adminApiHeaders';
+import { handleRouteError } from 'helper/handleRouteError';
 import { verifyAdmin } from 'helper/verifyAdmin';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
@@ -33,13 +33,6 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(parsed);
   } catch (e) {
-    log.error('GET Admin Blog Sources', {
-      error: e instanceof Error ? e.message : String(e),
-      type,
-    });
-    return NextResponse.json(
-      { message: 'Failed to fetch blog sources' },
-      { status: 500 },
-    );
+    return handleRouteError(e, 'fetch blog sources', { type });
   }
 }

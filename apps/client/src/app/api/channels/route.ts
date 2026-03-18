@@ -1,6 +1,6 @@
 import { blogSourceSchema } from '@devlog/domains';
-import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
+import { handleRouteError } from 'helper/handleRouteError';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
@@ -29,12 +29,6 @@ export async function GET() {
       })),
     });
   } catch (e) {
-    log.error('GET Channels', {
-      error: e instanceof Error ? e.message : String(e),
-    });
-    return NextResponse.json(
-      { message: 'Failed to fetch channels' },
-      { status: 500 },
-    );
+    return handleRouteError(e, 'fetch channels');
   }
 }

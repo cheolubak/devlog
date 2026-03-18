@@ -4,9 +4,9 @@ import {
   postListSchema,
   responseListSchema,
 } from '@devlog/domains';
-import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
 import { bffTemplate } from 'helper/bffTemplate';
+import { handleRouteError } from 'helper/handleRouteError';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
@@ -68,12 +68,7 @@ export async function GET(req: NextRequest) {
 
       return NextResponse.json(parsed);
     } catch (e) {
-      log.error('GET Posts', {
-        error: e instanceof Error ? e.message : String(e),
-        page,
-        q,
-      });
-      return NextResponse.json({ message: 'Error!!' }, { status: 500 });
+      return handleRouteError(e, 'fetch posts', { page, q });
     }
   });
 }

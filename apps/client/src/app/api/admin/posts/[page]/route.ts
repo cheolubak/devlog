@@ -4,9 +4,9 @@ import {
   postListAllSchema,
   responseListSchema,
 } from '@devlog/domains';
-import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
 import { getAdminApiHeaders } from 'helper/adminApiHeaders';
+import { handleRouteError } from 'helper/handleRouteError';
 import { verifyAdmin } from 'helper/verifyAdmin';
 import { NextResponse } from 'next/server';
 
@@ -36,13 +36,6 @@ export async function GET(
 
     return NextResponse.json(parsed);
   } catch (e) {
-    log.error('GET Admin Posts', {
-      error: e instanceof Error ? e.message : String(e),
-      page,
-    });
-    return NextResponse.json(
-      { message: 'Failed to fetch posts' },
-      { status: 500 },
-    );
+    return handleRouteError(e, 'fetch posts', { page });
   }
 }

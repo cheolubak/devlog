@@ -1,8 +1,8 @@
 import type { NextRequest } from 'next/server';
 
-import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
 import { getAdminApiHeaders } from 'helper/adminApiHeaders';
+import { handleRouteError } from 'helper/handleRouteError';
 import { verifyAdmin } from 'helper/verifyAdmin';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { NextResponse } from 'next/server';
@@ -33,14 +33,7 @@ export async function DELETE(
 
     return NextResponse.json({ message: 'success' });
   } catch (e) {
-    log.error('DELETE Admin Post', {
-      error: e instanceof Error ? e.message : String(e),
-      id,
-    });
-    return NextResponse.json(
-      { message: 'Failed to delete post' },
-      { status: 500 },
-    );
+    return handleRouteError(e, 'delete post', { id });
   }
 }
 
@@ -73,13 +66,6 @@ export async function PATCH(
 
     return NextResponse.json({ message: 'success' });
   } catch (e) {
-    log.error('PATCH Admin Post', {
-      error: e instanceof Error ? e.message : String(e),
-      id,
-    });
-    return NextResponse.json(
-      { message: 'Failed to update post' },
-      { status: 500 },
-    );
+    return handleRouteError(e, 'update post', { id });
   }
 }

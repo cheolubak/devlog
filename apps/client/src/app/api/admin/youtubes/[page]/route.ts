@@ -4,9 +4,9 @@ import {
   postListAllSchema,
   responseListSchema,
 } from '@devlog/domains';
-import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
 import { getAdminApiHeaders } from 'helper/adminApiHeaders';
+import { handleRouteError } from 'helper/handleRouteError';
 import { verifyAdmin } from 'helper/verifyAdmin';
 import { NextResponse } from 'next/server';
 
@@ -36,13 +36,6 @@ export async function GET(
 
     return NextResponse.json(parsed);
   } catch (e) {
-    log.error('GET Admin Youtubes', {
-      error: e instanceof Error ? e.message : String(e),
-      page,
-    });
-    return NextResponse.json(
-      { message: 'Failed to fetch youtubes' },
-      { status: 500 },
-    );
+    return handleRouteError(e, 'fetch youtubes', { page });
   }
 }

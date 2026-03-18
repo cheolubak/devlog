@@ -1,8 +1,8 @@
 import type { NextRequest } from 'next/server';
 
 import { blogSourceSchema } from '@devlog/domains';
-import { log } from '@devlog/logger';
 import { externalApi } from '@devlog/request';
+import { handleRouteError } from 'helper/handleRouteError';
 import { NextResponse } from 'next/server';
 
 export async function GET(
@@ -23,13 +23,6 @@ export async function GET(
         : null,
     });
   } catch (e) {
-    log.error('GET Channel', {
-      error: e instanceof Error ? e.message : String(e),
-      id,
-    });
-    return NextResponse.json(
-      { message: 'Failed to fetch channel' },
-      { status: 500 },
-    );
+    return handleRouteError(e, 'fetch channel', { id });
   }
 }
