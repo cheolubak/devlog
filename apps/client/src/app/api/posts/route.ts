@@ -68,7 +68,11 @@ export async function GET(req: NextRequest) {
 
       return NextResponse.json(parsed);
     } catch (e) {
-      log.error('GET Posts', { error: JSON.stringify(e), page, q });
+      log.error('GET Posts', {
+        error: e instanceof Error ? e.message : String(e),
+        page,
+        q,
+      });
       return NextResponse.json({ message: 'Error!!' }, { status: 500 });
     }
   });

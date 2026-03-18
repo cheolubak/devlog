@@ -60,7 +60,11 @@ export async function GET(req: NextRequest) {
         data: parsed.data.map((item) => ({ ...item, isBookmark: true })),
       });
     } catch (e) {
-      log.error('GET Posts', { error: JSON.stringify(e), page, q });
+      log.error('GET Bookmark Posts', {
+        error: e instanceof Error ? e.message : String(e),
+        page,
+        q,
+      });
       return NextResponse.json({ message: 'Error!!' }, { status: 500 });
     }
   });
