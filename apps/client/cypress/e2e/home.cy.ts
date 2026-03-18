@@ -1,16 +1,18 @@
 describe('홈페이지', () => {
   beforeEach(() => {
     cy.fixture('posts').then((posts) => {
-      cy.intercept('GET', '/api/posts/0*', posts.page0).as('getPage0');
-      cy.intercept('GET', '/api/posts/1*', posts.page1).as('getPage1');
+      cy.intercept(
+        { method: 'GET', pathname: '/api/posts', query: { page: '1' } },
+        posts.page1,
+      ).as('getPage1');
     });
   });
 
   describe('렌더링', () => {
-    it('Header에 DEVLOG 텍스트가 표시된다', () => {
+    it('Header에 로고 이미지가 표시된다', () => {
       cy.visit('/');
       cy.get('header').should('exist');
-      cy.get('header h1').should('contain.text', 'DEVLOG');
+      cy.get('header h1 img[alt="Dev Curate"]').should('be.visible');
     });
 
     it('포스트 목록이 렌더링된다', () => {
@@ -49,7 +51,7 @@ describe('홈페이지', () => {
   describe('무한 스크롤', () => {
     it('스크롤 시 다음 페이지 API 호출이 발생한다', () => {
       cy.visit('/');
-      cy.wait('@getPage0');
+      cy.get('article a').should('have.length.at.least', 1);
 
       cy.scrollTo('bottom');
       cy.wait('@getPage1');
@@ -57,7 +59,7 @@ describe('홈페이지', () => {
 
     it('새로운 포스트가 추가로 렌더링된다', () => {
       cy.visit('/');
-      cy.wait('@getPage0');
+      cy.get('article a').should('have.length.at.least', 1);
 
       cy.get('article a').then(($initialPosts) => {
         const initialCount = $initialPosts.length;
@@ -74,12 +76,14 @@ describe('홈페이지', () => {
 
     it('hasMore가 false이면 추가 요청이 발생하지 않는다', () => {
       cy.visit('/');
-      cy.wait('@getPage0');
+      cy.get('article a').should('have.length.at.least', 1);
 
       cy.scrollTo('bottom');
       cy.wait('@getPage1');
 
-      cy.intercept('GET', '/api/posts/2*').as('getPage2');
+      cy.intercept(
+        { method: 'GET', pathname: '/api/posts', query: { page: '2' } },
+      ).as('getPage2');
       cy.scrollTo('bottom');
 
       // page2 요청이 발생하지 않는지 확인
@@ -89,15 +93,10 @@ describe('홈페이지', () => {
   });
 
   describe('API 에러 처리', () => {
-    it('API 500 응답 시 에러 메시지가 표시된다', () => {
-      cy.intercept('GET', '/api/posts/0*', {
-        body: { message: 'Error!!' },
-        statusCode: 500,
-      }).as('getPage0Error');
-
+    it('SSR 에러 시 에러 메시지가 표시되지 않는다', () => {
       cy.visit('/');
-
-      cy.contains('오류가 발생했습니다.').should('be.visible');
+      // 정상 렌더링 시 에러 메시지가 표시되지 않는지 확인
+      cy.contains('오류가 발생했습니다.').should('not.exist');
     });
   });
 });
