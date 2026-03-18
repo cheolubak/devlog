@@ -71,6 +71,12 @@ export const usePostBookmark = (post: PostList) => {
     },
     onSuccess: () => {
       prevBookmark.current = !prevBookmark.current;
+      queryClient.invalidateQueries({
+        queryKey: ['bookmark-posts-list'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['first-post-bookmark'],
+      });
     },
   });
 
