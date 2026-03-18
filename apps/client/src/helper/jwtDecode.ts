@@ -5,7 +5,8 @@ export const jwtDecode = (token: string) => {
     throw new Error('Invalid JWT token format');
   }
 
-  const payload = atob(parts[1]);
+  const base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+  const payload = atob(base64);
 
   const data: {
     exp: number;

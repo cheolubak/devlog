@@ -57,4 +57,18 @@ describe('jwtDecode', () => {
   it('빈 문자열이면 에러를 던진다', () => {
     expect(() => jwtDecode('')).toThrow('Invalid JWT token format');
   });
+
+  it('Base64URL 인코딩된 토큰을 디코딩한다', () => {
+    const payload = { exp: 1700000000, iat: 1699000000, sub: 'user+1/2' };
+    const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
+    const body = btoa(JSON.stringify(payload))
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=+$/, '');
+    const token = `${header}.${body}.signature`;
+
+    const result = jwtDecode(token);
+
+    expect(result).toEqual(payload);
+  });
 });

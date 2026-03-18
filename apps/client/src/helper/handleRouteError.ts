@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 export function handleRouteError(
   e: unknown,
   context: string,
-  attrs?: Record<string, unknown>,
+  attrs?: Record<string, boolean | number | string>,
 ) {
   log.error(context, {
     error: e instanceof Error ? e.message : String(e),
