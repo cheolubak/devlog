@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import type { ToastType } from './useToast';
@@ -26,26 +26,35 @@ const ToastItem = ({
 }) => {
   const dismiss = useToast((state) => state.dismiss);
   const [visible, setVisible] = useState(false);
+  const dismissTimerRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   useEffect(() => {
-    requestAnimationFrame(() => setVisible(true));
+    const rafId = requestAnimationFrame(() => setVisible(true));
 
     const timer = setTimeout(() => {
       setVisible(false);
-      setTimeout(() => dismiss(id), 300);
+      dismissTimerRef.current = setTimeout(() => dismiss(id), 300);
     }, TOAST_DURATION);
 
-    return () => clearTimeout(timer);
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(timer);
+      if (dismissTimerRef.current) {
+        clearTimeout(dismissTimerRef.current);
+      }
+    };
   }, [dismiss, id]);
 
   const handleDismiss = useCallback(() => {
     setVisible(false);
-    setTimeout(() => dismiss(id), 300);
+    if (dismissTimerRef.current) {
+      clearTimeout(dismissTimerRef.current);
+    }
+    dismissTimerRef.current = setTimeout(() => dismiss(id), 300);
   }, [dismiss, id]);
 
   return (
     <div
-      aria-live="assertive"
       className={`${typeStyles[type]} px-4 py-3 rounded-lg shadow-lg text-sm max-w-[320px] transition-all duration-300 cursor-pointer ${
         visible
           ? 'opacity-100 translate-y-0'
@@ -72,7 +81,10 @@ export const Toast = () => {
   }
 
   return createPortal(
-    <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-[1100] flex flex-col-reverse gap-2 items-center">
+    <div
+      aria-live="assertive"
+      className="fixed bottom-20 left-1/2 -translate-x-1/2 z-[1100] flex flex-col-reverse gap-2 items-center"
+    >
       {toasts.map((toast) => (
         <ToastItem
           id={toast.id}
