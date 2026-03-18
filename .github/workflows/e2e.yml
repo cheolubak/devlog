@@ -36,6 +36,11 @@ jobs:
           NEXT_PUBLIC_SENTRY_PROJECT: ""
           NEXT_PUBLIC_HOME: http://localhost:3000
 
+      - name: Start mock API server
+        run: node apps/client/cypress/mock-server.cjs &
+        env:
+          MOCK_PORT: 8080
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
