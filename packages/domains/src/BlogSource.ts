@@ -14,7 +14,7 @@ export const blogSourceSchema = z.object({
   scrapingConfig: z.unknown().nullish(),
   totalPostsFetched: z.number().int().nonnegative().default(0),
   type: z.string().optional(),
-  updatedAt: z.string(),
+  updatedAt: z.string().optional(),
   url: z.string(),
 });
 
