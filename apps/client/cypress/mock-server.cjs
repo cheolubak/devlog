@@ -95,7 +95,7 @@ const blogSources = [
 const postsResponse = {
   data: [
     {
-      id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+      id: 'a1b2c3d4-e5f6-4890-abcd-ef1234567890',
       title: 'React 19의 새로운 기능 살펴보기',
       description:
         'React 19에서 추가된 주요 기능들과 변경사항을 정리합니다.',
@@ -103,7 +103,7 @@ const postsResponse = {
       imageUrl: null,
       originalPublishedAt: '2025-01-15T00:00:00.000Z',
       source: {
-        id: 'a1b2c3d4-0000-0000-0000-000000000001',
+        id: '11b2c3d4-e5f6-4890-abcd-ef1234567001',
         name: 'Tech Blog',
         blogUrl: 'https://tech-blog.example.com',
         url: 'https://tech-blog.example.com',
@@ -111,7 +111,7 @@ const postsResponse = {
       },
       postTags: [
         {
-          postId: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+          postId: 'a1b2c3d4-e5f6-4890-abcd-ef1234567890',
           tagId: 1,
           createdAt: '2025-01-15T00:00:00.000Z',
           tag: { id: 1, name: 'React' },
@@ -120,7 +120,7 @@ const postsResponse = {
       viewCount: 42,
     },
     {
-      id: 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
+      id: 'b2c3d4e5-f6a7-4901-bcde-a12345678901',
       title: 'TypeScript 타입 시스템 완벽 가이드',
       description:
         'TypeScript의 고급 타입 기능을 활용하는 방법을 소개합니다.',
@@ -128,7 +128,7 @@ const postsResponse = {
       imageUrl: null,
       originalPublishedAt: '2025-01-14T00:00:00.000Z',
       source: {
-        id: 'b2c3d4e5-0000-0000-0000-000000000002',
+        id: '22c3d4e5-f6a7-4901-bcde-a12345678002',
         name: 'TS Blog',
         blogUrl: 'https://ts-blog.example.com',
         url: 'https://ts-blog.example.com',
@@ -138,7 +138,7 @@ const postsResponse = {
       viewCount: 28,
     },
     {
-      id: 'c3d4e5f6-a7b8-9012-cdef-123456789012',
+      id: 'c3d4e5f6-a7b8-4012-8def-123456789012',
       title: 'Next.js App Router 마이그레이션 경험기',
       description:
         'Pages Router에서 App Router로 마이그레이션한 과정과 주의사항을 공유합니다.',
@@ -146,7 +146,7 @@ const postsResponse = {
       imageUrl: null,
       originalPublishedAt: '2025-01-13T00:00:00.000Z',
       source: {
-        id: 'c3d4e5f6-0000-0000-0000-000000000003',
+        id: '33d4e5f6-a7b8-4012-8def-123456789003',
         name: 'Dev Notes',
         blogUrl: 'https://devnotes.example.com/',
         url: 'https://devnotes.example.com',
@@ -155,12 +155,48 @@ const postsResponse = {
       postTags: [],
       viewCount: 15,
     },
+    {
+      id: 'd4e5f6a7-b8c9-4123-9efa-234567890123',
+      title: 'CSS Container Queries 실전 활용',
+      description:
+        'Container Queries를 사용하여 컴포넌트 기반 반응형 디자인을 구현하는 방법입니다.',
+      sourceUrl: 'https://cssweekly.example.com/container-queries',
+      imageUrl: null,
+      originalPublishedAt: '2025-01-12T00:00:00.000Z',
+      source: {
+        id: '44e5f6a7-b8c9-4123-9efa-234567890004',
+        name: 'CSS Weekly',
+        blogUrl: 'https://cssweekly.example.com',
+        url: 'https://cssweekly.example.com',
+        icon: null,
+      },
+      postTags: [],
+      viewCount: 20,
+    },
+    {
+      id: 'e5f6a7b8-c9d0-4234-afab-345678901234',
+      title: 'Zod를 활용한 런타임 타입 검증',
+      description:
+        'Zod 라이브러리를 사용하여 API 응답을 안전하게 검증하는 패턴을 알아봅니다.',
+      sourceUrl: 'https://tech-blog.example.com/zod-validation',
+      imageUrl: null,
+      originalPublishedAt: '2025-01-11T00:00:00.000Z',
+      source: {
+        id: '11b2c3d4-e5f6-4890-abcd-ef1234567001',
+        name: 'Tech Blog',
+        blogUrl: 'https://tech-blog.example.com',
+        url: 'https://tech-blog.example.com',
+        icon: null,
+      },
+      postTags: [],
+      viewCount: 35,
+    },
   ],
   pagination: {
-    hasMore: false,
+    hasMore: true,
     limit: 20,
     offset: 0,
-    total: 3,
+    total: 7,
   },
 };
 
