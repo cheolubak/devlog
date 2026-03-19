@@ -1,16 +1,13 @@
 'use client';
 
 import type { PostList } from '@devlog/domains';
+import type { Analytics } from 'firebase/analytics';
 
 import firebaseApp from '@devlog/firebase-config';
 import { fetchApi } from '@devlog/request';
-import {
-  type Analytics,
-  getAnalytics,
-  logEvent,
-  setUserProperties,
-} from 'firebase/analytics';
 import { useEffect, useRef } from 'react';
+
+const getAnalyticsModule = () => import('firebase/analytics');
 
 export const useAnalytics = () => {
   const analytics = useRef<Analytics | null>(null);
@@ -18,46 +15,47 @@ export const useAnalytics = () => {
   useEffect(() => {
     if (!firebaseApp) return;
 
-    try {
-      analytics.current = getAnalytics(firebaseApp);
-    } catch {
-      // Firebase Analytics unavailable (missing config)
-    }
+    getAnalyticsModule()
+      .then(({ getAnalytics }) => {
+        analytics.current = getAnalytics(firebaseApp!);
+      })
+      .catch(() => {
+        // Firebase Analytics unavailable
+      });
   }, []);
 
-  const handleLogin = (type: 'github' | 'google' | 'kakao' | 'naver') => {
-    if (!analytics.current) {
-      return;
-    }
+  const handleLogin = async (
+    type: 'github' | 'google' | 'kakao' | 'naver',
+  ) => {
+    if (!analytics.current) return;
 
-    logEvent(analytics.current, 'login', {
-      content_type: type,
-    });
+    const { logEvent } = await getAnalyticsModule();
+    logEvent(analytics.current, 'login', { content_type: type });
   };
 
-  const handlePageView = (pathname: string) => {
-    if (!analytics.current) {
-      return;
-    }
+  const handlePageView = async (pathname: string) => {
+    if (!analytics.current) return;
 
+    const { logEvent } = await getAnalyticsModule();
     logEvent(analytics.current, 'page_view', {
       firebase_screen: pathname,
     });
   };
 
-  const handleEvent = (eventName: string, args?: Record<string, any>) => {
-    if (!analytics.current) {
-      return;
-    }
+  const handleEvent = async (
+    eventName: string,
+    args?: Record<string, any>,
+  ) => {
+    if (!analytics.current) return;
 
+    const { logEvent } = await getAnalyticsModule();
     logEvent(analytics.current, eventName, args);
   };
 
-  const handleSelectContent = (post: PostList) => {
-    if (!analytics.current) {
-      return;
-    }
+  const handleSelectContent = async (post: PostList) => {
+    if (!analytics.current) return;
 
+    const { logEvent } = await getAnalyticsModule();
     logEvent(analytics.current, 'select_content', {
       content_type: 'post',
       description: post.description,
@@ -66,11 +64,10 @@ export const useAnalytics = () => {
     });
   };
 
-  const handleBookmark = (post: PostList) => {
-    if (!analytics.current) {
-      return;
-    }
+  const handleBookmark = async (post: PostList) => {
+    if (!analytics.current) return;
 
+    const { logEvent } = await getAnalyticsModule();
     logEvent(analytics.current, 'bookmark', {
       description: post.description,
       item_id: post.id,
@@ -79,11 +76,12 @@ export const useAnalytics = () => {
   };
 
   const handleSetSession = async () => {
-    if (!analytics.current) {
-      return;
-    }
+    if (!analytics.current) return;
 
-    const { session } = await fetchApi.get<{ session: string }>('/session');
+    const [{ setUserProperties }, { session }] = await Promise.all([
+      getAnalyticsModule(),
+      fetchApi.get<{ session: string }>('/session'),
+    ]);
 
     setUserProperties(analytics.current, {
       session_id: session,
