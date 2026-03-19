@@ -1,3 +1,5 @@
+import type { FirebaseApp } from 'firebase/app';
+
 import { getApp, getApps, initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
@@ -10,6 +12,12 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGEBUCKET,
 };
 
-const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+const isConfigValid = Boolean(firebaseConfig.apiKey && firebaseConfig.projectId);
+
+let app: FirebaseApp | null = null;
+
+if (isConfigValid) {
+  app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+}
 
 export default app;

@@ -16,7 +16,13 @@ export const useAnalytics = () => {
   const analytics = useRef<Analytics | null>(null);
 
   useEffect(() => {
-    analytics.current = getAnalytics(firebaseApp);
+    if (!firebaseApp) return;
+
+    try {
+      analytics.current = getAnalytics(firebaseApp);
+    } catch {
+      // Firebase Analytics unavailable (missing config)
+    }
   }, []);
 
   const handleLogin = (type: 'github' | 'google' | 'kakao' | 'naver') => {
