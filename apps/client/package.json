@@ -50,6 +50,7 @@
     "zustand": "catalog:"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.2.0",
     "@next/eslint-plugin-next": "catalog:",
     "@tailwindcss/postcss": "catalog:",
     "@types/node": "catalog:",

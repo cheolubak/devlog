@@ -40,7 +40,18 @@ const pretendard = localFont({
     'sans-serif',
   ],
   preload: true,
-  src: './fonts/PretendardVariable.woff2',
+  src: [
+    {
+      path: './fonts/PretendardVariable-latin.woff2',
+      style: 'normal',
+      weight: '45 920',
+    },
+    {
+      path: './fonts/PretendardVariable-korean.woff2',
+      style: 'normal',
+      weight: '45 920',
+    },
+  ],
 });
 
 export const metadata: Metadata = {

@@ -1,8 +1,18 @@
 import type { NextConfig } from 'next';
 
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 const { withSentryConfig } = require('@sentry/nextjs');
 
 const nextConfig: NextConfig = {
+  experimental: {
+    optimizePackageImports: [
+      '@devlog/components',
+      '@devlog/hooks',
+      '@devlog/utils',
+    ],
+  },
   images: {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -28,7 +38,7 @@ const nextConfig: NextConfig = {
   ],
 };
 
-export default withSentryConfig(nextConfig, {
+export default withBundleAnalyzer(withSentryConfig(nextConfig, {
   org: process.env.NEXT_PUBLIC_SENTRY_ORG,
   project: process.env.NEXT_PUBLIC_SENTRY_PROJECT,
   silent: !process.env.CI,
@@ -40,4 +50,4 @@ export default withSentryConfig(nextConfig, {
     },
   },
   widenClientFileUpload: true,
-});
+}));
