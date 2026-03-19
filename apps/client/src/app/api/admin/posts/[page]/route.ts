@@ -1,9 +1,6 @@
 import type { NextRequest } from 'next/server';
 
-import {
-  postListAllSchema,
-  responseListSchema,
-} from '@devlog/domains';
+import { postListAllSchema, responseListSchema } from '@devlog/domains';
 import { externalApi } from '@devlog/request';
 import { getAdminApiHeaders } from 'helper/adminApiHeaders';
 import { handleRouteError } from 'helper/handleRouteError';
