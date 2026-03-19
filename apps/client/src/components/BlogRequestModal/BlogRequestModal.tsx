@@ -116,7 +116,7 @@ export const BlogRequestModal = ({ modalKey }: BlogRequestModalProps) => {
           <Input
             name='url'
             onChange={handleChangeValue}
-            placeholder='블로그 URL을 입력해주세요'
+            placeholder='블로그 URL을 입력해주세요(https:// 포함)'
           />
         </InputGroup>
         <InputGroup label='요청자 이메일'>
