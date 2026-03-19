@@ -45,19 +45,18 @@ export const YoutubeRequestModal = ({ modalKey }: BlogRequestModalProps) => {
   const { mutate } = useMutation({
     mutationFn: () => {
       const { email, url } = requestInfo.current;
-      if (
-        !url ||
-        url.replace(/\s/g, '').length === 0 ||
-        !email ||
-        email.replace(/\s/g, '').length === 0
-      ) {
+      const normalizedEmail = email.replace(/\s/g, '');
+      const normalizedUrl = url.replace(/\s/g, '');
+      if (normalizedUrl.length === 0 || normalizedEmail.length === 0) {
         throw new Error('입력하신 요청하신 내용을 다시 확인 해주세요');
-      } else {
-        return fetchApi.post('/request/youtubes', {
-          email: email.replace(/\s/g, ''),
-          url: url.replace(/\s/g, ''),
-        });
       }
+      if (!/^https?:\/\//i.test(normalizedUrl)) {
+        throw new Error('URL은 https://를 포함해 입력해주세요');
+      }
+      return fetchApi.post('/request/youtubes', {
+        email: normalizedEmail,
+        url: normalizedUrl,
+      });
     },
     mutationKey: ['blog-request'],
     onError: (e) => {
@@ -116,7 +115,7 @@ export const YoutubeRequestModal = ({ modalKey }: BlogRequestModalProps) => {
           <Input
             name='url'
             onChange={handleChangeValue}
-            placeholder='유튜브 채널 URL을 입력해주세요(https:// 포함)'
+            placeholder='유튜브 채널 URL을 입력해주세요 (https:// 포함)'
           />
         </InputGroup>
         <InputGroup label='요청자 이메일'>
