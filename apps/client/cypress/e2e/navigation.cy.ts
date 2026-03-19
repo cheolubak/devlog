@@ -51,6 +51,7 @@ describe('네비게이션', () => {
     });
 
     it('채널 페이지로 이동하면 채널 항목이 활성화된다', () => {
+      cy.get('article a').should('have.length.at.least', 1);
       cy.get('footer a[href="/channels"]').click();
       cy.url().should('include', '/channels');
 
