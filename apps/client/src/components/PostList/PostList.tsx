@@ -18,7 +18,7 @@ import { getPostList } from 'apis';
 import { getBookmarkPosts } from 'apis/getBookmarkPosts';
 import { VirtualPostList } from 'components';
 import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { PostListLoading } from './PostListLoading';
 
@@ -40,7 +40,19 @@ export const PostList = ({
 
   const queryClient = useQueryClient();
 
+  const [isIdle, setIsIdle] = useState(false);
+
+  useEffect(() => {
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(() => setIsIdle(true));
+      return () => cancelIdleCallback(id);
+    }
+    const id = setTimeout(() => setIsIdle(true), 100);
+    return () => clearTimeout(id);
+  }, []);
+
   const { data: bookmarks } = useQuery({
+    enabled: isIdle,
     queryFn: () =>
       getBookmarkPosts({
         postIdList: data.map((post) => post.id),
