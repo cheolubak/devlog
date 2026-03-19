@@ -7,7 +7,7 @@ export const blogSourceSchema = z.object({
   icon: z.string().nullish(),
   id: z.string(),
   isActive: z.boolean(),
-  lastFetchedAt: z.string(),
+  lastFetchedAt: z.string().nullish(),
   lastFetchError: z.string().nullish(),
   lastFetchStatus: z.string(),
   name: z.string(),

@@ -78,7 +78,7 @@ export const BlogSourceList = ({ blogSources }: BlogSourceListProps) => {
               <Typography variants='title-medium'>{source.type}</Typography>
               <Typography>
                 Last Fetched:{' '}
-                {dayjs(source.lastFetchedAt).format('YYYY-MM-DD HH:mm:ss')}(
+                {source.lastFetchedAt ? dayjs(source.lastFetchedAt).format('YYYY-MM-DD HH:mm:ss') : '-'}(
                 {source.lastFetchStatus})
               </Typography>
               <Link
