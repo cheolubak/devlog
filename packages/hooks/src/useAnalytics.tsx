@@ -11,7 +11,7 @@ const getAnalyticsModule = () => import('firebase/analytics');
 
 export const useAnalytics = () => {
   const analytics = useRef<Analytics | null>(null);
-  const logEventFn = useRef<typeof LogEventFn | null>(null);
+  const logEventFn = useRef<null | typeof LogEventFn>(null);
 
   useEffect(() => {
     if (!firebaseApp) return;
@@ -42,7 +42,7 @@ export const useAnalytics = () => {
 
   const handleEvent = (
     eventName: string,
-    args?: Record<string, string | number | boolean>,
+    args?: Record<string, boolean | number | string>,
   ) => {
     if (!analytics.current || !logEventFn.current) return;
     logEventFn.current(analytics.current, eventName, args);
