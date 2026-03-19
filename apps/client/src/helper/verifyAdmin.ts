@@ -1,17 +1,6 @@
-import { timingSafeEqual } from 'crypto';
 import { getAdminAuthCookie } from 'helper/getAdminAuthCookie';
+import { safeCompare } from 'helper/safeCompare';
 import { NextResponse } from 'next/server';
-
-const safeCompare = (a: string, b: string): boolean => {
-  const bufA = Buffer.from(a);
-  const bufB = Buffer.from(b);
-
-  if (bufA.length !== bufB.length) {
-    return false;
-  }
-
-  return timingSafeEqual(bufA, bufB);
-};
 
 export const verifyAdmin = async (): Promise<NextResponse | null> => {
   const authValue = await getAdminAuthCookie();

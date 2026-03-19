@@ -85,8 +85,12 @@ i18n.use(initReactI18next).init({
           'Please check your input and try again.',
         'request.validationUrl':
           'URL must include https://',
+        'youtubeRequest.cancel': 'Cancel',
         'youtubeRequest.description':
           'If there is a YouTube channel not registered on\n"DEVCURATE" that you want to see,\nplease fill out the form below.\nWe will review and notify you via email.',
+        'youtubeRequest.emailLabel': 'Your Email',
+        'youtubeRequest.emailPlaceholder': 'Enter your email address',
+        'youtubeRequest.submit': 'Request',
         'youtubeRequest.title': 'YouTube Channel Request',
         'youtubeRequest.urlLabel': 'YouTube Channel URL',
         'youtubeRequest.urlPlaceholder':
@@ -160,11 +164,15 @@ i18n.use(initReactI18next).init({
           '빠른 확인 후 추가할게요.',
         'request.successTitle': '요청 완료!',
         'request.validationError':
-          '입력하신 내용을 다시 확인 해주세요.',
+          '입력하신 내용을 다시 확인해주세요.',
         'request.validationUrl':
           'URL은 https://를 포함해 입력해주세요',
+        'youtubeRequest.cancel': '그만하기',
         'youtubeRequest.description':
           '"DEVCURATE"에 등록이 안 된,\n보고 싶은 유튜브 채널이 있다면\n아래의 양식을 입력해 요청해주세요.\n확인 후 추가하고 입력하신 이메일로 알려드릴게요.',
+        'youtubeRequest.emailLabel': '요청자 이메일',
+        'youtubeRequest.emailPlaceholder': '요청하신 분의 이메일을 입력해주세요',
+        'youtubeRequest.submit': '요청하기',
         'youtubeRequest.title': '유튜브 채널 요청',
         'youtubeRequest.urlLabel': '유튜브 채널 URL',
         'youtubeRequest.urlPlaceholder':

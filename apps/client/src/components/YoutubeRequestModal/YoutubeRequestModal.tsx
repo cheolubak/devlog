@@ -54,7 +54,7 @@ export const YoutubeRequestModal = ({
       if (normalizedUrl.length === 0 || normalizedEmail.length === 0) {
         throw new Error(t('request.validationError'));
       }
-      if (!/^https?:\/\//i.test(normalizedUrl)) {
+      if (!/^https:\/\//i.test(normalizedUrl)) {
         throw new Error(t('request.validationUrl'));
       }
       return fetchApi.post('/request/youtubes', {
@@ -120,12 +120,12 @@ export const YoutubeRequestModal = ({
             placeholder={t('youtubeRequest.urlPlaceholder')}
           />
         </InputGroup>
-        <InputGroup label={t('blogRequest.emailLabel')}>
+        <InputGroup label={t('youtubeRequest.emailLabel')}>
           <Input
             defaultValue={user?.email ?? ''}
             name='email'
             onChange={handleChangeValue}
-            placeholder={t('blogRequest.emailPlaceholder')}
+            placeholder={t('youtubeRequest.emailPlaceholder')}
           />
         </InputGroup>
       </form>
@@ -140,9 +140,9 @@ export const YoutubeRequestModal = ({
           onClick={handleClickClose}
           variant='text'
         >
-          {t('blogRequest.cancel')}
+          {t('youtubeRequest.cancel')}
         </Button>
-        <Button onClick={() => mutate()}>{t('blogRequest.submit')}</Button>
+        <Button onClick={() => mutate()}>{t('youtubeRequest.submit')}</Button>
       </footer>
     </Modal>
   );

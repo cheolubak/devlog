@@ -52,7 +52,7 @@ export const BlogRequestModal = ({ modalKey }: BlogRequestModalProps) => {
       if (normalizedUrl.length === 0 || normalizedEmail.length === 0) {
         throw new Error(t('request.validationError'));
       }
-      if (!/^https?:\/\//i.test(normalizedUrl)) {
+      if (!/^https:\/\//i.test(normalizedUrl)) {
         throw new Error(t('request.validationUrl'));
       }
       return fetchApi.post('/request/blogs', {

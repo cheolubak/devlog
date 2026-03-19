@@ -1,7 +1,7 @@
 'use client';
 
 import type { PostList } from '@devlog/domains';
-import type { Analytics } from 'firebase/analytics';
+import type { Analytics, logEvent as LogEventFn } from 'firebase/analytics';
 
 import firebaseApp from '@devlog/firebase-config';
 import { fetchApi } from '@devlog/request';
@@ -11,52 +11,46 @@ const getAnalyticsModule = () => import('firebase/analytics');
 
 export const useAnalytics = () => {
   const analytics = useRef<Analytics | null>(null);
+  const logEventFn = useRef<typeof LogEventFn | null>(null);
 
   useEffect(() => {
     if (!firebaseApp) return;
 
     getAnalyticsModule()
-      .then(({ getAnalytics }) => {
+      .then(({ getAnalytics, logEvent }) => {
         analytics.current = getAnalytics(firebaseApp!);
+        logEventFn.current = logEvent;
       })
       .catch(() => {
         // Firebase Analytics unavailable
       });
   }, []);
 
-  const handleLogin = async (
+  const handleLogin = (
     type: 'github' | 'google' | 'kakao' | 'naver',
   ) => {
-    if (!analytics.current) return;
-
-    const { logEvent } = await getAnalyticsModule();
-    logEvent(analytics.current, 'login', { content_type: type });
+    if (!analytics.current || !logEventFn.current) return;
+    logEventFn.current(analytics.current, 'login', { content_type: type });
   };
 
-  const handlePageView = async (pathname: string) => {
-    if (!analytics.current) return;
-
-    const { logEvent } = await getAnalyticsModule();
-    logEvent(analytics.current, 'page_view', {
+  const handlePageView = (pathname: string) => {
+    if (!analytics.current || !logEventFn.current) return;
+    logEventFn.current(analytics.current, 'page_view', {
       firebase_screen: pathname,
     });
   };
 
-  const handleEvent = async (
+  const handleEvent = (
     eventName: string,
-    args?: Record<string, any>,
+    args?: Record<string, string | number | boolean>,
   ) => {
-    if (!analytics.current) return;
-
-    const { logEvent } = await getAnalyticsModule();
-    logEvent(analytics.current, eventName, args);
+    if (!analytics.current || !logEventFn.current) return;
+    logEventFn.current(analytics.current, eventName, args);
   };
 
-  const handleSelectContent = async (post: PostList) => {
-    if (!analytics.current) return;
-
-    const { logEvent } = await getAnalyticsModule();
-    logEvent(analytics.current, 'select_content', {
+  const handleSelectContent = (post: PostList) => {
+    if (!analytics.current || !logEventFn.current) return;
+    logEventFn.current(analytics.current, 'select_content', {
       content_type: 'post',
       description: post.description,
       item_id: post.id,
@@ -64,11 +58,9 @@ export const useAnalytics = () => {
     });
   };
 
-  const handleBookmark = async (post: PostList) => {
-    if (!analytics.current) return;
-
-    const { logEvent } = await getAnalyticsModule();
-    logEvent(analytics.current, 'bookmark', {
+  const handleBookmark = (post: PostList) => {
+    if (!analytics.current || !logEventFn.current) return;
+    logEventFn.current(analytics.current, 'bookmark', {
       description: post.description,
       item_id: post.id,
       name: post.title,

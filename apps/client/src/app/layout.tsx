@@ -25,7 +25,7 @@ import { QueryProvider } from 'providers/QueryProvider';
 import { ScrollProvider } from 'providers/ScrollProvider';
 import { Suspense } from 'react';
 
-const pretendard = localFont({
+const pretendardLatin = localFont({
   display: 'swap',
   fallback: [
     '-apple-system',
@@ -46,6 +46,13 @@ const pretendard = localFont({
       style: 'normal',
       weight: '45 920',
     },
+  ],
+});
+
+const pretendardKorean = localFont({
+  display: 'swap',
+  preload: false,
+  src: [
     {
       path: './fonts/PretendardVariable-korean.woff2',
       style: 'normal',
@@ -98,7 +105,7 @@ export default async function RootLayout({
 
   return (
     <html
-      className={pretendard.className}
+      className={`${pretendardLatin.className} ${pretendardKorean.className}`}
       lang={lang}
     >
       <body>

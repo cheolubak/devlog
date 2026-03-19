@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
 
 import { ADMIN_AUTH_KEY } from 'constants/auth';
-import { timingSafeEqual } from 'crypto';
+import { safeCompare } from 'helper/safeCompare';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -15,10 +15,7 @@ export default async function AdminLayout({ children }: AdminLayoutProps) {
     redirect('/');
   }
 
-  const bufA = Buffer.from(checkAuth);
-  const bufB = Buffer.from(process.env.AUTH_KEY);
-
-  if (bufA.length !== bufB.length || !timingSafeEqual(bufA, bufB)) {
+  if (!safeCompare(checkAuth, process.env.AUTH_KEY)) {
     redirect('/');
   }
 
