@@ -31,7 +31,7 @@ jobs:
           key: cypress-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Install Cypress binary
-        run: pnpm cypress install
+        run: pnpm exec cypress install
 
       - name: Build
         run: pnpm build
