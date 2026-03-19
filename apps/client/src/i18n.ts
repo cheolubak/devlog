@@ -17,15 +17,34 @@ i18n.use(initReactI18next).init({
   resources: {
     en: {
       translation: {
+        'blogRequest.cancel': 'Cancel',
+        'blogRequest.description':
+          'If there is a blog not registered on\n"DEVCURATE" that you want to see,\nplease fill out the form below.\nWe will review and notify you via email.',
+        'blogRequest.emailLabel': 'Your Email',
+        'blogRequest.emailPlaceholder': 'Enter your email address',
+        'blogRequest.submit': 'Request',
+        'blogRequest.title': 'Blog Request',
+        'blogRequest.urlLabel': 'Blog URL',
+        'blogRequest.urlPlaceholder':
+          'Enter the blog URL (including https://)',
         'bookmarkPostList.empty': 'No bookmarked posts.',
         'bookmarkPostList.goToPosts': 'Go to posts',
+        'channelContent.goToBlog': 'Go to Blog',
+        'channelContent.goToService': 'Go to Service',
+        'channelContent.goToYoutube': 'Go to YouTube Channel',
         'channelList.blog': 'Blog',
         'channelList.youtube': 'YouTube',
 
+        'common.confirm': 'OK',
         'common.language': 'English',
         'common.login': 'LOGIN',
         'common.privacyPolicy': 'Privacy Policy',
         'common.servicePolicy': 'Service Policy',
+        'error.message':
+          'A temporary error occurred.\nPlease try again later or go to the home page.',
+        'error.retry': 'Try Again',
+        'error.title': 'Oops! Something went wrong',
+        'error.toHome': 'Home',
         'loginModal.githubLogin': 'GitHub Login',
 
         'loginModal.googleLogin': 'Google Login',
@@ -56,19 +75,54 @@ i18n.use(initReactI18next).init({
 
         'postFilter.type.YOUTUBE': 'YouTube',
         'postListFilter.filter': 'Filter',
+        'request.error':
+          'An error occurred.\nPlease try again later.',
+        'request.failTitle': 'Request Failed',
+        'request.successDescription':
+          'We will review and add it shortly.',
+        'request.successTitle': 'Request Complete!',
+        'request.validationError':
+          'Please check your input and try again.',
+        'request.validationUrl':
+          'URL must include https://',
+        'youtubeRequest.description':
+          'If there is a YouTube channel not registered on\n"DEVCURATE" that you want to see,\nplease fill out the form below.\nWe will review and notify you via email.',
+        'youtubeRequest.title': 'YouTube Channel Request',
+        'youtubeRequest.urlLabel': 'YouTube Channel URL',
+        'youtubeRequest.urlPlaceholder':
+          'Enter the YouTube channel URL (including https://)',
       },
     },
     ko: {
       translation: {
+        'blogRequest.cancel': '그만하기',
+        'blogRequest.description':
+          '"DEVCURATE"에 등록이 안 된,\n보고 싶은 블로그가 있다면\n아래의 양식을 입력해 요청해주세요.\n확인 후 추가하고 입력하신 이메일로 알려드릴게요.',
+        'blogRequest.emailLabel': '요청자 이메일',
+        'blogRequest.emailPlaceholder': '요청하신 분의 이메일을 입력해주세요',
+        'blogRequest.submit': '요청하기',
+        'blogRequest.title': '블로그 요청',
+        'blogRequest.urlLabel': '블로그 URL',
+        'blogRequest.urlPlaceholder':
+          '블로그 URL을 입력해주세요 (https:// 포함)',
         'bookmarkPostList.empty': '저장된 포스트가 없어요.',
         'bookmarkPostList.goToPosts': '포스트 보러 가기',
+        'channelContent.goToBlog': '블로그 가기',
+        'channelContent.goToService': '서비스 가기',
+        'channelContent.goToYoutube': '유튜브 채널 가기',
         'channelList.blog': '기술블로그',
         'channelList.youtube': '유튜브',
 
+        'common.confirm': '확인',
         'common.language': '한국어',
         'common.login': '로그인',
         'common.privacyPolicy': '개인정보처리방침',
         'common.servicePolicy': '서비스이용약관',
+        'error.message':
+          '일시적인 오류가 발생했습니다.\n잠시 후 다시 시도하거나, 홈으로 이동해주세요.',
+        'error.retry': '다시 시도',
+        'error.title': '오류가 발생했습니다',
+        'error.toHome': '홈으로 이동',
         'loginModal.githubLogin': 'GitHub 로그인',
 
         'loginModal.googleLogin': '구글 로그인',
@@ -99,6 +153,22 @@ i18n.use(initReactI18next).init({
 
         'postFilter.type.YOUTUBE': '유튜브',
         'postListFilter.filter': '필터',
+        'request.error':
+          '오류가 발생했어요.\n잠시후에 다시 시도해주세요.',
+        'request.failTitle': '요청 실패',
+        'request.successDescription':
+          '빠른 확인 후 추가할게요.',
+        'request.successTitle': '요청 완료!',
+        'request.validationError':
+          '입력하신 내용을 다시 확인 해주세요.',
+        'request.validationUrl':
+          'URL은 https://를 포함해 입력해주세요',
+        'youtubeRequest.description':
+          '"DEVCURATE"에 등록이 안 된,\n보고 싶은 유튜브 채널이 있다면\n아래의 양식을 입력해 요청해주세요.\n확인 후 추가하고 입력하신 이메일로 알려드릴게요.',
+        'youtubeRequest.title': '유튜브 채널 요청',
+        'youtubeRequest.urlLabel': '유튜브 채널 URL',
+        'youtubeRequest.urlPlaceholder':
+          '유튜브 채널 URL을 입력해주세요 (https:// 포함)',
       },
     },
   },

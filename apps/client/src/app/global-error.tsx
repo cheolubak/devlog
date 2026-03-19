@@ -2,6 +2,7 @@
 
 import { Button, Typography } from '@devlog/components';
 import * as Sentry from '@sentry/nextjs';
+import { useTranslateText } from 'hooks/useTranslateText';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -14,6 +15,7 @@ export default function ErrorPage({
 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const t = useTranslateText();
 
   useEffect(() => {
     Sentry.captureException(error);
@@ -33,10 +35,13 @@ export default function ErrorPage({
         className='text-white'
         variants='display-large'
       >
-        Ooooooooooops!!
+        {t('error.title')}
+      </Typography>
+      <Typography className='text-center text-white'>
+        {t('error.message')}
       </Typography>
       <Button onClick={handleClick}>
-        {pathname === '/' ? 'Try Again' : 'HOME'}
+        {pathname === '/' ? t('error.retry') : t('error.toHome')}
       </Button>
     </div>
   );

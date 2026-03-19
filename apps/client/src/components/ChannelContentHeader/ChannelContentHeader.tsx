@@ -4,6 +4,7 @@ import type { BlogSource } from '@devlog/domains';
 
 import { Icon, Typography } from '@devlog/components';
 import { cn } from '@devlog/utils';
+import { useTranslateText } from 'hooks/useTranslateText';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -16,6 +17,7 @@ export const ChannelContentHeader = ({
   channel,
 }: ChannelContentHeaderProps) => {
   const [imageError, setImageError] = useState(false);
+  const t = useTranslateText();
 
   return (
     <header
@@ -90,7 +92,9 @@ export const ChannelContentHeader = ({
             href={channel.corpUrl}
             target='_blank'
           >
-            <Typography variants='title-medium'>서비스 가기</Typography>
+            <Typography variants='title-medium'>
+              {t('channelContent.goToService')}
+            </Typography>
           </Link>
         )}
         {channel.corpUrl && channel.blogUrl && '|'}
@@ -110,7 +114,9 @@ export const ChannelContentHeader = ({
             target='_blank'
           >
             <Typography variants='title-medium'>
-              {channel.type === 'YOUTUBE' ? '유튜브 채널 가기' : '블로그 가기'}
+              {channel.type === 'YOUTUBE'
+                ? t('channelContent.goToYoutube')
+                : t('channelContent.goToBlog')}
             </Typography>
           </Link>
         )}

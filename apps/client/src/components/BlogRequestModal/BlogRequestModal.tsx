@@ -16,6 +16,7 @@ import { cn } from '@devlog/utils';
 import { useMutation } from '@tanstack/react-query';
 import { DefaultModal } from 'components';
 import { useAuth } from 'hooks';
+import { useTranslateText } from 'hooks/useTranslateText';
 import { useRef } from 'react';
 
 interface BlogRequestModalProps {
@@ -26,6 +27,7 @@ export const BlogRequestModal = ({ modalKey }: BlogRequestModalProps) => {
   const { close, open } = useModal();
   const { user } = useAuth();
   const { hide, show } = useLoading();
+  const t = useTranslateText();
 
   const requestInfo = useRef<{ email: string; url: string }>({
     email: user?.email ?? '',
@@ -48,10 +50,10 @@ export const BlogRequestModal = ({ modalKey }: BlogRequestModalProps) => {
       const normalizedEmail = email.replace(/\s/g, '');
       const normalizedUrl = url.replace(/\s/g, '');
       if (normalizedUrl.length === 0 || normalizedEmail.length === 0) {
-        throw new Error('입력하신 요청하신 내용을 다시 확인 해주세요');
+        throw new Error(t('request.validationError'));
       }
       if (!/^https?:\/\//i.test(normalizedUrl)) {
-        throw new Error('URL은 https://를 포함해 입력해주세요');
+        throw new Error(t('request.validationUrl'));
       }
       return fetchApi.post('/request/blogs', {
         email: normalizedEmail,
@@ -60,7 +62,7 @@ export const BlogRequestModal = ({ modalKey }: BlogRequestModalProps) => {
     },
     mutationKey: ['blog-request'],
     onError: (e) => {
-      let message = '오류가 발생했어요.\n잠시후에 다시 시도해주세요.';
+      let message = t('request.error');
 
       if (e instanceof Error && !('response' in e)) {
         message = e.message;
@@ -68,9 +70,9 @@ export const BlogRequestModal = ({ modalKey }: BlogRequestModalProps) => {
 
       open(
         <DefaultModal
-          confirmText='확인'
+          confirmText={t('common.confirm')}
           description={message}
-          title='요청 실패 😭'
+          title={t('request.failTitle')}
         />,
       );
     },
@@ -84,9 +86,9 @@ export const BlogRequestModal = ({ modalKey }: BlogRequestModalProps) => {
       close(modalKey);
       open(
         <DefaultModal
-          confirmText='확인'
-          description='빠른 확인 후 추가할게요.'
-          title='요청 완료! 😍'
+          confirmText={t('common.confirm')}
+          description={t('request.successDescription')}
+          title={t('request.successTitle')}
         />,
       );
     },
@@ -99,31 +101,29 @@ export const BlogRequestModal = ({ modalKey }: BlogRequestModalProps) => {
         semantic='h3'
         variants='title-large'
       >
-        블로그 요청
+        {t('blogRequest.title')}
       </Typography>
       <Typography
         className={cn('mb-8 text-center')}
         semantic='p'
       >
-        {
-          '"DEVCURATE"에 등록이 안 된,\n보고 싶은 블로그가 있다면\n아래의 양식을 입력해 요청해주세요.\n확인 후 추가하고 입력하신 이메일로 알려드릴게요.'
-        }
+        {t('blogRequest.description')}
       </Typography>
 
       <form className={cn('flex flex-col gap-4 mb-8')}>
-        <InputGroup label='블로그 URL'>
+        <InputGroup label={t('blogRequest.urlLabel')}>
           <Input
             name='url'
             onChange={handleChangeValue}
-            placeholder='블로그 URL을 입력해주세요 (https:// 포함)'
+            placeholder={t('blogRequest.urlPlaceholder')}
           />
         </InputGroup>
-        <InputGroup label='요청자 이메일'>
+        <InputGroup label={t('blogRequest.emailLabel')}>
           <Input
             defaultValue={user?.email ?? ''}
             name='email'
             onChange={handleChangeValue}
-            placeholder='요청하신 분의 이메일을 입력해주세요'
+            placeholder={t('blogRequest.emailPlaceholder')}
           />
         </InputGroup>
       </form>
@@ -138,9 +138,9 @@ export const BlogRequestModal = ({ modalKey }: BlogRequestModalProps) => {
           onClick={handleClickClose}
           variant='text'
         >
-          그만하기
+          {t('blogRequest.cancel')}
         </Button>
-        <Button onClick={() => mutate()}>요청하기</Button>
+        <Button onClick={() => mutate()}>{t('blogRequest.submit')}</Button>
       </footer>
     </Modal>
   );
