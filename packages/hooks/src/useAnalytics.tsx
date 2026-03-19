@@ -70,14 +70,18 @@ export const useAnalytics = () => {
   const handleSetSession = async () => {
     if (!analytics.current) return;
 
-    const [{ setUserProperties }, { session }] = await Promise.all([
-      getAnalyticsModule(),
-      fetchApi.get<{ session: string }>('/session'),
-    ]);
+    try {
+      const [{ setUserProperties }, { session }] = await Promise.all([
+        getAnalyticsModule(),
+        fetchApi.get<{ session: string }>('/session'),
+      ]);
 
-    setUserProperties(analytics.current, {
-      session_id: session,
-    });
+      setUserProperties(analytics.current, {
+        session_id: session,
+      });
+    } catch {
+      // analytics/session 동기화 실패는 앱 핵심 흐름을 막지 않음
+    }
   };
 
   return {

@@ -110,7 +110,7 @@ export const PostList = ({
         };
       },
     );
-  }, [bookmarks]);
+  }, [bookmarks, queryClient]);
 
   const postList = posts?.pages.flatMap((page) => page.data) ?? [];
 

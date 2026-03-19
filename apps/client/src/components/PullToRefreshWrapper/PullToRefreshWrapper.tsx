@@ -1,9 +1,16 @@
 'use client';
 
-import type { ComponentType, PropsWithChildren } from 'react';
+import type { ComponentType, PropsWithChildren, ReactNode } from 'react';
 
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+
+interface PullToRefreshComponentProps {
+  children?: ReactNode;
+  isPullable?: boolean;
+  onRefresh: () => Promise<void>;
+  pullingContent?: ReactNode;
+}
 
 interface PullToRefreshWrapperProps extends PropsWithChildren {}
 
@@ -13,7 +20,7 @@ export const PullToRefreshWrapper = ({
   const router = useRouter();
   const pathname = usePathname();
   const [PullToRefreshComponent, setPullToRefreshComponent] =
-    useState<ComponentType<any> | null>(null);
+    useState<ComponentType<PullToRefreshComponentProps> | null>(null);
 
   const isPullable =
     pathname === '/' ||
@@ -23,9 +30,13 @@ export const PullToRefreshWrapper = ({
   useEffect(() => {
     if (!isPullable) return;
 
-    import('react-simple-pull-to-refresh').then((mod) => {
-      setPullToRefreshComponent(() => mod.default);
-    });
+    import('react-simple-pull-to-refresh')
+      .then((mod) => {
+        setPullToRefreshComponent(
+          () => mod.default as ComponentType<PullToRefreshComponentProps>,
+        );
+      })
+      .catch(console.error);
   }, [isPullable]);
 
   if (!isPullable || !PullToRefreshComponent) {
