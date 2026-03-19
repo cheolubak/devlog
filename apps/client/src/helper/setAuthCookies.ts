@@ -1,8 +1,10 @@
 'use server';
 
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from 'constants/auth';
-import { jwtDecode } from 'helper/jwtDecode';
 import { cookies } from 'next/headers';
+
+const ACCESS_TOKEN_MAX_AGE = 60 * 60; // 1 hour
+const REFRESH_TOKEN_MAX_AGE = 7 * 24 * 60 * 60; // 7 days
 
 export const setAuthCookies = async ({
   accessToken,
@@ -21,10 +23,10 @@ export const setAuthCookies = async ({
 
   cookieStores.set(ACCESS_TOKEN_KEY, accessToken, {
     ...cookieOptions,
-    expires: jwtDecode(accessToken).exp * 1000,
+    maxAge: ACCESS_TOKEN_MAX_AGE,
   });
   cookieStores.set(REFRESH_TOKEN_KEY, refreshToken, {
     ...cookieOptions,
-    expires: jwtDecode(refreshToken).exp * 1000,
+    maxAge: REFRESH_TOKEN_MAX_AGE,
   });
 };
