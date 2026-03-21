@@ -31,7 +31,7 @@ export const IconButton = ({
     <button
       {...props}
       className={cn(
-        'relative overflow-hidden rounded-full p-0 m-0 cursor-pointer outline-none inline-flex items-center justify-center',
+        'relative overflow-hidden rounded-full p-0 m-0 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 inline-flex items-center justify-center',
         className,
       )}
       style={{ height: size, width: size, ...style }}

@@ -7,8 +7,8 @@ import i18n, {
 } from './i18n';
 
 describe('i18n', () => {
-  it('기본 fallbackLng이 en으로 설정되어 있다', () => {
-    expect(i18n.options.fallbackLng).toEqual(['en']);
+  it('기본 fallbackLng이 ko로 설정되어 있다', () => {
+    expect(i18n.options.fallbackLng).toEqual(['ko']);
   });
 
   it('supportedLngs에 ko와 en이 포함되어 있다', () => {
@@ -28,10 +28,10 @@ describe('i18n', () => {
     expect(i18n.language).toBe('en');
   });
 
-  it('지원하지 않는 언어는 en으로 폴백된다', async () => {
+  it('지원하지 않는 언어는 ko로 폴백된다', async () => {
     await i18n.changeLanguage('ja');
 
-    expect(i18n.language).toBe('en');
+    expect(i18n.language).toBe('ko');
   });
 
   it('SUPPORTED_LANGUAGES에 ko와 en이 포함되어 있다', () => {
@@ -39,8 +39,8 @@ describe('i18n', () => {
     expect(SUPPORTED_LANGUAGES).toContain('en');
   });
 
-  it('FALLBACK_LANGUAGE가 en이다', () => {
-    expect(FALLBACK_LANGUAGE).toBe('en');
+  it('FALLBACK_LANGUAGE가 ko이다', () => {
+    expect(FALLBACK_LANGUAGE).toBe('ko');
   });
 
   it('I18N_STORAGE_KEY가 정의되어 있다', () => {

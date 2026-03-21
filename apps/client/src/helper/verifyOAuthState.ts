@@ -1,6 +1,8 @@
 import { OAUTH_STATE_KEY } from 'constants/auth';
 import { cookies } from 'next/headers';
 
+import { safeCompare } from './safeCompare';
+
 export const verifyOAuthState = async (
   callbackState: null | string,
 ): Promise<boolean> => {
@@ -13,5 +15,5 @@ export const verifyOAuthState = async (
     return false;
   }
 
-  return storedState === callbackState;
+  return safeCompare(storedState, callbackState);
 };

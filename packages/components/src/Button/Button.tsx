@@ -8,7 +8,7 @@ import { cva } from 'class-variance-authority';
 import { Ripple } from '../Ripple';
 
 const buttonVariants = cva(
-  'relative outline-none inline-flex justify-center items-center border-2 whitespace-nowrap text-white',
+  'relative outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 inline-flex justify-center items-center border-2 whitespace-nowrap text-white',
   {
     compoundVariants: [
       {

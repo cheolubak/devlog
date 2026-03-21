@@ -22,7 +22,7 @@ export const Input = ({
 }: InputProps) => {
   return (
     <label className={cn(
-      'h-12 inline-flex justify-stretch items-center gap-2 px-4 border border-gray-400 rounded-lg bg-white shadow-md',
+      'h-12 inline-flex justify-stretch items-center gap-2 px-4 border border-gray-400 rounded-lg bg-white shadow-md focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2',
       className,
     )}>
       {prefix && <span className="w-6 h-6 -ml-1">{prefix}</span>}
