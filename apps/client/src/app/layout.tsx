@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 
 import { GlobalModal, Loading, Toast } from '@devlog/components';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import {
   BottomNavigation,
   Header,
@@ -109,7 +108,6 @@ export default async function RootLayout({
       lang={lang}
     >
       <body>
-        <SpeedInsights />
         <FirebaseAnalyticsProvider />
         <ScrollProvider />
         <I18nProvider initialLang={lang}>
