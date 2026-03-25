@@ -36,7 +36,8 @@ export const BottomNavigation = () => {
   };
 
   return (
-    <footer
+    <nav
+      aria-label='주요 탐색'
       className={cn(
         'fixed',
         'bottom-0',
@@ -82,6 +83,10 @@ export const BottomNavigation = () => {
                     'h-12 md:h-[64px]',
                     'rounded-full',
                     'overflow-hidden',
+                    'outline-none',
+                    'focus-visible:ring-2',
+                    'focus-visible:ring-indigo-500',
+                    'focus-visible:ring-offset-2',
                   )}
                   href={item.href}
                   scroll={false}
@@ -98,6 +103,6 @@ export const BottomNavigation = () => {
           );
         })}
       </ul>
-    </footer>
+    </nav>
   );
 };

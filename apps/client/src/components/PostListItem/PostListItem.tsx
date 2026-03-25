@@ -1,7 +1,7 @@
 'use client';
 
 import type { PostList } from '@devlog/domains';
-import type { CSSProperties, MouseEvent } from 'react';
+import type { CSSProperties } from 'react';
 
 import { Icon, IconButton, Typography } from '@devlog/components';
 import { useAnalytics } from '@devlog/hooks';
@@ -14,13 +14,15 @@ import { usePostView } from 'hooks/usePostView';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
+
+
 interface PostItemProps {
   post: PostList;
   style?: CSSProperties;
 }
 
 export const PostListItem = ({ post, style }: PostItemProps) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { eventSelectContent } = useAnalytics();
   const { parseUrl } = useOpenLink();
 
@@ -43,10 +45,7 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
     sourceUrl: post.sourceUrl,
   });
 
-  const handlePostBookmarks = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-
+  const handlePostBookmarks = () => {
     bookmarkPosts();
   };
 
@@ -59,119 +58,133 @@ export const PostListItem = ({ post, style }: PostItemProps) => {
   };
 
   return (
-    <LogClick
-      eventName='post_click'
-      params={eventPostParams}
+    <article
+      className={cn(
+        'relative',
+        'block',
+        'px-4 md:px-10',
+        'py-6 md:py-12',
+        'text-white',
+        'h-[220px]',
+      )}
+      style={style}
     >
-      <Link
-        className={cn(
-          'block',
-          'px-4 md:px-10',
-          'py-6 md:py-12',
-          'text-white',
-          'h-[220px]',
-          'cursor-pointer',
-        )}
-        draggable={false}
-        href={blogUrl}
-        onClick={handleClickPost}
-        style={style}
-        target='_blank'
+      <LogClick
+        eventName='post_click'
+        params={eventPostParams}
       >
-        <header
+        <Link
           className={cn(
-            'flex',
-            'justify-stretch',
-            'items-center',
-            'gap-2',
-            'mb-3',
+            'block',
+            'cursor-pointer',
+            "after:content-['']",
+            'after:absolute',
+            'after:inset-0',
           )}
+          draggable={false}
+          href={blogUrl}
+          onClick={handleClickPost}
+          target='_blank'
         >
-          <Icon
-            color={
-              post.source.type === 'YOUTUBE'
-                ? 'var(--color-red-500)'
-                : 'var(--color-teal-500)'
-            }
-            name={post.source.type === 'YOUTUBE' ? 'youtube' : 'rss'}
-            size={26}
-          />
-          <Typography
-            className={cn('flex-1')}
-            maxLines={2}
-            semantic='h2'
-            variants='title-large'
-          >
-            {title}
-          </Typography>
-          <LogClick
-            eventName='post_bookmark'
-            params={eventPostParams}
-          >
-            <IconButton
-              aria-label={post.isBookmark ? '북마크 해제' : '북마크 추가'}
-              iconColor={
-                post.isBookmark
-                  ? 'var(--color-yellow-500)'
-                  : 'var(--color-white)'
-              }
-              name={post.isBookmark ? 'bookmark-fill' : 'bookmark-outline'}
-              onClick={handlePostBookmarks}
-            />
-          </LogClick>
-        </header>
-        <Typography
-          className={cn('mb-6')}
-          maxLines={2}
-          semantic='p'
-          variants='body-large'
-        >
-          {description}
-        </Typography>
-        <footer
-          className={cn(
-            'flex',
-            'justify-between',
-            'items-center',
-            'gap-2',
-          )}
-        >
-          <Typography
-            semantic='h3'
-            variants='body-medium'
-          >
-            {post.source.name}
-          </Typography>
-          <div
+          <header
             className={cn(
               'flex',
-              'justify-end',
               'items-center',
-              'gap-3',
+              'gap-2',
+              'mb-3',
+              'pr-10',
             )}
           >
-            <Typography variants='body-medium'>
-              {dayjs(post.originalPublishedAt).format('YYYY.MM.DD')}
+            <Icon
+              color={
+                post.source.type === 'YOUTUBE'
+                  ? 'var(--color-red-500)'
+                  : 'var(--color-teal-500)'
+              }
+              name={post.source.type === 'YOUTUBE' ? 'youtube' : 'rss'}
+              size={26}
+            />
+            <Typography
+              className={cn('flex-1')}
+              maxLines={2}
+              semantic='h2'
+              variants='title-large'
+            >
+              {title}
             </Typography>
-            <Typography variants='body-medium'>|</Typography>
+          </header>
+          <Typography
+            className={cn('mb-6')}
+            maxLines={2}
+            semantic='p'
+            variants='body-large'
+          >
+            {description}
+          </Typography>
+          <footer
+            className={cn(
+              'flex',
+              'justify-between',
+              'items-center',
+              'gap-2',
+            )}
+          >
+            <Typography
+              semantic='h3'
+              variants='body-medium'
+            >
+              {post.source.name}
+            </Typography>
             <div
               className={cn(
                 'flex',
-                'justify-start',
+                'justify-end',
                 'items-center',
-                'gap-2',
+                'gap-3',
               )}
             >
-              <Icon
-                color='var(--color-white)'
-                name='visibility'
-                size={14}
-              />
-              {post.viewCount}
+              <Typography variants='body-medium'>
+                {dayjs(post.originalPublishedAt).format('YYYY.MM.DD')}
+              </Typography>
+              <Typography variants='body-medium'>|</Typography>
+              <div
+                className={cn(
+                  'flex',
+                  'justify-start',
+                  'items-center',
+                  'gap-2',
+                )}
+              >
+                <Icon
+                  color='var(--color-white)'
+                  name='visibility'
+                  size={14}
+                />
+                {post.viewCount}
+              </div>
             </div>
-          </div>
-        </footer>
-      </Link>
-    </LogClick>
+          </footer>
+        </Link>
+      </LogClick>
+      <div className='absolute top-6 right-4 z-10 md:top-12 md:right-10'>
+        <LogClick
+          eventName='post_bookmark'
+          params={eventPostParams}
+        >
+          <IconButton
+            aria-label={t(
+              post.isBookmark ? 'post.removeBookmark' : 'post.addBookmark',
+            )}
+            iconColor={
+              post.isBookmark
+                ? 'var(--color-yellow-500)'
+                : 'var(--color-white)'
+            }
+            name={post.isBookmark ? 'bookmark-fill' : 'bookmark-outline'}
+            onClick={handlePostBookmarks}
+          />
+        </LogClick>
+      </div>
+    </article>
   );
 };

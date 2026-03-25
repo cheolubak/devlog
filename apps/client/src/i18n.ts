@@ -63,6 +63,10 @@ i18n.use(initReactI18next).init({
         'myPage.rssBlogRequest': 'RSS Blog Request',
         'myPage.title': 'My Page',
         'myPage.youtubeChannelRequest': 'YouTube Channel Request',
+        'notFound.message':
+          'The page you are looking for does not exist.\nPlease check the URL or go to the home page.',
+        'post.addBookmark': 'Add bookmark',
+        'post.removeBookmark': 'Remove bookmark',
         'postFilter.region.ALL': 'All',
         'postFilter.region.FOREIGN': 'English',
         'postFilter.region.KOREA': 'Korean',
@@ -145,6 +149,10 @@ i18n.use(initReactI18next).init({
         'myPage.rssBlogRequest': 'RSS 블로그 추가 요청',
         'myPage.title': '마이페이지',
         'myPage.youtubeChannelRequest': '유튜브 채널 추가 요청',
+        'notFound.message':
+          '요청하신 페이지가 존재하지 않습니다.\nURL을 확인하시거나 홈으로 이동해주세요.',
+        'post.addBookmark': '북마크 추가',
+        'post.removeBookmark': '북마크 해제',
         'postFilter.region.ALL': '전체',
         'postFilter.region.FOREIGN': '국외',
         'postFilter.region.KOREA': '국내',
