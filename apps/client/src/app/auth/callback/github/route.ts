@@ -34,8 +34,22 @@ export async function GET(req: NextRequest) {
       },
     );
 
+    if (!res.ok) {
+      return NextResponse.json(
+        { error: 'Failed to exchange token' },
+        { status: 502 },
+      );
+    }
+
     const data: { access_token: string; scope: string; token_type: 'bearer' } =
       await res.json();
+
+    if (!data.access_token) {
+      return NextResponse.json(
+        { error: 'Invalid token response' },
+        { status: 502 },
+      );
+    }
 
     return await completeLogin({
       accessToken: data.access_token,

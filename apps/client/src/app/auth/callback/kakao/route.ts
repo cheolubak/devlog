@@ -51,6 +51,13 @@ export async function GET(req: NextRequest) {
       token_type: 'bearer';
     } = await res.json();
 
+    if (!data.access_token) {
+      return NextResponse.json(
+        { error: 'Invalid token response' },
+        { status: 502 },
+      );
+    }
+
     return await completeLogin({
       accessToken: data.access_token,
       sessionId,

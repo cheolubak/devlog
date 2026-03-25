@@ -1,6 +1,7 @@
 import type { NextRequest } from 'next/server';
 
 import { log } from '@devlog/logger';
+import { safeCompare } from 'helper/safeCompare';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { NextResponse } from 'next/server';
 
@@ -21,7 +22,7 @@ const isValidBody = (
 export async function POST(req: NextRequest) {
   const secret = req.headers.get('x-revalidate-secret');
 
-  if (secret !== process.env.REVALIDATE_SECRET) {
+  if (!safeCompare(secret ?? '', process.env.REVALIDATE_SECRET ?? '')) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
 
