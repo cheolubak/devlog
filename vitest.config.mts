@@ -10,6 +10,7 @@ export default defineConfig({
       helper: path.resolve(__dirname, 'apps/client/src/helper'),
       hooks: path.resolve(__dirname, 'apps/client/src/hooks'),
       i18n: path.resolve(__dirname, 'apps/client/src/i18n'),
+      locales: path.resolve(__dirname, 'apps/client/src/locales'),
       'i18n.constants': path.resolve(
         __dirname,
         'apps/client/src/i18n.constants',

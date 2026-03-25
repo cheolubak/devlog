@@ -27,6 +27,8 @@ export const Modal = ({
     const dialog = dialogRef.current;
     if (!dialog) return;
 
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+
     dialog.showModal();
 
     const handleCancel = (e: Event) => {
@@ -42,6 +44,7 @@ export const Modal = ({
     return () => {
       dialog.removeEventListener('cancel', handleCancel);
       dialog.close();
+      previouslyFocused?.focus();
     };
   }, [closeModal, disabledClose, modalKey]);
 
