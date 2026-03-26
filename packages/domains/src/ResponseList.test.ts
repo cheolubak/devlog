@@ -8,7 +8,7 @@ import { responseListSchema } from './ResponseList';
 const validPagination = {
   hasMore: false,
   limit: 10,
-  offset: 0,
+  page: 1,
   total: 1,
 };
 

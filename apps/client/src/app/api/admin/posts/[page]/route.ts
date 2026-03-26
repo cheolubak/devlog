@@ -24,7 +24,7 @@ export async function GET(
       headers: getAdminApiHeaders(),
       params: {
         isDisplay,
-        offset: page,
+        page: Number(page) + 1,
         type: ['RSS', 'ATOM', 'SCRAPING'],
       },
     });

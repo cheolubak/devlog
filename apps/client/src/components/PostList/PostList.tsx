@@ -67,14 +67,14 @@ export const PostList = ({
     isFetching,
   } = useInfiniteQuery({
     getNextPageParam: (lastPage) =>
-      lastPage.pagination.hasMore ? lastPage.pagination.offset + 1 : undefined,
+      lastPage.pagination.hasMore ? lastPage.pagination.page + 1 : undefined,
     initialData: isDefaultView
       ? {
-          pageParams: [0],
+          pageParams: [1],
           pages: [{ data, pagination }],
         }
       : undefined,
-    initialPageParam: 0,
+    initialPageParam: 1,
     queryFn: ({ pageParam }) =>
       getPostList({
         page: pageParam,

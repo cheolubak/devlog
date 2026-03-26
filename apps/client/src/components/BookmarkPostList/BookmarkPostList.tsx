@@ -29,8 +29,8 @@ export const BookmarkPostList = ({ sourceId }: BookmarkPostListProps) => {
     isFetching,
   } = useInfiniteQuery({
     getNextPageParam: (lastPage: ResponseList<PostList>) =>
-      lastPage.pagination.hasMore ? lastPage.pagination.offset + 1 : undefined,
-    initialPageParam: 0,
+      lastPage.pagination.hasMore ? lastPage.pagination.page + 1 : undefined,
+    initialPageParam: 1,
     queryFn: ({ pageParam }) =>
       getBookmarkPosts({ page: pageParam, q, sourceId }),
     queryKey: ['bookmark-posts-list', { q, sourceId }],

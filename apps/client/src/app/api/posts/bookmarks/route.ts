@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
     if (!accessToken) {
       return NextResponse.json({
         data: [],
-        pagination: { hasMore: false, limit: 20, offset: 0, total: 0 },
+        pagination: { hasMore: false, limit: 20, page: 1, total: 0 },
       });
     }
 
@@ -20,15 +20,15 @@ export async function GET(req: NextRequest) {
     const page = z.coerce
       .number()
       .int()
-      .nonnegative()
-      .default(0)
-      .parse(searchParams.get('page'));
+      .positive()
+      .default(1)
+      .parse(searchParams.get('page') ?? undefined);
     const q = searchParams.get('q') ?? '';
     const sourceId = searchParams.get('sourceId');
 
     try {
       const apiParams: Record<string, number | string | string[]> = {
-        offset: page,
+        page,
       };
 
       let endpoint = '/posts/bookmarks';

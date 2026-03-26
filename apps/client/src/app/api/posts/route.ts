@@ -17,9 +17,9 @@ export async function GET(req: NextRequest) {
     const page = z.coerce
       .number()
       .int()
-      .nonnegative()
-      .default(0)
-      .parse(searchParams.get('page'));
+      .positive()
+      .default(1)
+      .parse(searchParams.get('page') ?? undefined);
     const q = searchParams.get('q') ?? '';
     const sourceId = searchParams.get('sourceId');
     const region = searchParams.get('region');
@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
 
     try {
       const apiParams: Record<string, number | string | string[]> = {
-        offset: page,
+        page,
       };
 
       let endpoint = '/posts';

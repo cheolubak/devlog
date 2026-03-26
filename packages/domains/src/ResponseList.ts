@@ -6,7 +6,7 @@ export const responseListSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
     pagination: z.object({
       hasMore: z.boolean(),
       limit: z.number(),
-      offset: z.number(),
+      page: z.number(),
       total: z.number(),
     }),
   });
@@ -16,7 +16,7 @@ export type ResponseList<T> = {
   pagination: {
     hasMore: boolean;
     limit: number;
-    offset: number;
+    page: number;
     total: number;
   };
 };
